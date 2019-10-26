@@ -1,0 +1,98 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
+[ext_resource path="res://Images/Julep/000_Idle00.png" type="Texture" id=2]
+[ext_resource path="res://Images/Julep/008_Attack00.png" type="Texture" id=3]
+[ext_resource path="res://Images/Julep/008_Attack01.png" type="Texture" id=4]
+[ext_resource path="res://Images/Julep/008_Attack02.png" type="Texture" id=5]
+[ext_resource path="res://Images/Julep/008_Attack03.png" type="Texture" id=6]
+[ext_resource path="res://Images/Julep/008_Attack04.png" type="Texture" id=7]
+[ext_resource path="res://Images/Julep/008_Attack05.png" type="Texture" id=8]
+[ext_resource path="res://Images/Julep/003_Jump00.png" type="Texture" id=9]
+[ext_resource path="res://Images/Julep/003_Jump01.png" type="Texture" id=10]
+[ext_resource path="res://Images/Julep/006_Slide00.png" type="Texture" id=11]
+[ext_resource path="res://Images/Julep/006_Slide01.png" type="Texture" id=12]
+[ext_resource path="res://Images/Julep/007_Dash00.png" type="Texture" id=13]
+[ext_resource path="res://Images/Julep/007_Dash01.png" type="Texture" id=14]
+[ext_resource path="res://Images/Julep/001_Walk01.png" type="Texture" id=15]
+[ext_resource path="res://Images/Julep/001_Walk00.png" type="Texture" id=16]
+[ext_resource path="res://Images/Julep/001_Walk02.png" type="Texture" id=17]
+[ext_resource path="res://Images/Julep/001_Walk03.png" type="Texture" id=18]
+[ext_resource path="res://Images/Julep/001_Walk04.png" type="Texture" id=19]
+[ext_resource path="res://Images/Julep/001_Walk05.png" type="Texture" id=20]
+[ext_resource path="res://Images/Julep/001_Walk06.png" type="Texture" id=21]
+[ext_resource path="res://Images/Julep/001_Walk07.png" type="Texture" id=22]
+[ext_resource path="res://Images/Julep/005_Kick00.png" type="Texture" id=23]
+[ext_resource path="res://Images/Julep/005_Kick01.png" type="Texture" id=24]
+[ext_resource path="res://Images/Julep/002_Charge00.png" type="Texture" id=25]
+[ext_resource path="res://Images/Julep/002_Charge01.png" type="Texture" id=26]
+[ext_resource path="res://Images/Julep/002_Charge02.png" type="Texture" id=27]
+[ext_resource path="res://Images/Julep/002_Charge03.png" type="Texture" id=28]
+[ext_resource path="res://Images/Julep/004_Fall00.png" type="Texture" id=29]
+[ext_resource path="res://Images/Julep/004_Fall01.png" type="Texture" id=30]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "attackNormal",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "jump",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "wallSlide",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "dash",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "diveKick",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ],
+"loop": true,
+"name": "charge",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 29 ), ExtResource( 30 ) ],
+"loop": true,
+"name": "fall",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 9.20285
+height = 40.8807
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+position = Vector2( 0, -38.7312 )
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2.1405, 2.20064 )
+frames = SubResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.53, 8.87603 )
+shape = SubResource( 2 )
