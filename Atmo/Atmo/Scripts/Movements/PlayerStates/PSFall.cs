@@ -10,7 +10,7 @@ namespace Atmo2.Movements.PlayerStates
 	class PSFall : PlayerState
 	{
 		private float speed;
-		private int coyoteTime;
+		private int coyoteTimeTicks;
 		private float speedModifier;
 
 		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1)
@@ -18,7 +18,7 @@ namespace Atmo2.Movements.PlayerStates
 		{
 			this.player     = player;
 			this.speed      = speed < 0 ? player.RunSpeed : speed;
-			this.coyoteTime = coyoteTime ? 6 : 0;
+			this.coyoteTimeTicks = coyoteTime ? 10 : 0;
 			speedModifier = initialSpeedModifier;
 		}
 		public override void OnEnter()
@@ -76,12 +76,18 @@ namespace Atmo2.Movements.PlayerStates
 			if (player.InputController.JumpPressed() && player.InputController.DownHeld())
 				return new PSDiveKick(player);
 
-			if (coyoteTime > 0)
+			if (coyoteTimeTicks > 0)
 			{
-				--coyoteTime;
+				--coyoteTimeTicks;
 				if (player.InputController.JumpPressed())
 				{
 					return new PSJump(player, speedModifier);
+				}
+				if (player.Abilities.GroundDash &&
+					player.InputController.DashPressed())
+				{
+					if (signedHorizontal != 0)
+						return new PSDash(player, signedHorizontal);
 				}
 			}
 

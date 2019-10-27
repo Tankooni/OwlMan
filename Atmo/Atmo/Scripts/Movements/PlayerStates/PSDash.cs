@@ -15,7 +15,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		private float SpeedModifier { get { return player.DashMultiplier * player.RunSpeed * direction; } }
 
-        public PSDash(Player player, float direction, int dashTicks = 14) //dash should probably be 9-10
+        public PSDash(Player player, float direction, int dashTicks = 10) //dash should probably be 9-10
 			: base(player)
 		{
             this.player = player;
@@ -23,7 +23,7 @@ namespace Atmo2.Movements.PlayerStates
 			this.direction = direction;
             this.dashTicks = dashTicks;
 
-			player.MovementInfo.VelX = 0;
+			player.MovementInfo.VelX = this.speed * direction;
 			player.MovementInfo.VelY = 0;
 		}
         public override void OnEnter()

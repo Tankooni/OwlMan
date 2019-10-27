@@ -71,7 +71,7 @@ namespace Atmo2.Movements.PlayerStates
 			if(player.Abilities.GroundDash && 
 				player.InputController.DashPressed())
 			{
-				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
+				if (signedHorizontal != 0)
 					return new PSDash(player, signedHorizontal);
 			}
 			if (!player.MovementInfo.OnGround)
