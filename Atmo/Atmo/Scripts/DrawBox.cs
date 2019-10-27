@@ -17,7 +17,7 @@ public class DrawBox : StaticBody2D
 	public override void _Draw()
 	{
 		// Your draw commands here
-		DrawRect(new Rect2(-box.Extents.x, -box.Extents.y, box.Extents.x*2, box.Extents.y*2), new Color(1, 0, 0, 1));
+		DrawRect(new Rect2(-box.Extents.x, -box.Extents.y, box.Extents.x*2, box.Extents.y*2), new Color(0, 0, 0, 1));
 	}
 
 	public override void _Process(float delta)

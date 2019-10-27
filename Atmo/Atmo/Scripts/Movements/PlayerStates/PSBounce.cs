@@ -8,16 +8,14 @@ namespace Atmo2.Movements.PlayerStates
 {
 	class PSBounce : PlayerState
 	{
-		private float duration;
+		private int duration;
 		private float strX;
 		private float strY;
-		private float gravity;
 
-		public PSBounce(Player player, float gravity, float strX = 240, float strY = -120, float duration = .1f)
+		public PSBounce(Player player, float strX = 240, float strY = -120, int duration = 6)
 			: base(player)
 		{
 			this.player = player;
-			this.gravity = gravity;
 			this.strX = strX;
 			this.strY = strY;
 			this.duration = duration;
@@ -34,58 +32,72 @@ namespace Atmo2.Movements.PlayerStates
 			//player.MovementInfo.VelX = 0;
 		}
 
-		public override PlayerState Update(float delta)
+		public override PlayerState Update()
 		{
-			duration -= delta;
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
+			//Perform caluclations and modify player variables with results
+			if (signedHorizontal != 0)
+				player.image.SetFlipH(signedHorizontal < 0);
+			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal;
+
+			//Handle any collision resitution & modify variables further if needed
+
+
+			//Modify any timer variables & animations that will be based on movement
+			--duration;
+
+			//Handle Player input for state changers
 			if (!player.MovementInfo.OnGround)
 			{
 				// && delta - PSDiveKick.last_bounce > 300)
-				if (Controller.JumpPressed() && Controller.DownHeld())
-					return new PSDiveKick(player, KQ.STANDARD_GRAVITY);
+				if (player.InputController.JumpPressed() && player.InputController.DownHeld())
+					return new PSDiveKick(player);
 
 				if (player.Abilities.DoubleJump &&
-					Controller.JumpPressed() &&
+					player.InputController.JumpPressed() &&
 					player.Energy >= 1)
 				{
 					player.Energy -= 1;
 					return new PSJump(player);
 				}
 
-				if (player.Abilities.AirDash &&
-					Controller.DashPressed() &&
+				if (signedHorizontal != 0 &&
+					player.Abilities.AirDash &&
+					player.InputController.DashPressed() &&
 					player.Energy >= 1)
 				{
-					if (Controller.LeftStickHorizontal() != 0 || Controller.LeftStickVertical() != 0)
+					if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
 					{
 						player.Energy -= 1;
-						return new PSDash(player);
+						return new PSDash(player, signedHorizontal);
 					}
 				}
 			}
 			else
 			{
-				if(Controller.JumpPressed())
+				if(player.InputController.JumpPressed())
 					return new PSJump(player);
-				if (player.Abilities.GroundDash &&
-					Controller.DashPressed())
-					if (Controller.LeftStickHorizontal() != 0 || Controller.LeftStickVertical() != 0)
-						return new PSDash(player);
+				if (signedHorizontal != 0 &&
+					player.Abilities.GroundDash &&
+					player.InputController.DashPressed())
+				{
+					return new PSDash(player, signedHorizontal);
+				}
 			}
-
-			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(Controller.LeftStickHorizontal());
 
 			if (duration < 0)
 			{
 				if (player.MovementInfo.OnGround)
-					if (Controller.LeftHeld() || Controller.RightHeld())
+					if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 						return new PSRun(player);
 					else
 						return new PSIdle(player);
 				else
-					return new PSFall(player, KQ.STANDARD_GRAVITY);
+					return new PSFall(player);
 			}
-			player.MovementInfo.VelY += gravity;
+			player.MovementInfo.VelY += player.Gravity;
 			return null;
 		}
 	}

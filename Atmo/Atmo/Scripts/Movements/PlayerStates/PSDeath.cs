@@ -31,7 +31,7 @@ namespace Atmo2.Movements.PlayerStates
             // player.Collidable = true;
         }
 
-        public override PlayerState Update(float delta)
+        public override PlayerState Update()
         {
             // if(animation_finished)
             // {

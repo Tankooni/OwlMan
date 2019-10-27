@@ -7,20 +7,20 @@ using Atmo2.Movements.PlayerStates;
 
 namespace Atmo2.Movements
 {
-	public class PlayerController
+	public class PlayerStateController
 	{
 		public PlayerState current_state;
 		private PlayerState next_state;
 
-		public PlayerController(PlayerState initial_state)
+		public PlayerStateController(PlayerState initial_state)
 		{
 			this.current_state = initial_state;
 			initial_state.OnEnter();
 		}
 
-		public void Update(float delta)
+		public void Update()
 		{
-			var newState = current_state.Update(delta);
+			var newState = current_state.Update();
 
 			// Transision states if needed
 			if (next_state != null)

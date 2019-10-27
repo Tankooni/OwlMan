@@ -9,12 +9,10 @@ namespace Atmo2.Movements.PlayerStates
 {
 	class PSAttackNormal : PlayerState
 	{
-		private float gravity;
-		public PSAttackNormal(Player player, float gravity)
+		public PSAttackNormal(Player player)
 			: base(player)
 		{
 			this.player = player;
-			this.gravity = gravity;
 		}
 
 		public override void OnEnter()
@@ -27,12 +25,12 @@ namespace Atmo2.Movements.PlayerStates
 			player.MovementInfo.VelX = 0;
 		}
 
-		public override PlayerState Update(float delta)
+		public override PlayerState Update()
 		{
-			player.MovementInfo.VelY += gravity;
+			player.MovementInfo.VelY += player.Gravity;
 			
 			if(!player.MovementInfo.OnGround)
-				player.MovementInfo.VelX = player.RunSpeed * Math.Sign(Controller.LeftStickHorizontal());
+				player.MovementInfo.VelX = player.RunSpeed * Math.Sign(player.InputController.LeftStickHorizontal());
 
 			//TODO: Enemy colision
 			// Enemy enemy = player.World.CollideRect(KQ.CollisionTypeEnemy, player.X - player.HalfWidth + player.Width * (player.image.FlippedX ? -1 : 1), player.Y - player.Height, player.Width, player.Height) as Enemy;
@@ -49,12 +47,12 @@ namespace Atmo2.Movements.PlayerStates
 		public override PlayerState OnAnimationComplete()
 		{
 			if (player.MovementInfo.OnGround)
-				if (Controller.LeftHeld() || Controller.RightHeld())
+				if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 					return new PSRun(player);
 				else
 					return new PSIdle(player);
 			else
-				return new PSFall(player, KQ.STANDARD_GRAVITY);
+				return new PSFall(player);
 		}
 	}
 }

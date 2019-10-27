@@ -16,7 +16,7 @@ namespace Atmo2.Movements.PlayerStates
 		}
 
 		public abstract void OnEnter();
-		public abstract PlayerState Update(float delta);
+		public abstract PlayerState Update();
 		public abstract void OnExit();
 		public virtual PlayerState OnAnimationComplete()
 		{

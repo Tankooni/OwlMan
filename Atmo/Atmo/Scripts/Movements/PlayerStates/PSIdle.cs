@@ -26,43 +26,40 @@ namespace Atmo2.Movements.PlayerStates
         {
         }
 
-        public override PlayerState Update(float delta)
+        public override PlayerState Update()
         {
-            player.RefillEnergy(delta);
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			
+			//Perform caluclations and modify player variables with results
+			player.RefillEnergy();
 
-            // See if there's ground below us
-            if(!player.MovementInfo.OnGround)
-			{
-                return new PSFall(player, KQ.STANDARD_GRAVITY);
-            }
+
 			// TODO:  Check for enemy collision
 			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
 			// if (enemy != null && !this.player.IsInvincable)
 			// {
 			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
 			// }
-			if (player.Abilities.GroundDash &&
-				Controller.DashPressed())
+
+			if (!player.MovementInfo.OnGround)
 			{
-				if (Controller.LeftStickHorizontal() != 0 || Controller.LeftStickVertical() != 0)
-					return new PSDash(player);
+				return new PSFall(player);
 			}
 
-			if (Controller.AttackPressed())
+			if (player.InputController.AttackPressed())
 			{
-				return new PSAttackNormal(player, KQ.STANDARD_GRAVITY);
+				return new PSAttackNormal(player);
 			}
-            if(Controller.DownPressed())
-            {
-               return new PSCharge(player);
-            }
-            if(Controller.LeftHeld() || Controller.RightHeld())
+            //if(player.InputController.DownPressed())
+            //{
+            //   return new PSCharge(player);
+            //}
+            if(signedHorizontal != 0)
             {
                 return new PSRun(player);
             }
-            if(Controller.JumpPressed())
+            if(player.InputController.JumpPressed())
             {
                 return new PSJump(player);
             }

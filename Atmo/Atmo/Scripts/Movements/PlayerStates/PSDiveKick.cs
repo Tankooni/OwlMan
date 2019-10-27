@@ -10,60 +10,61 @@ namespace Atmo2.Movements.PlayerStates
     {
         //TODO: Fix this
         public static float last_bounce;
-		private float gravity;
 
-		public PSDiveKick(Player player, float gravity)
+		public PSDiveKick(Player player)
 			: base(player)
 		{
             this.player = player;
-			this.gravity = gravity;
 		}
         public override void OnEnter()
         {
             player.image.Play("diveKick");
             player.MovementInfo.VelY = 1200f;
-        }
+			player.InputController.JumpSuccess();
+		}
 
         public override void OnExit()
         {
 
         }
 
-        public override PlayerState Update(float delta)
+        public override PlayerState Update()
         {
-			player.MovementInfo.VelY += gravity;
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
+
+			player.MovementInfo.VelY += player.Gravity;
+			if (signedHorizontal != 0)
+				player.image.SetFlipH(signedHorizontal < 0);
+			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(signedHorizontal);
 
 			if (player.MovementInfo.OnGround)
             {
-				if (Controller.LeftHeld() || Controller.RightHeld())
+				if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 					return new PSRun(player);
 				else
 					return new PSIdle(player);
 			}
 
 			if (player.Abilities.DoubleJump &&
-					Controller.JumpPressed() &&
+					player.InputController.JumpPressed() &&
 					player.Energy >= 1)
 			{
 				player.Energy -= 1;
 				return new PSJump(player);
 			}
 
-			if (player.Abilities.AirDash &&
-				Controller.DashPressed() &&
+			if (signedHorizontal != 0 &&
+				player.Abilities.AirDash &&
+				player.InputController.DashPressed() &&
 				player.Energy >= 1)
 			{
-				if (Controller.LeftStickHorizontal() != 0 || Controller.LeftStickVertical() != 0)
+				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
 				{
 					player.Energy -= 1;
-					return new PSDash(player);
+					return new PSDash(player, signedHorizontal);
 				}
 			}
-
-			var h = Controller.LeftStickHorizontal();
-			if (h != 0)
-				player.image.SetFlipH(h < 0);
-			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(h);
 
 			//TODO: Check for enemy collision
 			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;

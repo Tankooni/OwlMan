@@ -116,11 +116,19 @@ position = Vector2( 646.3, 425.715 )
 scale = Vector2( -44.8417, 1.58908 )
 
 [node name="StaticBody2D3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1096.88, 311.536 )
-scale = Vector2( -44.8417, 1.58908 )
+position = Vector2( 1592.85, 311.536 )
+scale = Vector2( -93.8817, 1.58908 )
+
+[node name="StaticBody2D10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3468.62, 311.504 )
+scale = Vector2( -93.8817, 1.58908 )
 
 [node name="StaticBody2D4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1096.88, 311.536 )
+scale = Vector2( -1.76167, 25.0291 )
+
+[node name="StaticBody2D11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 4387.6, 71.2302 )
 scale = Vector2( -1.76167, 25.0291 )
 
 [node name="StaticBody2D5" parent="." instance=ExtResource( 2 )]
@@ -133,6 +141,34 @@ scale = Vector2( 6.01175, 2.7259 )
 
 [node name="StaticBody2D7" parent="." instance=ExtResource( 2 )]
 position = Vector2( 473.325, 95.19 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1453.03, -39.3616 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D13" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1835.66, -39.3616 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D14" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2268.75, -35.1569 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D15" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2663.99, -35.1569 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D16" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3059.24, -35.1569 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D17" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3433.46, -35.1569 )
+scale = Vector2( 6.01175, 2.7259 )
+
+[node name="StaticBody2D18" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3971.67, -39.3617 )
 scale = Vector2( 6.01175, 2.7259 )
 
 [node name="StaticBody2D8" parent="." instance=ExtResource( 2 )]

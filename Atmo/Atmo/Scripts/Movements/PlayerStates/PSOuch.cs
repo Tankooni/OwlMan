@@ -8,17 +8,15 @@ namespace Atmo2.Movements.PlayerStates
 {
     class PSOuch : PlayerState
     {
-        private float duration;
+        private int duration;
         private int damage_taken;
-		private float gravity;
 
-        public PSOuch(Player player, int damage, float gravity)
+        public PSOuch(Player player, int damage, int duration = 24)
 			: base(player)
         {
             this.player = player;
             this.damage_taken = damage;
-            this.duration = .4f;
-			this.gravity = gravity;
+            this.duration = duration;
         }
         public override void OnEnter()
         {
@@ -48,20 +46,22 @@ namespace Atmo2.Movements.PlayerStates
             
         }
 
-        public override PlayerState Update(float delta)
+        public override PlayerState Update()
         {
-            this.duration -= delta;
+			player.MovementInfo.VelY += player.Gravity;
+
+			--duration;
+
             if(this.duration < 0)
             {
 				if (player.MovementInfo.OnGround)
-					if (Controller.LeftHeld() || Controller.RightHeld())
+					if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 						return new PSRun(player);
 					else
 						return new PSIdle(player);
 				else
-					return new PSFall(player, KQ.STANDARD_GRAVITY);
+					return new PSFall(player);
 			}
-			player.MovementInfo.VelY += gravity;
             return null;
         }
     }

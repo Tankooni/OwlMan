@@ -9,10 +9,13 @@ namespace Atmo2.Movements.PlayerStates
 {
 	class PSRun : PlayerState
 	{
-		public PSRun(Player player)
+		private float speedModifier;
+
+		public PSRun(Player player, float initialSpeedModifier = 0)
 			:base(player)
 		{
 			this.player = player;
+			speedModifier = initialSpeedModifier;
 		}
 		public override void OnEnter()
 		{
@@ -25,18 +28,24 @@ namespace Atmo2.Movements.PlayerStates
 			player.MovementInfo.VelX = 0;
 		}
 
-		public override PlayerState Update(float delta)
+		public override PlayerState Update()
 		{
-			player.RefillEnergy(delta);
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			if (Controller.AttackPressed())
-				return new PSAttackNormal(player, KQ.STANDARD_GRAVITY);
+			//Perform caluclations and modify player variables with results
+			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
+				speedModifier = 0;
 
-			var h = Controller.LeftStickHorizontal();
-			if (h == 0)
+			player.RefillEnergy();
+
+			if (signedHorizontal == 0)
 				return new PSIdle(player);
-			player.image.SetFlipH(h < 0);
-			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(h);
+			player.image.SetFlipH(signedHorizontal < 0);
+
+			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
+
+			//Handle any collision resitution & modify variables further if needed
 			//player.image.SetSpeedScale(Math.Max(Math.Abs(h), .3f));
 			//TODO: enemy collision
 			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
@@ -45,19 +54,29 @@ namespace Atmo2.Movements.PlayerStates
 			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
 			// }
 
-			if (Controller.JumpPressed())
+			//Modify any timer variables & animations that will be based on movement
+			if (speedModifier != 0)
+			{
+				speedModifier = Mathf.Clamp(speedModifier - player.HorizontalDrag * signedHorizontal, signedHorizontal < 0 ? speedModifier : 0, signedHorizontal < 0 ? 0 : speedModifier);
+			}
+
+			//Handle Player input for state changers
+			if (player.InputController.AttackPressed())
+				return new PSAttackNormal(player);
+
+			if (player.InputController.JumpPressed())
 			{
 				return new PSJump(player);
 			}
 			if(player.Abilities.GroundDash && 
-				Controller.DashPressed())
+				player.InputController.DashPressed())
 			{
-				if (Controller.LeftStickHorizontal() != 0 || Controller.LeftStickVertical() != 0)
-					return new PSDash(player);
+				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
+					return new PSDash(player, signedHorizontal);
 			}
 			if (!player.MovementInfo.OnGround)
 			{
-				return new PSFall(player, KQ.STANDARD_GRAVITY);
+				return new PSFall(player, coyoteTime: true);
 			}
 
 			return null;

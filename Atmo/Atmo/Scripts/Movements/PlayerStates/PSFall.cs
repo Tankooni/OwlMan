@@ -9,15 +9,17 @@ namespace Atmo2.Movements.PlayerStates
 {
 	class PSFall : PlayerState
 	{
-		private float gravity;
 		private float speed;
+		private int coyoteTime;
+		private float speedModifier;
 
-		public PSFall(Player player, float gravity, float speed = -1)
+		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1)
 			: base(player)
 		{
 			this.player     = player;
-			this.gravity    = gravity;
 			this.speed      = speed < 0 ? player.RunSpeed : speed;
+			this.coyoteTime = coyoteTime ? 6 : 0;
+			speedModifier = initialSpeedModifier;
 		}
 		public override void OnEnter()
 		{
@@ -29,51 +31,77 @@ namespace Atmo2.Movements.PlayerStates
 			player.MovementInfo.VelX = 0;
 		}
 
-		public override PlayerState Update(float delta)
+		public override PlayerState Update()
 		{
-			player.MovementInfo.VelY += gravity;
-			if (player.MovementInfo.HeadBonk)
-				player.MovementInfo.VelY = gravity;
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-
-			AnimationCheckSet();
-
-			if (Controller.AttackPressed())
+			//Perform caluclations and modify player variables with results
+			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
 			{
-				return new PSAttackNormal(player, KQ.STANDARD_GRAVITY);
+				speedModifier = 0;
 			}
-			// && delta - PSDiveKick.last_bounce > 300)
-			if (Controller.JumpPressed() && Controller.DownHeld())
-				return new PSDiveKick(player, KQ.STANDARD_GRAVITY);
 
-			var h = Controller.LeftStickHorizontal();
-			if (h != 0)
-				player.image.SetFlipH(h < 0);
-			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(h);
+			player.MovementInfo.VelY += player.Gravity;
+			if (player.MovementInfo.HeadBonk)
+				player.MovementInfo.VelY = player.Gravity;
+			
+			if (signedHorizontal != 0)
+				player.image.SetFlipH(signedHorizontal < 0);
+			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 
+			//Handle any collision resitution & modify variables further if needed
 			//TODO: Enemy Collision
 			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
 			// if (enemy != null && !this.player.IsInvincable)
 			// {
 			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
 			// }
+			
+			//Modify any timer variables & animations that will be based on movement
+			if (speedModifier != 0)
+			{
+				speedModifier = Mathf.Clamp(speedModifier - player.HorizontalDrag * signedHorizontal, signedHorizontal < 0 ? speedModifier : 0, signedHorizontal < 0 ? 0 : speedModifier);
+			}
+
+			AnimationCheckSet();
+
+			if (player.InputController.AttackPressed())
+			{
+				return new PSAttackNormal(player);
+			}
+
+			//Handle Player input for state changers
+			// && delta - PSDiveKick.last_bounce > 300)
+			if (player.InputController.JumpPressed() && player.InputController.DownHeld())
+				return new PSDiveKick(player);
+
+			if (coyoteTime > 0)
+			{
+				--coyoteTime;
+				if (player.InputController.JumpPressed())
+				{
+					return new PSJump(player, speedModifier);
+				}
+			}
 
 			if (player.Abilities.DoubleJump &&
-				Controller.JumpPressed() && 
+				player.InputController.JumpPressed() && 
 				player.Energy >= 1)
 			{
 				player.Energy -= 1;
-				return new PSJump(player);
+				return new PSJump(player, speedModifier);
 			}
 
-			if(player.Abilities.AirDash && 
-				Controller.DashPressed() && 
+			if(signedHorizontal != 0 &&
+				player.Abilities.AirDash && 
+				player.InputController.DashPressed() && 
 				player.Energy >= 1)
 			{
-				if (Controller.LeftStickHorizontal() != 0 || Controller.LeftStickVertical() != 0)
+				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
 				{
 					player.Energy -= 1;
-					return new PSDash(player);
+					return new PSDash(player, signedHorizontal);
 				}
 			}
 

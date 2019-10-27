@@ -26,7 +26,7 @@ namespace Atmo2
 		public Abilities(Player player)
 		{
             this.player = player;
-			GoodJump = false;
+			GoodJump = true;
 			DoubleJump = false;
 			WallSlide = false;
 			WallJump = false;

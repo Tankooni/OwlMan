@@ -37,9 +37,9 @@ namespace Atmo2.Movements.PlayerStates
             player.EnergyRechargeRate = previous_charge_rate;
         }
 
-        public override PlayerState Update(float delta)
+        public override PlayerState Update()
         {
-            player.RefillEnergy(delta);
+            player.RefillEnergy();
 
 			//TODO: Enemy Collision
             // Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
@@ -48,7 +48,7 @@ namespace Atmo2.Movements.PlayerStates
             //     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
             // }
 
-            if (!Controller.DownHeld())
+            if (!player.InputController.DownHeld())
             {
                 return new PSIdle(player);
             }

@@ -6,7 +6,9 @@ using Atmo2.Movements.PlayerStates;
 
 public class Player : KinematicBody2D
 {
-	public PlayerController player_controller;
+	public Controller InputController;
+	public PlayerStateController PlayerStateController;
+
 	public Abilities Abilities;
 	public MovementInfo MovementInfo;
 
@@ -20,7 +22,7 @@ public class Player : KinematicBody2D
 		 {
 			 spice = Mathf.Clamp(value, 0, 100);
 			 if (spice == 0)
-				 player_controller.NextState(
+				 PlayerStateController.NextState(
 					 new PSDeath(this));
 		 }
 	}
@@ -38,6 +40,9 @@ public class Player : KinematicBody2D
 
 	public float JumpStrenth { get; set; }
 	public float RunSpeed { get; set; }
+	public float DashMultiplier { get; set; }
+	public float HorizontalDrag { get; set; }
+	public float Gravity { get; set; }
 	public bool IsInvincable { get; set; }
 
 	public AnimatedSprite image;
@@ -68,7 +73,10 @@ public class Player : KinematicBody2D
 
 		//JumpStrenth = 660;
 		RunSpeed = 240;
-		
+		DashMultiplier = 3.5f;
+		HorizontalDrag = 50;
+		Gravity = KQ.STANDARD_GRAVITY;
+
 		// image.RenderStep = 1;
 
 		// GameWorld.player = this;
@@ -78,7 +86,9 @@ public class Player : KinematicBody2D
 		Abilities.GiveAllAbilities();
 		MovementInfo = new MovementInfo(this);
 
-		player_controller = new PlayerController(new PSIdle(this));
+		InputController = new Controller();
+		PlayerStateController = new PlayerStateController(new PSIdle(this));
+
 		image.Connect("animation_finished", this, "AnimationComplete");
 
 		// AddResponse(PickupType.AirDash, OnAirDashPickup);
@@ -89,10 +99,10 @@ public class Player : KinematicBody2D
 
 	public void AnimationComplete()
 	{
-		player_controller.AnimationComplete();
+		PlayerStateController.AnimationComplete();
 	}
 
-	public void RefillEnergy(float delta)
+	public void RefillEnergy()
 	{
 		Energy = MaxEnergy;/*MathHelper.Clamp(
 			time.Elapsed*EnergyRechargeRate + Energy, 0, MaxEnergy);*/
@@ -107,27 +117,25 @@ public class Player : KinematicBody2D
 	// {
 	// }
 
-	public override void _Process(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
-		// base.Update(delta);
+		base._PhysicsProcess(delta);
 
+		InputController.Update();
 		// if(Keyboard.Space.Pressed)
 		// {
 		// 	Console.WriteLine(player_controller.current_state.ToString());
 		// }
 
-		player_controller.Update(delta);
+		PlayerStateController.Update();
 		MovementInfo.Update(delta);
-		
+
 		UpdateCamera();
 
-		// if(Controller.Select())
-		// {
-		// 	OnAirDashPickup(null);
-		// 	OnAirJumpPickup(null);
-		// 	OnDashPickup(null);
-		// 	OnJumpPickup(null);
-		// }
+		if (InputController.Select())
+		{
+			Abilities.GiveAllAbilities();
+		}
 	}
 
 	// public override void Squish()
