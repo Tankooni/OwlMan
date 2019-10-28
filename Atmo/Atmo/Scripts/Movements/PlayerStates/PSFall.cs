@@ -87,7 +87,9 @@ namespace Atmo2.Movements.PlayerStates
 					player.InputController.DashPressed())
 				{
 					if (signedHorizontal != 0)
+					{
 						return new PSDash(player, signedHorizontal);
+					}
 				}
 			}
 

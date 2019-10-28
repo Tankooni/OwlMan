@@ -130,6 +130,8 @@ public class Player : KinematicBody2D
 		PlayerStateController.Update();
 		MovementInfo.Update(delta);
 
+		GD.Print(MovementInfo.AgainstWall);
+
 		UpdateCamera();
 
 		if (InputController.Select())

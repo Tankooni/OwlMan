@@ -41,7 +41,7 @@ namespace Atmo2.Movements
 
 			OnGround = entity.TestMove(entity.Transform, new Vector2(0, 1));
 			HeadBonk = entity.TestMove(entity.Transform, new Vector2(0, -1));
-			AgainstWall += entity.TestMove(entity.Transform, new Vector2(1, 0)) ? 1 : 0;
+			AgainstWall = entity.TestMove(entity.Transform, new Vector2(1, 0)) ? 1 : 0;
 			AgainstWall -= entity.TestMove(entity.Transform, new Vector2(-1, 0)) ? 1 : 0;
 
 

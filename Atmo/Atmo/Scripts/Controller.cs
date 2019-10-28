@@ -7,12 +7,7 @@ namespace Atmo2
 	{
 		private int jumpTicker { get; set; }
 
-		public bool JumpPressed()
-		{
-			bool canJump = jumpTicker > 0;
-			//jumpTicker = 0;
-			return canJump;
-		}
+		public bool JumpPressed() { return jumpTicker > 0; }
 		public void JumpSuccess() { jumpTicker = 0; }
 		public bool DashPressed() { return Input.IsActionJustPressed("dash"); }
 		public bool AttackPressed() { return Input.IsActionJustPressed("attack"); }
