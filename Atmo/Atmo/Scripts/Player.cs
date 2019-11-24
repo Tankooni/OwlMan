@@ -70,6 +70,10 @@ public class Player : KinematicBody2D
 	private Camera2D camera;
 	private Control hud;
 	private CollisionShape2D _collisionShape2D;
+	private Area2D _boxL;
+	private Area2D _boxR;
+	private Area2D _boxB;
+
 
 	public String Animation {
 		get { return this._image.Animation; }
@@ -99,6 +103,10 @@ public class Player : KinematicBody2D
 		hud = GetNode<Control>("../CanvasLayer/HUD");
 		_image = GetNode<AnimatedSprite>("AnimatedSprite");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+
+		_boxL = GetNode<Area2D>("SideBoxL");
+		_boxR = GetNode<Area2D>("SideBoxR");
+		_boxB = GetNode<Area2D>("BottomBox");
 
 		this.Connect("HealthChanged", hud, "on_set_health");
 		this.Connect("AnimationChanged", hud, "on_animation_changed");
