@@ -65,7 +65,7 @@ public class Player : KinematicBody2D
 	{
 		camera = GetNode<Camera2D>("../MainCamera");
 		image = GetNode<AnimatedSprite>("AnimatedSprite");
-
+		
 		// Spice = 100;
 		// Energy = 0f;
 		MaxEnergy = 3;
@@ -75,7 +75,7 @@ public class Player : KinematicBody2D
 		RunSpeed = 240;
 		DashMultiplier = 3.5f;
 		HorizontalDrag = 50;
-		Gravity = KQ.STANDARD_GRAVITY;
+		Gravity = Overlord.STANDARD_GRAVITY;
 
 		// image.RenderStep = 1;
 
@@ -129,8 +129,6 @@ public class Player : KinematicBody2D
 
 		PlayerStateController.Update();
 		MovementInfo.Update(delta);
-
-		GD.Print(MovementInfo.AgainstWall);
 
 		UpdateCamera();
 
