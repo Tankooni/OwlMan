@@ -230,7 +230,7 @@ public class Player : KinematicBody2D
 		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.x / 2f, Overlord.LevelBoundsX.y - Overlord.ViewportSize.x / 2f);
 		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.y / 2f, Overlord.LevelBoundsY.y - Overlord.ViewportSize.y / 2f);
 
-		//camera.SetPosition(new Vector2(centerX, centerY));
+		camera.SetPosition(new Vector2(centerX, centerY));
 	}
 	
 	public void OnDamage(CollisionObject2D collider) {

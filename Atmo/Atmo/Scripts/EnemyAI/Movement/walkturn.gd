@@ -7,12 +7,12 @@ enum WalkingDirection {
 	Right = 1
 }
 
+export(NodePath) onready var node = get_node(node)
 export(WalkingDirection) var direction = WalkingDirection.Left
 export(int) var speed = 200
 export(int) var gravity = 18;
 #export(NodePath) onready var node = get_node(node)
 
-onready var node = self
 var vel_y = 0
 
 func _ready():
@@ -23,8 +23,14 @@ func _ready():
 		node = get_parent()
 
 func _physics_process(delta):
+	var cur_direction = -1 if int(direction) == int(WalkingDirection.Left) else 1
+	
 	# update gravity
 	vel_y += gravity
+	
+	# check if we would fall
+	if node.test_move(node.transform, Vector2(0, vel_y)) and not node.test_move(node.transform, Vector2(speed * 5 * cur_direction, vel_y)):
+		direction = !direction
 
 	# do the move
 	var vel = Vector2(speed, vel_y)
