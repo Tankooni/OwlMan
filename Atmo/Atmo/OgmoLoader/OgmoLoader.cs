@@ -53,7 +53,7 @@ namespace Atmo.OgmoLoader
 		/// Loads all levels for the game and project data.
 		/// </summary>
 		/// <returns>The generated starting scene.</returns>
-		public Node2D Load(out Node2D player)
+		public Node2D Load(out Node2D player, out Vector2 levelBoundsX, out Vector2 levelBoundsY)
 		{
 			string pathToProjectFile = "res://ogmo/project.ogmo";
 			string pathToLevelsDir = "res://ogmo/levels";
@@ -76,7 +76,9 @@ namespace Atmo.OgmoLoader
 				if (levelPath.StartsWith("Start", StringComparison.InvariantCultureIgnoreCase))
 					startLevel = Levels.Last().Value;
 			}
-			
+
+			levelBoundsX = new Vector2(0, startLevel.width);
+			levelBoundsY = new Vector2(0, startLevel.height);
 
 			return GenerateScene(project, startLevel, out player);
 		}
@@ -99,6 +101,8 @@ namespace Atmo.OgmoLoader
 			tileMap.SetName("TileMap");
 			ultimateParent.AddChild(tileMap);
 
+
+
 			//foreach(int id in tileMap.TileSet.GetTilesIds())
 			//{
 			//	GD.Print(id.GetType());
@@ -112,6 +116,14 @@ namespace Atmo.OgmoLoader
 				for (int x = 0; x < tileData[y].Count; x++)
 				{
 					tileMap.SetCell(x, y, tileData[y][x]);
+					if (y == 0)
+						tileMap.SetCell(x, -1, 0);
+					if (x == 0)
+						tileMap.SetCell(-1, y, 0);
+					if (x == tileData.Count - 1)
+						tileMap.SetCell(tileData.Count, y, 0);
+					if (y == tileData[y].Count - 1)
+						tileMap.SetCell(x, tileData[y].Count, 0);
 					//GD.Print("x: ", x, ", y: ", y, ", data: ", tileData[y][x]);
 				}
 			}
