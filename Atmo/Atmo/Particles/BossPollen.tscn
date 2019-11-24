@@ -28,4 +28,5 @@ hue_variation_random = 1.0
 amount = 1000
 lifetime = 5.0
 preprocess = 10.0
+local_coords = false
 process_material = SubResource( 3 )
