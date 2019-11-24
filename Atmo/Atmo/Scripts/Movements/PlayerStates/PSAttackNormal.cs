@@ -38,7 +38,8 @@ namespace Atmo2.Movements.PlayerStates
 			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
 				speedModifier = 0;
 
-			player._image.SetFlipH(signedHorizontal < 0);
+			if (signedHorizontal != 0)
+				player._image.SetFlipH(signedHorizontal < 0);
 
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 			if(!player.IsOnFloor())
