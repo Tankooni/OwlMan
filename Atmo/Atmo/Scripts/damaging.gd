@@ -18,11 +18,16 @@ export(bool) var apply_to_parent = false
 
 var node
 
+export(Vector2) var direction
+
 func _ready():
 	if apply_to_parent:
 		node = get_parent()
 	else:
 		node = self
+		
+	if direction:
+		$Movement.direction = direction
 
 func _physics_process(delta):
 	pass

@@ -21,8 +21,9 @@ func _physics_process(delta):
 	
 	# Try to stay distance away from target
 	distance_to -= distance
-	 
-	node.move_and_slide(slerp_to * speed/12000.0 * distance_to / delta)
+	
+	if distance_to <= 1200:
+		node.move_and_slide(slerp_to * speed/12000.0 * distance_to / delta)
 
 	if $AnimatedSprite:
 		if direction.x > 0:

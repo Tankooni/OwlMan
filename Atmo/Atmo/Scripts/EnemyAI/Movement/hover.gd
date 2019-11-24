@@ -10,6 +10,8 @@ var frames_until_attack = attack_freq
 
 var animation_node
 
+var boolette = preload("res://DamagingThings/boolette.tscn")
+
 func _ready():
 	set_physics_process(true)
 	
@@ -37,6 +39,9 @@ func _physics_process(delta):
 			
 			animation_node.play("attack")
 			animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
+
+			var bullet = boolette.instance()
+			bullet.direction = direction.normalized()
 			
 		else:
 			frames_until_attack -= 1
