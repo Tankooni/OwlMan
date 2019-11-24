@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/EnemyAI/Movement/hover.gd" type="Script" id=1]
-[ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture" id=2]
-[ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture" id=3]
-[ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture" id=4]
-[ext_resource path="res://Images/BawssButterfly/000_Wings03.png" type="Texture" id=5]
-[ext_resource path="res://Images/BawssButterfly/000_Worm00.png" type="Texture" id=6]
-[ext_resource path="res://Images/BawssButterfly/000_Worm01.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=8]
+[ext_resource path="res://Particles/BossPollen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture" id=3]
+[ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture" id=4]
+[ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture" id=5]
+[ext_resource path="res://Images/BawssButterfly/000_Wings03.png" type="Texture" id=6]
+[ext_resource path="res://Images/BawssButterfly/000_Worm00.png" type="Texture" id=7]
+[ext_resource path="res://Images/BawssButterfly/000_Worm01.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
@@ -19,12 +20,12 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "attack",
 "speed": 0.4
@@ -62,11 +63,15 @@ tracks/1/keys = {
 script = ExtResource( 1 )
 node = NodePath(".")
 
+[node name="BossPollen" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -40 )
+amount = 300
+
 [node name="Wings" type="AnimatedSprite" parent="."]
 position = Vector2( 24.5547, -14.7329 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Worm" type="AnimatedSprite" parent="."]
@@ -83,4 +88,4 @@ shape = SubResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Worm")
 anims/idle = SubResource( 4 )
-script = ExtResource( 8 )
+script = ExtResource( 9 )
