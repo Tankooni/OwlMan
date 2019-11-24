@@ -18,7 +18,7 @@ namespace Atmo2.Movements
 
 		public MovementInfo(Player entity)
 		{
-            this.entity = entity;
+			this.entity = entity;
 			MoveRefill = 0;
 			VelX = 0;
 			VelY = 0;
@@ -35,8 +35,8 @@ namespace Atmo2.Movements
 			VelY = 0;
 		}
 
-        public void Update(float delta)
-        {
+		public void Update(float delta)
+		{
 			entity.MoveAndSlide(new Vector2(VelX, VelY));
 
 			OnGround = entity.TestMove(entity.Transform, new Vector2(0, 1));

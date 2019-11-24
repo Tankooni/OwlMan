@@ -8,26 +8,26 @@
 [ext_resource path="res://Images/Julep/008_Attack03.png" type="Texture" id=6]
 [ext_resource path="res://Images/Julep/008_Attack04.png" type="Texture" id=7]
 [ext_resource path="res://Images/Julep/008_Attack05.png" type="Texture" id=8]
-[ext_resource path="res://Images/Julep/003_Jump00.png" type="Texture" id=9]
-[ext_resource path="res://Images/Julep/003_Jump01.png" type="Texture" id=10]
-[ext_resource path="res://Images/Julep/001_Walk01.png" type="Texture" id=11]
-[ext_resource path="res://Images/Julep/001_Walk00.png" type="Texture" id=12]
-[ext_resource path="res://Images/Julep/001_Walk02.png" type="Texture" id=13]
-[ext_resource path="res://Images/Julep/001_Walk03.png" type="Texture" id=14]
-[ext_resource path="res://Images/Julep/001_Walk04.png" type="Texture" id=15]
-[ext_resource path="res://Images/Julep/001_Walk05.png" type="Texture" id=16]
-[ext_resource path="res://Images/Julep/001_Walk06.png" type="Texture" id=17]
-[ext_resource path="res://Images/Julep/001_Walk07.png" type="Texture" id=18]
-[ext_resource path="res://Images/Julep/007_Dash00.png" type="Texture" id=19]
-[ext_resource path="res://Images/Julep/007_Dash01.png" type="Texture" id=20]
-[ext_resource path="res://Images/Julep/002_Charge00.png" type="Texture" id=21]
-[ext_resource path="res://Images/Julep/002_Charge01.png" type="Texture" id=22]
-[ext_resource path="res://Images/Julep/002_Charge02.png" type="Texture" id=23]
-[ext_resource path="res://Images/Julep/002_Charge03.png" type="Texture" id=24]
-[ext_resource path="res://Images/Julep/006_Slide00.png" type="Texture" id=25]
-[ext_resource path="res://Images/Julep/006_Slide01.png" type="Texture" id=26]
-[ext_resource path="res://Images/Julep/005_Kick00.png" type="Texture" id=27]
-[ext_resource path="res://Images/Julep/005_Kick01.png" type="Texture" id=28]
+[ext_resource path="res://Images/Julep/001_Walk01.png" type="Texture" id=9]
+[ext_resource path="res://Images/Julep/001_Walk00.png" type="Texture" id=10]
+[ext_resource path="res://Images/Julep/001_Walk02.png" type="Texture" id=11]
+[ext_resource path="res://Images/Julep/001_Walk03.png" type="Texture" id=12]
+[ext_resource path="res://Images/Julep/001_Walk04.png" type="Texture" id=13]
+[ext_resource path="res://Images/Julep/001_Walk05.png" type="Texture" id=14]
+[ext_resource path="res://Images/Julep/001_Walk06.png" type="Texture" id=15]
+[ext_resource path="res://Images/Julep/001_Walk07.png" type="Texture" id=16]
+[ext_resource path="res://Images/Julep/003_Jump00.png" type="Texture" id=17]
+[ext_resource path="res://Images/Julep/003_Jump01.png" type="Texture" id=18]
+[ext_resource path="res://Images/Julep/005_Kick00.png" type="Texture" id=19]
+[ext_resource path="res://Images/Julep/005_Kick01.png" type="Texture" id=20]
+[ext_resource path="res://Images/Julep/007_Dash00.png" type="Texture" id=21]
+[ext_resource path="res://Images/Julep/007_Dash01.png" type="Texture" id=22]
+[ext_resource path="res://Images/Julep/006_Slide00.png" type="Texture" id=23]
+[ext_resource path="res://Images/Julep/006_Slide01.png" type="Texture" id=24]
+[ext_resource path="res://Images/Julep/002_Charge00.png" type="Texture" id=25]
+[ext_resource path="res://Images/Julep/002_Charge01.png" type="Texture" id=26]
+[ext_resource path="res://Images/Julep/002_Charge02.png" type="Texture" id=27]
+[ext_resource path="res://Images/Julep/002_Charge03.png" type="Texture" id=28]
 [ext_resource path="res://Images/Julep/004_Fall00.png" type="Texture" id=29]
 [ext_resource path="res://Images/Julep/004_Fall01.png" type="Texture" id=30]
 
@@ -43,34 +43,34 @@ animations = [ {
 "name": "attackNormal",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "jump",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "walk",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "jump",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "diveKick",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 22 ) ],
 "loop": true,
 "name": "dash",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
-"loop": true,
-"name": "charge",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 25 ), ExtResource( 26 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 24 ) ],
 "loop": true,
 "name": "wallSlide",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 27 ), ExtResource( 28 ) ],
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ],
 "loop": true,
-"name": "diveKick",
+"name": "charge",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 29 ), ExtResource( 30 ) ],
