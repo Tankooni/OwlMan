@@ -1,6 +1,6 @@
 extends MarginContainer
 
-var scene_pip = preload("res://JulepNew.png")
+var scene_pip = preload("res://JulepSprite.tscn")
 
 onready var health_pips : HBoxContainer = $StatPanel/Health/HealthPips
 
@@ -10,6 +10,7 @@ func _ready():
 
 func on_set_health(health : int):
 	health = int(clamp(0, health, 3))
+	print(health_pips)
 	var current_health = health_pips.get_child_count()
 	
 	if current_health == health:
@@ -19,4 +20,8 @@ func on_set_health(health : int):
 			health_pips.remove_child(health_pips.get_child(0))
 	else:
 		for _i in range(health - current_health):
-			health_pips.add_child(scene_pip.instance())
+			var pip = scene_pip.instance()
+			pip.scale *= 0.6
+			pip.offset.y -= 10
+			pip.centered = false
+			health_pips.add_child(pip)

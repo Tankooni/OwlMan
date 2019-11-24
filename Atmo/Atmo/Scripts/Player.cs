@@ -21,14 +21,14 @@ public class Player : KinematicBody2D
 	private int health;
 	public int Health { 
 		get { return health; }
-	  set {
+		set {
 			health = value;
 			EmitSignal(nameof(HealthChanged), health);
 		}
 	}
 	public int Power { get; set; }
 	
-	private int maxHealth;
+	private int maxHealth = 3;
 	private int maxPower;
 
 	private int invulnerabilityFrames = 0;
@@ -85,7 +85,8 @@ public class Player : KinematicBody2D
 		camera = GetNode<Camera2D>("../MainCamera");
 		image = GetNode<AnimatedSprite>("AnimatedSprite");
 		
-		Health = maxHealth;
+		SetDeferred("Health", maxHealth);
+		//Health = maxHealth;
 		Power = 0;
 
 		// Spice = 100;
