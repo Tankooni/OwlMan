@@ -93,8 +93,8 @@ namespace Atmo.OgmoLoader
 		private Node2D GenerateScene(OgmoProject project, OgmoLevel level)
 		{
 			var tileMap = (TileMap)((PackedScene)ResourceLoader.Load("res://prefab/TileMap.tscn")).Instance();
-			//Node2D ultimateParent = new Node2D();
-			//ultimateParent.AddChild(tileMap);
+			Node2D ultimateParent = new Node2D();
+			ultimateParent.AddChild(tileMap);
 
 			//foreach(int id in tileMap.TileSet.GetTilesIds())
 			//{
@@ -102,6 +102,7 @@ namespace Atmo.OgmoLoader
 			//	GD.Print(id.ToString());
 			//}
 
+			//Load set tiles in
 			var tileData = level.layers.First(x => x.name == "Tiles").data2D;
 			for (int y = 0; y < tileData.Count; y++)
 			{
@@ -112,7 +113,30 @@ namespace Atmo.OgmoLoader
 				}
 			}
 
-			return tileMap;
+			var playerScene = ((PackedScene)ResourceLoader.Load("res://prefab/PlayerOwl.tscn"));
+			var bugScene = ((PackedScene)ResourceLoader.Load("res://prefab/Bug.tscn"));
+
+			foreach (var entity in level.layers.First(x => x.name == "Entity").entities)
+			{
+				Node2D childInstance = null;
+				switch (entity.name)
+				{
+					case "LevelSpawn":
+						childInstance = (Node2D)playerScene.Instance();
+						break;
+					case "Walker":
+						childInstance = (Node2D)bugScene.Instance();
+						break;
+				}
+				if (childInstance != null)
+				{
+					//childInstance.SetOwner(ultimateParent);
+					//ultimateParent.AddChild(childInstance);
+					//childInstance.SetPosition(new Vector2(entity.x, entity.y));
+				}
+			}
+
+			return ultimateParent;
 		}
 	}
 }

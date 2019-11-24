@@ -4,7 +4,7 @@ using Atmo.OgmoLoader;
 
 public class Overlord : Node
 {
-	public static float STANDARD_GRAVITY = 18f;
+	public static float STANDARD_GRAVITY = 0f;
 
 	// Declare member variables here. Examples:
 	// private int a = 2;
