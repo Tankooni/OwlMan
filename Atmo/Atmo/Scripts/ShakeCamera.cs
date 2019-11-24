@@ -59,7 +59,7 @@ public class ShakeCamera : Camera2D
 	//Kick off a new screenshake effect.
 	public void Shake(float duration, float frequency, float amplitude)
 	{
-		GD.Print("Shaking ", duration, " ", frequency, " ", amplitude);
+
 		//Initialize variables.
 		_duration = duration;
 		_timer = duration;
