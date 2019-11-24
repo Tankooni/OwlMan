@@ -19,6 +19,8 @@ public class Player : KinematicBody2D
 	public MovementInfo MovementInfo;
 
 	private Camera2D camera;
+
+	private Control hud;
 	
 	// Player state
 	private int health;
@@ -95,8 +97,12 @@ public class Player : KinematicBody2D
 	public override void _Ready()
 	{
 		camera = GetNode<Camera2D>("../MainCamera");
+		hud = GetNode<Control>("../CanvasLayer/HUD");
 		_image = GetNode<AnimatedSprite>("AnimatedSprite");
-		
+
+		this.Connect("HealthChanged", hud, "on_set_health");
+		this.Connect("AnimationChanged", hud, "on_animation_changed");
+
 		SetDeferred("Health", maxHealth);
 		//Health = maxHealth;
 		Power = 0;
@@ -130,6 +136,8 @@ public class Player : KinematicBody2D
 		// AddResponse(PickupType.AirJump, OnAirJumpPickup);
 		// AddResponse(PickupType.Jump, OnJumpPickup);
 		// AddResponse(PickupType.Dash, OnDashPickup);
+
+
 	}
 
 	public void AnimationComplete()
