@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Block.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Enemies/Bug.tscn" type="PackedScene" id=3]
-[ext_resource path="res://DamagingThings/boolette.tscn" type="PackedScene" id=4]
-[ext_resource path="res://hud.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefab/PlayerOwl.tscn" type="PackedScene" id=1]
+[ext_resource path="res://hud.tscn" type="PackedScene" id=2]
 
 [node name="Node" type="Node"]
 
@@ -14,95 +11,12 @@
 position = Vector2( 654.933, 354.973 )
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2( 655.497, 353.048 )
+position = Vector2( 265.845, 178.949 )
 current = true
 smoothing_enabled = true
 
-[node name="StaticBody2D" parent="." instance=ExtResource( 2 )]
-
-[node name="StaticBody2D2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 646.3, 425.715 )
-scale = Vector2( -44.8417, 1.58908 )
-
-[node name="StaticBody2D3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1592.85, 311.536 )
-scale = Vector2( -93.8817, 1.58908 )
-
-[node name="StaticBody2D10" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3468.62, 311.504 )
-scale = Vector2( -93.8817, 1.58908 )
-
-[node name="StaticBody2D4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1096.88, 311.536 )
-scale = Vector2( -1.76167, 25.0291 )
-
-[node name="StaticBody2D11" parent="." instance=ExtResource( 2 )]
-position = Vector2( 4387.6, 71.2302 )
-scale = Vector2( -1.76167, 25.0291 )
-
-[node name="StaticBody2D5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 395.404, -121.039 )
-scale = Vector2( 68.2117, 2.7259 )
-
-[node name="StaticBody2D6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 331.12, 215.967 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 473.325, 95.19 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D12" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1453.03, -39.3616 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D13" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1835.66, -39.3616 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D14" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2268.75, -35.1569 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D15" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2663.99, -35.1569 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D16" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3059.24, -35.1569 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D17" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3433.46, -35.1569 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D18" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3971.67, -39.3617 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 407.093, 340.639 )
-scale = Vector2( 6.01175, 2.7259 )
-
-[node name="StaticBody2D9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 666.178, 204.279 )
-scale = Vector2( 1.69174, 10.6859 )
-
-[node name="Bug" parent="." instance=ExtResource( 3 )]
-position = Vector2( 412.52, 292.201 )
-
-[node name="Boolette" parent="." instance=ExtResource( 4 )]
-position = Vector2( 418.659, 380.599 )
-
-[node name="Boolette2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 294.657, 379.371 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 2 )]
 [connection signal="AnimationChanged" from="Player" to="CanvasLayer/HUD" method="on_animation_changed" flags=3]
 [connection signal="HealthChanged" from="Player" to="CanvasLayer/HUD" method="on_set_health"]

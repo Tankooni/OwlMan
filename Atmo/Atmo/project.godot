@@ -19,6 +19,10 @@ config/name="Atmo"
 run/main_scene="res://map.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Overlord="*res://Scripts/Overlord.cs"
+
 [display]
 
 window/size/width=640

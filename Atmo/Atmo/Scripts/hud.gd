@@ -1,6 +1,6 @@
 extends MarginContainer
 
-var scene_pip = preload("res://JulepSprite.tscn")
+var scene_pip = preload("res://owlman_sprite.tscn")
 
 onready var health_pips : HBoxContainer = $StatPanel/Health/HealthPips
 
@@ -22,11 +22,12 @@ func on_set_health(health : int):
 		for i in range(health - current_health):
 			var pip = scene_pip.instance()
 			pip.scale *= 0.6
-			pip.offset.y -= 10
+			pip.offset.y -= 5
 			pip.centered = false
 			
 			# Because hboxes don't work? (probably because this isn't a UI element. ho llew)
-			pip.offset.x += (i + current_health) * 50
+			pip.offset.x += (i + current_health) * 55
+			pip.offset.x -= 20
 
 			health_pips.add_child(pip)
 
