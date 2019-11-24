@@ -21,7 +21,7 @@ namespace Atmo2.Movements.PlayerStates
 		}
         public override void OnEnter()
         {
-            player.image.Play("jump");
+            player.Animation = "jump";
 			player.MovementInfo.VelY = -player.JumpStrenth * multiplier;
 			player.InputController.JumpSuccess();
 		}
@@ -40,7 +40,7 @@ namespace Atmo2.Movements.PlayerStates
 				speedModifier = 0;
 
 			if (signedHorizontal != 0)
-				player.image.SetFlipH(signedHorizontal < 0);
+				player._image.SetFlipH(signedHorizontal < 0);
 
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 

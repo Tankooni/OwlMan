@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://hud.tscn" type="PackedScene" id=1]
 
 [node name="Node" type="Node"]
 
@@ -7,3 +9,7 @@ position = Vector2( 265.845, 178.949 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 7.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 1 )]

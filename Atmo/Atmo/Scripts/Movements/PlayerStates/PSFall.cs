@@ -47,7 +47,7 @@ namespace Atmo2.Movements.PlayerStates
 				player.MovementInfo.VelY = player.Gravity;
 			
 			if (signedHorizontal != 0)
-				player.image.SetFlipH(signedHorizontal < 0);
+				player._image.SetFlipH(signedHorizontal < 0);
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 
 			//Handle any collision resitution & modify variables further if needed
@@ -124,9 +124,9 @@ namespace Atmo2.Movements.PlayerStates
 		private void AnimationCheckSet()
 		{
 			if (player.MovementInfo.VelY > 0)
-				player.image.Play("fall");
+				player.Animation = "fall";
 			else
-				player.image.Play("jump");
+				player.Animation = "jump";
 		}
 	}
 }

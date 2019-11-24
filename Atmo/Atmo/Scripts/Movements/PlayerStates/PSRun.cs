@@ -20,7 +20,7 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.MovementInfo.VelY = 0;
-			player.image.Play("walk");
+			player.Animation = "walk";
 		}
 
 		public override void OnExit()
@@ -41,7 +41,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (signedHorizontal == 0)
 				return new PSIdle(player);
-			player.image.SetFlipH(signedHorizontal < 0);
+			player._image.SetFlipH(signedHorizontal < 0);
 
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 

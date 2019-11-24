@@ -20,12 +20,12 @@ namespace Atmo2.Movements.PlayerStates
         }
         public override void OnEnter()
         {
-            player.image.Play("fall");
+            player.Animation = "fall";
             player.Spice -= damage_taken;
             if (player.Spice == 0) return;
 
             player.MovementInfo.VelY = -240;
-            if (player.image.FlipH)
+            if (player._image.FlipH)
                 player.MovementInfo.VelX += 480;
             else
                 player.MovementInfo.VelX -= 480;
