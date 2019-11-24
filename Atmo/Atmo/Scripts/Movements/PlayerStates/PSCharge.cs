@@ -13,6 +13,8 @@ namespace Atmo2.Movements.PlayerStates
         private float charge_rate;
 		private Particles2D poseParticles;
 
+		private int ticker = 0;
+
         public PSCharge(Player player, float chargeRate=10)
 			: base(player)
 		{
@@ -44,7 +46,17 @@ namespace Atmo2.Movements.PlayerStates
 
         public override PlayerState Update()
         {
+			
             player.RefillEnergy();
+
+			if(ticker++ > 60)
+			{
+				ticker = 0;
+				player.MovementInfo.StartShake = true;
+
+			}
+			ticker++;
+
 
 			//TODO: Enemy Collision
             // Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;

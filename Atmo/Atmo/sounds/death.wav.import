@@ -12,7 +12,7 @@ dest_files=[ "res://.import/death.wav-f25f3fdea106fce4e1b173bbe13f8ab4.sample" ]
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true

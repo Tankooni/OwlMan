@@ -99,9 +99,6 @@ namespace Atmo.OgmoLoader
 			Node2D ultimateParent = new Node2D();
 			ultimateParent.SetName("Level");
 			tileMap.SetName("TileMap");
-			ultimateParent.AddChild(tileMap);
-
-
 
 			//foreach(int id in tileMap.TileSet.GetTilesIds())
 			//{
@@ -152,6 +149,8 @@ namespace Atmo.OgmoLoader
 					childInstance.SetPosition(new Vector2(entity.x, entity.y));
 				}
 			}
+
+			ultimateParent.AddChild(tileMap);
 
 			return ultimateParent;
 		}

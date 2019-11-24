@@ -24,12 +24,11 @@ public class Overlord : Node
 		Viewport root = GetTree().GetRoot();
 		Overlord.ViewportSize = root.Size;
 		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
-		CurrentScene.CallDeferred("add_child", level);
 		if(player != null)
 		{
 			CurrentScene.CallDeferred("add_child", player);
 		}
-
+		CurrentScene.CallDeferred("add_child", level);
 		//CurrentScene.AddChild(yeah);
 	}
 

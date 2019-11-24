@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/hit2.wav-e784fa75f80ed851ac2f999391dea43d.sample"
+path="res://.import/clash.wav-9c52138854e5da0e0aad584b0cf89f07.sample"
 
 [deps]
 
-source_file="res://sounds/hit2.wav"
-dest_files=[ "res://.import/hit2.wav-e784fa75f80ed851ac2f999391dea43d.sample" ]
+source_file="res://sounds/clash.wav"
+dest_files=[ "res://.import/clash.wav-9c52138854e5da0e0aad584b0cf89f07.sample" ]
 
 [params]
 

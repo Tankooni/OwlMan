@@ -20,7 +20,7 @@ _data = [ Vector2( 0, 0.1216 ), 0.0, 0.0, 0, 0, Vector2( 0.870217, 1 ), 0.0, 0.0
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
@@ -40,4 +40,5 @@ color_ramp = SubResource( 7 )
 [node name="Particles2D" type="Particles2D"]
 amount = 500
 lifetime = 0.5
-process_material = SubResource( 1 )
+local_coords = false
+process_material = SubResource( 8 )
