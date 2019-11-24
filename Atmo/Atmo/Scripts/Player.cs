@@ -171,7 +171,7 @@ public class Player : KinematicBody2D
 		// }
 
 		PlayerStateController.Update();
-		MovementInfo.Update(delta);
+		MovementInfo.Update();
 
 		if (InputController.Select())
 		{
@@ -217,12 +217,20 @@ public class Player : KinematicBody2D
 		// centerX = Mathf.Clamp(centerX, Engine.HalfWidth, currentRoom.RealRoomMeta.width - Engine.HalfWidth);
 		// centerY = Mathf.Clamp(centerY, Engine.HalfHeight, currentRoom.RealRoomMeta.height - Engine.HalfHeight);
 
+		if(MovementInfo.StartShake)
+		{
+			GD.Print("Start");
+			camera.Call("Shake", 10f, .1f, 10);
+			MovementInfo.StartShake = false;
+		}
+
 		var centerX = Position.x;
 		var centerY = Position.y;
+
 		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.x / 2f, Overlord.LevelBoundsX.y - Overlord.ViewportSize.x / 2f);
 		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.y / 2f, Overlord.LevelBoundsY.y - Overlord.ViewportSize.y / 2f);
 
-		camera.SetPosition(new Vector2(centerX, centerY));
+		//camera.SetPosition(new Vector2(centerX, centerY));
 	}
 	
 	public void OnDamage(CollisionObject2D collider) {

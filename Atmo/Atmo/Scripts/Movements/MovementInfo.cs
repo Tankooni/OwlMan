@@ -16,6 +16,8 @@ namespace Atmo2.Movements
 		public float VelX { get; set; }
 		public float VelY { get; set; }
 
+		public bool StartShake { get; set; }
+
 		public MovementInfo(Player entity)
 		{
 			this.entity = entity;
@@ -35,7 +37,7 @@ namespace Atmo2.Movements
 			VelY = 0;
 		}
 
-		public void Update(float delta)
+		public void Update()
 		{
 			entity.MoveAndSlide(new Vector2(VelX, VelY));
 
