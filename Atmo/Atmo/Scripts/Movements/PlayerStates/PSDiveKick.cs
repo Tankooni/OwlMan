@@ -26,10 +26,12 @@ namespace Atmo2.Movements.PlayerStates
         public override void OnExit()
         {
 
-        }
+			player.MovementInfo.ResetBoxes();
+		}
 
         public override PlayerState Update()
         {
+			player.MovementInfo.BottomBox = true;
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 

@@ -70,9 +70,9 @@ public class Player : KinematicBody2D
 	private Camera2D camera;
 	private Control hud;
 	private CollisionShape2D _collisionShape2D;
-	private Area2D _boxL;
-	private Area2D _boxR;
-	private Area2D _boxB;
+	public Area2D BoxL;
+	public Area2D BoxR;
+	public Area2D BoxB;
 
 
 	public String Animation {
@@ -107,9 +107,9 @@ public class Player : KinematicBody2D
 		_image = GetNode<AnimatedSprite>("AnimatedSprite");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 
-		_boxL = GetNode<Area2D>("SideBoxL");
-		_boxR = GetNode<Area2D>("SideBoxR");
-		_boxB = GetNode<Area2D>("BottomBox");
+		BoxL = GetNode<Area2D>("SideBoxL");
+		BoxR = GetNode<Area2D>("SideBoxR");
+		BoxB = GetNode<Area2D>("BottomBox");
 
 		this.Connect("HealthChanged", hud, "on_set_health");
 		this.Connect("AnimationChanged", hud, "on_animation_changed");
@@ -261,6 +261,35 @@ public class Player : KinematicBody2D
 	void CheckDeath() {
 		if(this.Health <= 0) {
 			// Handle death here
+		}
+	}
+
+	public void OnKillEnterL(PhysicsBody2D body)
+	{
+		if (body.IsInGroup("enemy"))
+		{
+			if (MovementInfo.LeftBox)
+				body.QueueFree();
+		}
+	}
+
+	public void OnKillEnterR(PhysicsBody2D body)
+	{
+		if (body.IsInGroup("enemy"))
+		{
+			if (MovementInfo.RightBox)
+				body.QueueFree();
+		}
+	}
+
+	public void OnKillEnterB(PhysicsBody2D body)
+	{
+		GD.Print(body.Name);
+
+		if (body.IsInGroup("enemy"))
+		{
+			if (MovementInfo.BottomBox)
+				body.QueueFree();
 		}
 	}
 

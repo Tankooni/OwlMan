@@ -164,6 +164,7 @@ namespace Atmo.OgmoLoader
 				}
 				if (childInstance != null)
 				{
+					childInstance.AddToGroup("enemy", true);
 					nodes.Add(childInstance);
 					ultimateParent.AddChild(childInstance);
 					childInstance.SetPosition(new Vector2(entity.x, entity.y));

@@ -13,6 +13,17 @@ namespace Atmo2.Movements
 		public int AgainstWall { get; set; }
 		public float MoveRefill { get; set; }
 
+		public bool LeftBox { get; set; }
+		public bool RightBox { get; set; }
+		public bool BottomBox { get; set; }
+
+		public void ResetBoxes()
+		{
+			LeftBox = false;
+			RightBox = false;
+			BottomBox = false;
+		}
+
 		public float VelX { get; set; }
 		public float VelY { get; set; }
 

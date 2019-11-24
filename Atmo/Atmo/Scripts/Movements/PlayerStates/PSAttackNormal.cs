@@ -27,6 +27,7 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnExit()
 		{
 			player.MovementInfo.VelX = 0;
+			player.MovementInfo.ResetBoxes();
 		}
 
 		public override PlayerState Update()
@@ -41,8 +42,17 @@ namespace Atmo2.Movements.PlayerStates
 			if (signedHorizontal != 0)
 				player._image.SetFlipH(signedHorizontal < 0);
 
+			if (player._image.FlipH)
+			{
+				player.MovementInfo.LeftBox = true;
+			}
+			else
+			{
+				player.MovementInfo.RightBox = true;
+			}
+
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
-			if(!player.IsOnFloor())
+			if (!player.IsOnFloor())
 				player.MovementInfo.VelY += player.Gravity;
 
 			//Handle any collision resitution & modify variables further if needed

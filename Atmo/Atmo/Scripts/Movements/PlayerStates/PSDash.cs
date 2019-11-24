@@ -33,8 +33,9 @@ namespace Atmo2.Movements.PlayerStates
 		}
 
         public override void OnExit()
-        {
-        }
+		{
+			player.MovementInfo.ResetBoxes();
+		}
 
         public override PlayerState Update()
         {
@@ -52,6 +53,15 @@ namespace Atmo2.Movements.PlayerStates
 			//TODO: change this to be directional based
 			player.MovementInfo.VelX = this.speed * direction;
 			//player.MovementInfo.VelY = this.speed * direction.y;
+
+			if (player._image.FlipH)
+			{
+				player.MovementInfo.LeftBox = true;
+			}
+			else
+			{
+				player.MovementInfo.RightBox = true;
+			}
 
 			/*
 			(-0.921875, -1)(-0.6778028, -0.7352437)
