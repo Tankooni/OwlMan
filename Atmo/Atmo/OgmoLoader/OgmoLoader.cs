@@ -162,7 +162,8 @@ namespace Atmo.OgmoLoader
 				}
 				if (childInstance != null)
 				{
-					childInstance.Set("target", player.GetPath());
+					childInstance.SetDeferred("target", player.GetPath());
+					childInstance.SetDeferred("node", childInstance.GetPath());
 
 					ultimateParent.AddChild(childInstance);
 					childInstance.SetPosition(new Vector2(entity.x, entity.y));
