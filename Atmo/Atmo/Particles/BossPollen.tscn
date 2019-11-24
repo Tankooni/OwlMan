@@ -9,14 +9,16 @@ gradient = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
-emission_box_extents = Vector3( 100, 100, 1 )
+emission_box_extents = Vector3( 150, 100, 1 )
 flag_disable_z = true
-gravity = Vector3( 0, 8, 0 )
+gravity = Vector3( 0, 15, 0 )
 initial_velocity = 10.0
 initial_velocity_random = 0.62
 angular_velocity = 3.51726e-043
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+radial_accel = 3.0
+radial_accel_random = 0.4
 damping = 10.0
 scale = 1.5
 scale_random = 0.7
