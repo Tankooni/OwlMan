@@ -17,10 +17,6 @@ public class Player : KinematicBody2D
 
 	public Abilities Abilities;
 	public MovementInfo MovementInfo;
-
-	private Camera2D camera;
-
-	private Control hud;
 	
 	// Player state
 	private int health;
@@ -71,6 +67,9 @@ public class Player : KinematicBody2D
 
 	// Make this private later and fix the things that reference it to flip the image
 	public AnimatedSprite _image;
+	private Camera2D camera;
+	private Control hud;
+	private CollisionShape2D _collisionShape2D;
 
 	public String Animation {
 		get { return this._image.Animation; }
@@ -99,6 +98,7 @@ public class Player : KinematicBody2D
 		camera = GetNode<Camera2D>("../MainCamera");
 		hud = GetNode<Control>("../CanvasLayer/HUD");
 		_image = GetNode<AnimatedSprite>("AnimatedSprite");
+		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 
 		this.Connect("HealthChanged", hud, "on_set_health");
 		this.Connect("AnimationChanged", hud, "on_animation_changed");
@@ -217,7 +217,12 @@ public class Player : KinematicBody2D
 		// centerX = Mathf.Clamp(centerX, Engine.HalfWidth, currentRoom.RealRoomMeta.width - Engine.HalfWidth);
 		// centerY = Mathf.Clamp(centerY, Engine.HalfHeight, currentRoom.RealRoomMeta.height - Engine.HalfHeight);
 
-		camera.SetPosition(Position);
+		var centerX = Position.x;
+		var centerY = Position.y;
+		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.x / 2f, Overlord.LevelBoundsX.y - Overlord.ViewportSize.x / 2f);
+		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.y / 2f, Overlord.LevelBoundsY.y - Overlord.ViewportSize.y / 2f);
+
+		camera.SetPosition(new Vector2(centerX, centerY));
 	}
 	
 	public void OnDamage(CollisionObject2D collider) {
