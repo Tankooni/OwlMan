@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/EnemyAI/Movement/hover.gd" type="Script" id=1]
+[ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture" id=2]
+[ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture" id=3]
+[ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture" id=4]
+[ext_resource path="res://Images/BawssButterfly/000_Wings03.png" type="Texture" id=5]
+[ext_resource path="res://Images/BawssButterfly/000_Worm00.png" type="Texture" id=6]
+[ext_resource path="res://Images/BawssButterfly/000_Worm01.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "attack",
+"speed": 0.4
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 30.4105
+height = 94.0929
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.994561 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -0.161506, -0.25, 0, 0.22, 3.87613, 0, -0.234561, -6.13721, 0.25, 0 ),
+"times": PoolRealArray( 0.03, 0.994561 )
+}
+
+[node name="CarnosaurusRex" type="KinematicBody2D"]
+script = ExtResource( 1 )
+node = NodePath(".")
+
+[node name="Wings" type="AnimatedSprite" parent="."]
+position = Vector2( 24.5547, -14.7329 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="Worm" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 0.72864 )
+frames = SubResource( 2 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 3.68323, 1.45547 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Worm")
+anims/idle = SubResource( 4 )
+script = ExtResource( 8 )
