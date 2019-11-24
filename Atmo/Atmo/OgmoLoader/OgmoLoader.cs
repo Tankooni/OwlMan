@@ -53,7 +53,7 @@ namespace Atmo.OgmoLoader
 		/// Loads all levels for the game and project data.
 		/// </summary>
 		/// <returns>The generated starting scene.</returns>
-		public Node2D Load()
+		public Node2D Load(out Node2D player)
 		{
 			string pathToProjectFile = "res://ogmo/project.ogmo";
 			string pathToLevelsDir = "res://ogmo/levels";
@@ -78,7 +78,7 @@ namespace Atmo.OgmoLoader
 			}
 			
 
-			return GenerateScene(project, startLevel);
+			return GenerateScene(project, startLevel, out player);
 		}
 
 		private string ObtainFileString(string path)
@@ -90,10 +90,13 @@ namespace Atmo.OgmoLoader
 			return result;
 		}
 
-		private Node2D GenerateScene(OgmoProject project, OgmoLevel level)
+		private Node2D GenerateScene(OgmoProject project, OgmoLevel level, out Node2D player)
 		{
+			player = null;
 			var tileMap = (TileMap)((PackedScene)ResourceLoader.Load("res://prefab/TileMap.tscn")).Instance();
 			Node2D ultimateParent = new Node2D();
+			ultimateParent.SetName("Level");
+			tileMap.SetName("TileMap");
 			ultimateParent.AddChild(tileMap);
 
 			//foreach(int id in tileMap.TileSet.GetTilesIds())
@@ -122,17 +125,19 @@ namespace Atmo.OgmoLoader
 				switch (entity.name)
 				{
 					case "LevelSpawn":
-						childInstance = (Node2D)playerScene.Instance();
+						player = (Node2D)playerScene.Instance();
+						player.SetName("Player_" + entity._eid);
+						player.SetPosition(new Vector2(entity.x, entity.y));
 						break;
 					case "Walker":
 						childInstance = (Node2D)bugScene.Instance();
+						childInstance.SetName("Walker_" + entity._eid);
 						break;
 				}
 				if (childInstance != null)
 				{
-					//childInstance.SetOwner(ultimateParent);
-					//ultimateParent.AddChild(childInstance);
-					//childInstance.SetPosition(new Vector2(entity.x, entity.y));
+					ultimateParent.AddChild(childInstance);
+					childInstance.SetPosition(new Vector2(entity.x, entity.y));
 				}
 			}
 
