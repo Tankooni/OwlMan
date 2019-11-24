@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Particles/TestParticles.tscn" type="PackedScene" id=2]
@@ -8,6 +8,15 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.0
 height = 42.6628
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.16637, 28.68 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 7.21506, 29.8691 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 19.5821, 5.61076 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -29,3 +38,28 @@ stream = ExtResource( 4 )
 volume_db = 1.0
 autoplay = true
 attenuation = 0.013139
+
+[node name="SideBoxL" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( -47.5655, -24.0205 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxL"]
+position = Vector2( 0.475655, -4.28089 )
+shape = SubResource( 2 )
+
+[node name="SideBoxR" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxR"]
+position = Vector2( 48.2789, -29.9662 )
+shape = SubResource( 3 )
+
+[node name="BottomBox" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox"]
+position = Vector2( -1.52588e-005, 5.47003 )
+shape = SubResource( 4 )

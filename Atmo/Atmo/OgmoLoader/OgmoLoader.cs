@@ -126,7 +126,10 @@ namespace Atmo.OgmoLoader
 			}
 
 			var playerScene = ((PackedScene)ResourceLoader.Load("res://prefab/PlayerOwl.tscn"));
-			var bugScene = ((PackedScene)ResourceLoader.Load("res://prefab/Bug.tscn"));
+			var bugScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Bug.tscn"));
+			var beeScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Beee.tscn"));
+			var carnosaurScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Carnosaur.tscn"));
+			var carnosaurusRexScene = ((PackedScene)ResourceLoader.Load("res://Enemies/CarnosaurusRex.tscn"));
 
 			foreach (var entity in level.layers.First(x => x.name == "Entity").entities)
 			{
@@ -142,6 +145,19 @@ namespace Atmo.OgmoLoader
 						childInstance = (Node2D)bugScene.Instance();
 						childInstance.SetName("Walker_" + entity._eid);
 						break;
+					case "TargerFlyer":
+						childInstance = (Node2D)bugScene.Instance();
+						childInstance.SetName("Flyer_" + entity._eid);
+						break;
+					case "Bee":
+						childInstance = (Node2D)beeScene.Instance();
+						childInstance.SetName("Bee_" + entity._eid);
+						break;
+					case "Boss":
+						childInstance = (Node2D)carnosaurusRexScene.Instance();
+						childInstance.SetName("Boss_" + entity._eid);
+						break;
+
 				}
 				if (childInstance != null)
 				{

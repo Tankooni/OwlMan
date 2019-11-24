@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Owl2HIT.wav-66513e9768703b22caef11d26e7fa9be.sample"
+
+[deps]
+
+source_file="res://sounds/Owl2HIT.wav"
+dest_files=[ "res://.import/Owl2HIT.wav-66513e9768703b22caef11d26e7fa9be.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
