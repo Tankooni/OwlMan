@@ -6,6 +6,9 @@ using Atmo2.Movements.PlayerStates;
 
 public class Player : KinematicBody2D
 {
+	[Signal]
+	public delegate void HealthChanged(int health);
+	
 	public Controller InputController;
 	public PlayerStateController PlayerStateController;
 
@@ -13,6 +16,22 @@ public class Player : KinematicBody2D
 	public MovementInfo MovementInfo;
 
 	private Camera2D camera;
+	
+	// Player state
+	private int health;
+	public int Health { 
+		get { return health; }
+	  set {
+			health = value;
+			EmitSignal(nameof(HealthChanged), health);
+		}
+	}
+	public int Power { get; set; }
+	
+	private int maxHealth;
+	private int maxPower;
+
+	private int invulnerabilityFrames = 0;
 	
 	private int spice;
 	public int Spice
@@ -65,6 +84,9 @@ public class Player : KinematicBody2D
 	{
 		camera = GetNode<Camera2D>("../MainCamera");
 		image = GetNode<AnimatedSprite>("AnimatedSprite");
+		
+		Health = maxHealth;
+		Power = 0;
 
 		// Spice = 100;
 		// Energy = 0f;
@@ -130,9 +152,7 @@ public class Player : KinematicBody2D
 		PlayerStateController.Update();
 		MovementInfo.Update(delta);
 
-		GD.Print(MovementInfo.AgainstWall);
-
-		UpdateCamera();
+		UpdateCamera(delta);
 
 		if (InputController.Select())
 		{
@@ -163,20 +183,42 @@ public class Player : KinematicBody2D
 	public void ResetPlayerPosition()
 	{
 		SetPosition(ResetPoint);
-		UpdateCamera();
+		UpdateCamera(0.5f);
 	}		
 
-	public void UpdateCamera()
+	public void UpdateCamera(float delta)
 	{
-		var centerX = Position.x;
-		var centerY = Position.y;
+		//var centerX = Position.x;
+		//var centerY = Position.y;
 
 		//TODO: clamping camera to edges of the current room
 		// var currentRoom = ((GameWorld)(World)).CurrentRoom;
 		// centerX = Mathf.Clamp(centerX, Engine.HalfWidth, currentRoom.RealRoomMeta.width - Engine.HalfWidth);
 		// centerY = Mathf.Clamp(centerY, Engine.HalfHeight, currentRoom.RealRoomMeta.height - Engine.HalfHeight);
-		
+
 		camera.SetPosition(Position);
+	}
+	
+	public void OnDamage(CollisionObject2D collider) {
+		if(this.invulnerabilityFrames > 0) {
+			// Count down inv frames
+			invulnerabilityFrames -= 1;
+			GD.Print(invulnerabilityFrames);
+		} else {
+			if((collider as CollisionObject2D).IsInGroup("damaging"))
+			{
+				// Take a damage and do hurt stuff
+				Health -= 1;
+				invulnerabilityFrames = 120;
+
+				CheckDeath();
+			}
+		}
+	}
+	void CheckDeath() {
+		if(this.Health <= 0) {
+			// Handle death here
+		}
 	}
 
 	// public void OnJumpPickup(object[] param)

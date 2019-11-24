@@ -1,113 +1,22 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Block.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Entities/Bug.cs" type="Script" id=3]
-[ext_resource path="res://Images/Bug/000_BugIdle00.png" type="Texture" id=4]
-[ext_resource path="res://Images/Bug/000_BugIdle01.png" type="Texture" id=5]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath00.png" type="Texture" id=6]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath01.png" type="Texture" id=7]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath02.png" type="Texture" id=8]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath03.png" type="Texture" id=9]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath04.png" type="Texture" id=10]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath05.png" type="Texture" id=11]
-[ext_resource path="res://Images/Bug/006_BugLaserDeath06.png" type="Texture" id=12]
-[ext_resource path="res://Images/Bug/007_BugLaserFade01.png" type="Texture" id=13]
-[ext_resource path="res://Images/Bug/007_BugLaserFade02.png" type="Texture" id=14]
-[ext_resource path="res://Images/Bug/007_BugLaserFade03.png" type="Texture" id=15]
-[ext_resource path="res://Images/Bug/007_BugLaserFade04.png" type="Texture" id=16]
-[ext_resource path="res://Images/Bug/007_BugLaserFade05.png" type="Texture" id=17]
-[ext_resource path="res://Images/Bug/007_BugLaserFade06.png" type="Texture" id=18]
-[ext_resource path="res://Images/Bug/007_BugLaserFade07.png" type="Texture" id=19]
-[ext_resource path="res://Images/Bug/007_BugLaserFade08.png" type="Texture" id=20]
-[ext_resource path="res://Images/Bug/007_BugLaserFade09.png" type="Texture" id=21]
-[ext_resource path="res://Images/Bug/003_BugSlash00.png" type="Texture" id=22]
-[ext_resource path="res://Images/Bug/003_BugSlash01.png" type="Texture" id=23]
-[ext_resource path="res://Images/Bug/003_BugSlash02.png" type="Texture" id=24]
-[ext_resource path="res://Images/Bug/003_BugSlash03.png" type="Texture" id=25]
-[ext_resource path="res://Images/Bug/003_BugSlash04.png" type="Texture" id=26]
-[ext_resource path="res://Images/Bug/003_BugSlash05.png" type="Texture" id=27]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath00.png" type="Texture" id=28]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath01.png" type="Texture" id=29]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath02.png" type="Texture" id=30]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath03.png" type="Texture" id=31]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath04.png" type="Texture" id=32]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath05.png" type="Texture" id=33]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath06.png" type="Texture" id=34]
-[ext_resource path="res://Images/Bug/005_BugSlashDeath07.png" type="Texture" id=35]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath00.png" type="Texture" id=36]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath01.png" type="Texture" id=37]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath02.png" type="Texture" id=38]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath03.png" type="Texture" id=39]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath04.png" type="Texture" id=40]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath05.png" type="Texture" id=41]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath06.png" type="Texture" id=42]
-[ext_resource path="res://Images/Bug/004_BugCrushDeath07.png" type="Texture" id=43]
-[ext_resource path="res://Images/Bug/002_BugRun00.png" type="Texture" id=44]
-[ext_resource path="res://Images/Bug/002_BugRun01.png" type="Texture" id=45]
-[ext_resource path="res://Images/Bug/002_BugRun02.png" type="Texture" id=46]
-[ext_resource path="res://Images/Bug/002_BugRun03.png" type="Texture" id=47]
-[ext_resource path="res://Images/Bug/002_BugRun04.png" type="Texture" id=48]
-[ext_resource path="res://Images/Bug/002_BugRun05.png" type="Texture" id=49]
-[ext_resource path="res://Images/Bug/002_BugRun06.png" type="Texture" id=50]
-[ext_resource path="res://Images/Bug/002_BugRun07.png" type="Texture" id=51]
-[ext_resource path="res://Images/Bug/001_BugPoise00.png" type="Texture" id=52]
-[ext_resource path="res://Images/Bug/001_BugPoise01.png" type="Texture" id=53]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "deathLaser",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
-"loop": true,
-"name": "deathFade",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
-"loop": true,
-"name": "slash",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ],
-"loop": true,
-"name": "deathSlash",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ) ],
-"loop": true,
-"name": "deathCrush",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 52 ), ExtResource( 53 ) ],
-"loop": true,
-"name": "posie",
-"speed": 5.0
-} ]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 9.19104, 6.86301 )
+[ext_resource path="res://Enemies/Bug.tscn" type="PackedScene" id=3]
+[ext_resource path="res://DamagingThings/boolette.tscn" type="PackedScene" id=4]
+[ext_resource path="res://hud.tscn" type="PackedScene" id=5]
 
 [node name="Node" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 565.308, 242.021 )
+[node name="Player" parent="." groups=[
+"player",
+] instance=ExtResource( 1 )]
+position = Vector2( 654.933, 354.973 )
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2( 564.644, 289.206 )
+position = Vector2( 655.497, 353.048 )
 current = true
+smoothing_enabled = true
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 2 )]
 
@@ -179,15 +88,19 @@ scale = Vector2( 6.01175, 2.7259 )
 position = Vector2( 666.178, 204.279 )
 scale = Vector2( 1.69174, 10.6859 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 617.34, 338.717 )
-script = ExtResource( 3 )
+[node name="Bug" parent="." instance=ExtResource( 3 )]
+position = Vector2( 412.52, 292.201 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
-frames = SubResource( 1 )
-animation = "idle"
-playing = true
+[node name="Boolette" parent="." instance=ExtResource( 4 )]
+position = Vector2( 418.659, 380.599 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 3.23523, 7.76483 )
-shape = SubResource( 2 )
+[node name="Boolette2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 294.657, 379.371 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
