@@ -27,6 +27,7 @@ func _ready():
 func _physics_process(delta):
 	if animation_node:
 		var direction = (target as Node2D).position.direction_to((node as Node2D).position)
+		var distance = (target as Node2D).position.distance_to((node as Node2D).position)
 		
 		if direction.x > 0:
 			animation_node.set_flip_h(false)
@@ -34,7 +35,7 @@ func _physics_process(delta):
 			animation_node.set_flip_h(true)
 			
 		# I was gonna do this somewhere else but gamejam time jam AHHHHHHH
-		if frames_until_attack <= 0:
+		if frames_until_attack <= 0 && distance <= 1200:
 			frames_until_attack = rand_range(0, 120) + attack_freq
 			
 			animation_node.play("attack")

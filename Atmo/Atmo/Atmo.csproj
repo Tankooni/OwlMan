@@ -89,7 +89,7 @@
     <Compile Include="Scripts\Movements\PlayerStates\PSJump.cs" />
     <Compile Include="Scripts\Movements\PlayerStates\PSOuch.cs" />
     <Compile Include="Scripts\Movements\PlayerStates\PSRun.cs" />
-    <Compile Include="scripts\ShakeCamera.cs" />
+    <Compile Include="Scripts\ShakeCamera.cs" />
     <Compile Include="Scripts\Test.cs" />
   </ItemGroup>
   <ItemGroup>
