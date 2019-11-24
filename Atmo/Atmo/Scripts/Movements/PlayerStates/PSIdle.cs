@@ -49,7 +49,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (player.InputController.AttackPressed())
 			{
-				return new PSAttackNormal(player);
+				return new PSAttackNormal(player, 0);
 			}
 			if (player.InputController.DownPressed())
 			{

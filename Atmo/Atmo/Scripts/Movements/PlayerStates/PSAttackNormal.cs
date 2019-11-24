@@ -1,3 +1,4 @@
+using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,13 @@ namespace Atmo2.Movements.PlayerStates
 {
 	class PSAttackNormal : PlayerState
 	{
-		public PSAttackNormal(Player player)
+		private float speedModifier;
+
+		public PSAttackNormal(Player player, float initialSpeedModifier)
 			: base(player)
 		{
 			this.player = player;
+			speedModifier = initialSpeedModifier;
 		}
 
 		public override void OnEnter()
@@ -27,19 +31,33 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override PlayerState Update()
 		{
-			player.MovementInfo.VelY += player.Gravity;
-			
-			if(!player.MovementInfo.OnGround)
-				player.MovementInfo.VelX = player.RunSpeed * Math.Sign(player.InputController.LeftStickHorizontal());
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			//TODO: Enemy colision
-			// Enemy enemy = player.World.CollideRect(KQ.CollisionTypeEnemy, player.X - player.HalfWidth + player.Width * (player.image.FlippedX ? -1 : 1), player.Y - player.Height, player.Width, player.Height) as Enemy;
-			// if (enemy != null)
+			//Perform caluclations and modify player variables with results
+			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
+				speedModifier = 0;
+
+			player._image.SetFlipH(signedHorizontal < 0);
+
+			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
+			if(!player.IsOnFloor())
+				player.MovementInfo.VelY += player.Gravity;
+
+			//Handle any collision resitution & modify variables further if needed
+			//player.image.SetSpeedScale(Math.Max(Math.Abs(h), .3f));
+			//TODO: enemy collision
+			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
+			// if (enemy != null && !this.player.IsInvincable)
 			// {
-			// 	enemy.World.Remove(enemy);
+			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
 			// }
 
-			//Used to have an animcation callback here, but should no longer be needed
+			//Modify any timer variables & animations that will be based on movement
+			if (speedModifier != 0)
+			{
+				speedModifier = Mathf.Clamp(speedModifier - player.HorizontalDrag * signedHorizontal, signedHorizontal < 0 ? speedModifier : 0, signedHorizontal < 0 ? 0 : speedModifier);
+			}
 
 			return null;
 		}

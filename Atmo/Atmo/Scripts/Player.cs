@@ -113,7 +113,7 @@ public class Player : KinematicBody2D
 		EnergyRechargeRate = 2f;
 
 		//JumpStrenth = 660;
-		RunSpeed = 240;
+		RunSpeed = 200;
 		DashMultiplier = 3.5f;
 		HorizontalDrag = 50;
 		Gravity = Overlord.STANDARD_GRAVITY;
