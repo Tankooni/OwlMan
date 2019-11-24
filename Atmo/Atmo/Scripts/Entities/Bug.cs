@@ -35,7 +35,7 @@ public class Bug : KinematicBody2D
 			VelX = 200;
 			image.SetFlipH(!walkingLeft);
 		}
-		VelY += KQ.STANDARD_GRAVITY;
+		VelY += Overlord.STANDARD_GRAVITY;
 		var velocity = new Vector2(VelX, VelY);
 		var collision = MoveAndSlide(velocity);
 

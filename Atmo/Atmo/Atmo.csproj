@@ -46,14 +46,33 @@
       <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharpEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OgmoLoader\OgmoLoader.cs" />
+    <Compile Include="OgmoLoader\Serialized\ArrayMode.cs" />
+    <Compile Include="OgmoLoader\Serialized\DecalDefinition.cs" />
+    <Compile Include="OgmoLoader\Serialized\EntityDefinition.cs" />
+    <Compile Include="OgmoLoader\Serialized\EntityShape.cs" />
+    <Compile Include="OgmoLoader\Serialized\EntityTemplate.cs" />
+    <Compile Include="OgmoLoader\Serialized\ExportMode.cs" />
+    <Compile Include="OgmoLoader\Serialized\LayerDefinition.cs" />
+    <Compile Include="OgmoLoader\Serialized\LayerValueDefinition .cs" />
+    <Compile Include="OgmoLoader\Serialized\LayerTemplate.cs" />
+    <Compile Include="OgmoLoader\Serialized\TilesetTemplate.cs" />
+    <Compile Include="OgmoLoader\Serialized\ValueDefiniton.cs" />
+    <Compile Include="OgmoLoader\Serialized\Point.cs" />
+    <Compile Include="OgmoLoader\Serialized\OgmoLevel.cs" />
+    <Compile Include="OgmoLoader\Serialized\OgmoProject.cs" />
+    <Compile Include="OgmoLoader\Serialized\ValueTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Controller.cs" />
     <Compile Include="Scripts\DrawBox.cs" />
     <Compile Include="Scripts\Entities\Bug.cs" />
-    <Compile Include="Scripts\Global.cs" />
+    <Compile Include="Scripts\Overlord.cs" />
     <Compile Include="Scripts\Player.cs" />
     <Compile Include="Scripts\Movements\Abilities.cs" />
     <Compile Include="Scripts\Movements\MovementInfo.cs" />
@@ -71,6 +90,9 @@
     <Compile Include="Scripts\Movements\PlayerStates\PSOuch.cs" />
     <Compile Include="Scripts\Movements\PlayerStates\PSRun.cs" />
     <Compile Include="Scripts\Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

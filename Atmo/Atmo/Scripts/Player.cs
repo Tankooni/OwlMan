@@ -98,7 +98,7 @@ public class Player : KinematicBody2D
 		RunSpeed = 240;
 		DashMultiplier = 3.5f;
 		HorizontalDrag = 50;
-		Gravity = KQ.STANDARD_GRAVITY;
+		Gravity = Overlord.STANDARD_GRAVITY;
 
 		// image.RenderStep = 1;
 
@@ -143,7 +143,7 @@ public class Player : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		base._PhysicsProcess(delta);
-
+		
 		InputController.Update();
 		// if(Keyboard.Space.Pressed)
 		// {
@@ -153,12 +153,12 @@ public class Player : KinematicBody2D
 		PlayerStateController.Update();
 		MovementInfo.Update(delta);
 
-		UpdateCamera(delta);
-
 		if (InputController.Select())
 		{
 			Abilities.GiveAllAbilities();
 		}
+		
+		UpdateCamera();
 	}
 
 	// public override void Squish()
@@ -184,10 +184,10 @@ public class Player : KinematicBody2D
 	public void ResetPlayerPosition()
 	{
 		SetPosition(ResetPoint);
-		UpdateCamera(0.5f);
+		UpdateCamera();
 	}		
 
-	public void UpdateCamera(float delta)
+	public void UpdateCamera()
 	{
 		//var centerX = Position.x;
 		//var centerY = Position.y;

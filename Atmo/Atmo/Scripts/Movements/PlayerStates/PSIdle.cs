@@ -51,11 +51,11 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				return new PSAttackNormal(player);
 			}
-            //if(player.InputController.DownPressed())
-            //{
-            //   return new PSCharge(player);
-            //}
-            if(signedHorizontal != 0)
+			if (player.InputController.DownPressed())
+			{
+				return new PSCharge(player);
+			}
+			if (signedHorizontal != 0)
             {
                 return new PSRun(player);
             }
