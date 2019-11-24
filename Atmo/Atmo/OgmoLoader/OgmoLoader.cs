@@ -15,6 +15,8 @@ namespace Atmo.OgmoLoader
 		public OgmoProject project;
 		public Dictionary<string, OgmoLevel> Levels;
 
+		public static List<Node2D> nodes = new List<Node2D>();
+
 		private Dictionary<string, Type> _types;
 		//private Dictionary<string, GridDefinition> _gridTypes;
 		//private Dictionary<string, TilemapDefinition> _tilemapTypes;
@@ -162,9 +164,9 @@ namespace Atmo.OgmoLoader
 				}
 				if (childInstance != null)
 				{
-					childInstance.SetDeferred("target", player.GetPath());
 					childInstance.SetDeferred("node", childInstance.GetPath());
 
+					nodes.Add(childInstance);
 					ultimateParent.AddChild(childInstance);
 					childInstance.SetPosition(new Vector2(entity.x, entity.y));
 				}

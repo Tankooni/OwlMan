@@ -99,6 +99,9 @@ public class Player : KinematicBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		foreach(var node in Atmo.OgmoLoader.OgmoLoader.nodes)
+			node.Set("target", GetPath());
+
 		camera = GetNode<Camera2D>("../MainCamera");
 		hud = GetNode<Control>("../CanvasLayer/HUD");
 		_image = GetNode<AnimatedSprite>("AnimatedSprite");
@@ -227,7 +230,6 @@ public class Player : KinematicBody2D
 
 		if(MovementInfo.StartShake)
 		{
-			GD.Print("Start");
 			camera.Call("Shake", 10f, .1f, 10);
 			MovementInfo.StartShake = false;
 		}
@@ -245,7 +247,6 @@ public class Player : KinematicBody2D
 		if(this.invulnerabilityFrames > 0) {
 			// Count down inv frames
 			invulnerabilityFrames -= 1;
-			GD.Print(invulnerabilityFrames);
 		} else {
 			if((collider as CollisionObject2D).IsInGroup("damaging"))
 			{

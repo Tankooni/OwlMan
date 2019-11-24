@@ -46,6 +46,7 @@ func _physics_process(delta):
 
 			var bullet = boolette.instance()
 			bullet.direction = direction.normalized()
+			get_node("./").add_child(bullet)
 			
 		else:
 			frames_until_attack -= 1
