@@ -17,6 +17,6 @@ func _ready():
 func _physics_process(delta):
 	var collider = node.move_and_collide(direction.abs() * speed * delta)
 
-	if collider:
+	if collider and collider.collider:
 		emit_signal("on_collide", collider.collider)
 		
