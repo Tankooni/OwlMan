@@ -61,3 +61,4 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox"]
 position = Vector2( -1.52588e-005, 5.47003 )
 shape = SubResource( 4 )
+[connection signal="area_entered" from="SideBoxL" to="SideBoxL" method="OnKillEnter2"]
