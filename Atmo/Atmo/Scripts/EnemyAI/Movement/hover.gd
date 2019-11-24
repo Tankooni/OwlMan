@@ -42,7 +42,8 @@ func _physics_process(delta):
 			animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
 
 			var bullet = boolette.instance()
-			bullet.direction = direction.normalized()
+			bullet.direction = direction.normalized()		
+			get_tree().get_root().add_child(bullet)
 			
 		else:
 			frames_until_attack -= 1

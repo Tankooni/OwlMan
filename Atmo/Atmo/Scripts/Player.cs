@@ -99,8 +99,12 @@ public class Player : KinematicBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		foreach(var node in Atmo.OgmoLoader.OgmoLoader.nodes)
+		foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
+		{
 			node.Set("target", GetPath());
+
+			//node.Set("node", node.GetPath());
+		}
 
 		camera = GetNode<Camera2D>("../MainCamera");
 		hud = GetNode<Control>("../CanvasLayer/HUD");

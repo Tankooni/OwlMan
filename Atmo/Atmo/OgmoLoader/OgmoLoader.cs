@@ -148,8 +148,8 @@ namespace Atmo.OgmoLoader
 						childInstance = (Node2D)bugScene.Instance();
 						childInstance.SetName("Walker_" + entity._eid);
 						break;
-					case "TargerFlyer":
-						childInstance = (Node2D)bugScene.Instance();
+					case "TargetFlyer":
+						childInstance = (Node2D)carnosaurScene.Instance();
 						childInstance.SetName("Flyer_" + entity._eid);
 						break;
 					case "Bee":
