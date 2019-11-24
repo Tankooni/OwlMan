@@ -131,16 +131,17 @@ namespace Atmo.OgmoLoader
 			var carnosaurScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Carnosaur.tscn"));
 			var carnosaurusRexScene = ((PackedScene)ResourceLoader.Load("res://Enemies/CarnosaurusRex.tscn"));
 
+			var playerEntity = level.layers.First(x => x.name == "Entity").entities.First(x => x.name == "LevelSpawn");
+
+			player = (Node2D)playerScene.Instance();
+			player.SetName("Player_" + playerEntity._eid);
+			player.SetPosition(new Vector2(playerEntity.x, playerEntity.y));
+
 			foreach (var entity in level.layers.First(x => x.name == "Entity").entities)
 			{
 				Node2D childInstance = null;
 				switch (entity.name)
 				{
-					case "LevelSpawn":
-						player = (Node2D)playerScene.Instance();
-						player.SetName("Player_" + entity._eid);
-						player.SetPosition(new Vector2(entity.x, entity.y));
-						break;
 					case "Walker":
 						childInstance = (Node2D)bugScene.Instance();
 						childInstance.SetName("Walker_" + entity._eid);
@@ -161,6 +162,8 @@ namespace Atmo.OgmoLoader
 				}
 				if (childInstance != null)
 				{
+					childInstance.Set("target", player.GetPath());
+
 					ultimateParent.AddChild(childInstance);
 					childInstance.SetPosition(new Vector2(entity.x, entity.y));
 				}

@@ -16,9 +16,9 @@ public class ShakeCamera : Camera2D
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-    {
+	{
 		//SetProcess(true);
-    }
+	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
@@ -59,7 +59,7 @@ public class ShakeCamera : Camera2D
 	//Kick off a new screenshake effect.
 	public void Shake(float duration, float frequency, float amplitude)
 	{
-		GD.Print("Shaking ", duration, " " , frequency, " ", amplitude);
+		GD.Print("Shaking ", duration, " ", frequency, " ", amplitude);
 		//Initialize variables.
 		_duration = duration;
 		_timer = duration;

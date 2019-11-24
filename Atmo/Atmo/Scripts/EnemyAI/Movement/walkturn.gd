@@ -2,6 +2,8 @@ extends Node
 
 signal on_collide(CollisionObject2D)
 
+export(NodePath) onready var target
+
 enum WalkingDirection {
 	Left = 0,
 	Right = 1
