@@ -16,7 +16,7 @@ namespace Atmo2.Movements.PlayerStates
         public override void OnEnter()
         {
             // player.Collidable = false;
-            player.image.Play("fall");
+            player.Animation = "fall";
             // player.Tweener.Tween(player, new { Alpha = 1 }, 1)
             //     .From(new { Alpha = 0 })
             //     .Ease((t) => Engine.Random.Float(0, 1))

@@ -17,11 +17,20 @@ func on_set_health(health : int):
 		return
 	elif current_health > health:
 		for _i in range(current_health - health):
-			health_pips.remove_child(health_pips.get_child(0))
+			health_pips.remove_child(health_pips.get_child(current_health - _i - 1))
 	else:
-		for _i in range(health - current_health):
+		for i in range(health - current_health):
 			var pip = scene_pip.instance()
 			pip.scale *= 0.6
 			pip.offset.y -= 10
 			pip.centered = false
+			
+			# Because hboxes don't work? (probably because this isn't a UI element. ho llew)
+			pip.offset.x += (i + current_health) * 50
+
 			health_pips.add_child(pip)
+
+func on_animation_changed(animation : String):
+	for i in health_pips.get_child_count():
+		var pip = health_pips.get_child(i)
+		pip.play(animation)

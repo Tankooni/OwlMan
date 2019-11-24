@@ -23,7 +23,7 @@ namespace Atmo2.Movements.PlayerStates
             player.EnergyRechargeRate = charge_rate;
 
             // Animation
-            player.image.Play("charge");
+            player.Animation = "charge";
 
 			// Sound
 			//if (Engine.Random.Chance(1f))

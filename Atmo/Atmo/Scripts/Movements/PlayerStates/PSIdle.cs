@@ -19,7 +19,7 @@ namespace Atmo2.Movements.PlayerStates
         public override void OnEnter()
         {
 			player.MovementInfo.VelY = 0;
-			player.image.Play("idle");
+			player.Animation = "idle";
         }
 
         public override void OnExit()

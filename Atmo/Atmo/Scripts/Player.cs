@@ -9,6 +9,9 @@ public class Player : KinematicBody2D
 	[Signal]
 	public delegate void HealthChanged(int health);
 	
+	[Signal]
+	public delegate void AnimationChanged(String animation);
+
 	public Controller InputController;
 	public PlayerStateController PlayerStateController;
 
@@ -64,7 +67,16 @@ public class Player : KinematicBody2D
 	public float Gravity { get; set; }
 	public bool IsInvincable { get; set; }
 
-	public AnimatedSprite image;
+	// Make this private later and fix the things that reference it to flip the image
+	public AnimatedSprite _image;
+
+	public String Animation {
+		get { return this._image.Animation; }
+		set { 
+			this._image.Play(value);
+			this.EmitSignal("AnimationChanged", value);
+		}
+	}
 
 	// public float Alpha
 	// {
@@ -83,7 +95,7 @@ public class Player : KinematicBody2D
 	public override void _Ready()
 	{
 		camera = GetNode<Camera2D>("../MainCamera");
-		image = GetNode<AnimatedSprite>("AnimatedSprite");
+		_image = GetNode<AnimatedSprite>("AnimatedSprite");
 		
 		SetDeferred("Health", maxHealth);
 		//Health = maxHealth;
@@ -112,7 +124,7 @@ public class Player : KinematicBody2D
 		InputController = new Controller();
 		PlayerStateController = new PlayerStateController(new PSIdle(this));
 
-		image.Connect("animation_finished", this, "AnimationComplete");
+		_image.Connect("animation_finished", this, "AnimationComplete");
 
 		// AddResponse(PickupType.AirDash, OnAirDashPickup);
 		// AddResponse(PickupType.AirJump, OnAirJumpPickup);

@@ -17,7 +17,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnEnter()
 		{
-			player.image.Play("attackNormal");
+			player.Animation = "attackNormal";
 		}
 
 		public override void OnExit()

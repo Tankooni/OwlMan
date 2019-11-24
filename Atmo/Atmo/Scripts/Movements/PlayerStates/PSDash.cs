@@ -28,7 +28,7 @@ namespace Atmo2.Movements.PlayerStates
 		}
         public override void OnEnter()
         {
-            player.image.Play("dash");
+            player.Animation = "dash";
 			//direction = new Vector2(player.InputController.LeftStickHorizontal(), 0/*Controller.LeftStickVertical()*/).Normalized();
 		}
 

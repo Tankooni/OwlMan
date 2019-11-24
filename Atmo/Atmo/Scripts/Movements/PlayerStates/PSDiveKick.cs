@@ -18,7 +18,7 @@ namespace Atmo2.Movements.PlayerStates
 		}
         public override void OnEnter()
         {
-            player.image.Play("diveKick");
+            player.Animation = "diveKick";
             player.MovementInfo.VelY = 1200f;
 			player.InputController.JumpSuccess();
 		}
@@ -35,7 +35,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			player.MovementInfo.VelY += player.Gravity;
 			if (signedHorizontal != 0)
-				player.image.SetFlipH(signedHorizontal < 0);
+				player._image.SetFlipH(signedHorizontal < 0);
 			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(signedHorizontal);
 
 			if (player.MovementInfo.OnGround)
