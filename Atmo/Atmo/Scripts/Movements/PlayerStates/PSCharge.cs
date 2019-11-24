@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Godot;
 
 namespace Atmo2.Movements.PlayerStates
 {
@@ -10,12 +11,14 @@ namespace Atmo2.Movements.PlayerStates
     {
         private float previous_charge_rate;
         private float charge_rate;
+		private Particles2D poseParticles;
 
         public PSCharge(Player player, float chargeRate=10)
 			: base(player)
 		{
             this.player = player;
             this.charge_rate = chargeRate;
+			poseParticles = player.GetNode<Particles2D>("PoseParticles");
         }
 		public override void OnEnter()
         {
@@ -24,6 +27,7 @@ namespace Atmo2.Movements.PlayerStates
 
             // Animation
             player.Animation = "charge";
+			poseParticles.Emitting = true;
 
 			// Sound
 			//if (Engine.Random.Chance(1f))
@@ -34,6 +38,7 @@ namespace Atmo2.Movements.PlayerStates
 
         public override void OnExit()
         {
+			poseParticles.Emitting = false;
             player.EnergyRechargeRate = previous_charge_rate;
         }
 
