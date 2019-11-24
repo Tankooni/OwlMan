@@ -6,6 +6,10 @@ public class Overlord : Node
 {
 	public static float STANDARD_GRAVITY = 18f;
 
+	public static Vector2 LevelBoundsX;
+	public static Vector2 LevelBoundsY;
+	public static Vector2 ViewportSize;
+
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";
@@ -14,11 +18,19 @@ public class Overlord : Node
 	public override void _Ready()
     {
         var ogmo = new OgmoLoader();
-		var yeah = ogmo.Load();
+		Node2D player;
+		var level = ogmo.Load(out player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
 
 		Viewport root = GetTree().GetRoot();
+		Overlord.ViewportSize = root.Size;
 		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
-		CurrentScene.AddChild(yeah);
+		CurrentScene.CallDeferred("add_child", level);
+		if(player != null)
+		{
+			CurrentScene.CallDeferred("add_child", player);
+		}
+
+		//CurrentScene.AddChild(yeah);
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

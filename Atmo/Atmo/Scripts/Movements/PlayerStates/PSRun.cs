@@ -62,7 +62,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			//Handle Player input for state changers
 			if (player.InputController.AttackPressed())
-				return new PSAttackNormal(player);
+				return new PSAttackNormal(player, speedModifier);
 
 			if (player.InputController.JumpPressed())
 			{

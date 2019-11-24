@@ -53,7 +53,7 @@ namespace Atmo.OgmoLoader
 		/// Loads all levels for the game and project data.
 		/// </summary>
 		/// <returns>The generated starting scene.</returns>
-		public Node2D Load()
+		public Node2D Load(out Node2D player, out Vector2 levelBoundsX, out Vector2 levelBoundsY)
 		{
 			string pathToProjectFile = "res://ogmo/project.ogmo";
 			string pathToLevelsDir = "res://ogmo/levels";
@@ -76,9 +76,11 @@ namespace Atmo.OgmoLoader
 				if (levelPath.StartsWith("Start", StringComparison.InvariantCultureIgnoreCase))
 					startLevel = Levels.Last().Value;
 			}
-			
 
-			return GenerateScene(project, startLevel);
+			levelBoundsX = new Vector2(0, startLevel.width);
+			levelBoundsY = new Vector2(0, startLevel.height);
+
+			return GenerateScene(project, startLevel, out player);
 		}
 
 		private string ObtainFileString(string path)
@@ -90,11 +92,16 @@ namespace Atmo.OgmoLoader
 			return result;
 		}
 
-		private Node2D GenerateScene(OgmoProject project, OgmoLevel level)
+		private Node2D GenerateScene(OgmoProject project, OgmoLevel level, out Node2D player)
 		{
+			player = null;
 			var tileMap = (TileMap)((PackedScene)ResourceLoader.Load("res://prefab/TileMap.tscn")).Instance();
 			Node2D ultimateParent = new Node2D();
+			ultimateParent.SetName("Level");
+			tileMap.SetName("TileMap");
 			ultimateParent.AddChild(tileMap);
+
+
 
 			//foreach(int id in tileMap.TileSet.GetTilesIds())
 			//{
@@ -109,6 +116,14 @@ namespace Atmo.OgmoLoader
 				for (int x = 0; x < tileData[y].Count; x++)
 				{
 					tileMap.SetCell(x, y, tileData[y][x]);
+					if (y == 0)
+						tileMap.SetCell(x, -1, 0);
+					if (x == 0)
+						tileMap.SetCell(-1, y, 0);
+					if (x == tileData.Count - 1)
+						tileMap.SetCell(tileData.Count, y, 0);
+					if (y == tileData[y].Count - 1)
+						tileMap.SetCell(x, tileData[y].Count, 0);
 					//GD.Print("x: ", x, ", y: ", y, ", data: ", tileData[y][x]);
 				}
 			}
@@ -122,17 +137,19 @@ namespace Atmo.OgmoLoader
 				switch (entity.name)
 				{
 					case "LevelSpawn":
-						childInstance = (Node2D)playerScene.Instance();
+						player = (Node2D)playerScene.Instance();
+						player.SetName("Player_" + entity._eid);
+						player.SetPosition(new Vector2(entity.x, entity.y));
 						break;
 					case "Walker":
 						childInstance = (Node2D)bugScene.Instance();
+						childInstance.SetName("Walker_" + entity._eid);
 						break;
 				}
 				if (childInstance != null)
 				{
-					//childInstance.SetOwner(ultimateParent);
-					//ultimateParent.AddChild(childInstance);
-					//childInstance.SetPosition(new Vector2(entity.x, entity.y));
+					ultimateParent.AddChild(childInstance);
+					childInstance.SetPosition(new Vector2(entity.x, entity.y));
 				}
 			}
 
