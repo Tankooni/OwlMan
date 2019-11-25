@@ -221,6 +221,8 @@ public class Player : KinematicBody2D
 				body.QueueFree();
 			}
 		}
+
+		invulnerabilityFrames = Math.Max(--invulnerabilityFrames, 0);
 	}
 
 	// public override void Squish()
@@ -274,11 +276,10 @@ public class Player : KinematicBody2D
 		camera.SetPosition(new Vector2(centerX, centerY));
 	}
 	
-	public void OnDamage(CollisionObject2D collider) {
-		if(this.invulnerabilityFrames > 0) {
-			// Count down inv frames
-			invulnerabilityFrames -= 1;
-		} else {
+	public void OnDamage(CollisionObject2D collider)
+	{
+		if(this.invulnerabilityFrames == 0)
+		{ 
 			if((collider as CollisionObject2D).IsInGroup("damaging"))
 			{
 				// Take a damage and do hurt stuff

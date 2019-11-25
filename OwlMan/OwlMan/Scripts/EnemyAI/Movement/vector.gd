@@ -1,9 +1,7 @@
 extends Node
 
-signal on_collide(CollisionObject2D)
-
 export(Vector2) var direction = Vector2(1, 0)
-export(int) var speed = 500
+export(int) var speed = 5
 
 onready var node = self
 
@@ -15,8 +13,12 @@ func _ready():
 		node = get_parent()
 
 func _physics_process(delta):
-	var collider = node.move_and_collide(direction.abs() * speed * delta)
+	
+	var motion = direction * speed
+	node.position += motion
 
-	if collider and collider.collider:
-		emit_signal("on_collide", collider.collider)
+#	var collider = node.move_and_collide()
+
+#	if collider and collider.collider:
+#		emit_signal("on_collide", collider.collider)
 		

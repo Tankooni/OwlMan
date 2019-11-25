@@ -32,12 +32,11 @@ func _ready():
 func _physics_process(delta):
 	pass
 
-func on_collide(collider : CollisionObject2D):
+func on_area_enter(collider):
 	# Tell the other entity it collided and kill ourselves
-	if collider and not collider.is_in_group("enemy"):
+	if not collider.is_in_group("enemy"):
 		if collider.has_method("OnDamage"):
 			collider.call("OnDamage", self)
 		elif collider.has_method("on_damage"):
 			collider.call("on_damage", self)
-		
 		self.queue_free()

@@ -13,8 +13,9 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 246.269
 
-[node name="Boolette" type="KinematicBody2D" groups=[
+[node name="Bullet" type="Area2D" groups=[
 "damaging",
 ]]
 script = ExtResource( 1 )
@@ -23,9 +24,10 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.813553, 0.421426 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.02, 0.02 )
 shape = SubResource( 2 )
-[connection signal="on_collide" from="Movement" to="." method="on_collide"]
+[connection signal="body_entered" from="." to="." method="on_area_enter"]
