@@ -70,6 +70,11 @@ namespace Atmo2.Movements.PlayerStates
 			(1, -1)(0.7071068, -0.7071068)
 			*/
 
+			if (player.InputController.AttackPressed())
+			{
+				return new PSAttackNormal(player, SpeedModifier);
+			}
+
 			if (!player.MovementInfo.OnGround)
 			{
 				// && delta - PSDiveKick.last_bounce > 300)
