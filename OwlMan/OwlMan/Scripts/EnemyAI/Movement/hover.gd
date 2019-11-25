@@ -33,7 +33,7 @@ func _physics_process(delta):
 			animation_node.set_flip_h(true)
 		
 		# I was gonna do this somewhere else but gamejam time jam AHHHHHHH
-		if frames_until_attack <= 0 && distance >= 400:
+		if frames_until_attack == 0 && distance <= 400:
 			frames_until_attack = rand_range(0, 60) + attack_freq
 			
 			animation_node.play("attack")
