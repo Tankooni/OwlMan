@@ -201,7 +201,7 @@ public class Player : KinematicBody2D
 		{
 			foreach (PhysicsBody2D body in BoxL.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
 			{
-
+				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 			}
 		}
@@ -209,6 +209,7 @@ public class Player : KinematicBody2D
 		{
 			foreach (PhysicsBody2D body in BoxR.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
 			{
+				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 			}
 		}
@@ -216,7 +217,7 @@ public class Player : KinematicBody2D
 		{
 			foreach (PhysicsBody2D body in BoxB.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
 			{
-
+				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 			}
 		}
