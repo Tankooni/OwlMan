@@ -204,6 +204,10 @@ public class Player : KinematicBody2D
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 			}
+			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
+			{
+				area.QueueFree();
+			}
 		}
 		if (MovementInfo.RightBox)
 		{
@@ -212,6 +216,10 @@ public class Player : KinematicBody2D
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 			}
+			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
+			{
+				area.QueueFree();
+			}
 		}
 		if (MovementInfo.BottomBox)
 		{
@@ -219,6 +227,10 @@ public class Player : KinematicBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
+			}
+			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
+			{
+				area.QueueFree();
 			}
 		}
 

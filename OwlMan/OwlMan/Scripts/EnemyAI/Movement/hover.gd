@@ -34,8 +34,7 @@ func _physics_process(delta):
 		
 		# I was gonna do this somewhere else but gamejam time jam AHHHHHHH
 		if frames_until_attack == 0 && distance <= 400:
-			frames_until_attack = rand_range(0, 60) + attack_freq
-			
+			frames_until_attack = randi()%60 + attack_freq
 			animation_node.play("attack")
 			animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
 
@@ -45,4 +44,4 @@ func _physics_process(delta):
 			get_tree().get_root().add_child(bullet)
 			
 		else:
-			frames_until_attack = max(--frames_until_attack, 0)
+			frames_until_attack = max(frames_until_attack - 1, 0)
