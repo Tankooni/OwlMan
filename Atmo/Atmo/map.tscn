@@ -6,7 +6,7 @@
 [node name="Node" type="Node"]
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2( 265.845, 178.949 )
+position = Vector2( 362.077, 240.02 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 7.0

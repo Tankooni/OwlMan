@@ -7,17 +7,16 @@
 [ext_resource path="res://Scripts/KillBox.cs" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 12.0
-height = 42.6628
+height = 47.7273
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 13.6371, 28.68 )
+extents = Vector2( 13.654, 29.869 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13.6544, 29.8691 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 39.2844, 5.61076 )
+extents = Vector2( 38.0554, 13.2307 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -41,26 +40,23 @@ autoplay = true
 attenuation = 0.013139
 
 [node name="SideBoxL" type="Area2D" parent="."]
-position = Vector2( -47.5655, -24.0205 )
+position = Vector2( -22.9764, -29.5324 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxL"]
-position = Vector2( 21.2693, -5.64938 )
 shape = SubResource( 2 )
 
 [node name="SideBoxR" type="Area2D" parent="."]
+position = Vector2( 24.2816, -29.5324 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxR"]
-position = Vector2( 25.63, -27.6867 )
 shape = SubResource( 3 )
 
 [node name="BottomBox" type="Area2D" parent="."]
+position = Vector2( 0.922073, 5.53243 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox"]
-position = Vector2( -1.52588e-005, 5.47003 )
+position = Vector2( 0, 7.9913 )
 shape = SubResource( 4 )
-[connection signal="body_entered" from="SideBoxL" to="." method="OnKillEnterL"]
-[connection signal="body_entered" from="SideBoxR" to="." method="OnKillEnterR"]
-[connection signal="body_entered" from="BottomBox" to="." method="OnKillEnterB"]

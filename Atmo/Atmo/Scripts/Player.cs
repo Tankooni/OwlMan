@@ -3,6 +3,8 @@ using System;
 using Atmo2;
 using Atmo2.Movements;
 using Atmo2.Movements.PlayerStates;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Player : KinematicBody2D
 {
@@ -194,6 +196,30 @@ public class Player : KinematicBody2D
 		}
 		
 		UpdateCamera();
+
+		if (MovementInfo.LeftBox)
+		{
+			foreach (PhysicsBody2D body in BoxL.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
+			{
+
+				body.QueueFree();
+			}
+		}
+		if (MovementInfo.RightBox)
+		{
+			foreach (PhysicsBody2D body in BoxR.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
+			{
+				body.QueueFree();
+			}
+		}
+		if (MovementInfo.BottomBox)
+		{
+			foreach (PhysicsBody2D body in BoxB.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
+			{
+
+				body.QueueFree();
+			}
+		}
 	}
 
 	// public override void Squish()
@@ -265,35 +291,6 @@ public class Player : KinematicBody2D
 	void CheckDeath() {
 		if(this.Health <= 0) {
 			// Handle death here
-		}
-	}
-
-	public void OnKillEnterL(PhysicsBody2D body)
-	{
-		if (body.IsInGroup("enemy"))
-		{
-			if (MovementInfo.LeftBox)
-				body.QueueFree();
-		}
-	}
-
-	public void OnKillEnterR(PhysicsBody2D body)
-	{
-		if (body.IsInGroup("enemy"))
-		{
-			if (MovementInfo.RightBox)
-				body.QueueFree();
-		}
-	}
-
-	public void OnKillEnterB(PhysicsBody2D body)
-	{
-		GD.Print(body.Name);
-
-		if (body.IsInGroup("enemy"))
-		{
-			if (MovementInfo.BottomBox)
-				body.QueueFree();
 		}
 	}
 
