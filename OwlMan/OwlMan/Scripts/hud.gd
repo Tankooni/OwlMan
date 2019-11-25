@@ -10,7 +10,6 @@ func _ready():
 
 func on_set_health(health : int):
 	health = int(clamp(0, health, 3))
-	print(health_pips)
 	var current_health = health_pips.get_child_count()
 	
 	if current_health == health:

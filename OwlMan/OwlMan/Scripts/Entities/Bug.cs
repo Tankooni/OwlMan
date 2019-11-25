@@ -38,16 +38,5 @@ public class Bug : KinematicBody2D
 		VelY += Overlord.STANDARD_GRAVITY;
 		var velocity = new Vector2(VelX, VelY);
 		var collision = MoveAndSlide(velocity);
-
-		//if (collision != null)
-		//{
-		//	GD.Print(velocity, collision);
-		//	//velocity = velocity.Slide(collision.Normal);
-
-		//	if (collision.x != 0)
-		//	{
-		//		walkingLeft = !walkingLeft;
-		//	}
-		//}
 	}
 }

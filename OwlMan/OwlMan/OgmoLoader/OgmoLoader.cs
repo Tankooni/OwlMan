@@ -102,12 +102,6 @@ namespace Atmo.OgmoLoader
 			ultimateParent.SetName("Level");
 			tileMap.SetName("TileMap");
 
-			//foreach(int id in tileMap.TileSet.GetTilesIds())
-			//{
-			//	GD.Print(id.GetType());
-			//	GD.Print(id.ToString());
-			//}
-
 			//Load set tiles in
 			var tileData = level.layers.First(x => x.name == "Tiles").data2D;
 			for (int y = 0; y < tileData.Count; y++)
@@ -123,7 +117,6 @@ namespace Atmo.OgmoLoader
 						tileMap.SetCell(tileData.Count, y, 0);
 					if (y == tileData[y].Count - 1)
 						tileMap.SetCell(x, tileData[y].Count, 0);
-					//GD.Print("x: ", x, ", y: ", y, ", data: ", tileData[y][x]);
 				}
 			}
 
