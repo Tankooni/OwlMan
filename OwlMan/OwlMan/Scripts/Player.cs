@@ -31,7 +31,7 @@ public class Player : KinematicBody2D
 	}
 	public int Power { get; set; }
 	
-	private int maxHealth = 3;
+	private int maxHealth = 5;
 	private int maxPower;
 
 	private int invulnerabilityFrames = 0;
@@ -67,20 +67,22 @@ public class Player : KinematicBody2D
 	public float Gravity { get; set; }
 	public bool IsInvincable { get; set; }
 
-	// Make this private later and fix the things that reference it to flip the image
-	public AnimatedSprite _image;
-	private Camera2D camera;
-	private Control hud;
-	private CollisionShape2D _collisionShape2D;
 	public Area2D BoxL;
 	public Area2D BoxR;
 	public Area2D BoxB;
 
+	// Make this private later and fix the things that reference it to flip the image
+	public AnimatedSprite Image;
+
+	private Camera2D _camera;
+	private Control _hud;
+	private CollisionShape2D _collisionShape2D;
+	private Node _overlord;
 
 	public String Animation {
-		get { return this._image.Animation; }
+		get { return this.Image.Animation; }
 		set { 
-			this._image.Play(value);
+			this.Image.Play(value);
 			this.EmitSignal("AnimationChanged", value);
 		}
 	}
@@ -108,17 +110,18 @@ public class Player : KinematicBody2D
 			//node.Set("node", node.GetPath());
 		}
 
-		camera = GetNode<Camera2D>("../MainCamera");
-		hud = GetNode<Control>("../CanvasLayer/HUD");
-		_image = GetNode<AnimatedSprite>("AnimatedSprite");
+		_camera = GetNode<Camera2D>("../MainCamera");
+		_hud = GetNode<Control>("../CanvasLayer/HUD");
+		Image = GetNode<AnimatedSprite>("AnimatedSprite");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+		_overlord = GetNode("/root/Overlord");
 
 		BoxL = GetNode<Area2D>("SideBoxL");
 		BoxR = GetNode<Area2D>("SideBoxR");
 		BoxB = GetNode<Area2D>("BottomBox");
 
-		this.Connect("HealthChanged", hud, "on_set_health");
-		this.Connect("AnimationChanged", hud, "on_animation_changed");
+		this.Connect("HealthChanged", _hud, "on_set_health");
+		this.Connect("AnimationChanged", _hud, "on_animation_changed");
 
 		SetDeferred("Health", maxHealth);
 		//Health = maxHealth;
@@ -147,7 +150,7 @@ public class Player : KinematicBody2D
 		InputController = new Controller();
 		PlayerStateController = new PlayerStateController(new PSIdle(this));
 
-		_image.Connect("animation_finished", this, "AnimationComplete");
+		Image.Connect("animation_finished", this, "AnimationComplete");
 
 		// AddResponse(PickupType.AirDash, OnAirDashPickup);
 		// AddResponse(PickupType.AirJump, OnAirJumpPickup);
@@ -275,7 +278,7 @@ public class Player : KinematicBody2D
 
 		if(MovementInfo.StartShake)
 		{
-			camera.Call("Shake", 10f, .1f, 10);
+			_camera.Call("Shake", 10f, .1f, 10);
 			MovementInfo.StartShake = false;
 		}
 
@@ -285,7 +288,7 @@ public class Player : KinematicBody2D
 		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.x / 2f, Overlord.LevelBoundsX.y - Overlord.ViewportSize.x / 2f);
 		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.y / 2f, Overlord.LevelBoundsY.y - Overlord.ViewportSize.y / 2f);
 
-		camera.SetPosition(new Vector2(centerX, centerY));
+		_camera.SetPosition(new Vector2(centerX, centerY));
 	}
 	
 	public void OnDamage(CollisionObject2D collider)
@@ -303,8 +306,9 @@ public class Player : KinematicBody2D
 		}
 	}
 	void CheckDeath() {
-		if(this.Health <= 0) {
-			// Handle death here
+		if(this.Health <= 0)
+		{
+			_overlord.Call("Reset");
 		}
 	}
 

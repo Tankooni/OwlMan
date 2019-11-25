@@ -25,7 +25,7 @@ namespace Atmo2.Movements.PlayerStates
             if (player.Spice == 0) return;
 
             player.MovementInfo.VelY = -240;
-            if (player._image.FlipH)
+            if (player.Image.FlipH)
                 player.MovementInfo.VelX += 480;
             else
                 player.MovementInfo.VelX -= 480;

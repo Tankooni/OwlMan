@@ -40,9 +40,9 @@ namespace Atmo2.Movements.PlayerStates
 				speedModifier = 0;
 
 			if (signedHorizontal != 0)
-				player._image.SetFlipH(signedHorizontal < 0);
+				player.Image.SetFlipH(signedHorizontal < 0);
 
-			if (player._image.FlipH)
+			if (player.Image.FlipH)
 			{
 				player.MovementInfo.LeftBox = true;
 			}

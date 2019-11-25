@@ -39,7 +39,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			//Perform caluclations and modify player variables with results
 			if (signedHorizontal != 0)
-				player._image.SetFlipH(signedHorizontal < 0);
+				player.Image.SetFlipH(signedHorizontal < 0);
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal;
 
 			//Handle any collision resitution & modify variables further if needed

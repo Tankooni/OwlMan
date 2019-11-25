@@ -98,9 +98,10 @@ namespace Atmo.OgmoLoader
 		{
 			player = null;
 			var tileMap = (TileMap)((PackedScene)ResourceLoader.Load("res://prefab/TileMap.tscn")).Instance();
+			tileMap.SetName("TileMap");
 			Node2D ultimateParent = new Node2D();
 			ultimateParent.SetName("Level");
-			tileMap.SetName("TileMap");
+			ultimateParent.AddChild(tileMap);
 
 			//Load set tiles in
 			var tileData = level.layers.First(x => x.name == "Tiles").data2D;
@@ -120,7 +121,7 @@ namespace Atmo.OgmoLoader
 				}
 			}
 
-			var playerScene = ((PackedScene)ResourceLoader.Load("res://prefab/PlayerOwl.tscn"));
+			var playerScene = (PackedScene)ResourceLoader.Load("res://prefab/PlayerOwl.tscn");
 			var bugScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Bug.tscn"));
 			var beeScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Beee.tscn"));
 			var carnosaurScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Carnosaur.tscn"));
@@ -163,8 +164,6 @@ namespace Atmo.OgmoLoader
 					childInstance.SetPosition(new Vector2(entity.x, entity.y));
 				}
 			}
-
-			ultimateParent.AddChild(tileMap);
 
 			return ultimateParent;
 		}

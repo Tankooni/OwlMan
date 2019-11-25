@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OwlMan"
-run/main_scene="res://map.tscn"
+run/main_scene="res://scenes/GameScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
