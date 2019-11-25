@@ -37,7 +37,9 @@ func _physics_process(delta):
 			frames_until_attack = randi()%60 + attack_freq
 			animation_node.play("attack")
 			animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
-
+			
+			$BulletAudio.play(0)
+			
 			var bullet = boolette.instance()
 			bullet.position = node.position
 			bullet.direction = direction.normalized()		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/EnemyAI/Movement/hover.gd" type="Script" id=1]
 [ext_resource path="res://Images/Beee/000_Idle00.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Images/Beee/001_Attack01.png" type="Texture" id=7]
 [ext_resource path="res://Images/Beee/001_Attack02.png" type="Texture" id=8]
 [ext_resource path="res://Images/Beee/001_Attack03.png" type="Texture" id=9]
+[ext_resource path="res://sounds/squeak.wav" type="AudioStream" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0894
@@ -38,3 +39,6 @@ frames = SubResource( 2 )
 animation = "idle"
 frame = 3
 playing = true
+
+[node name="BulletAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
