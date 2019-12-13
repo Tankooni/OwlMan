@@ -10,6 +10,8 @@ public class Overlord : Node
 	public static Vector2 LevelBoundsY;
 	public static Vector2 ViewportSize;
 
+	public static Node2D Player;
+
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";
@@ -23,16 +25,15 @@ public class Overlord : Node
 	public void LoadLevel()
 	{
 		var ogmo = new OgmoLoader();
-		Node2D player;
-		var level = ogmo.Load(out player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
+		var level = ogmo.Load(out Overlord.Player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
 
 		Viewport root = GetTree().GetRoot();
 		Overlord.ViewportSize = root.Size;
 
 		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
-		if (player != null)
-			CurrentScene.CallDeferred("add_child", player);
+		if (Overlord.Player != null)
+			CurrentScene.CallDeferred("add_child", Overlord.Player);
 		CurrentScene.CallDeferred("add_child", level);
 	}
 

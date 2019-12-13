@@ -5,7 +5,7 @@ signal on_collide(CollisionObject2D)
 export(NodePath) onready var node
 export(NodePath) onready var target
 
-export(int) var speed = 500
+export(int) var speed = 200
 export(int) var distance = 300
 
 var activateRange = 1200
@@ -29,15 +29,13 @@ func _ready():
 
 func _physics_process(delta):
 	var distance_to = (node as Node2D).position.distance_to((target as Node2D).position)
-	var direction = (node as Node2D).position.direction_to((target as Node2D).position) * distance
-
-	var slerp_to = (node as Node2D).position.normalized().slerp((target as Node2D).position - direction, 0.1)
-
-	# Try to stay distance away from target
-	distance_to -= distance
+	var direction = (target as Node2D).position.direction_to((node as Node2D).position)
 
 	if distance_to <= activateRange:
-		node.move_and_slide(slerp_to * speed/12000.0 * distance_to / delta)
+		if(distance_to > 300):
+			node.move_and_slide(-direction * speed)
+		elif (distance_to < 250):
+			node.move_and_slide(direction * speed)
 
 		if frames_until_attack == 0 && distance <= 400:
 			frames_until_attack = randi() % 60 + attack_freq
@@ -54,9 +52,9 @@ func _physics_process(delta):
 			frames_until_attack = max(frames_until_attack - 1, 0)
 
 	if $AnimatedSprite:
-		if direction.x < 0:
+		if direction.x > 0:
 			$AnimatedSprite.set_flip_h(false)
-		elif direction.x >0:
+		elif direction.x < 0:
 			$AnimatedSprite.set_flip_h(true)
 
 
