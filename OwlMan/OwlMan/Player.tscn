@@ -3,9 +3,8 @@
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://JulepSprite.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 9.20285
-height = 40.8807
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 26.5885 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 position = Vector2( 0, -38.7312 )
@@ -14,5 +13,5 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.53, 8.87603 )
+position = Vector2( 2.53, 11.876 )
 shape = SubResource( 1 )

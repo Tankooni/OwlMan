@@ -5,8 +5,8 @@
 [ext_resource path="res://owlman_sprite.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/KillBox.cs" type="Script" id=4]
 
-[sub_resource type="CapsuleShape2D" id=1]
-height = 48.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 33.6605 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 13, 30 )
@@ -30,7 +30,7 @@ emitting = false
 position = Vector2( 0, -44 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.559, -34 )
+position = Vector2( 0.559, -33 )
 shape = SubResource( 1 )
 
 [node name="SideBoxL" type="Area2D" parent="."]

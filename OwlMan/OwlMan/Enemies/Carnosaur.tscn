@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/EnemyAI/Movement/menace3d.gd" type="Script" id=1]
 [ext_resource path="res://Images/Carnosaur/000_Idle00.png" type="Texture" id=2]
 [ext_resource path="res://Images/Carnosaur/000_Idle01.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=4]
+[ext_resource path="res://sounds/hit1.wav" type="AudioStream" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -52,3 +53,6 @@ script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[node name="BulletAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )

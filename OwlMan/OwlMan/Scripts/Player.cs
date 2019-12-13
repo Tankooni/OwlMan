@@ -195,7 +195,7 @@ public class Player : KinematicBody2D
 
 		if (InputController.Select())
 		{
-			Abilities.GiveAllAbilities();
+			_overlord.Call("Reset");
 		}
 		
 		UpdateCamera();
@@ -266,6 +266,10 @@ public class Player : KinematicBody2D
 		UpdateCamera();
 	}		
 
+	Vector2 viewSize;
+	Vector2 levelBoundsX;
+	Vector2 levelBoundsY;
+
 	public void UpdateCamera()
 	{
 		//var centerX = Position.x;
@@ -276,10 +280,26 @@ public class Player : KinematicBody2D
 		// centerX = Mathf.Clamp(centerX, Engine.HalfWidth, currentRoom.RealRoomMeta.width - Engine.HalfWidth);
 		// centerY = Mathf.Clamp(centerY, Engine.HalfHeight, currentRoom.RealRoomMeta.height - Engine.HalfHeight);
 
-		if(MovementInfo.StartShake)
+		// if(MovementInfo.StartShake)
+		// {
+		// 	_camera.Call("Shake", 10f, .1f, 10);
+		// 	MovementInfo.StartShake = false;
+		// }
+
+		if(viewSize == null || viewSize != Overlord.ViewportSize)
 		{
-			_camera.Call("Shake", 10f, .1f, 10);
-			MovementInfo.StartShake = false;
+			viewSize = Overlord.ViewportSize;
+			GD.Print("viewSize: ", viewSize);
+		}
+		if(levelBoundsX == null || levelBoundsX != Overlord.LevelBoundsX)
+		{
+			levelBoundsX = Overlord.LevelBoundsX;
+			GD.Print("levelBoundsX: ", levelBoundsX);
+		}
+		if(levelBoundsY == null || levelBoundsY != Overlord.LevelBoundsY)
+		{
+			levelBoundsY = Overlord.LevelBoundsY;
+			GD.Print("levelBoundsY: ", levelBoundsY);
 		}
 
 		var centerX = Position.x;
