@@ -39,7 +39,7 @@ func on_area_enter(collider):
 				collider.call("OnDamage", self)
 			elif collider.has_method("on_damage"):
 				collider.call("on_damage", self)
-			self.queue_free()
+		self.queue_free()
 
 func deflected():
 	if not deflected:
