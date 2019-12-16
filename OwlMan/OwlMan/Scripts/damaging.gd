@@ -42,6 +42,7 @@ func on_area_enter(collider):
 			self.queue_free()
 
 func deflected():
-	direction = -direction
-	$Movement.direction = direction
-	deflected = true
+	if not deflected:
+		direction = -direction
+		$Movement.direction = direction
+		deflected = true
