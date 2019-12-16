@@ -13,7 +13,7 @@ func _ready():
 		node = get_parent()
 
 func _physics_process(delta):
-	
+
 	var motion = direction * speed
 	node.position += motion
 
@@ -21,4 +21,3 @@ func _physics_process(delta):
 
 #	if collider and collider.collider:
 #		emit_signal("on_collide", collider.collider)
-		

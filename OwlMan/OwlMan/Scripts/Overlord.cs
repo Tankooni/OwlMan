@@ -19,6 +19,11 @@ public class Overlord : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
     {
+		Overlord.ViewportSize = new Vector2
+		(
+			x: (int)ProjectSettings.GetSetting("display/window/size/width"),
+			y: (int)ProjectSettings.GetSetting("display/window/size/height")
+		);
 		LoadLevel();
 	}
 
@@ -28,8 +33,6 @@ public class Overlord : Node
 		var level = ogmo.Load(out Overlord.Player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
 
 		Viewport root = GetTree().GetRoot();
-		Overlord.ViewportSize = root.Size;
-
 		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
 		if (Overlord.Player != null)

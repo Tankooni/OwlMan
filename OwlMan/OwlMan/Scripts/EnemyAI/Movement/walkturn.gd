@@ -53,3 +53,5 @@ func _physics_process(delta):
 	# clear gravity if needed
 	if collision.y == 0:
 		vel_y = 0
+func on_damage(damage):
+	self.queue_free()

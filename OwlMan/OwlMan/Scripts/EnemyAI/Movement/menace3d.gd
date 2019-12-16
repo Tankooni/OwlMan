@@ -5,7 +5,7 @@ signal on_collide(CollisionObject2D)
 export(NodePath) onready var node
 export(NodePath) onready var target
 
-export(int) var speed = 200
+export(int) var speed = 150
 export(int) var distance = 300
 
 var activateRange = 1200
@@ -46,7 +46,7 @@ func _physics_process(delta):
 
 			var bullet = boolette.instance()
 			bullet.position = node.position
-			bullet.direction = direction.normalized()
+			bullet.direction = -direction.normalized()
 			get_tree().get_root().add_child(bullet)
 		else:
 			frames_until_attack = max(frames_until_attack - 1, 0)
@@ -60,3 +60,5 @@ func _physics_process(delta):
 
 	#if collider:
 	#	emit_signal("on_collide", collider.collider)
+func on_damage(damage):
+	self.queue_free()

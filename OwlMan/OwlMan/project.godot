@@ -27,6 +27,7 @@ Overlord="*res://prefab/Overlord.tscn"
 
 window/size/width=720
 window/size/height=480
+window/size/fullscreen=true
 window/size/test_width=720
 window/size/test_height=480
 window/stretch/mode="2d"

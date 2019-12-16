@@ -183,7 +183,7 @@ public class Player : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		base._PhysicsProcess(delta);
-		
+
 		InputController.Update();
 		// if(Keyboard.Space.Pressed)
 		// {
@@ -206,10 +206,16 @@ public class Player : KinematicBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
+
+				// if (body.HasMethod("OnDamage"))
+				// 	body.Call("OnDamage");
+				// else if (body.HasMethod("on_damage"))
+				// 	body.Call("on_damage");
+				
 			}
 			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
 			{
-				area.QueueFree();
+				area.Call("deflected");
 			}
 		}
 		if (MovementInfo.RightBox)
@@ -221,7 +227,7 @@ public class Player : KinematicBody2D
 			}
 			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
 			{
-				area.QueueFree();
+				area.Call("deflected");
 			}
 		}
 		if (MovementInfo.BottomBox)
@@ -233,7 +239,8 @@ public class Player : KinematicBody2D
 			}
 			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
 			{
-				area.QueueFree();
+				// area.QueueFree();
+				area.Call("deflected");
 			}
 		}
 
@@ -285,21 +292,31 @@ public class Player : KinematicBody2D
 		// 	_camera.Call("Shake", 10f, .1f, 10);
 		// 	MovementInfo.StartShake = false;
 		// }
-
+		bool chan = false;
 		if(viewSize == null || viewSize != Overlord.ViewportSize)
 		{
 			viewSize = Overlord.ViewportSize;
 			GD.Print("viewSize: ", viewSize);
+			chan = true;
 		}
 		if(levelBoundsX == null || levelBoundsX != Overlord.LevelBoundsX)
 		{
 			levelBoundsX = Overlord.LevelBoundsX;
 			GD.Print("levelBoundsX: ", levelBoundsX);
+			chan = true;
 		}
 		if(levelBoundsY == null || levelBoundsY != Overlord.LevelBoundsY)
 		{
 			levelBoundsY = Overlord.LevelBoundsY;
 			GD.Print("levelBoundsY: ", levelBoundsY);
+			chan = true;
+		}
+
+		if(chan)
+		{
+			GD.Print("Player pos", this.Position);
+			GD.Print("~~~~~~~~~~~~~");
+
 		}
 
 		var centerX = Position.x;
