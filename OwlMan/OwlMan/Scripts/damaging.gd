@@ -45,4 +45,6 @@ func deflected():
 	if not deflected:
 		direction = -direction
 		$Movement.direction = direction
+		$Movement.speed = $Movement.speed * 2
 		deflected = true
+		$DeflectionAudio.play(0)

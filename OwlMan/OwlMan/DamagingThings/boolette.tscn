@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/damaging.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/EnemyAI/Movement/vector.gd" type="Script" id=2]
 [ext_resource path="res://Images/BawssButterfly/000_Bullet00.png" type="Texture" id=3]
+[ext_resource path="res://sounds/Owl2HIT.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,4 +31,9 @@ frames = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.02, 0.02 )
 shape = SubResource( 2 )
+
+[node name="DeflectionAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 4.0
+attenuation = 1.36604
 [connection signal="body_entered" from="." to="." method="on_area_enter"]

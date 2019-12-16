@@ -37,19 +37,21 @@ func _physics_process(delta):
 		elif (distance_to < 250):
 			node.move_and_slide(direction * speed)
 
-		if frames_until_attack == 0 && distance <= 400:
-			frames_until_attack = randi() % 60 + attack_freq
-			animation_node.play("attack")
-			animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
+		# bullet logic. only shoot if close
+		if distance_to <= 400:
+			if frames_until_attack == 0 && distance <= 400:
+				frames_until_attack = randi() % 60 + attack_freq
+				animation_node.play("attack")
+				animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
 
-			$BulletAudio.play(0)
+				$BulletAudio.play(0)
 
-			var bullet = boolette.instance()
-			bullet.position = node.position
-			bullet.direction = -direction.normalized()
-			get_tree().get_root().add_child(bullet)
-		else:
-			frames_until_attack = max(frames_until_attack - 1, 0)
+				var bullet = boolette.instance()
+				bullet.position = node.position
+				bullet.direction = -direction.normalized()
+				get_tree().get_root().add_child(bullet)
+			else:
+				frames_until_attack = max(frames_until_attack - 1, 0)
 
 	if $AnimatedSprite:
 		if direction.x > 0:
