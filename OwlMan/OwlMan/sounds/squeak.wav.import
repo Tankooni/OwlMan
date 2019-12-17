@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/squeak.wav-4f4ec433cce2d11263043dd3e2b4b148.sample"
+path="res://.import/Squeak.wav-f32db2f93eb36d069a2b84092afccd9f.sample"
 
 [deps]
 
-source_file="res://sounds/squeak.wav"
-dest_files=[ "res://.import/squeak.wav-4f4ec433cce2d11263043dd3e2b4b148.sample" ]
+source_file="res://sounds/Squeak.wav"
+dest_files=[ "res://.import/Squeak.wav-f32db2f93eb36d069a2b84092afccd9f.sample" ]
 
 [params]
 

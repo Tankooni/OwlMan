@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Owl2HIT.wav-66513e9768703b22caef11d26e7fa9be.sample"
+path="res://.import/Hit4.wav-5c4925ae303d75ed5227232b6fb8b238.sample"
 
 [deps]
 
-source_file="res://sounds/Owl2HIT.wav"
-dest_files=[ "res://.import/Owl2HIT.wav-66513e9768703b22caef11d26e7fa9be.sample" ]
+source_file="res://sounds/Hit4.wav"
+dest_files=[ "res://.import/Hit4.wav-5c4925ae303d75ed5227232b6fb8b238.sample" ]
 
 [params]
 

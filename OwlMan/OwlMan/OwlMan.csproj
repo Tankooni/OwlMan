@@ -73,6 +73,7 @@
     <Compile Include="Scripts\DrawBox.cs" />
     <Compile Include="Scripts\Entities\Bug.cs" />
     <Compile Include="Scripts\KillBox.cs" />
+    <Compile Include="Scripts\OneOffSounds.cs" />
     <Compile Include="Scripts\Overlord.cs" />
     <Compile Include="Scripts\Player.cs" />
     <Compile Include="Scripts\Movements\Abilities.cs" />

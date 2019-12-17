@@ -292,32 +292,6 @@ public class Player : KinematicBody2D
 		// 	_camera.Call("Shake", 10f, .1f, 10);
 		// 	MovementInfo.StartShake = false;
 		// }
-		bool chan = false;
-		if(viewSize == null || viewSize != Overlord.ViewportSize)
-		{
-			viewSize = Overlord.ViewportSize;
-			GD.Print("viewSize: ", viewSize);
-			chan = true;
-		}
-		if(levelBoundsX == null || levelBoundsX != Overlord.LevelBoundsX)
-		{
-			levelBoundsX = Overlord.LevelBoundsX;
-			GD.Print("levelBoundsX: ", levelBoundsX);
-			chan = true;
-		}
-		if(levelBoundsY == null || levelBoundsY != Overlord.LevelBoundsY)
-		{
-			levelBoundsY = Overlord.LevelBoundsY;
-			GD.Print("levelBoundsY: ", levelBoundsY);
-			chan = true;
-		}
-
-		if(chan)
-		{
-			GD.Print("Player pos", this.Position);
-			GD.Print("~~~~~~~~~~~~~");
-
-		}
 
 		var centerX = Position.x;
 		var centerY = Position.y;

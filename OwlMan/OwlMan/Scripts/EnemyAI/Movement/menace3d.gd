@@ -44,7 +44,7 @@ func _physics_process(delta):
 				animation_node.play("attack")
 				animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
 
-				$BulletAudio.play(0)
+				Overlord.call("PlaySound", "Hit1", self.position)
 
 				var bullet = boolette.instance()
 				bullet.position = node.position

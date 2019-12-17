@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/damaging.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/EnemyAI/Movement/vector.gd" type="Script" id=2]
 [ext_resource path="res://Images/BawssButterfly/000_Bullet00.png" type="Texture" id=3]
-[ext_resource path="res://sounds/Owl2HIT.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/Hit4.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

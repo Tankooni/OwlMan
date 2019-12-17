@@ -122,10 +122,10 @@ namespace Atmo.OgmoLoader
 			}
 
 			var playerScene = (PackedScene)ResourceLoader.Load("res://prefab/PlayerOwl.tscn");
-			var bugScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Bug.tscn"));
-			var beeScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Beee.tscn"));
-			var carnosaurScene = ((PackedScene)ResourceLoader.Load("res://Enemies/Carnosaur.tscn"));
-			var carnosaurusRexScene = ((PackedScene)ResourceLoader.Load("res://Enemies/CarnosaurusRex.tscn"));
+			var bugScene = ((PackedScene)ResourceLoader.Load("res://prefab/enemies/Bug.tscn"));
+			var beeScene = ((PackedScene)ResourceLoader.Load("res://prefab/enemies/Beee.tscn"));
+			var carnosaurScene = ((PackedScene)ResourceLoader.Load("res://prefab/enemies/Carnosaur.tscn"));
+			var carnosaurusRexScene = ((PackedScene)ResourceLoader.Load("res://prefab/enemies/CarnosaurusRex.tscn"));
 
 			var playerEntity = level.layers.First(x => x.name == "Entity").entities.First(x => x.name == "LevelSpawn");
 

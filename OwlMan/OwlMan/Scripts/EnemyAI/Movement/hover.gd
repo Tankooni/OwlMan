@@ -10,6 +10,8 @@ var animation_node
 
 var boolette = preload("res://DamagingThings/boolette.tscn")
 
+export(String) var AttackSoundName
+
 func _ready():
 	set_physics_process(true)
 
@@ -38,7 +40,7 @@ func _physics_process(delta):
 			animation_node.play("attack")
 			animation_node.connect("animation_finished", animation_node, "play", ["idle"], CONNECT_ONESHOT)
 
-			$BulletAudio.play(0)
+			Overlord.call("PlaySound", AttackSoundName, self.position)
 
 			var bullet = boolette.instance()
 			bullet.position = node.position

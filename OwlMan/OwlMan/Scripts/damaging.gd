@@ -47,4 +47,4 @@ func deflected():
 		$Movement.direction = direction
 		$Movement.speed = $Movement.speed * 2
 		deflected = true
-		$DeflectionAudio.play(0)
+		Overlord.call("PlaySound", "Hit4", self.position)
