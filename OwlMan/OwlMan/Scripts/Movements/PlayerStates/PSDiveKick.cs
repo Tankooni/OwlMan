@@ -48,6 +48,11 @@ namespace Atmo2.Movements.PlayerStates
 					return new PSIdle(player);
 			}
 
+			if (player.InputController.AttackPressed())
+			{
+				return new PSAttackNormal(player, 0);
+			}
+
 			if (player.Abilities.DoubleJump &&
 					player.InputController.JumpPressed() &&
 					player.Energy >= 1)

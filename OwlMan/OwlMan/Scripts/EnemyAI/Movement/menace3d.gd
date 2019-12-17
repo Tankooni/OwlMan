@@ -1,7 +1,5 @@
 extends Node
 
-signal on_collide(CollisionObject2D)
-
 export(NodePath) onready var node
 export(NodePath) onready var target
 

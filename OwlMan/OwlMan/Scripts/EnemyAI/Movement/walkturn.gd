@@ -19,17 +19,17 @@ var vel_y = 0
 
 func _ready():
 	set_physics_process(true)
-	
+
 	# if the node we are bound to is a blank node, try to use it's parent
 	if node.get_class() == "Node":
 		node = get_parent()
 
 func _physics_process(delta):
 	var cur_direction = -1 if int(direction) == int(WalkingDirection.Left) else 1
-	
+
 	# update gravity
 	vel_y += gravity
-	
+
 	# check if we would fall
 	if node.test_move(node.transform, Vector2(0, vel_y)) and not node.test_move(node.transform, Vector2(speed * 5 * cur_direction, vel_y)):
 		direction = !direction
@@ -45,7 +45,7 @@ func _physics_process(delta):
 	if node is CollisionObject2D:
 		for i in (node as CollisionObject2D).get_slide_count():
 			emit_signal("on_collide", node.get_slide_collision(i))
-	
+
 	# reverse direction
 	if abs(collision.x) < speed:
 		direction = !direction
