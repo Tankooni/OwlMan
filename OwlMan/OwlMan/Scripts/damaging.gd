@@ -10,7 +10,7 @@ enum Alignment {
 	Enemy
 }
 
-var deflected = false
+var isDeflected = false
 
 #export(int) var damage = 1
 #export(DamageType) var damage_type = DamageType.Boolette
@@ -26,7 +26,7 @@ func _physics_process(delta):
 
 func on_area_enter(collider):
 	# Tell the other entity it collided and kill ourselves
-	if not deflected:
+	if not isDeflected:
 		if not collider.is_in_group("enemy"):
 			if collider.has_method("OnDamage"):
 				collider.call("OnDamage", self)
@@ -42,9 +42,9 @@ func on_area_enter(collider):
 		self.queue_free()
 
 func deflected():
-	if not deflected:
+	if not isDeflected:
 		direction = -direction
 		$Movement.direction = direction
 		$Movement.speed = $Movement.speed * 2
-		deflected = true
+		isDeflected = true
 		Overlord.call("PlaySound", "Hit4", self.position)

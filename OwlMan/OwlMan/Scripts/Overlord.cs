@@ -12,6 +12,7 @@ public class Overlord : Node
 	public static Vector2 ViewportSize;
 
 	public static Node2D Player;
+	public static Overlord OwlOverlord;
 
 	public Dictionary<string, PackedScene> Sounds = new Dictionary<string, PackedScene>();
 
@@ -24,6 +25,7 @@ public class Overlord : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
     {
+		Overlord.OwlOverlord = this;
 		Overlord.ViewportSize = new Vector2
 		(
 			x: (int)ProjectSettings.GetSetting("display/window/size/width"),
@@ -47,7 +49,9 @@ public class Overlord : Node
 		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
 		if (Overlord.Player != null)
+		{
 			CurrentScene.CallDeferred("add_child", Overlord.Player);
+		}
 		CurrentScene.CallDeferred("add_child", Level);
 	}
 

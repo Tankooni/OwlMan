@@ -51,4 +51,5 @@ func _physics_process(delta):
 			frames_until_attack = max(frames_until_attack - 1, 0)
 
 func on_damage(damage):
+	var _damage = damage
 	self.queue_free()

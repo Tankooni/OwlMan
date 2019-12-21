@@ -12,7 +12,7 @@ func try_play(animation : String):
 func _ready():
 	set_process(true)
 
-func _process(delta):
+func _physics_process(delta):
 	var vel = (previous_pos - node.position) * delta
 	previous_pos = node.position
 

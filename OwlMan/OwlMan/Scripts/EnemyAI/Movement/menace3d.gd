@@ -61,4 +61,5 @@ func _physics_process(delta):
 	#if collider:
 	#	emit_signal("on_collide", collider.collider)
 func on_damage(damage):
+	var _damage = damage
 	self.queue_free()

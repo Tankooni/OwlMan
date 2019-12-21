@@ -19,7 +19,7 @@ var vel_y = 0
 
 func _ready():
 	set_physics_process(true)
-
+	target = target
 	# if the node we are bound to is a blank node, try to use it's parent
 	if node.get_class() == "Node":
 		node = get_parent()
@@ -54,4 +54,5 @@ func _physics_process(delta):
 	if collision.y == 0:
 		vel_y = 0
 func on_damage(damage):
+	var _damage = damage
 	self.queue_free()

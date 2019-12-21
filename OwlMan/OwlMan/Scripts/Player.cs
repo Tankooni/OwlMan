@@ -103,14 +103,16 @@ public class Player : KinematicBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_camera = GetNode<Camera2D>("../MainCamera");
+		_camera.Call("SetFollow", this.GetPath());
+
 		foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
 		{
 			node.Set("target", GetPath());
 
 			//node.Set("node", node.GetPath());
 		}
-
-		_camera = GetNode<Camera2D>("../MainCamera");
+		
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
 		Image = GetNode<AnimatedSprite>("AnimatedSprite");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
@@ -197,8 +199,6 @@ public class Player : KinematicBody2D
 		{
 			_overlord.Call("Reset");
 		}
-		
-		UpdateCamera();
 
 		if (MovementInfo.LeftBox)
 		{
@@ -206,6 +206,8 @@ public class Player : KinematicBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
+				_camera.Call("Shake", .1f, 100, 10);
+				Overlord.OwlOverlord.PlaySound("Hit4", Position);
 
 				// if (body.HasMethod("OnDamage"))
 				// 	body.Call("OnDamage");
@@ -215,6 +217,7 @@ public class Player : KinematicBody2D
 			}
 			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
 			{
+				_camera.Call("Shake", .1f, 100, 10);
 				area.Call("deflected");
 			}
 		}
@@ -224,9 +227,12 @@ public class Player : KinematicBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
+				_camera.Call("Shake", .1f, 100, 10);
+				Overlord.OwlOverlord.PlaySound("Hit4", Position);
 			}
 			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
 			{
+				_camera.Call("Shake", .1f, 100, 10);
 				area.Call("deflected");
 			}
 		}
@@ -236,10 +242,12 @@ public class Player : KinematicBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
+				_camera.Call("Shake", .1f, 100, 10);
+				Overlord.OwlOverlord.PlaySound("Hit4", Position);
 			}
 			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
 			{
-				// area.QueueFree();
+				_camera.Call("Shake", .1f, 100, 10);
 				area.Call("deflected");
 			}
 		}
@@ -293,19 +301,13 @@ public class Player : KinematicBody2D
 		// 	MovementInfo.StartShake = false;
 		// }
 
-		var centerX = Position.x;
-		var centerY = Position.y;
-
-		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.x / 2f, Overlord.LevelBoundsX.y - Overlord.ViewportSize.x / 2f);
-		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.y / 2f, Overlord.LevelBoundsY.y - Overlord.ViewportSize.y / 2f);
-
-		_camera.SetPosition(new Vector2(centerX, centerY));
+		
 	}
 	
 	public void OnDamage(CollisionObject2D collider)
 	{
 		if(this.invulnerabilityFrames == 0)
-		{ 
+		{
 			if((collider as CollisionObject2D).IsInGroup("damaging"))
 			{
 				// Take a damage and do hurt stuff
