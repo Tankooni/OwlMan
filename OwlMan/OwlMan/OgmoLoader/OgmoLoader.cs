@@ -96,6 +96,7 @@ namespace Atmo.OgmoLoader
 
 		private Node2D GenerateScene(OgmoProject project, OgmoLevel level, out Node2D player)
 		{
+			nodes = new List<Node2D>();
 			player = null;
 			var tileMap = (TileMap)((PackedScene)ResourceLoader.Load("res://prefab/TileMap.tscn")).Instance();
 			tileMap.SetName("TileMap");

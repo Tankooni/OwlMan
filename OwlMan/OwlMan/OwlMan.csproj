@@ -70,7 +70,6 @@
     <Compile Include="OgmoLoader\Serialized\ValueTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Controller.cs" />
-    <Compile Include="Scripts\DrawBox.cs" />
     <Compile Include="Scripts\KillBox.cs" />
     <Compile Include="Scripts\OneOffSounds.cs" />
     <Compile Include="Scripts\Overlord.cs" />
