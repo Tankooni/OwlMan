@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Owl.ogg-fadd5afb4e3a31caa2dd97fe230d4895.oggstr"
+path="res://.import/owl.ogg-09bb1c0dac4bbb931ac4bae2f9547d25.oggstr"
 
 [deps]
 
-source_file="res://sounds/music/Owl.ogg"
-dest_files=[ "res://.import/Owl.ogg-fadd5afb4e3a31caa2dd97fe230d4895.oggstr" ]
+source_file="res://sounds/music/owl.ogg"
+dest_files=[ "res://.import/owl.ogg-09bb1c0dac4bbb931ac4bae2f9547d25.oggstr" ]
 
 [params]
 
