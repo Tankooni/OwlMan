@@ -13,7 +13,7 @@ var frames_until_attack = 0
 
 var animation_node
 
-var boolette = preload("res://DamagingThings/boolette.tscn")
+var boolette = preload("res://prefab/DamagingThings/boolette.tscn")
 
 func _ready():
 	set_physics_process(true)
