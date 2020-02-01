@@ -88,7 +88,7 @@ namespace Atmo.OgmoLoader
 		private string ObtainFileString(string path)
 		{
 			var file = new File();
-			file.Open(path, 1); //Readonly
+			file.Open(path, ModeFlags.Read); //Readonly
 			string result = file.GetAsText();
 			file.Close();
 			return result;
@@ -99,9 +99,9 @@ namespace Atmo.OgmoLoader
 			nodes = new List<Node2D>();
 			player = null;
 			var tileMap = (TileMap)((PackedScene)ResourceLoader.Load("res://prefab/TileMap.tscn")).Instance();
-			tileMap.SetName("TileMap");
+			tileMap.Name = "TileMap";
 			Node2D ultimateParent = new Node2D();
-			ultimateParent.SetName("Level");
+			ultimateParent.Name = "Level";
 			ultimateParent.AddChild(tileMap);
 
 			//Load set tiles in
@@ -131,8 +131,8 @@ namespace Atmo.OgmoLoader
 			var playerEntity = level.layers.First(x => x.name == "Entity").entities.First(x => x.name == "LevelSpawn");
 
 			player = (Node2D)playerScene.Instance();
-			player.SetName("Player_" + playerEntity._eid);
-			player.SetPosition(new Vector2(playerEntity.x, playerEntity.y));
+			player.Name = "Player_" + playerEntity._eid;
+			player.Position = new Vector2(playerEntity.x, playerEntity.y);
 
 			foreach (var entity in level.layers.First(x => x.name == "Entity").entities)
 			{
@@ -141,19 +141,19 @@ namespace Atmo.OgmoLoader
 				{
 					case "Walker":
 						childInstance = (Node2D)bugScene.Instance();
-						childInstance.SetName("Walker_" + entity._eid);
+						childInstance.Name = "Walker_" + entity._eid;
 						break;
 					case "TargetFlyer":
 						childInstance = (Node2D)carnosaurScene.Instance();
-						childInstance.SetName("Flyer_" + entity._eid);
+						childInstance.Name = "Flyer_" + entity._eid;
 						break;
 					case "Bee":
 						childInstance = (Node2D)beeScene.Instance();
-						childInstance.SetName("Bee_" + entity._eid);
+						childInstance.Name = "Bee_" + entity._eid;
 						break;
 					case "Boss":
 						childInstance = (Node2D)carnosaurusRexScene.Instance();
-						childInstance.SetName("Boss_" + entity._eid);
+						childInstance.Name = "Boss_" + entity._eid;
 						break;
 
 				}
@@ -162,7 +162,7 @@ namespace Atmo.OgmoLoader
 					childInstance.AddToGroup("enemy", true);
 					nodes.Add(childInstance);
 					ultimateParent.AddChild(childInstance);
-					childInstance.SetPosition(new Vector2(entity.x, entity.y));
+					childInstance.Position = new Vector2(entity.x, entity.y);
 				}
 			}
 

@@ -37,7 +37,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			player.MovementInfo.VelY += player.Gravity;
 			if (signedHorizontal != 0)
-				player.Image.SetFlipH(signedHorizontal < 0);
+				player.Image.FlipH = signedHorizontal < 0;
 			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(signedHorizontal);
 
 			if (player.MovementInfo.OnGround)

@@ -272,12 +272,12 @@ public class Player : KinematicBody2D
 	}
 	public void SetResetPoint(float x, float y)
 	{
-		ResetPoint.Set(x, y);
+		ResetPoint = new Vector2(x, y);
 	}
 
 	public void ResetPlayerPosition()
 	{
-		SetPosition(ResetPoint);
+		this.Position = ResetPoint;
 		UpdateCamera();
 	}		
 

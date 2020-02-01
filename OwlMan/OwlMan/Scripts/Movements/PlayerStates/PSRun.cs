@@ -41,7 +41,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (signedHorizontal == 0)
 				return new PSIdle(player);
-			player.Image.SetFlipH(signedHorizontal < 0);
+			player.Image.FlipH = signedHorizontal < 0;
 
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 

@@ -45,7 +45,7 @@ public class Overlord : Node
 		var ogmo = new OgmoLoader();
 		Level = ogmo.Load(out Overlord.Player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
 
-		Viewport root = GetTree().GetRoot();
+		Viewport root = GetTree().Root;
 		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
 		if (Overlord.Player != null)
@@ -76,7 +76,7 @@ public class Overlord : Node
 		{
 			var sfx = (Node2D)sfxScene.Instance();
 			Level.AddChild(sfx);
-			sfx.SetPosition(position);
+			sfx.Position = position;
 		}
 	}
 

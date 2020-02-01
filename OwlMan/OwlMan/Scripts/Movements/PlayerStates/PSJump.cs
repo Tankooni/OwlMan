@@ -40,7 +40,7 @@ namespace Atmo2.Movements.PlayerStates
 				speedModifier = 0;
 
 			if (signedHorizontal != 0)
-				player.Image.SetFlipH(signedHorizontal < 0);
+				player.Image.FlipH = signedHorizontal < 0;
 
 			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 
