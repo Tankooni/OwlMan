@@ -25,7 +25,7 @@ func _ready():
 	if has_node("AnimatedSprite"):
 		animation_node = $AnimatedSprite
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var distance_to = (node as Node2D).position.distance_to((target as Node2D).position)
 	var direction = (target as Node2D).position.direction_to((node as Node2D).position)
 

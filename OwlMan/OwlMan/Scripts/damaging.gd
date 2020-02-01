@@ -21,7 +21,7 @@ func _ready():
 	if direction:
 		$Movement.direction = direction
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
 func on_area_enter(collider):

@@ -24,7 +24,7 @@ func _ready():
 	if node.get_class() == "Node":
 		node = get_parent()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var cur_direction = -1 if int(direction) == int(WalkingDirection.Left) else 1
 
 	# update gravity

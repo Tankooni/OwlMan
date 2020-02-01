@@ -24,7 +24,7 @@ func _ready():
 	elif $Worm:
 		animation_node = $Worm
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if animation_node:
 		var direction = (node as Node2D).position.direction_to((target as Node2D).position)
 		var distance = (node as Node2D).position.distance_to((target as Node2D).position)

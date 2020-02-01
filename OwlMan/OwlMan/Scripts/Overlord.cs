@@ -24,7 +24,7 @@ public class Overlord : Node
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-    {
+	{
 		Overlord.OwlOverlord = this;
 		Overlord.ViewportSize = new Vector2
 		(

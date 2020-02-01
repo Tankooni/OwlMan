@@ -12,7 +12,7 @@ func _ready():
 	if node.get_class() == "Node":
 		node = get_parent()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 
 	var motion = direction * speed
 	node.position += motion
