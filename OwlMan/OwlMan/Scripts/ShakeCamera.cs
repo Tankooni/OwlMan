@@ -14,12 +14,13 @@ public class ShakeCamera : Camera2D
 	private float _previous_y = 0.0f;
 	private Vector2 _last_offset = new Vector2(0, 0);
 
+	//private Vector2 _last_window_offset;
+
 	private RandomNumberGenerator rand = new RandomNumberGenerator();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,8 +33,11 @@ public class ShakeCamera : Camera2D
 		//CAMERA SHAKING
 
 		//Only shake when there's shake time remaining.
-		if (_timer == 0)
+		if (_timer == 0) {
+			//_last_window_offset = OS.WindowPosition;
 			return;
+		}
+
 		//Only shake on certain frames.
 		_last_shook_timer = _last_shook_timer + delta;
 		//Be mathematically correct in the face of lag; usually only happens once.
@@ -52,15 +56,18 @@ public class ShakeCamera : Camera2D
 			_previous_y = new_y;
 			// Track how much we've moved the offset, as opposed to other effects.
 			var new_offset = new Vector2(x_component, y_component);
-			this.Offset -= _last_offset + new_offset;
-			_last_offset = new_offset;
+			this.Offset -= (_last_offset + new_offset);
+			//OS.WindowPosition += (_last_offset + new_offset);
 		}
 		//Reset the offset when we're done shaking.
 		_timer = _timer - delta;
+		_last_offset = new Vector2(0, 0);// new_offset;
 		if (_timer <= 0)
 		{
 			_timer = 0;
-			this.Offset -= _last_offset;
+			this.Offset = new Vector2(0, 0); // -= _last_offset;
+			//OS.WindowPosition = this._last_window_offset;
+			//Engine.TimeScale = 1f;
 		}
 	}
 
