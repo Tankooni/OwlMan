@@ -68,7 +68,7 @@ AttackSoundName = "Hit3"
 position = Vector2( 23.956, 23.5862 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 3
+frame = 2
 playing = true
 
 [node name="BossPollen" parent="." instance=ExtResource( 6 )]

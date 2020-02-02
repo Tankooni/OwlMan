@@ -8,7 +8,7 @@ var frames_until_attack = 0
 
 var animation_node
 
-var boolette = preload("res:///prefab/DamagingThings/boolette.tscn")
+var boolette = preload("res:///prefab/Projectiles/Bullet.tscn")
 
 export(String) var AttackSoundName
 
@@ -25,6 +25,7 @@ func _ready():
 		animation_node = $Worm
 
 func _physics_process(_delta):
+	return
 	if animation_node:
 		var direction = (node as Node2D).position.direction_to((target as Node2D).position)
 		var distance = (node as Node2D).position.distance_to((target as Node2D).position)

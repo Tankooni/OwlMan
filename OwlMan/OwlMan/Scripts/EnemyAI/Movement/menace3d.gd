@@ -13,7 +13,7 @@ var frames_until_attack = 0
 
 var animation_node
 
-var boolette = preload("res://prefab/DamagingThings/boolette.tscn")
+var boolette = preload("res://prefab/Projectiles/Bullet.tscn")
 
 func _ready():
 	set_physics_process(true)
@@ -26,6 +26,7 @@ func _ready():
 		animation_node = $AnimatedSprite
 
 func _physics_process(_delta):
+	return
 	var distance_to = (node as Node2D).position.distance_to((target as Node2D).position)
 	var direction = (target as Node2D).position.direction_to((node as Node2D).position)
 

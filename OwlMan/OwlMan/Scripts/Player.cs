@@ -3,6 +3,7 @@ using System;
 using Atmo2;
 using Atmo2.Movements;
 using Atmo2.Movements.PlayerStates;
+using Atmo2.Enemy;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -109,6 +110,7 @@ public class Player : KinematicBody2D
 		foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
 		{
 			node.Set("target", GetPath());
+			Enemy.PlayerPath = GetPath();
 
 			//node.Set("node", node.GetPath());
 		}

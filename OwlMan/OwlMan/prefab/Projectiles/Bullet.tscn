@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/damaging.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/EnemyAI/Movement/vector.gd" type="Script" id=2]
-[ext_resource path="res://Images/BawssButterfly/000_Bullet00.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Projectile.cs" type="Script" id=1]
+[ext_resource path="res://Images/BawssButterfly/000_Bullet00.png" type="Texture" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -20,9 +19,6 @@ radius = 246.269
 ]]
 script = ExtResource( 1 )
 
-[node name="Movement" type="Node" parent="."]
-script = ExtResource( 2 )
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.813553, 0.421426 )
 frames = SubResource( 1 )
@@ -30,4 +26,3 @@ frames = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.02, 0.02 )
 shape = SubResource( 2 )
-[connection signal="body_entered" from="." to="." method="on_area_enter"]

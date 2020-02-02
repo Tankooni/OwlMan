@@ -91,8 +91,15 @@
     <Compile Include="Scripts\Movements\PlayerStates\PSJump.cs" />
     <Compile Include="Scripts\Movements\PlayerStates\PSOuch.cs" />
     <Compile Include="Scripts\Movements\PlayerStates\PSRun.cs" />
+    <Compile Include="Scripts\Projectile.cs" />
     <Compile Include="Scripts\ShakeCamera.cs" />
     <Compile Include="Scripts\Test.cs" />
+    <Compile Include="Scripts\EnemyAI\Movement\AIVector.cs" />
+    <Compile Include="Scripts\EnemyAI\Movement\Hover.cs" />
+    <Compile Include="Scripts\Enemies\Bee.cs" />
+    <Compile Include="Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Scripts\Bullet.cs" />
+    <Compile Include="Scripts\EnemyAI\Attack\ShootAt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
