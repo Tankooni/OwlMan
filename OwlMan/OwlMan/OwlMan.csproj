@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>$(GodotDefineConstants);GODOT;DEBUG;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
@@ -29,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>$(GodotDefineConstants);GODOT;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Tools|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,7 +95,6 @@
     <Compile Include="Scripts\Movements\PlayerStates\PSRun.cs" />
     <Compile Include="Scripts\Projectile.cs" />
     <Compile Include="Scripts\ShakeCamera.cs" />
-    <Compile Include="Scripts\Test.cs" />
     <Compile Include="Scripts\EnemyAI\Movement\AIVector.cs" />
     <Compile Include="Scripts\EnemyAI\Movement\Hover.cs" />
     <Compile Include="Scripts\Enemies\Bee.cs" />

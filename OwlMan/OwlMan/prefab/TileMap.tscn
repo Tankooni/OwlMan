@@ -2,51 +2,51 @@
 
 [ext_resource path="res://ogmo/tiles.png" type="Texture" id=1]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
-
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=9]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
 [sub_resource type="ConvexPolygonShape2D" id=13]
-points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
 
-[sub_resource type="TileSet" id=14]
+[sub_resource type="ConvexPolygonShape2D" id=14]
+points = PoolVector2Array( 0, 0, 20, 0, 20, 20, 0, 20 )
+
+[sub_resource type="TileSet" id=1]
 0/name = "tiles.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 24, 24 )
+0/region = Rect2( 0, 0, 20, 20 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -54,7 +54,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -62,7 +62,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 1/texture = ExtResource( 1 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 24, 0, 24, 24 )
+1/region = Rect2( 20, 0, 20, 20 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
@@ -72,7 +72,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 2/texture = ExtResource( 1 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 48, 0, 24, 24 )
+2/region = Rect2( 40, 0, 20, 20 )
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
 2/navigation_offset = Vector2( 0, 0 )
@@ -82,7 +82,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 3/texture = ExtResource( 1 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 72, 0, 24, 24 )
+3/region = Rect2( 60, 0, 20, 20 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
 3/navigation_offset = Vector2( 0, 0 )
@@ -92,7 +92,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 4/texture = ExtResource( 1 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 96, 0, 24, 24 )
+4/region = Rect2( 80, 0, 20, 20 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
 4/navigation_offset = Vector2( 0, 0 )
@@ -102,7 +102,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 5/texture = ExtResource( 1 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 120, 0, 24, 24 )
+5/region = Rect2( 100, 0, 20, 20 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
@@ -112,7 +112,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 6/texture = ExtResource( 1 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 144, 0, 24, 24 )
+6/region = Rect2( 120, 0, 20, 20 )
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
@@ -122,7 +122,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 7/texture = ExtResource( 1 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 168, 0, 24, 24 )
+7/region = Rect2( 140, 0, 20, 20 )
 7/tile_mode = 0
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
@@ -132,7 +132,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 8/texture = ExtResource( 1 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 0, 24, 24, 24 )
+8/region = Rect2( 0, 20, 20, 20 )
 8/tile_mode = 0
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
@@ -140,7 +140,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 13 ),
+"shape": SubResource( 14 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 8/z_index = 0
@@ -148,7 +148,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 9/texture = ExtResource( 1 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 24, 24, 24, 24 )
+9/region = Rect2( 20, 20, 20, 20 )
 9/tile_mode = 0
 9/occluder_offset = Vector2( 0, 0 )
 9/navigation_offset = Vector2( 0, 0 )
@@ -158,7 +158,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 10/texture = ExtResource( 1 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 48, 24, 24, 24 )
+10/region = Rect2( 40, 20, 20, 20 )
 10/tile_mode = 0
 10/occluder_offset = Vector2( 0, 0 )
 10/navigation_offset = Vector2( 0, 0 )
@@ -168,7 +168,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 11/texture = ExtResource( 1 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 72, 24, 24, 24 )
+11/region = Rect2( 60, 20, 20, 20 )
 11/tile_mode = 0
 11/occluder_offset = Vector2( 0, 0 )
 11/navigation_offset = Vector2( 0, 0 )
@@ -176,7 +176,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 11/z_index = 0
@@ -184,7 +184,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 12/texture = ExtResource( 1 )
 12/tex_offset = Vector2( 0, 0 )
 12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 96, 24, 24, 24 )
+12/region = Rect2( 80, 20, 20, 20 )
 12/tile_mode = 0
 12/occluder_offset = Vector2( 0, 0 )
 12/navigation_offset = Vector2( 0, 0 )
@@ -192,7 +192,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 12/z_index = 0
@@ -200,7 +200,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 13/texture = ExtResource( 1 )
 13/tex_offset = Vector2( 0, 0 )
 13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 120, 24, 24, 24 )
+13/region = Rect2( 100, 20, 20, 20 )
 13/tile_mode = 0
 13/occluder_offset = Vector2( 0, 0 )
 13/navigation_offset = Vector2( 0, 0 )
@@ -210,7 +210,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 14/texture = ExtResource( 1 )
 14/tex_offset = Vector2( 0, 0 )
 14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 144, 24, 24, 24 )
+14/region = Rect2( 120, 20, 20, 20 )
 14/tile_mode = 0
 14/occluder_offset = Vector2( 0, 0 )
 14/navigation_offset = Vector2( 0, 0 )
@@ -220,7 +220,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 15/texture = ExtResource( 1 )
 15/tex_offset = Vector2( 0, 0 )
 15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 168, 24, 24, 24 )
+15/region = Rect2( 140, 20, 20, 20 )
 15/tile_mode = 0
 15/occluder_offset = Vector2( 0, 0 )
 15/navigation_offset = Vector2( 0, 0 )
@@ -230,7 +230,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 16/texture = ExtResource( 1 )
 16/tex_offset = Vector2( 0, 0 )
 16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 0, 48, 24, 24 )
+16/region = Rect2( 0, 40, 20, 20 )
 16/tile_mode = 0
 16/occluder_offset = Vector2( 0, 0 )
 16/navigation_offset = Vector2( 0, 0 )
@@ -240,7 +240,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 17/texture = ExtResource( 1 )
 17/tex_offset = Vector2( 0, 0 )
 17/modulate = Color( 1, 1, 1, 1 )
-17/region = Rect2( 24, 48, 24, 24 )
+17/region = Rect2( 20, 40, 20, 20 )
 17/tile_mode = 0
 17/occluder_offset = Vector2( 0, 0 )
 17/navigation_offset = Vector2( 0, 0 )
@@ -250,7 +250,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 18/texture = ExtResource( 1 )
 18/tex_offset = Vector2( 0, 0 )
 18/modulate = Color( 1, 1, 1, 1 )
-18/region = Rect2( 48, 48, 24, 24 )
+18/region = Rect2( 40, 40, 20, 20 )
 18/tile_mode = 0
 18/occluder_offset = Vector2( 0, 0 )
 18/navigation_offset = Vector2( 0, 0 )
@@ -260,7 +260,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 19/texture = ExtResource( 1 )
 19/tex_offset = Vector2( 0, 0 )
 19/modulate = Color( 1, 1, 1, 1 )
-19/region = Rect2( 72, 48, 24, 24 )
+19/region = Rect2( 60, 40, 20, 20 )
 19/tile_mode = 0
 19/occluder_offset = Vector2( 0, 0 )
 19/navigation_offset = Vector2( 0, 0 )
@@ -270,7 +270,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 20/texture = ExtResource( 1 )
 20/tex_offset = Vector2( 0, 0 )
 20/modulate = Color( 1, 1, 1, 1 )
-20/region = Rect2( 96, 48, 24, 24 )
+20/region = Rect2( 80, 40, 20, 20 )
 20/tile_mode = 0
 20/occluder_offset = Vector2( 0, 0 )
 20/navigation_offset = Vector2( 0, 0 )
@@ -278,7 +278,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 20/z_index = 0
@@ -286,7 +286,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 21/texture = ExtResource( 1 )
 21/tex_offset = Vector2( 0, 0 )
 21/modulate = Color( 1, 1, 1, 1 )
-21/region = Rect2( 120, 48, 24, 24 )
+21/region = Rect2( 100, 40, 20, 20 )
 21/tile_mode = 0
 21/occluder_offset = Vector2( 0, 0 )
 21/navigation_offset = Vector2( 0, 0 )
@@ -296,7 +296,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 22/texture = ExtResource( 1 )
 22/tex_offset = Vector2( 0, 0 )
 22/modulate = Color( 1, 1, 1, 1 )
-22/region = Rect2( 144, 48, 24, 24 )
+22/region = Rect2( 120, 40, 20, 20 )
 22/tile_mode = 0
 22/occluder_offset = Vector2( 0, 0 )
 22/navigation_offset = Vector2( 0, 0 )
@@ -306,7 +306,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 23/texture = ExtResource( 1 )
 23/tex_offset = Vector2( 0, 0 )
 23/modulate = Color( 1, 1, 1, 1 )
-23/region = Rect2( 168, 48, 24, 24 )
+23/region = Rect2( 140, 40, 20, 20 )
 23/tile_mode = 0
 23/occluder_offset = Vector2( 0, 0 )
 23/navigation_offset = Vector2( 0, 0 )
@@ -316,7 +316,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 24/texture = ExtResource( 1 )
 24/tex_offset = Vector2( 0, 0 )
 24/modulate = Color( 1, 1, 1, 1 )
-24/region = Rect2( 0, 72, 24, 24 )
+24/region = Rect2( 0, 60, 20, 20 )
 24/tile_mode = 0
 24/occluder_offset = Vector2( 0, 0 )
 24/navigation_offset = Vector2( 0, 0 )
@@ -326,7 +326,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 25/texture = ExtResource( 1 )
 25/tex_offset = Vector2( 0, 0 )
 25/modulate = Color( 1, 1, 1, 1 )
-25/region = Rect2( 24, 72, 24, 24 )
+25/region = Rect2( 20, 60, 20, 20 )
 25/tile_mode = 0
 25/occluder_offset = Vector2( 0, 0 )
 25/navigation_offset = Vector2( 0, 0 )
@@ -336,7 +336,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 26/texture = ExtResource( 1 )
 26/tex_offset = Vector2( 0, 0 )
 26/modulate = Color( 1, 1, 1, 1 )
-26/region = Rect2( 48, 72, 24, 24 )
+26/region = Rect2( 40, 60, 20, 20 )
 26/tile_mode = 0
 26/occluder_offset = Vector2( 0, 0 )
 26/navigation_offset = Vector2( 0, 0 )
@@ -346,7 +346,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 27/texture = ExtResource( 1 )
 27/tex_offset = Vector2( 0, 0 )
 27/modulate = Color( 1, 1, 1, 1 )
-27/region = Rect2( 72, 72, 24, 24 )
+27/region = Rect2( 60, 60, 20, 20 )
 27/tile_mode = 0
 27/occluder_offset = Vector2( 0, 0 )
 27/navigation_offset = Vector2( 0, 0 )
@@ -356,7 +356,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 28/texture = ExtResource( 1 )
 28/tex_offset = Vector2( 0, 0 )
 28/modulate = Color( 1, 1, 1, 1 )
-28/region = Rect2( 96, 72, 24, 24 )
+28/region = Rect2( 80, 60, 20, 20 )
 28/tile_mode = 0
 28/occluder_offset = Vector2( 0, 0 )
 28/navigation_offset = Vector2( 0, 0 )
@@ -366,7 +366,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 29/texture = ExtResource( 1 )
 29/tex_offset = Vector2( 0, 0 )
 29/modulate = Color( 1, 1, 1, 1 )
-29/region = Rect2( 120, 72, 24, 24 )
+29/region = Rect2( 100, 60, 20, 20 )
 29/tile_mode = 0
 29/occluder_offset = Vector2( 0, 0 )
 29/navigation_offset = Vector2( 0, 0 )
@@ -376,7 +376,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 30/texture = ExtResource( 1 )
 30/tex_offset = Vector2( 0, 0 )
 30/modulate = Color( 1, 1, 1, 1 )
-30/region = Rect2( 144, 72, 24, 24 )
+30/region = Rect2( 120, 60, 20, 20 )
 30/tile_mode = 0
 30/occluder_offset = Vector2( 0, 0 )
 30/navigation_offset = Vector2( 0, 0 )
@@ -386,7 +386,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 31/texture = ExtResource( 1 )
 31/tex_offset = Vector2( 0, 0 )
 31/modulate = Color( 1, 1, 1, 1 )
-31/region = Rect2( 168, 72, 24, 24 )
+31/region = Rect2( 140, 60, 20, 20 )
 31/tile_mode = 0
 31/occluder_offset = Vector2( 0, 0 )
 31/navigation_offset = Vector2( 0, 0 )
@@ -394,7 +394,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 6 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 31/z_index = 0
@@ -402,7 +402,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 32/texture = ExtResource( 1 )
 32/tex_offset = Vector2( 0, 0 )
 32/modulate = Color( 1, 1, 1, 1 )
-32/region = Rect2( 0, 96, 24, 24 )
+32/region = Rect2( 0, 80, 20, 20 )
 32/tile_mode = 0
 32/occluder_offset = Vector2( 0, 0 )
 32/navigation_offset = Vector2( 0, 0 )
@@ -412,7 +412,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 33/texture = ExtResource( 1 )
 33/tex_offset = Vector2( 0, 0 )
 33/modulate = Color( 1, 1, 1, 1 )
-33/region = Rect2( 24, 96, 24, 24 )
+33/region = Rect2( 20, 80, 20, 20 )
 33/tile_mode = 0
 33/occluder_offset = Vector2( 0, 0 )
 33/navigation_offset = Vector2( 0, 0 )
@@ -422,7 +422,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 34/texture = ExtResource( 1 )
 34/tex_offset = Vector2( 0, 0 )
 34/modulate = Color( 1, 1, 1, 1 )
-34/region = Rect2( 48, 96, 24, 24 )
+34/region = Rect2( 40, 80, 20, 20 )
 34/tile_mode = 0
 34/occluder_offset = Vector2( 0, 0 )
 34/navigation_offset = Vector2( 0, 0 )
@@ -432,7 +432,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 35/texture = ExtResource( 1 )
 35/tex_offset = Vector2( 0, 0 )
 35/modulate = Color( 1, 1, 1, 1 )
-35/region = Rect2( 72, 96, 24, 24 )
+35/region = Rect2( 60, 80, 20, 20 )
 35/tile_mode = 0
 35/occluder_offset = Vector2( 0, 0 )
 35/navigation_offset = Vector2( 0, 0 )
@@ -442,7 +442,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 36/texture = ExtResource( 1 )
 36/tex_offset = Vector2( 0, 0 )
 36/modulate = Color( 1, 1, 1, 1 )
-36/region = Rect2( 96, 96, 24, 24 )
+36/region = Rect2( 80, 80, 20, 20 )
 36/tile_mode = 0
 36/occluder_offset = Vector2( 0, 0 )
 36/navigation_offset = Vector2( 0, 0 )
@@ -452,7 +452,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 37/texture = ExtResource( 1 )
 37/tex_offset = Vector2( 0, 0 )
 37/modulate = Color( 1, 1, 1, 1 )
-37/region = Rect2( 120, 96, 24, 24 )
+37/region = Rect2( 100, 80, 20, 20 )
 37/tile_mode = 0
 37/occluder_offset = Vector2( 0, 0 )
 37/navigation_offset = Vector2( 0, 0 )
@@ -462,7 +462,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 38/texture = ExtResource( 1 )
 38/tex_offset = Vector2( 0, 0 )
 38/modulate = Color( 1, 1, 1, 1 )
-38/region = Rect2( 144, 96, 24, 24 )
+38/region = Rect2( 120, 80, 20, 20 )
 38/tile_mode = 0
 38/occluder_offset = Vector2( 0, 0 )
 38/navigation_offset = Vector2( 0, 0 )
@@ -472,7 +472,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 39/texture = ExtResource( 1 )
 39/tex_offset = Vector2( 0, 0 )
 39/modulate = Color( 1, 1, 1, 1 )
-39/region = Rect2( 168, 96, 24, 24 )
+39/region = Rect2( 140, 80, 20, 20 )
 39/tile_mode = 0
 39/occluder_offset = Vector2( 0, 0 )
 39/navigation_offset = Vector2( 0, 0 )
@@ -482,7 +482,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 40/texture = ExtResource( 1 )
 40/tex_offset = Vector2( 0, 0 )
 40/modulate = Color( 1, 1, 1, 1 )
-40/region = Rect2( 0, 120, 24, 24 )
+40/region = Rect2( 0, 100, 20, 20 )
 40/tile_mode = 0
 40/occluder_offset = Vector2( 0, 0 )
 40/navigation_offset = Vector2( 0, 0 )
@@ -492,7 +492,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 41/texture = ExtResource( 1 )
 41/tex_offset = Vector2( 0, 0 )
 41/modulate = Color( 1, 1, 1, 1 )
-41/region = Rect2( 24, 120, 24, 24 )
+41/region = Rect2( 20, 100, 20, 20 )
 41/tile_mode = 0
 41/occluder_offset = Vector2( 0, 0 )
 41/navigation_offset = Vector2( 0, 0 )
@@ -500,7 +500,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 41/z_index = 0
@@ -508,7 +508,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 42/texture = ExtResource( 1 )
 42/tex_offset = Vector2( 0, 0 )
 42/modulate = Color( 1, 1, 1, 1 )
-42/region = Rect2( 48, 120, 24, 24 )
+42/region = Rect2( 40, 100, 20, 20 )
 42/tile_mode = 0
 42/occluder_offset = Vector2( 0, 0 )
 42/navigation_offset = Vector2( 0, 0 )
@@ -516,7 +516,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 42/z_index = 0
@@ -524,7 +524,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 43/texture = ExtResource( 1 )
 43/tex_offset = Vector2( 0, 0 )
 43/modulate = Color( 1, 1, 1, 1 )
-43/region = Rect2( 72, 120, 24, 24 )
+43/region = Rect2( 60, 100, 20, 20 )
 43/tile_mode = 0
 43/occluder_offset = Vector2( 0, 0 )
 43/navigation_offset = Vector2( 0, 0 )
@@ -532,7 +532,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 43/z_index = 0
@@ -540,7 +540,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 44/texture = ExtResource( 1 )
 44/tex_offset = Vector2( 0, 0 )
 44/modulate = Color( 1, 1, 1, 1 )
-44/region = Rect2( 96, 120, 24, 24 )
+44/region = Rect2( 80, 100, 20, 20 )
 44/tile_mode = 0
 44/occluder_offset = Vector2( 0, 0 )
 44/navigation_offset = Vector2( 0, 0 )
@@ -550,7 +550,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 45/texture = ExtResource( 1 )
 45/tex_offset = Vector2( 0, 0 )
 45/modulate = Color( 1, 1, 1, 1 )
-45/region = Rect2( 120, 120, 24, 24 )
+45/region = Rect2( 100, 100, 20, 20 )
 45/tile_mode = 0
 45/occluder_offset = Vector2( 0, 0 )
 45/navigation_offset = Vector2( 0, 0 )
@@ -560,7 +560,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 46/texture = ExtResource( 1 )
 46/tex_offset = Vector2( 0, 0 )
 46/modulate = Color( 1, 1, 1, 1 )
-46/region = Rect2( 144, 120, 24, 24 )
+46/region = Rect2( 120, 100, 20, 20 )
 46/tile_mode = 0
 46/occluder_offset = Vector2( 0, 0 )
 46/navigation_offset = Vector2( 0, 0 )
@@ -570,7 +570,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 47/texture = ExtResource( 1 )
 47/tex_offset = Vector2( 0, 0 )
 47/modulate = Color( 1, 1, 1, 1 )
-47/region = Rect2( 168, 120, 24, 24 )
+47/region = Rect2( 140, 100, 20, 20 )
 47/tile_mode = 0
 47/occluder_offset = Vector2( 0, 0 )
 47/navigation_offset = Vector2( 0, 0 )
@@ -580,7 +580,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 48/texture = ExtResource( 1 )
 48/tex_offset = Vector2( 0, 0 )
 48/modulate = Color( 1, 1, 1, 1 )
-48/region = Rect2( 0, 144, 24, 24 )
+48/region = Rect2( 0, 120, 20, 20 )
 48/tile_mode = 0
 48/occluder_offset = Vector2( 0, 0 )
 48/navigation_offset = Vector2( 0, 0 )
@@ -590,7 +590,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 49/texture = ExtResource( 1 )
 49/tex_offset = Vector2( 0, 0 )
 49/modulate = Color( 1, 1, 1, 1 )
-49/region = Rect2( 24, 144, 24, 24 )
+49/region = Rect2( 20, 120, 20, 20 )
 49/tile_mode = 0
 49/occluder_offset = Vector2( 0, 0 )
 49/navigation_offset = Vector2( 0, 0 )
@@ -600,7 +600,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 50/texture = ExtResource( 1 )
 50/tex_offset = Vector2( 0, 0 )
 50/modulate = Color( 1, 1, 1, 1 )
-50/region = Rect2( 48, 144, 24, 24 )
+50/region = Rect2( 40, 120, 20, 20 )
 50/tile_mode = 0
 50/occluder_offset = Vector2( 0, 0 )
 50/navigation_offset = Vector2( 0, 0 )
@@ -610,7 +610,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 51/texture = ExtResource( 1 )
 51/tex_offset = Vector2( 0, 0 )
 51/modulate = Color( 1, 1, 1, 1 )
-51/region = Rect2( 72, 144, 24, 24 )
+51/region = Rect2( 60, 120, 20, 20 )
 51/tile_mode = 0
 51/occluder_offset = Vector2( 0, 0 )
 51/navigation_offset = Vector2( 0, 0 )
@@ -618,7 +618,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 10 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 51/z_index = 0
@@ -626,7 +626,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 52/texture = ExtResource( 1 )
 52/tex_offset = Vector2( 0, 0 )
 52/modulate = Color( 1, 1, 1, 1 )
-52/region = Rect2( 96, 144, 24, 24 )
+52/region = Rect2( 80, 120, 20, 20 )
 52/tile_mode = 0
 52/occluder_offset = Vector2( 0, 0 )
 52/navigation_offset = Vector2( 0, 0 )
@@ -634,7 +634,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 10 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 52/z_index = 0
@@ -642,7 +642,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 53/texture = ExtResource( 1 )
 53/tex_offset = Vector2( 0, 0 )
 53/modulate = Color( 1, 1, 1, 1 )
-53/region = Rect2( 120, 144, 24, 24 )
+53/region = Rect2( 100, 120, 20, 20 )
 53/tile_mode = 0
 53/occluder_offset = Vector2( 0, 0 )
 53/navigation_offset = Vector2( 0, 0 )
@@ -650,7 +650,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 11 ),
+"shape": SubResource( 12 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 53/z_index = 0
@@ -658,7 +658,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 54/texture = ExtResource( 1 )
 54/tex_offset = Vector2( 0, 0 )
 54/modulate = Color( 1, 1, 1, 1 )
-54/region = Rect2( 144, 144, 24, 24 )
+54/region = Rect2( 120, 120, 20, 20 )
 54/tile_mode = 0
 54/occluder_offset = Vector2( 0, 0 )
 54/navigation_offset = Vector2( 0, 0 )
@@ -666,7 +666,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 12 ),
+"shape": SubResource( 13 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 54/z_index = 0
@@ -674,7 +674,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 55/texture = ExtResource( 1 )
 55/tex_offset = Vector2( 0, 0 )
 55/modulate = Color( 1, 1, 1, 1 )
-55/region = Rect2( 168, 144, 24, 24 )
+55/region = Rect2( 140, 120, 20, 20 )
 55/tile_mode = 0
 55/occluder_offset = Vector2( 0, 0 )
 55/navigation_offset = Vector2( 0, 0 )
@@ -684,7 +684,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 56/texture = ExtResource( 1 )
 56/tex_offset = Vector2( 0, 0 )
 56/modulate = Color( 1, 1, 1, 1 )
-56/region = Rect2( 0, 168, 24, 24 )
+56/region = Rect2( 0, 140, 20, 20 )
 56/tile_mode = 0
 56/occluder_offset = Vector2( 0, 0 )
 56/navigation_offset = Vector2( 0, 0 )
@@ -694,7 +694,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 57/texture = ExtResource( 1 )
 57/tex_offset = Vector2( 0, 0 )
 57/modulate = Color( 1, 1, 1, 1 )
-57/region = Rect2( 24, 168, 24, 24 )
+57/region = Rect2( 20, 140, 20, 20 )
 57/tile_mode = 0
 57/occluder_offset = Vector2( 0, 0 )
 57/navigation_offset = Vector2( 0, 0 )
@@ -704,7 +704,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 58/texture = ExtResource( 1 )
 58/tex_offset = Vector2( 0, 0 )
 58/modulate = Color( 1, 1, 1, 1 )
-58/region = Rect2( 48, 168, 24, 24 )
+58/region = Rect2( 40, 140, 20, 20 )
 58/tile_mode = 0
 58/occluder_offset = Vector2( 0, 0 )
 58/navigation_offset = Vector2( 0, 0 )
@@ -714,7 +714,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 59/texture = ExtResource( 1 )
 59/tex_offset = Vector2( 0, 0 )
 59/modulate = Color( 1, 1, 1, 1 )
-59/region = Rect2( 72, 168, 24, 24 )
+59/region = Rect2( 60, 140, 20, 20 )
 59/tile_mode = 0
 59/occluder_offset = Vector2( 0, 0 )
 59/navigation_offset = Vector2( 0, 0 )
@@ -724,7 +724,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 60/texture = ExtResource( 1 )
 60/tex_offset = Vector2( 0, 0 )
 60/modulate = Color( 1, 1, 1, 1 )
-60/region = Rect2( 96, 168, 24, 24 )
+60/region = Rect2( 80, 140, 20, 20 )
 60/tile_mode = 0
 60/occluder_offset = Vector2( 0, 0 )
 60/navigation_offset = Vector2( 0, 0 )
@@ -734,7 +734,7 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 61/texture = ExtResource( 1 )
 61/tex_offset = Vector2( 0, 0 )
 61/modulate = Color( 1, 1, 1, 1 )
-61/region = Rect2( 120, 168, 24, 24 )
+61/region = Rect2( 100, 140, 20, 20 )
 61/tile_mode = 0
 61/occluder_offset = Vector2( 0, 0 )
 61/navigation_offset = Vector2( 0, 0 )
@@ -744,16 +744,15 @@ points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
 62/texture = ExtResource( 1 )
 62/tex_offset = Vector2( 0, 0 )
 62/modulate = Color( 1, 1, 1, 1 )
-62/region = Rect2( 144, 168, 24, 24 )
+62/region = Rect2( 120, 140, 20, 20 )
 62/tile_mode = 0
 62/occluder_offset = Vector2( 0, 0 )
 62/navigation_offset = Vector2( 0, 0 )
 62/shapes = [  ]
 62/z_index = 0
 
-[node name="TileMap" type="TileMap" groups=[
-"wall",
-]]
-tile_set = SubResource( 14 )
-cell_size = Vector2( 24, 24 )
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 20, 20 )
+cell_custom_transform = Transform2D( 20, 0, 0, 20, 0, 0 )
 format = 1
