@@ -21,9 +21,9 @@ namespace Atmo2.Enemy.AI {
 
     public override void _PhysicsProcess(float delta)
     {
-      if(this.Parent == null) {
-        this.Free();
-      }
+      // if(this.Parent == null) {
+      //   this.Free();
+      // }
       
       var motion = this.Direction * this.Speed;
       this.Parent.Position += motion;

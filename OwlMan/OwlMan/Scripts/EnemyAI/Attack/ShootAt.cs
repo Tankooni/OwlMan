@@ -29,7 +29,6 @@ namespace Atmo2.Enemy.AI {
 
     public override void _Ready()
     {
-      GD.Print("shoot at start");
       // Default to target's groups if none are given
       if(this.TargetHitgroups == null) {
         this.TargetHitgroups = target.GetGroups();
@@ -57,20 +56,16 @@ namespace Atmo2.Enemy.AI {
         this.Target = Enemy.PlayerPath;
       }
 
-      Node b = bullet.Instance();
-      GD.Print(b);
-      var direction = this.GetParent<Node2D>().Position.DirectionTo(this.target.Position);
+      Projectile b = (Projectile)bullet.Instance();
 
-      b.Set("direction", direction);
-      b.Set("TargetHitgroups", this.TargetHitgroups);
-      b.Set("speed", 5);
-      b.Set("Position", this.Position);
-      //b.direction = direction;
-      //b.TargetHitgroups = this.TargetHitgroups;
-      //b.speed = 5;
-      //b.Position = this.Position;
-      GD.Print("FUCK");
-      GetTree().Root.AddChild(b);
+      var direction = this.GlobalPosition.DirectionTo(this.target.Position);
+
+      b.direction = direction;
+      b.TargetHitgroups = this.TargetHitgroups;
+      b.speed = 5;
+      b.Position = this.GlobalPosition;
+
+      GetNode("/root/GameScene").CallDeferred("add_child", b);
     }
   }
 }

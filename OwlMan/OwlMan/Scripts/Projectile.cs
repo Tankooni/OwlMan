@@ -40,14 +40,15 @@ namespace Atmo2 {
 		{
 			if(this.TargetHitgroups == null) {
 				this.TargetHitgroups = new Array();
-			}
+			}			
 
-			AIVector ai = new AIVector();
-			ai.Parent = this.GetParent<Node2D>();
-			ai.Speed = speed;
-			ai.Direction = direction;
-			this.movement = ai;
-			this.AddChild(this.movement);
+			movement = new AIVector
+			{
+				Parent = this,
+				Speed = speed,
+				Direction = direction
+			};
+			this.AddChild(movement);
 
 			this.Connect("body_entered", this, "OnCollide");
 		}
@@ -55,23 +56,26 @@ namespace Atmo2 {
 		public void OnCollide(Node body)
 		{
 			// Tell the thing we collided with and our parent that we've collided if we actually did collide
-			bool isInGroup = false; // Use Intersect(body) when godot makes it's arrays IEnumerable
-			foreach(string g in body.GetGroups()) {
-				if(this.TargetHitgroups.Contains(g)) {
-					isInGroup = true;
-					break;
-				}
-			}
+			// bool isInGroup = false; // Use Intersect(body) when godot makes it's arrays IEnumerable
+			
+			// foreach(string g in body.GetGroups() {
+			// 	if(HitGroups.Player == )
+			// 	if(this.TargetHitgroups.Contains(g)) {
+			// 		isInGroup = true;
+			// 		GD.Print(g);
+			// 		break;
+			// 	}
+			// }
 
 			// TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
-			if(isInGroup) {
+			if(!body.IsInGroup(HitGroups.Enemy)) {
 				var parent = this.GetParent();
 				EmitSignal(nameof(OnHit), GetParent(), body);
 
 				if(body.HasMethod("OnDamage"))
 					body.Call("OnDamage", this);
-// this.movement.Speed = 0;
-				// this.QueueFree();
+				// this.movement.Speed = 0;
+				this.QueueFree();
 			}
 		}	
   }
