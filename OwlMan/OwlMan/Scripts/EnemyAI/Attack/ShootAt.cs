@@ -22,14 +22,16 @@ namespace Atmo2.Enemy.AI {
     [Export]
     public List<string> TargetHitgroups { get; set; }
 
-    public int AttackFrameFrequency = 60;
+    private int attackFrameFrequency = 60;
     private int framesUntilAttack = 0;
-    Animation last_animation;
+    private int speed;
     Action shootCallback;
     Action<Vector2> directionCallback;
 
-    public ShootAt(Action shootCallback, Action<Vector2> directionCallback)
+    public ShootAt(Action shootCallback, Action<Vector2> directionCallback, int attackFrameFrequency)
     {
+      this.attackFrameFrequency = attackFrameFrequency;
+
       this.shootCallback = shootCallback;
       this.directionCallback = directionCallback;
     }
@@ -57,7 +59,7 @@ namespace Atmo2.Enemy.AI {
 
         if(framesUntilAttack == 0)
         {
-          framesUntilAttack = (int)GD.RandRange(0,60) + AttackFrameFrequency;
+          framesUntilAttack = (int)GD.RandRange(0,60) + attackFrameFrequency;
           Shoot(direction);
         }
         else 

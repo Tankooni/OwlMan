@@ -26,30 +26,10 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "diveKick",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": false,
-"name": "attackNormal",
-"speed": 15.0
-}, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "charge",
 "speed": 1.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "jump",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
 }, {
 "frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
@@ -61,10 +41,30 @@ animations = [ {
 "name": "fall",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "attackNormal",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "jump",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 18 ) ],
 "loop": true,
 "name": "dash",
 "speed": 1.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "diveKick",
+"speed": 10.0
 } ]
 
 [node name="AnimatedSprite" type="AnimatedSprite"]

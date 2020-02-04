@@ -1,6 +1,6 @@
 [gd_scene load_steps=55 format=2]
 
-[ext_resource path="res://Scripts/EnemyAI/Movement/walkturn.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemies/Bug.cs" type="Script" id=1]
 [ext_resource path="res://Images/Bug/000_BugIdle00.png" type="Texture" id=2]
 [ext_resource path="res://Images/Bug/000_BugIdle01.png" type="Texture" id=3]
 [ext_resource path="res://Images/Bug/006_BugLaserDeath00.png" type="Texture" id=4]
@@ -60,21 +60,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ) ],
-"loop": true,
-"name": "deathCrush",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "posie",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "deathLaser",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ) ],
 "loop": true,
 "name": "slash",
@@ -94,6 +79,21 @@ animations = [ {
 "loop": true,
 "name": "deathSlash",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "deathLaser",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "posie",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ) ],
+"loop": true,
+"name": "deathCrush",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -101,12 +101,10 @@ extents = Vector2( 9.19104, 6.86301 )
 
 [node name="Bug" type="KinematicBody2D"]
 script = ExtResource( 1 )
-node = NodePath(".")
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 52 )
 

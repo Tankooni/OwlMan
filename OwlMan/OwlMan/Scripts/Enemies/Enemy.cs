@@ -7,17 +7,16 @@ namespace Atmo2.Enemy {
   {
     // So this is maybe not the best design but it is by far the most convenient and not as hacky solution. This should eventually be replaced with some sort of AI player detection system.
     public static NodePath PlayerPath;
-
-
-    public int Health { get; set; }
+    [Export]
+    public int Health = 1;
 
     public override void _Ready()
     {
-      this.Health = 1;
     }
 
     public override void _PhysicsProcess(float delta)
     {
+      
     }
 
     public void OnDamage(CollisionObject2D collider)

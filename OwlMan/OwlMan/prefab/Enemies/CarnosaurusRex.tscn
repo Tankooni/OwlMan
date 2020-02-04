@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scripts/EnemyAI/Movement/hover.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemies/Carnosaur.cs" type="Script" id=1]
 [ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture" id=2]
 [ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture" id=3]
 [ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture" id=4]
@@ -61,8 +61,8 @@ tracks/1/keys = {
 
 [node name="CarnosaurusRex" type="KinematicBody2D"]
 script = ExtResource( 1 )
-node = NodePath(".")
-AttackSoundName = "Hit3"
+Health = 5
+AttackSoundName = "Hit4"
 
 [node name="Wings" type="AnimatedSprite" parent="."]
 position = Vector2( 23.956, 23.5862 )
@@ -75,18 +75,17 @@ playing = true
 position = Vector2( -0.598724, -1.68088 )
 amount = 300
 
-[node name="Worm" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.598724, 39.0478 )
 frames = SubResource( 2 )
 animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 3.68323, 1.45547 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Worm")
+root_node = NodePath("../AnimatedSprite")
 anims/idle = SubResource( 4 )
 script = ExtResource( 9 )

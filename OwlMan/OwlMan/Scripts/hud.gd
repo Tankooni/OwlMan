@@ -11,7 +11,7 @@ func _ready():
 func on_set_health(health : int):
 	health = int(clamp(0, health, 5))
 	var current_health = health_pips.get_child_count()
-	
+
 	if current_health == health:
 		return
 	elif current_health > health:
@@ -23,7 +23,7 @@ func on_set_health(health : int):
 			pip.scale *= 0.6
 			pip.offset.y -= 5
 			pip.centered = false
-			
+
 			# Because hboxes don't work? (probably because this isn't a UI element. ho llew)
 			pip.offset.x += (i + current_health) * 55
 			pip.offset.x -= 20

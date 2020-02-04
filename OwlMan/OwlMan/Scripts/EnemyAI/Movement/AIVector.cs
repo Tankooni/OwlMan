@@ -5,28 +5,26 @@ namespace Atmo2.Enemy.AI {
 
   public class AIVector : Node2D
   {
-    [Export]
-    public Node2D Parent { get; set; }
+    private Node2D parent;
 
-    [Export]
-    public Vector2 Direction = new Vector2(1, 0);
+    public Vector2 Direction;
 
-    [Export]
-    public int Speed = 5;
+    public int Speed;
 
+    public AIVector(Node2D parent, Vector2 direction, int speed)
+    {
+      this.parent = parent;
+      Direction = direction;
+      Speed = speed;
+    }
     public override void _Ready()
     {
-      this.SetPhysicsProcess(true);
     }
 
     public override void _PhysicsProcess(float delta)
     {
-      // if(this.Parent == null) {
-      //   this.Free();
-      // }
-      
-      var motion = this.Direction * this.Speed;
-      this.Parent.Position += motion;
+      var motion = Direction * Speed;
+      parent.Position += motion;
     }
   }
 }

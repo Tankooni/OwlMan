@@ -169,7 +169,7 @@
       "name": "LevelSpawn",
       "limit": 1,
       "size": {"x": 100, "y": 100},
-      "origin": {"x": 0, "y": 0},
+      "origin": {"x": 50, "y": 100},
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",
@@ -207,7 +207,7 @@
       "name": "Bee",
       "limit": -1,
       "size": {"x": 20, "y": 20},
-      "origin": {"x": 0, "y": 0},
+      "origin": {"x": 20, "y": 20},
       "originAnchored": true,
       "shape": {
         "label": "Rectangle",

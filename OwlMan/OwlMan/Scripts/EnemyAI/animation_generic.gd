@@ -18,7 +18,7 @@ func _physics_process(delta):
 		self.set_flip_h(false)
 	elif vel.x < 0:
 		self.set_flip_h(true)
-	
+
 	# move animation
 	if vel.x == 0:
 		try_play("idle")

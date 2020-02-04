@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Overlord : Node
 {
-	public static float STANDARD_GRAVITY = 18f;
+	public static int STANDARD_GRAVITY = 18;
 
 	public static Vector2 LevelBoundsX;
 	public static Vector2 LevelBoundsY;

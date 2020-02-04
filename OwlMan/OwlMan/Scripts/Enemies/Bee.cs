@@ -15,8 +15,9 @@ namespace Atmo2.Enemy {
     [Export]
     public string AttackSoundName {get; set; }
 
+    private ShootAt shootAI;
+
     AnimatedSprite animatedSprite;
-    ShootAt shootAI;
 
     public override void _Ready()
     {
@@ -24,12 +25,10 @@ namespace Atmo2.Enemy {
 
       animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 
-      shootAI = new ShootAt(Shoot, ChangeDirection)
+      AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60)
       {
         TargetHitgroups = new List<string> {HitGroups.Player, HitGroups.Wall}
-      };
-
-      this.AddChild(shootAI);
+      });
     }
 
     public void Shoot()

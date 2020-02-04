@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/EnemyAI/Movement/menace3d.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemies/Carnosaur.cs" type="Script" id=1]
 [ext_resource path="res://Images/Carnosaur/000_Idle00.png" type="Texture" id=2]
 [ext_resource path="res://Images/Carnosaur/000_Idle01.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=4]
@@ -38,10 +38,10 @@ radius = 28.8894
 [node name="Carnosaur" type="KinematicBody2D"]
 position = Vector2( 0, -0.461274 )
 script = ExtResource( 1 )
-node = NodePath(".")
+AttackSoundName = "Hit1"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -0.470627 )
+position = Vector2( 0, -0.484517 )
 frames = SubResource( 1 )
 animation = "idle"
 playing = true

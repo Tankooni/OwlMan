@@ -31,12 +31,7 @@ namespace Atmo2 {
 				this.TargetHitgroups = new List<string>();
 			}			
 
-			movement = new AIVector
-			{
-				Parent = this,
-				Speed = speed,
-				Direction = direction
-			};
+			movement = new AIVector(this, direction, speed);
 			this.AddChild(movement);
 			this.Connect("body_entered", this, "OnCollide");
 		}
