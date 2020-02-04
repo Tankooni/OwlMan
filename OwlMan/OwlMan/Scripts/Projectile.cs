@@ -8,18 +8,6 @@ using Atmo2.Enemy.AI;
 
 
 namespace Atmo2 {
-
-  // TODO: Put this somewhere else
-  // Also this is a hack to get around limitations in C# enums
-  public static class HitGroups {
-	public static readonly string Player = "player";
-	public static readonly string Enemy = "enemy";
-	public static readonly string Wall = "wall";
-
-	// have a way to enumerate over types
-	//public static IEnumerable<string> 
-  }
-
   public class Projectile : Area2D
   {
 		[Export]
@@ -33,11 +21,12 @@ namespace Atmo2 {
 
 		[Signal]
 		public delegate void OnHit(Node2D source, Node2D body);
-
 		AIVector movement;
 
 		public override void _Ready()
 		{
+			AddToGroup(HitGroups.Bullet);
+
 			if(this.TargetHitgroups == null) {
 				this.TargetHitgroups = new Array();
 			}			
@@ -49,10 +38,11 @@ namespace Atmo2 {
 				Direction = direction
 			};
 			this.AddChild(movement);
-
 			this.Connect("body_entered", this, "OnCollide");
 		}
 		
+		bool isDeflected = false;
+
 		public void OnCollide(Node body)
 		{
 			// Tell the thing we collided with and our parent that we've collided if we actually did collide
@@ -66,17 +56,29 @@ namespace Atmo2 {
 			// 		break;
 			// 	}
 			// }
-
+			
 			// TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
-			if(!body.IsInGroup(HitGroups.Enemy)) {
-				var parent = this.GetParent();
-				EmitSignal(nameof(OnHit), GetParent(), body);
+			if(!body.IsInGroup(HitGroups.Enemy) || isDeflected) {
+				// var parent = this.GetParent();
+				// EmitSignal(nameof(OnHit), GetParent(), body);
 
 				if(body.HasMethod("OnDamage"))
 					body.Call("OnDamage", this);
-				// this.movement.Speed = 0;
-				this.QueueFree();
+				
+				QueueFree();
+				SetPhysicsProcess(false);
 			}
-		}	
+		}
+
+		public void Deflect()
+		{
+			if(isDeflected)
+				return;
+				
+			isDeflected = true;
+			movement.Direction = -direction;
+			movement.Speed *= 2;
+			Overlord.OwlOverlord.PlaySound("Hit4", GlobalPosition);
+		}
   }
 }

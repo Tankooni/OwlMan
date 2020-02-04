@@ -11,7 +11,8 @@ namespace Atmo2.Enemy {
 
     public int Health { get; set; }
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
       this.Health = 1;
     }
 
@@ -19,10 +20,12 @@ namespace Atmo2.Enemy {
     {
     }
 
-    public void OnDamage() {
+    public void OnDamage(CollisionObject2D collider)
+    {
       this.Health -= 1;
       if(this.Health <= 0) {
-        this.Free();
+        this.QueueFree();
+        SetPhysicsProcess(false);
       }
     }
   }

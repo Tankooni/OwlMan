@@ -86,3 +86,15 @@ public class Overlord : Node
 	//      
 	//  }
 }
+
+  // Also this is a hack to get around limitations in C# enums
+  public static class HitGroups {
+	public static readonly string Player = "player";
+	public static readonly string Enemy = "enemy";
+	public static readonly string Wall = "wall";
+
+	public static readonly string Bullet = "bullet";
+
+	// have a way to enumerate over types
+	//public static IEnumerable<string> 
+  }

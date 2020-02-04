@@ -204,7 +204,7 @@ public class Player : KinematicBody2D
 
 		if (MovementInfo.LeftBox)
 		{
-			foreach (PhysicsBody2D body in BoxL.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
+			foreach (PhysicsBody2D body in BoxL.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
@@ -217,40 +217,40 @@ public class Player : KinematicBody2D
 				// 	body.Call("on_damage");
 				
 			}
-			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
+			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
 			{
 				_camera.Call("Shake", .1f, 100, 10);
-				area.Call("deflected");
+				area.Call("Deflect");
 			}
 		}
 		if (MovementInfo.RightBox)
 		{
-			foreach (PhysicsBody2D body in BoxR.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
+			foreach (PhysicsBody2D body in BoxR.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 				_camera.Call("Shake", .1f, 100, 10);
 				Overlord.OwlOverlord.PlaySound("Hit4", Position);
 			}
-			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
+			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
 			{
 				_camera.Call("Shake", .1f, 100, 10);
-				area.Call("deflected");
+				area.Call("Deflect");
 			}
 		}
 		if (MovementInfo.BottomBox)
 		{
-			foreach (PhysicsBody2D body in BoxB.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup("enemy")))
+			foreach (PhysicsBody2D body in BoxB.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
 				_camera.Call("Shake", .1f, 100, 10);
 				Overlord.OwlOverlord.PlaySound("Hit4", Position);
 			}
-			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup("damaging")))
+			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
 			{
 				_camera.Call("Shake", .1f, 100, 10);
-				area.Call("deflected");
+				area.Call("Deflect");
 			}
 		}
 
@@ -310,7 +310,7 @@ public class Player : KinematicBody2D
 	{
 		if(this.invulnerabilityFrames == 0)
 		{
-			if((collider as CollisionObject2D).IsInGroup("damaging"))
+			if((collider as CollisionObject2D).IsInGroup(HitGroups.Bullet))
 			{
 				// Take a damage and do hurt stuff
 				Health -= 1;

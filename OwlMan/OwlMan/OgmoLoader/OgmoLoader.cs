@@ -75,7 +75,7 @@ namespace Atmo.OgmoLoader
 					continue;
 				Levels.Add(levelPath.Replace(".json", string.Empty), JsonConvert.DeserializeObject<OgmoLevel>(ObtainFileString(pathToLevelsDir + "/" + levelPath)));
 
-				if (levelPath.StartsWith("start", StringComparison.InvariantCultureIgnoreCase))
+				if (levelPath.StartsWith("zack", StringComparison.InvariantCultureIgnoreCase))
 					startLevel = Levels.Last().Value;
 			}
 
