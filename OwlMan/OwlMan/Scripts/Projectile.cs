@@ -11,7 +11,7 @@ namespace Atmo2 {
   public class Projectile : Area2D
   {
 		[Export]
-		public Array TargetHitgroups { get; set; }
+		public List<string> TargetHitgroups { get; set; }
 
 		[Export]
 		public Vector2 direction;
@@ -28,7 +28,7 @@ namespace Atmo2 {
 			AddToGroup(HitGroups.Bullet);
 
 			if(this.TargetHitgroups == null) {
-				this.TargetHitgroups = new Array();
+				this.TargetHitgroups = new List<string>();
 			}			
 
 			movement = new AIVector

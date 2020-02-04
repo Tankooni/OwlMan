@@ -28,6 +28,7 @@ animations = [ {
 
 [node name="Beee" type="KinematicBody2D"]
 script = ExtResource( 1 )
+AttackSoundName = "Squeak"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -35,5 +36,4 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 3
 playing = true

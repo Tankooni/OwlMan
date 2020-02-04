@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
+using System.Linq;
 
 namespace Atmo2.Enemy.AI {
   class ShootAt : Node2D
@@ -17,55 +20,67 @@ namespace Atmo2.Enemy.AI {
     Node2D target;
 
     [Export]
-    public Array TargetHitgroups { get; set; }
+    public List<string> TargetHitgroups { get; set; }
 
-    [Export]
-    public float Interval { get; set; }
-    [Export]
-    public float RandomInterval { get; set; }
-
-    Timer timer;
+    public int AttackFrameFrequency = 60;
+    private int framesUntilAttack = 0;
     Animation last_animation;
+    Action shootCallback;
+    Action<Vector2> directionCallback;
+
+    public ShootAt(Action shootCallback, Action<Vector2> directionCallback)
+    {
+      this.shootCallback = shootCallback;
+      this.directionCallback = directionCallback;
+    }
 
     public override void _Ready()
     {
       // Default to target's groups if none are given
       if(this.TargetHitgroups == null) {
-        this.TargetHitgroups = target.GetGroups();
+        this.TargetHitgroups = new List<string>();
       }
-
-      this.timer = new Timer();
-
-      this.timer.WaitTime = this.Interval;
-      this.timer.OneShot = false;
-      this.timer.Connect("timeout", this, "Shoot");
-      this.timer.Autostart = true;
-
-      this.AddChild(this.timer);
-    }
-
-    void Shoot()
-    {
-      // Set the timer again
-      float r = (GD.Randf() * this.RandomInterval * 2) - this.RandomInterval;
-      this.timer.WaitTime = this.Interval + r;
-      //this.timer.Start();
 
       // Shoot at the player if we have nothing to shoot at
       if(true) { //this.Target == null) {
-        this.Target = Enemy.PlayerPath;
+        Target = Enemy.PlayerPath;
       }
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+      var distance = GlobalPosition.DistanceTo(target.GlobalPosition);
+      if(distance < 300)
+      {
+        var direction = GlobalPosition.DirectionTo(target.GlobalPosition);
+        directionCallback(direction);
+
+        if(framesUntilAttack == 0)
+        {
+          framesUntilAttack = (int)GD.RandRange(0,60) + AttackFrameFrequency;
+          Shoot(direction);
+        }
+        else 
+          framesUntilAttack = Math.Max(framesUntilAttack - 1, 0);
+        
+        
+      }
+    }
+
+    void Shoot(Vector2 direction)
+    {
 
       Projectile b = (Projectile)bullet.Instance();
 
-      var direction = this.GlobalPosition.DirectionTo(this.target.Position);
-
       b.direction = direction;
-      b.TargetHitgroups = this.TargetHitgroups;
+      b.TargetHitgroups = TargetHitgroups;
       b.speed = 5;
-      b.Position = this.GlobalPosition;
+      b.Position = GlobalPosition;
 
-      GetNode("/root/GameScene").CallDeferred("add_child", b);
+      GetNode("/root/GameScene").AddChild(b);
+
+      if(shootCallback != null)
+        shootCallback();
     }
   }
 }

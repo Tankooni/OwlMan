@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using Atmo2.Enemy.AI;
+using System.Collections.Generic;
 
 namespace Atmo2.Enemy {
   public class Bee : Enemy 
@@ -11,18 +12,40 @@ namespace Atmo2.Enemy {
       set { this.shootAI.Target = value; } 
     }
 
+    [Export]
+    public string AttackSoundName {get; set; }
+
+    AnimatedSprite animatedSprite;
     ShootAt shootAI;
 
     public override void _Ready()
     {
       base._Ready();
 
-      this.shootAI = new ShootAt();
-      this.shootAI.TargetHitgroups = new Array{HitGroups.Player, HitGroups.Wall};
-      this.shootAI.Interval = 1.5f;
-      this.shootAI.RandomInterval = 0.5f;
+      animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 
-      this.AddChild(this.shootAI);
+      shootAI = new ShootAt(Shoot, ChangeDirection)
+      {
+        TargetHitgroups = new List<string> {HitGroups.Player, HitGroups.Wall}
+      };
+
+      this.AddChild(shootAI);
+    }
+
+    public void Shoot()
+    {
+      if(AttackSoundName != null && !AttackSoundName.Empty())
+        Overlord.OwlOverlord.PlaySound(AttackSoundName, this.GlobalPosition);
+      animatedSprite.Play("attack");
+      animatedSprite.Connect("animation_finished", animatedSprite, "play", new Array {"idle"}, (uint)ConnectFlags.Oneshot);
+    }
+
+    public void ChangeDirection(Vector2 direction)
+    {
+      if(direction.x < 0)
+			  animatedSprite.FlipH = false;
+      else if(direction.x > 0)
+			  animatedSprite.FlipH = true;
     }
   }
 }
