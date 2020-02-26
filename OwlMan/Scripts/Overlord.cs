@@ -11,6 +11,8 @@ public class Overlord : Node
 	public static Vector2 LevelBoundsY;
 	public static Vector2 ViewportSize;
 
+	public static PackedScene Bullet;
+
 	public static Node2D Player;
 	public static Overlord OwlOverlord;
 
@@ -25,6 +27,8 @@ public class Overlord : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Bullet = ResourceLoader.Load<PackedScene>("res://prefab/Projectiles/Bullet.tscn");
+		
 		Overlord.OwlOverlord = this;
 		Overlord.ViewportSize = new Vector2
 		(

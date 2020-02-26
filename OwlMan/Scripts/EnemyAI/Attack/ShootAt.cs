@@ -7,8 +7,6 @@ using System.Linq;
 namespace Atmo2.Enemy.AI {
   class ShootAt : Node2D
   {
-    PackedScene bullet = ResourceLoader.Load<PackedScene>("res:///prefab/Projectiles/Bullet.tscn");
-
     [Export]
     public NodePath Target { 
       get { return this.target?.GetPath(); }
@@ -72,7 +70,7 @@ namespace Atmo2.Enemy.AI {
     void Shoot(Vector2 direction)
     {
 
-      Projectile b = (Projectile)bullet.Instance();
+      Projectile b = (Projectile)Overlord.Bullet.Instance();
 
       b.direction = direction;
       b.TargetHitgroups = TargetHitgroups;
