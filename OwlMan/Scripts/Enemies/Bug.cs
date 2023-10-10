@@ -2,16 +2,16 @@ using Atmo2.Enemy;
 using Godot;
 using System;
 
-public class Bug : Enemy
+public partial class Bug : Enemy
 {
-    private AnimatedSprite animatedSprite;
+    private AnimatedSprite2D animatedSprite;
 
 
     public override void _Ready()
     {
         base._Ready();
 
-        animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         
         AddChild(new WalkTurn(ChangeDirection, this, 200));
     }

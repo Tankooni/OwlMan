@@ -5,7 +5,7 @@ using Godot;
 
 namespace Atmo2.Movements
 {
-	public class MovementInfo
+	public partial class MovementInfo
 	{
         private Player entity;
 		public bool OnGround { get; set; }
@@ -50,7 +50,8 @@ namespace Atmo2.Movements
 
 		public void Update()
 		{
-			entity.MoveAndSlide(new Vector2(VelX, VelY));
+			entity.Velocity = new Vector2(VelX, VelY);
+			entity.MoveAndSlide();
 
 			OnGround = entity.TestMove(entity.Transform, new Vector2(0, 1));
 			HeadBonk = entity.TestMove(entity.Transform, new Vector2(0, -1));

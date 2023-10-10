@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Atmo.OgmoLoader.Serialized
 {
-	public class LayerTemplate
+	public partial class LayerTemplate
 	{
 		/**
 		 * Name of the Layer Template.
@@ -49,7 +49,7 @@ namespace Atmo.OgmoLoader.Serialized
 		*/
 		public List<string> excludedTags;
 		/**
-		* Directory to search for Decal images. Only available for Decal Layers.
+		* DirAccess to search for Decal images. Only available for Decal Layers.
 		*/
 		public string folder;
 		/**

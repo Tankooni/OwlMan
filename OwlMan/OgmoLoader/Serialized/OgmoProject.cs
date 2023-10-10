@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Atmo.OgmoLoader.Serialized
 {
-	public class OgmoProject
+	public partial class OgmoProject
 	{
 		/**
 			* The Name of the Ogmo Project.

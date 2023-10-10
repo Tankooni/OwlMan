@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class KillBox : Area2D
+public partial class KillBox : Area2D
 {
     // Declare member variables here. Examples:
     // private int a = 2;

@@ -7,7 +7,7 @@ using Atmo2.Movements.PlayerStates;
 
 namespace Atmo2.Movements
 {
-	public class PlayerStateController
+	public partial class PlayerStateController
 	{
 		public PlayerState current_state;
 		private PlayerState next_state;

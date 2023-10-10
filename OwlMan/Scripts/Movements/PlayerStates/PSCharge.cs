@@ -11,7 +11,7 @@ namespace Atmo2.Movements.PlayerStates
     {
         private float previous_charge_rate;
         private float charge_rate;
-		private Particles2D poseParticles;
+		//private GPUParticles2D poseParticles;
 
 		private int ticker = 0;
 
@@ -20,7 +20,7 @@ namespace Atmo2.Movements.PlayerStates
 		{
             this.player = player;
             this.charge_rate = chargeRate;
-			poseParticles = player.GetNode<Particles2D>("PoseParticles");
+			//poseParticles = player.GetNode<GPUParticles2D>("PoseParticles");
         }
 		public override void OnEnter()
         {
@@ -29,7 +29,7 @@ namespace Atmo2.Movements.PlayerStates
 
             // Animation
             player.Animation = "charge";
-			poseParticles.Emitting = true;
+			//poseParticles.Emitting = true;
 
 			// Sound
 			//if (Engine.Random.Chance(1f))
@@ -40,7 +40,7 @@ namespace Atmo2.Movements.PlayerStates
 
         public override void OnExit()
         {
-			poseParticles.Emitting = false;
+			//poseParticles.Emitting = false;
             player.EnergyRechargeRate = previous_charge_rate;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Atmo.OgmoLoader.Serialized
 {
-	public class DecalDefinition
+	public partial class DecalDefinition
 	{
 		public float x;
 		public float y;

@@ -1,6 +1,6 @@
 namespace Atmo2
 {
-    public class Abilities
+    public partial class Abilities
 	{
         private const float SHITTY_JUMP_STRENTH = 240;
         private const float GOOD_JUMP_STRENTH = 480;

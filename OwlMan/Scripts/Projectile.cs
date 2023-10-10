@@ -8,9 +8,9 @@ using Atmo2.Enemy.AI;
 
 
 namespace Atmo2 {
-  public class Projectile : Area2D
+  public partial class Projectile : Area2D
   {
-		[Export]
+		////[Export]
 		public List<string> TargetHitgroups { get; set; }
 
 		[Export]
@@ -20,7 +20,7 @@ namespace Atmo2 {
 		public int speed;
 
 		[Signal]
-		public delegate void OnHit(Node2D source, Node2D body);
+		public delegate void OnHitEventHandler(Node2D source, Node2D body);
 		AIVector movement;
 
 		public override void _Ready()
@@ -33,7 +33,7 @@ namespace Atmo2 {
 
 			movement = new AIVector(this, direction, speed);
 			this.AddChild(movement);
-			this.Connect("body_entered", this, "OnCollide");
+			this.Connect("body_entered", new Callable(this, "OnCollide"));
 		}
 		
 		bool isDeflected = false;
@@ -57,11 +57,15 @@ namespace Atmo2 {
 				// var parent = this.GetParent();
 				// EmitSignal(nameof(OnHit), GetParent(), body);
 
-				if(body.HasMethod("OnDamage"))
-					body.Call("OnDamage", this);
-				
-				QueueFree();
-				SetPhysicsProcess(false);
+
+				//TODO: need to fix collision layers
+				//if(body.HasMethod("OnDamage"))
+				//	body.Call("OnDamage", this);
+
+				//QueueFree();
+				//SetPhysicsProcess(false);
+
+				GD.Print("OOF");
 			}
 		}
 

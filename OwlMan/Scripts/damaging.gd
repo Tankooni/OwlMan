@@ -15,7 +15,7 @@ var isDeflected = false
 #export(int) var damage = 1
 #export(DamageType) var damage_type = DamageType.Boolette
 #export(Alignment) var alignment = Alignment.Enemy
-export(Vector2) var direction
+@export var direction: Vector2
 
 func _ready():
 	if direction:

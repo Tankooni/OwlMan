@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Carnosaur.cs" type="Script" id=1]
-[ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture" id=2]
-[ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture" id=3]
-[ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture" id=4]
-[ext_resource path="res://Images/BawssButterfly/000_Wings03.png" type="Texture" id=5]
+[ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture2D" id=2]
+[ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture2D" id=3]
+[ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture2D" id=4]
+[ext_resource path="res://Images/BawssButterfly/000_Wings03.png" type="Texture2D" id=5]
 [ext_resource path="res://Particles/BossPollen.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Images/BawssButterfly/000_Worm00.png" type="Texture" id=7]
-[ext_resource path="res://Images/BawssButterfly/000_Worm01.png" type="Texture" id=8]
+[ext_resource path="res://Images/BawssButterfly/000_Worm00.png" type="Texture2D" id=7]
+[ext_resource path="res://Images/BawssButterfly/000_Worm01.png" type="Texture2D" id=8]
 [ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -45,8 +45,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.994561 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0.994561 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:position:y")
@@ -55,16 +55,16 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -0.161506, -0.25, 0, 0.22, 3.87613, 0, -0.234561, -6.13721, 0.25, 0 ),
-"times": PoolRealArray( 0.03, 0.994561 )
+"points": PackedFloat32Array( -0.161506, -0.25, 0, 0.22, 3.87613, 0, -0.234561, -6.13721, 0.25, 0 ),
+"times": PackedFloat32Array( 0.03, 0.994561 )
 }
 
-[node name="CarnosaurusRex" type="KinematicBody2D"]
+[node name="CarnosaurusRex" type="CharacterBody2D"]
 script = ExtResource( 1 )
 Health = 5
 AttackSoundName = "Hit4"
 
-[node name="Wings" type="AnimatedSprite" parent="."]
+[node name="Wings" type="AnimatedSprite2D" parent="."]
 position = Vector2( 23.956, 23.5862 )
 frames = SubResource( 1 )
 animation = "idle"
@@ -75,7 +75,7 @@ playing = true
 position = Vector2( -0.598724, -1.68088 )
 amount = 300
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2( -0.598724, 39.0478 )
 frames = SubResource( 2 )
 animation = "idle"
@@ -86,6 +86,6 @@ position = Vector2( 3.68323, 1.45547 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../AnimatedSprite")
+root_node = NodePath("../AnimatedSprite2D")
 anims/idle = SubResource( 4 )
 script = ExtResource( 9 )

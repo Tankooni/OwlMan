@@ -3,7 +3,7 @@ using Godot;
 namespace Atmo2.Enemy.AI {
   /// This will move the given (or parent) entity in a straight line forever
 
-  public class AIVector : Node2D
+  public partial class AIVector : Node2D
   {
     private Node2D parent;
 
@@ -21,7 +21,7 @@ namespace Atmo2.Enemy.AI {
     {
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
       var motion = Direction * Speed;
       parent.Position += motion;

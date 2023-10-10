@@ -2,7 +2,7 @@ extends MarginContainer
 
 var scene_pip = preload("res://owlman_sprite.tscn")
 
-onready var health_pips : HBoxContainer = $StatPanel/Health/HealthPips
+@onready var health_pips : HBoxContainer = $StatPanel/Health/HealthPips
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +19,7 @@ func on_set_health(health : int):
 			health_pips.remove_child(health_pips.get_child(current_health - _i - 1))
 	else:
 		for i in range(health - current_health):
-			var pip = scene_pip.instance()
+			var pip = scene_pip.instantiate()
 			pip.scale *= 0.6
 			pip.offset.y -= 5
 			pip.centered = false

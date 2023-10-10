@@ -3,7 +3,7 @@ using Godot;
 
 namespace Atmo2
 {
-	public class Controller
+	public partial class Controller
 	{
 		private int jumpTicker { get; set; }
 

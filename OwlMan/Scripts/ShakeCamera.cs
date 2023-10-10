@@ -1,17 +1,17 @@
 using Godot;
 using System;
 
-public class ShakeCamera : Camera2D
+public partial class ShakeCamera : Camera2D
 {
 	public Node2D FollowNode;
 
-	private float _duration = 0.0f;
-	private float _period_in_ms = 0.0f;
-	private float _amplitude = 0.0f;
-	private float _timer = 0.0f;
-	private float _last_shook_timer = 0;
-	private float _previous_x = 0.0f;
-	private float _previous_y = 0.0f;
+	private double _duration = 0.0f;
+	private double _period_in_ms = 0.0f;
+	private double _amplitude = 0.0f;
+	private double _timer = 0.0f;
+	private double _last_shook_timer = 0;
+	private double _previous_x = 0.0f;
+	private double _previous_y = 0.0f;
 	private Vector2 _last_offset = new Vector2(0, 0);
 
 	//private Vector2 _last_window_offset;
@@ -24,7 +24,7 @@ public class ShakeCamera : Camera2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if(FollowNode == null)
 			return;
@@ -55,7 +55,7 @@ public class ShakeCamera : Camera2D
 			_previous_x = new_x;
 			_previous_y = new_y;
 			// Track how much we've moved the offset, as opposed to other effects.
-			var new_offset = new Vector2(x_component, y_component);
+			var new_offset = new Vector2((float)x_component, (float)y_component);
 			this.Offset -= (_last_offset + new_offset);
 			//OS.WindowPosition += (_last_offset + new_offset);
 		}
@@ -97,11 +97,11 @@ public class ShakeCamera : Camera2D
 
 	public void UpdatePosition()
 	{
-		var centerX = FollowNode.Position.x;
-		var centerY = FollowNode.Position.y;
+		var centerX = FollowNode.Position.X;
+		var centerY = FollowNode.Position.Y;
 
-		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.x / 2f, Overlord.LevelBoundsX.y - Overlord.ViewportSize.x / 2f);
-		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.y / 2f, Overlord.LevelBoundsY.y - Overlord.ViewportSize.y / 2f);
+		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.X / 2f, Overlord.LevelBoundsX.Y - Overlord.ViewportSize.X / 2f);
+		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.Y / 2f, Overlord.LevelBoundsY.Y - Overlord.ViewportSize.Y / 2f);
 
 		this.Position = new Vector2(centerX, centerY);
 	}

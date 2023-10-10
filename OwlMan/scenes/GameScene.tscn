@@ -1,54 +1,69 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://b8ynag3aoj0jj"]
 
-[ext_resource path="res://Scripts/ShakeCamera.cs" type="Script" id=1]
-[ext_resource path="res://hud.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Images/Backgrounds/BG_Sky.png" type="Texture" id=3]
-[ext_resource path="res://Images/Backgrounds/BG_Sky_Parallax2.png" type="Texture" id=4]
-[ext_resource path="res://Images/Backgrounds/BG_Sky_Parallax1.png" type="Texture" id=5]
-[ext_resource path="res://Images/Backgrounds/BG_Sky_Parallax3.png" type="Texture" id=6]
+[ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://b4m6dfs7iltcm" path="res://Images/Backgrounds/BG_Sky.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dxf1hvr7vqdq6" path="res://Images/Backgrounds/BG_Sky_Parallax2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bb61heaygk20d" path="res://Images/Backgrounds/BG_Sky_Parallax1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://4cpod2yihqqk" path="res://Images/Backgrounds/BG_Sky_Parallax3.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://bemup1of18ojp" path="res://prefab/TileMap_New.tscn" id="7_hlm6q"]
+[ext_resource type="PackedScene" uid="uid://boybl7xia5i5j" path="res://prefab/PlayerOwl.tscn" id="8_d3h60"]
+[ext_resource type="PackedScene" uid="uid://dg34tsxyauv00" path="res://prefab/Enemies/Beee.tscn" id="9_y1mjf"]
+[ext_resource type="PackedScene" uid="uid://dt6g14xyc321m" path="res://prefab/Enemies/Carnosaur.tscn" id="10_uotos"]
 
 [node name="GameScene" type="Node"]
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2( 640, 360 )
-current = true
-smoothing_speed = 7.0
-script = ExtResource( 1 )
+position = Vector2(640, 360)
+position_smoothing_speed = 7.0
+script = ExtResource("1")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="MainCamera"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
-motion_scale = Vector2( 0, 0 )
+motion_scale = Vector2(0, 0)
 
-[node name="Sprite" type="Sprite" parent="MainCamera/ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 3 )
+[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 0, 0, 1280, 720 )
+region_rect = Rect2(0, 0, 1280, 720)
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
-motion_scale = Vector2( 0.3, 0.01 )
+motion_scale = Vector2(0.3, 0.01)
 
-[node name="Sprite" type="Sprite" parent="MainCamera/ParallaxBackground/ParallaxLayer3"]
-texture = ExtResource( 5 )
+[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("5")
 region_enabled = true
-region_rect = Rect2( 0, 0, 12800, 720 )
+region_rect = Rect2(0, 0, 12800, 720)
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
-motion_scale = Vector2( 0.5, 0.03 )
+motion_scale = Vector2(0.5, 0.03)
 
-[node name="Sprite" type="Sprite" parent="MainCamera/ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource( 4 )
+[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("4")
 region_enabled = true
-region_rect = Rect2( 0, 0, 12800, 720 )
+region_rect = Rect2(0, 0, 12800, 720)
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
-motion_scale = Vector2( 0.7, 0.05 )
+motion_scale = Vector2(0.7, 0.05)
 
-[node name="Sprite" type="Sprite" parent="MainCamera/ParallaxBackground/ParallaxLayer4"]
-texture = ExtResource( 6 )
+[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource("6")
 region_enabled = true
-region_rect = Rect2( 0, 0, 12800, 720 )
+region_rect = Rect2(0, 0, 12800, 720)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 2 )]
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("2")]
+
+[node name="TileMap_New" parent="." instance=ExtResource("7_hlm6q")]
+position = Vector2(0, 0)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("8_d3h60")]
+position = Vector2(135, 282)
+
+[node name="Beee" parent="." instance=ExtResource("9_y1mjf")]
+position = Vector2(630, 209)
+
+[node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
+position = Vector2(369, 100.539)

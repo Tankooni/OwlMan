@@ -1,8 +1,8 @@
-extends AnimatedSprite
+extends AnimatedSprite2D
 
 # handles animation control based on state of entity
 
-onready var node = get_parent()
+@onready var node = get_parent()
 var previous_pos = Vector2(0, 0)
 
 func try_play(animation : String):

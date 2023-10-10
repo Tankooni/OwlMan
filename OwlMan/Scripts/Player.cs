@@ -7,47 +7,49 @@ using Atmo2.Enemy;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Player : KinematicBody2D
+public partial class Player : CharacterBody2D
 {
 	[Signal]
-	public delegate void HealthChanged(int health);
-	
+	public delegate void HealthChangedEventHandler(int health);
+
 	[Signal]
-	public delegate void AnimationChanged(String animation);
+	public delegate void AnimationChangedEventHandler(String animation);
 
 	public Controller InputController;
 	public PlayerStateController PlayerStateController;
 
 	public Abilities Abilities;
 	public MovementInfo MovementInfo;
-	
+
 	// Player state
 	private int health;
-	public int Health { 
+	public int Health
+	{
 		get { return health; }
-		set {
+		set
+		{
 			health = value;
 			EmitSignal(nameof(HealthChanged), health);
 		}
 	}
 	public int Power { get; set; }
-	
+
 	private int maxHealth = 5;
 	private int maxPower;
 
 	private int invulnerabilityFrames = 0;
-	
+
 	private int spice;
 	public int Spice
 	{
-		 get { return spice; }
-		 set
-		 {
-			 spice = Mathf.Clamp(value, 0, 100);
-			 if (spice == 0)
-				 PlayerStateController.NextState(
-					 new PSDeath(this));
-		 }
+		get { return spice; }
+		set
+		{
+			spice = Mathf.Clamp(value, 0, 100);
+			if (spice == 0)
+				PlayerStateController.NextState(
+					new PSDeath(this));
+		}
 	}
 	private float energy;
 	public float Energy
@@ -73,16 +75,18 @@ public class Player : KinematicBody2D
 	public Area2D BoxB;
 
 	// Make this private later and fix the things that reference it to flip the image
-	public AnimatedSprite Image;
+	public AnimatedSprite2D Image;
 
 	private Camera2D _camera;
 	private Control _hud;
 	private CollisionShape2D _collisionShape2D;
 	private Node _overlord;
 
-	public String Animation {
+	public String Animation
+	{
 		get { return this.Image.Animation; }
-		set { 
+		set
+		{
 			this.Image.Play(value);
 			this.EmitSignal("AnimationChanged", value);
 		}
@@ -107,16 +111,18 @@ public class Player : KinematicBody2D
 		_camera = GetNode<Camera2D>("../MainCamera");
 		_camera.Call("SetFollow", this.GetPath());
 
-		foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
-		{
-			node.Set("target", GetPath());
-			Enemy.PlayerPath = GetPath();
+		Enemy.PlayerPath = this.GetPath();
 
-			//node.Set("node", node.GetPath());
-		}
-		
+		//foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
+		//{
+		//	node.Set("target", GetPath());
+		//	Enemy.PlayerPath = GetPath();
+
+		//	//node.Set("node", node.GetPath());
+		//}
+
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
-		Image = GetNode<AnimatedSprite>("AnimatedSprite");
+		Image = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 		_overlord = GetNode("/root/Overlord");
 
@@ -124,8 +130,8 @@ public class Player : KinematicBody2D
 		BoxR = GetNode<Area2D>("SideBoxR");
 		BoxB = GetNode<Area2D>("BottomBox");
 
-		this.Connect("HealthChanged", _hud, "on_set_health");
-		this.Connect("AnimationChanged", _hud, "on_animation_changed");
+		this.Connect("HealthChanged", new Callable(_hud, "on_set_health"));
+		this.Connect("AnimationChanged", new Callable(_hud, "on_animation_changed"));
 
 		SetDeferred("Health", maxHealth);
 		//Health = maxHealth;
@@ -154,7 +160,7 @@ public class Player : KinematicBody2D
 		InputController = new Controller();
 		PlayerStateController = new PlayerStateController(new PSIdle(this));
 
-		Image.Connect("animation_finished", this, "AnimationComplete");
+		Image.Connect("animation_finished", new Callable(this, "AnimationComplete"));
 
 		// AddResponse(PickupType.AirDash, OnAirDashPickup);
 		// AddResponse(PickupType.AirJump, OnAirJumpPickup);
@@ -184,7 +190,7 @@ public class Player : KinematicBody2D
 	// {
 	// }
 
-	public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
 
@@ -215,7 +221,7 @@ public class Player : KinematicBody2D
 				// 	body.Call("OnDamage");
 				// else if (body.HasMethod("on_damage"))
 				// 	body.Call("on_damage");
-				
+
 			}
 			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
 			{
@@ -281,7 +287,7 @@ public class Player : KinematicBody2D
 	{
 		this.Position = ResetPoint;
 		UpdateCamera();
-	}		
+	}
 
 	Vector2 viewSize;
 	Vector2 levelBoundsX;
@@ -303,14 +309,14 @@ public class Player : KinematicBody2D
 		// 	MovementInfo.StartShake = false;
 		// }
 
-		
+
 	}
-	
+
 	public void OnDamage(CollisionObject2D collider)
 	{
-		if(this.invulnerabilityFrames == 0)
+		if (this.invulnerabilityFrames == 0)
 		{
-			if((collider as CollisionObject2D).IsInGroup(HitGroups.Bullet))
+			if ((collider as CollisionObject2D).IsInGroup(HitGroups.Bullet))
 			{
 				// Take a damage and do hurt stuff
 				Health -= 1;
@@ -320,8 +326,9 @@ public class Player : KinematicBody2D
 			}
 		}
 	}
-	void CheckDeath() {
-		if(this.Health <= 0)
+	void CheckDeath()
+	{
+		if (this.Health <= 0)
 		{
 			_overlord.Call("Reset");
 		}

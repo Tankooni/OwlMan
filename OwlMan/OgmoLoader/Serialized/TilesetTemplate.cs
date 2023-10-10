@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Atmo.OgmoLoader.Serialized
 {
-	public class TilesetTemplate
+	public partial class TilesetTemplate
 	{
 		/**
 		* Name of the Tileset.
 		*/
 		public string label;
 		/**
-		* Path to the Tileset image, relative to the Project's path.
+		* Path3D to the Tileset image, relative to the Project's path.
 		*/
 		public string path;
 		/**

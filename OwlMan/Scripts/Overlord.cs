@@ -3,12 +3,12 @@ using System;
 using Atmo.OgmoLoader;
 using System.Collections.Generic;
 
-public class Overlord : Node
+public partial class Overlord : Node
 {
 	public static int STANDARD_GRAVITY = 18;
 
-	public static Vector2 LevelBoundsX;
-	public static Vector2 LevelBoundsY;
+	public static Vector2 LevelBoundsX = new Vector2(0, 100000);
+	public static Vector2 LevelBoundsY = new Vector2(0, 100000);
 	public static Vector2 ViewportSize;
 
 	public static PackedScene Bullet;
@@ -35,7 +35,7 @@ public class Overlord : Node
 			x: (int)ProjectSettings.GetSetting("display/window/size/width"),
 			y: (int)ProjectSettings.GetSetting("display/window/size/height")
 		);
-		LoadLevel();
+		//LoadLevel();
 
 		
 		Sounds.Add("Squeak", (PackedScene)ResourceLoader.Load("res://prefab/sounds/Squeak.tscn"));
@@ -44,20 +44,20 @@ public class Overlord : Node
 		Sounds.Add("Hit4", (PackedScene)ResourceLoader.Load("res://prefab/sounds/Hit4.tscn"));
 	}
 
-	public void LoadLevel()
-	{
-		var ogmo = new OgmoLoader();
-		Level = ogmo.Load(out Overlord.Player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
+	//public void LoadLevel()
+	//{
+	//	var ogmo = new OgmoLoader();
+	//	Level = ogmo.Load(out Overlord.Player, out Overlord.LevelBoundsX, out Overlord.LevelBoundsY);
 
-		Viewport root = GetTree().Root;
-		var CurrentScene = root.GetChild(root.GetChildCount() - 1);
+	//	SubViewport root = GetTree().Root;
+	//	var CurrentScene = root.GetChild(root.GetChildCount() - 1);
 
-		if (Overlord.Player != null)
-		{
-			CurrentScene.CallDeferred("add_child", Overlord.Player);
-		}
-		CurrentScene.CallDeferred("add_child", Level);
-	}
+	//	if (Overlord.Player != null)
+	//	{
+	//		CurrentScene.CallDeferred("add_child", Overlord.Player);
+	//	}
+	//	CurrentScene.CallDeferred("add_child", Level);
+	//}
 
 	public void Reset()
 	{
@@ -67,21 +67,24 @@ public class Overlord : Node
 		level.CallDeferred("free");
 
 		//Add the next level
-		var nextLevel = ((PackedScene)ResourceLoader.Load("res://scenes/GameScene.tscn")).Instance();
+		var nextLevel = ((PackedScene)ResourceLoader.Load("res://scenes/GameScene.tscn")).Instantiate();
 		GetNode("/root").AddChild(nextLevel);
 
-		LoadLevel();
+		//LoadLevel();
 	}
 
 	public void PlaySound(string name, Vector2 position)
 	{
-		PackedScene sfxScene;
-		if(Sounds.TryGetValue(name, out sfxScene))
-		{
-			var sfx = (Node2D)sfxScene.Instance();
-			Level.AddChild(sfx);
-			sfx.Position = position;
-		}
+		//PackedScene sfxScene;
+		//if(Sounds.TryGetValue(name, out sfxScene))
+		//{
+		//	var sfx = (Node2D)sfxScene.Instantiate();
+		//	if(sfx != null)
+		//	{
+		//		Level.AddChild(sfx);
+		//		sfx.Position = position;
+		//	}
+		//}
 	}
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
