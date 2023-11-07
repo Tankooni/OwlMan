@@ -1,91 +1,116 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://dw3612jl0ldw2"]
 
-[ext_resource path="res://Scripts/Enemies/Carnosaur.cs" type="Script" id=1]
-[ext_resource path="res://Images/BawssButterfly/000_Wings00.png" type="Texture2D" id=2]
-[ext_resource path="res://Images/BawssButterfly/000_Wings01.png" type="Texture2D" id=3]
-[ext_resource path="res://Images/BawssButterfly/000_Wings02.png" type="Texture2D" id=4]
-[ext_resource path="res://Images/BawssButterfly/000_Wings03.png" type="Texture2D" id=5]
-[ext_resource path="res://Particles/BossPollen.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Images/BawssButterfly/000_Worm00.png" type="Texture2D" id=7]
-[ext_resource path="res://Images/BawssButterfly/000_Worm01.png" type="Texture2D" id=8]
-[ext_resource path="res://Scripts/AnimationPlayerAlwaysPlay.gd" type="Script" id=9]
+[ext_resource type="Script" path="res://Scripts/Enemies/Carnosaur.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://csxbt8746kkg6" path="res://Images/BawssButterfly/000_Wings00.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c2igyrp01xdsu" path="res://Images/BawssButterfly/000_Wings01.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bncr1l3ejq58g" path="res://Images/BawssButterfly/000_Wings02.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dsare1firlfa5" path="res://Images/BawssButterfly/000_Wings03.png" id="5"]
+[ext_resource type="PackedScene" uid="uid://b3wnll6424wb7" path="res://Particles/BossPollen.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://dcvl08yl4r8s7" path="res://Images/BawssButterfly/000_Worm00.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://b78few2gs3upv" path="res://Images/BawssButterfly/000_Worm01.png" id="8"]
+[ext_resource type="Script" path="res://Scripts/AnimationPlayerAlwaysPlay.gd" id="9"]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "idle",
-"speed": 1.0
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
 }, {
-"frames": [ ExtResource( 8 ) ],
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}],
 "loop": true,
-"name": "attack",
-"speed": 0.4
-} ]
+"name": &"idle",
+"speed": 5.0
+}]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="SpriteFrames" id="2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 0.4
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="3"]
 radius = 30.4105
 height = 94.0929
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "idle"
-loop = true
+loop_mode = 1
 tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0 ),
-"times": PackedFloat32Array( 0.994561 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"points": PackedFloat32Array( -0.161506, -0.25, 0, 0.22, 3.87613, 0, -0.234561, -6.13721, 0.25, 0 ),
-"times": PackedFloat32Array( 0.03, 0.994561 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3pjqh"]
+_data = {
+"idle": SubResource("4")
 }
 
 [node name="CarnosaurusRex" type="CharacterBody2D"]
-script = ExtResource( 1 )
-Health = 5
+script = ExtResource("1")
 AttackSoundName = "Hit4"
+Health = 5
 
 [node name="Wings" type="AnimatedSprite2D" parent="."]
-position = Vector2( 23.956, 23.5862 )
-frames = SubResource( 1 )
-animation = "idle"
+position = Vector2(23.956, 23.5862)
+sprite_frames = SubResource("1")
+animation = &"idle"
 frame = 2
-playing = true
 
-[node name="BossPollen" parent="." instance=ExtResource( 6 )]
-position = Vector2( -0.598724, -1.68088 )
+[node name="BossPollen" parent="." instance=ExtResource("6")]
+position = Vector2(-0.598724, -1.68088)
 amount = 300
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2( -0.598724, 39.0478 )
-frames = SubResource( 2 )
-animation = "idle"
-playing = true
+position = Vector2(-0.598724, 39.0478)
+sprite_frames = SubResource("2")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 3.68323, 1.45547 )
-shape = SubResource( 3 )
+position = Vector2(3.68323, 1.45547)
+shape = SubResource("3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
-anims/idle = SubResource( 4 )
-script = ExtResource( 9 )
+libraries = {
+"": SubResource("AnimationLibrary_3pjqh")
+}
+script = ExtResource("9")

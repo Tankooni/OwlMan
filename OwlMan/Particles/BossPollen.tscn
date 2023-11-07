@@ -1,34 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b3wnll6424wb7"]
 
-[sub_resource type="Gradient" id=1]
-offsets = PackedFloat32Array( 0.04, 0.245714, 0.742857, 1 )
-colors = PackedColorArray( 0.0392157, 0, 0.054902, 0, 0.553558, 0, 0.730469, 1, 0.553558, 0, 0.730469, 1, 0.537255, 0, 0.870588, 0 )
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0.04, 0.245714, 0.742857, 1)
+colors = PackedColorArray(0.0392157, 0, 0.054902, 0, 0.553558, 0, 0.730469, 1, 0.553558, 0, 0.730469, 1, 0.537255, 0, 0.870588, 0)
 
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
 
-[sub_resource type="ParticleProcessMaterial" id=3]
+[sub_resource type="ParticleProcessMaterial" id="3"]
 emission_shape = 2
-emission_box_extents = Vector3( 150, 100, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 15, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.62
-angular_velocity = 3.51726e-043
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-radial_accel = 3.0
-radial_accel_random = 0.4
-damping = 10.0
-scale = 1.5
-scale_random = 0.7
-color_ramp = SubResource( 2 )
-hue_variation = 0.05
-hue_variation_random = 1.0
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 15, 0)
+color_ramp = SubResource("2")
 
 [node name="BossPollen" type="GPUParticles2D"]
 amount = 1000
+process_material = SubResource("3")
 lifetime = 5.0
 preprocess = 10.0
-local_coords = false
-process_material = SubResource( 3 )
