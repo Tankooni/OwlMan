@@ -146,7 +146,6 @@ scale = Vector2(1.5, 0.75)
 emitting = false
 
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("3")]
-texture_filter = 1
 position = Vector2(0, -44)
 sprite_frames = SubResource("1")
 animation = &"idle"

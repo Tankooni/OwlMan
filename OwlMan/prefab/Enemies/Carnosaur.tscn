@@ -53,7 +53,6 @@ script = ExtResource("1")
 AttackSoundName = "Hit1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
 position = Vector2(0, -0.484517)
 sprite_frames = SubResource("1")
 animation = &"idle"

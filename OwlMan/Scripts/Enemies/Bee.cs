@@ -33,7 +33,7 @@ namespace Atmo2.Enemy
 
 			animatedSprite.Play("idle");
 
-			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60)
+			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 10)
 			{
 				TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall }
 			});
