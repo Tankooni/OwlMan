@@ -2,6 +2,7 @@
 extends Control
 
 @export var world_index: int = 1
+@export_file("*.tscn") var next_scene_path: String
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Label.text = "World " + str(world_index)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=13 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="2"]
@@ -13,6 +13,20 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5p7w"]
 size = Vector2(36, 71)
+
+[sub_resource type="GDScript" id="GDScript_lgtyf"]
+script/source = "extends Node
+
+## Opens a loading screen to load the target scene from the resource path.
+## target: The target scene resource path
+## parameters: An optional set of parameters to pass to the new scene. Keep in mind the target scene needs to understand the parameters for them to work.
+func load_screen_to_scene(target: String, parameters: Dictionary = {}) -> void:
+	var loading_screen = preload(\"res://scenes/loading.tscn\").instantiate() # Godot handles loading the loading screen upon game startup. We'll instance a new one here.
+	loading_screen.next_scene_path = target # Assign the next scene to the loader so it knows what to load
+	loading_screen.parameters = parameters # And the parameters to pass along
+	get_tree().current_scene.add_child(loading_screen) # Add the loading screen to the current scene. Note that this does not replace the current scene, so if you want the current scene to stop doing things, you'll need to pause it.
+	
+"
 
 [node name="GameScene" type="Node"]
 
@@ -78,3 +92,6 @@ position = Vector2(630, 209)
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
 position = Vector2(369, 100.539)
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_lgtyf")
