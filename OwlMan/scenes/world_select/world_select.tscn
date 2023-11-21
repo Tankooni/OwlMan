@@ -55,3 +55,4 @@ world_index = 5
 
 [node name="PlayerIcon" parent="." instance=ExtResource("3_tk4ue")]
 layout_mode = 0
+pivot_offset = Vector2(42, 48)

@@ -11,7 +11,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("left") and current_world > 0:
 		current_world -= 1
-		$PlayerIcon.global_position = worlds[current_world].global_positon
+		$PlayerIcon.global_position = worlds[current_world].global_position
 		print("Left pressed")
 		
 	if event.is_action_pressed("right") and current_world < worlds.size() - 1:
