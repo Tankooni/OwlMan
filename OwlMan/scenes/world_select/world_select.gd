@@ -3,7 +3,9 @@ extends Control
 @onready var worlds: Array = [$WorldIcon, $WorldIcon2, $WorldIcon3, $WorldIcon4, $WorldIcon5]
 @onready var current_level: String
 var current_world: int = 0
-var functions = preload("res://Scripts/functions.gd").new()
+#var functions = preload("res://Scripts/functions.gd").new()
+@export var level_select_packed: PackedScene = load("res://scenes/GameScene.tscn")
+#@onready var level_select_scene: LevelSelect = level_select_packed.instantiate()
 
 # Function to get the value at a specific index
 func getValueAtIndex(index: int) -> Control:
@@ -33,6 +35,7 @@ func _input(event):
 		
 	if event.is_action_pressed("start"):
 		print("Enter Pressed")
-		var world_object = getValueAtIndex(current_world)
-		if world_object:
-			functions.load_screen_to_scene(world_object.next_scene_path)
+		Functions.load_screen_to_scene("res://scenes/GameScene.tscn", {"test": "f"})
+#		var world_object = getValueAtIndex(current_world)
+#		if world_object:
+#			functions.load_screen_to_scene("res://scenes/loading.tscn")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=14 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
+[ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_j7aro"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b4m6dfs7iltcm" path="res://Images/Backgrounds/BG_Sky.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxf1hvr7vqdq6" path="res://Images/Backgrounds/BG_Sky_Parallax2.png" id="4"]
@@ -29,6 +30,7 @@ func load_screen_to_scene(target: String, parameters: Dictionary = {}) -> void:
 "
 
 [node name="GameScene" type="Node"]
+script = ExtResource("1_j7aro")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(640, 360)
