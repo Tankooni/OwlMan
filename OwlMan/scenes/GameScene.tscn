@@ -90,10 +90,13 @@ shape = SubResource("RectangleShape2D_s5p7w")
 debug_color = Color(0.392157, 0.568627, 0.611765, 0.419608)
 
 [node name="Beee" parent="." instance=ExtResource("9_y1mjf")]
-position = Vector2(630, 209)
+position = Vector2(296, 208)
+
+[node name="Beee2" parent="." instance=ExtResource("9_y1mjf")]
+position = Vector2(808, -40)
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
-position = Vector2(369, 100.539)
+position = Vector2(792, -120)
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_lgtyf")

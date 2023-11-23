@@ -19,6 +19,9 @@ namespace Atmo2 {
 		[Export]
 		public int speed;
 
+		[Export]
+		public AnimatedSprite2D projectileSprite;
+
 		[Signal]
 		public delegate void OnHitEventHandler(Node2D source, Node2D body);
 		AIVector movement;
@@ -78,6 +81,23 @@ namespace Atmo2 {
 			movement.Direction = -direction;
 			movement.Speed *= 2;
 			Overlord.OwlOverlord.PlaySound("Hit4", GlobalPosition);
-		}
+
+			 // Get the path to the AnimatedSprite2D node
+    		NodePath animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D")); // Replace "AnimatedSprite" with the actual name of your AnimatedSprite2D node
+			    
+			// Check if the path is valid
+			if (animatedSpritePath != null)
+			{
+				// Assuming your projectile has an AnimatedSprite2D as a child
+				AnimatedSprite2D projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);
+
+				// Check if the AnimatedSprite2D node exists
+				if (projectileAnimatedSprite != null)
+				{
+					// Change the current animation frame to 1
+					projectileAnimatedSprite.Frame = 1;
+				}
+			}
   }
+}
 }
