@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bchs0sl3rmwrj"]
+[gd_scene load_steps=7 format=3 uid="uid://bchs0sl3rmwrj"]
 
 [ext_resource type="Script" path="res://Scripts/Projectile.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b3w6xy7bcngiy" path="res://Images/BawssButterfly/000_Bullet00.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://0l3njagdn1x8" path="res://Images/BawssButterfly/000_Bullet01.png" id="3_xnkp1"]
+[ext_resource type="Texture2D" uid="uid://bbvj7rljaflh3" path="res://Images/BawssButterfly/000_Bullet02.png" id="4_e7agk"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -12,6 +13,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_xnkp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e7agk")
 }],
 "loop": true,
 "name": &"default",

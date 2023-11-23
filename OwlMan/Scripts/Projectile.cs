@@ -54,6 +54,32 @@ namespace Atmo2 {
 			// 		break;
 			// 	}
 			// }
+
+			
+
+			if (body.IsInGroup(HitGroups.Player)) {
+				GD.Print("Body is a player");
+			}
+		
+			if (body.IsInGroup(HitGroups.Player) && !isDeflected) {
+						 // Get the path to the AnimatedSprite2D node
+				NodePath animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D")); // Replace "AnimatedSprite" with the actual name of your AnimatedSprite2D node
+
+				GD.Print("Is Player and is not deflected");
+				// Check if the path is valid
+				if (animatedSpritePath != null)
+				{
+					// Assuming your projectile has an AnimatedSprite2D as a child
+					AnimatedSprite2D projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);
+
+					// Check if the AnimatedSprite2D node exists
+					if (projectileAnimatedSprite != null)
+					{
+						// Change the current animation frame to 1
+						projectileAnimatedSprite.Frame = 2;
+					}
+			}
+			}
 			
 			// TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
 			if(!body.IsInGroup(HitGroups.Enemy) || isDeflected) {

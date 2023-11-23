@@ -105,9 +105,12 @@ public partial class Player : CharacterBody2D
 	// Make this a property at some point
 	public Vector2 ResetPoint;
 
+	
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		AddToGroup(HitGroups.Player);
 		_camera = GetNode<Camera2D>("../MainCamera");
 		_camera.Call("SetFollow", this.GetPath());
 
@@ -167,8 +170,13 @@ public partial class Player : CharacterBody2D
 		// AddResponse(PickupType.Jump, OnJumpPickup);
 		// AddResponse(PickupType.Dash, OnDashPickup);
 
+		
+		// Node playerCharacter = GetNode<Node>("CharacterBody2D"); // Replace "PlayerCharacterPath" with the actual path to your player character node
 
-	}
+        // // Add the player character to the "Player" hit group
+        // playerCharacter?.AddToGroup("HitGroup.Player");
+
+    }
 
 	public void AnimationComplete()
 	{
