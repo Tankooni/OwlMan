@@ -25,6 +25,8 @@ namespace Atmo2 {
 		[Signal]
 		public delegate void OnHitEventHandler(Node2D source, Node2D body);
 		AIVector movement;
+		NodePath animatedSpritePath;
+		AnimatedSprite2D projectileAnimatedSprite;
 
 		public override void _Ready()
 		{
@@ -32,7 +34,9 @@ namespace Atmo2 {
 
 			if(this.TargetHitgroups == null) {
 				this.TargetHitgroups = new List<string>();
-			}			
+			}
+			animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D"));
+			projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);			
 
 			movement = new AIVector(this, direction, speed);
 			this.AddChild(movement);
@@ -62,27 +66,13 @@ namespace Atmo2 {
 			}
 		
 			if (body.IsInGroup(HitGroups.Player) && !isDeflected) {
-						 // Get the path to the AnimatedSprite2D node
-				NodePath animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D")); // Replace "AnimatedSprite" with the actual name of your AnimatedSprite2D node
-
 				GD.Print("Is Player and is not deflected");
-				// Check if the path is valid
-				if (animatedSpritePath != null)
-				{
-					// Assuming your projectile has an AnimatedSprite2D as a child
-					AnimatedSprite2D projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);
+				projectileAnimatedSprite.Frame = 2; // Color red
 
-					// Check if the AnimatedSprite2D node exists
-					if (projectileAnimatedSprite != null)
-					{
-						// Change the current animation frame to 1
-						projectileAnimatedSprite.Frame = 2;
-					}
-			}
 			}
 			
 			// TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
-			if(!body.IsInGroup(HitGroups.Enemy) || isDeflected) {
+			if(body.IsInGroup(HitGroups.Enemy) || isDeflected) {
 				// var parent = this.GetParent();
 				// EmitSignal(nameof(OnHit), GetParent(), body);
 
@@ -94,7 +84,8 @@ namespace Atmo2 {
 				//QueueFree();
 				//SetPhysicsProcess(false);
 
-				GD.Print("OOF");
+				// GD.Print("OOF");
+				projectileAnimatedSprite.Frame = 2; // Color red
 			}
 		}
 
@@ -107,23 +98,10 @@ namespace Atmo2 {
 			movement.Direction = -direction;
 			movement.Speed *= 2;
 			Overlord.OwlOverlord.PlaySound("Hit4", GlobalPosition);
-
-			 // Get the path to the AnimatedSprite2D node
-    		NodePath animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D")); // Replace "AnimatedSprite" with the actual name of your AnimatedSprite2D node
 			    
-			// Check if the path is valid
-			if (animatedSpritePath != null)
-			{
-				// Assuming your projectile has an AnimatedSprite2D as a child
-				AnimatedSprite2D projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);
+			projectileAnimatedSprite.Frame = 1; // Color blue
 
-				// Check if the AnimatedSprite2D node exists
-				if (projectileAnimatedSprite != null)
-				{
-					// Change the current animation frame to 1
-					projectileAnimatedSprite.Frame = 1;
-				}
-			}
+
   }
 }
 }
