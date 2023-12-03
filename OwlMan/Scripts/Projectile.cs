@@ -59,20 +59,30 @@ namespace Atmo2 {
 			// 	}
 			// }
 
-			
-
-			if (body.IsInGroup(HitGroups.Player)) {
-				GD.Print("Body is a player");
-			}
 		
-			if (body.IsInGroup(HitGroups.Player) && !isDeflected) {
-				GD.Print("Is Player and is not deflected");
-				projectileAnimatedSprite.Frame = 2; // Color red
-
+			if (body.IsInGroup(HitGroups.Enemy)) {
+				if (isDeflected) {
+					GD.Print("Bullet Hit Enemy and Will Damage Enemy");
+					projectileAnimatedSprite.Frame = 2; // Color red
+				} else {
+					GD.Print("Bullet Hit Enemy and Will Not Damage Enemy");
+					projectileAnimatedSprite.Frame = 0; // Color normal
+				}
+			} else if (body.IsInGroup(HitGroups.Player)) {
+				if (isDeflected) {
+					GD.Print("Bullet Hit Player and Will Not Damage Player");
+					projectileAnimatedSprite.Frame = 1; // Color blue
+				} else {
+					GD.Print("Bullet Hit Player and Will Damage Player");
+					projectileAnimatedSprite.Frame = 2; // Color red
+				}
 			}
 			
-			// TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
-			if(body.IsInGroup(HitGroups.Enemy) || isDeflected) {
+			// // TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
+			// if(body.IsInGroup(HitGroups.Enemy) && isDeflected) {
+			// 	GD.Print("Bullet Hit Enemy and Will Damage Enemy");
+			// 	projectileAnimatedSprite.Frame = 2; // Color red
+			// }
 				// var parent = this.GetParent();
 				// EmitSignal(nameof(OnHit), GetParent(), body);
 
@@ -85,8 +95,7 @@ namespace Atmo2 {
 				//SetPhysicsProcess(false);
 
 				// GD.Print("OOF");
-				projectileAnimatedSprite.Frame = 2; // Color red
-			}
+
 		}
 
 		public void Deflect()
