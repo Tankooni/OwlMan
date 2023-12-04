@@ -26,7 +26,7 @@ public partial class Flagpole : Area2D
 
 	private void OnArea2DAreaEntered(Area2D otherArea)
 	{
-				// Assuming you have a reference to the AnimatedSprite2D node
+		// Assuming you have a reference to the AnimatedSprite2D node
 		AnimatedSprite2D animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
 		// Change the animation to a new animation named "new_animation"
@@ -35,39 +35,3 @@ public partial class Flagpole : Area2D
 
 }
 
-// 	// Called when the player enters the area of the flag
-//     private void OnArea2DAreaEntered(Area2D otherArea)
-//     {
-// 		var typeInfo = otherArea.GetType();
-
-// 		GD.Print("FLAGPOLE IS TOUCHED");
-// 		GD.Print("Entering Area:", otherArea);
-// 		GD.Print("Class:", typeInfo);
-
-// 		        // Get the bodies that are overlapping with the area
-//         var overlappingBodies = GetOverlappingBodies();
-
-//         foreach (var body in overlappingBodies)
-//         {
-//             // Now you can access properties or methods of the overlapping body
-//             GD.Print("Overlapping body:", body);
-//         }
-
-// 		if(otherArea.IsInGroup("Player")){
-// 			GD.Print("FLAGPOLE IS TOUCHED BY PLAYER");
-// 		}
-//     }
-// }
-
-
-//         // // Check if the entering area is the Player node
-//         // if (area is Player)
-//         // {
-//         //     // Emit the PlayerTouched signal
-//         //     EmitSignal("PlayerTouched");
-            
-//         //     // You can add code here to swap the AnimatedSprite2D for the flag
-//         //     // For example, change the animation or texture
-//         //     // Example: Change the animation to "captured"
-//         //     GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("captured");
-//         // }
