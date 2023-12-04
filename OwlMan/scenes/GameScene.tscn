@@ -94,7 +94,7 @@ debug_color = Color(0.392157, 0.568627, 0.611765, 0.419608)
 position = Vector2(360, 208)
 
 [node name="Beee2" parent="." instance=ExtResource("9_y1mjf")]
-position = Vector2(672, 128)
+position = Vector2(768, 248)
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
 position = Vector2(504, 112)

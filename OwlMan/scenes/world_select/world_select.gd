@@ -2,6 +2,7 @@ extends Control
 
 @onready var worlds: Array = [$WorldIcon, $WorldIcon2, $WorldIcon3, $WorldIcon4, $WorldIcon5]
 @onready var current_level: String
+var parameters: Dictionary
 var current_world: int = 0
 #var functions = preload("res://Scripts/functions.gd").new()
 @export var level_select_packed: PackedScene = load("res://scenes/GameScene.tscn")
