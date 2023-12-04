@@ -12,6 +12,8 @@ public partial class Bug : Enemy
         base._Ready();
 
         animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+        AddToGroup(HitGroups.Enemy);
         
         AddChild(new WalkTurn(ChangeDirection, this, 200));
     }

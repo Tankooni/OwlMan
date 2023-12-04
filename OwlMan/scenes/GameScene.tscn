@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=15 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
+[ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_j7aro"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b4m6dfs7iltcm" path="res://Images/Backgrounds/BG_Sky.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxf1hvr7vqdq6" path="res://Images/Backgrounds/BG_Sky_Parallax2.png" id="4"]
@@ -10,8 +11,27 @@
 [ext_resource type="PackedScene" uid="uid://boybl7xia5i5j" path="res://prefab/PlayerOwl.tscn" id="8_d3h60"]
 [ext_resource type="PackedScene" uid="uid://dg34tsxyauv00" path="res://prefab/Enemies/Beee.tscn" id="9_y1mjf"]
 [ext_resource type="PackedScene" uid="uid://dt6g14xyc321m" path="res://prefab/Enemies/Carnosaur.tscn" id="10_uotos"]
+[ext_resource type="PackedScene" uid="uid://dwekd1pgdtx03" path="res://prefab/Objects/flagpole.tscn" id="12_xtltd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5p7w"]
+size = Vector2(36, 71)
+
+[sub_resource type="GDScript" id="GDScript_lgtyf"]
+script/source = "extends Node
+
+## Opens a loading screen to load the target scene from the resource path.
+## target: The target scene resource path
+## parameters: An optional set of parameters to pass to the new scene. Keep in mind the target scene needs to understand the parameters for them to work.
+func load_screen_to_scene(target: String, parameters: Dictionary = {}) -> void:
+	var loading_screen = preload(\"res://scenes/loading.tscn\").instantiate() # Godot handles loading the loading screen upon game startup. We'll instance a new one here.
+	loading_screen.next_scene_path = target # Assign the next scene to the loader so it knows what to load
+	loading_screen.parameters = parameters # And the parameters to pass along
+	get_tree().current_scene.add_child(loading_screen) # Add the loading screen to the current scene. Note that this does not replace the current scene, so if you want the current scene to stop doing things, you'll need to pause it.
+	
+"
 
 [node name="GameScene" type="Node"]
+script = ExtResource("1_j7aro")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(640, 360)
@@ -48,6 +68,7 @@ region_rect = Rect2(0, 0, 12800, 720)
 motion_scale = Vector2(0.7, 0.05)
 
 [node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer4"]
+position = Vector2(39, 4)
 texture = ExtResource("6")
 region_enabled = true
 region_rect = Rect2(0, 0, 12800, 720)
@@ -58,12 +79,28 @@ region_rect = Rect2(0, 0, 12800, 720)
 
 [node name="TileMap_New" parent="." instance=ExtResource("7_hlm6q")]
 position = Vector2(0, 0)
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048581, 0, 0, 1048582, 0, 0, -65536, 0, 0, -131072, 0, 0, -196608, 0, 0, -262144, 0, 0, -327680, 0, 0, -393216, 0, 0, -458752, 0, 0, -524288, 0, 0, -589824, 0, 0, -589823, 0, 0, -589822, 0, 0, -589821, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 0, 0, -589817, 0, 0, -589816, 0, 0, -589815, 0, 0, -589814, 0, 0, -589813, 0, 0, -589812, 0, 0, -589811, 0, 0, -589810, 0, 0, -589809, 0, 0, -589808, 0, 0, -589807, 0, 0, -589806, 0, 0, -589805, 0, 0, -589804, 0, 0, -589803, 0, 0, -589802, 0, 0, -589801, 0, 0, -589800, 0, 0, -589799, 0, 0, -589798, 0, 0, -589797, 0, 0, -589796, 0, 0, -589795, 0, 0, -589794, 0, 0, -589793, 0, 0, -589792, 0, 0, -589791, 0, 0, -589787, 0, 0, -589786, 0, 0, -589788, 0, 0, -589789, 0, 0, -589790, 0, 0, -327638, 0, 0, -262102, 0, 0, -196566, 0, 0, -131030, 0, 0, -65494, 0, 0, 196650, 0, 0, 262186, 0, 0, 327722, 0, 0, 393258, 0, 0, 458794, 0, 0, 524330, 0, 0, 589866, 0, 0, 655402, 0, 0, 720938, 0, 0, 786474, 0, 0, 852010, 0, 0, 917546, 0, 0, 983082, 0, 0, 1048616, 0, 0, 1048615, 0, 0, 1048614, 0, 0, 1048613, 0, 0, 1048612, 0, 0, 1048611, 0, 0, 1048610, 0, 0, 1048609, 0, 0, 1048608, 0, 0, 1048607, 0, 0, 1048606, 0, 0, 1048605, 0, 0, 1048604, 0, 0, 1048603, 0, 0, 1048599, 0, 0, 1048598, 0, 0, 1048600, 0, 0, 1048601, 0, 0, 1048602, 0, 0, 1048617, 0, 0, 1048618, 0, 0, 131114, 0, 0, 65578, 0, 0, 42, 0, 0, -589785, 0, 0, -589784, 0, 0, -589783, 0, 0, -589782, 0, 0, -524246, 0, 0, -458710, 0, 0, -393174, 0, 0, 917533, 0, 0, 983069, 0, 0, 917534, 0, 0, 983070, 0, 0, 917535, 0, 0, 983071, 0, 0, 917536, 0, 0, 983072, 0, 0, 917537, 0, 0, 983073, 0, 0, 917538, 0, 0, 983074, 0, 0, 917539, 0, 0, 983075, 0, 0, 917540, 0, 0, 983076, 0, 0, 262183, 0, 0, 327719, 0, 0, 393255, 0, 0, 458791, 0, 0, 524327, 0, 0, 589863, 0, 0, 655399, 0, 0, 720935, 0, 0, 262184, 0, 0, 327720, 0, 0, 393256, 0, 0, 458792, 0, 0, 524328, 0, 0, 589864, 0, 0, 655400, 0, 0, 720936, 0, 0, 262185, 0, 0, 327721, 0, 0, 393257, 0, 0, 458793, 0, 0, 524329, 0, 0, 589865, 0, 0, 655401, 0, 0, 720937, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983045, 0, 0, 983044, 0, 0, 983043, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 917522, 0, 0, 917523, 0, 0, 1114112, 0, 0, 1114113, 0, 0, 1114114, 0, 0, 1114115, 0, 0, 1114116, 0, 0, 1114117, 0, 0, 1114118, 0, 0, 1114119, 0, 0, 1114120, 0, 0, 1114121, 0, 0, 1114122, 0, 0, 1114123, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179663, 0, 0, 1179664, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1179669, 65536, 0, 1114124, 0, 0, 1114125, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1114132, 0, 0, 1114133, 0, 0, 1114134, 0, 0, 1114135, 0, 0, 1114136, 0, 0, 1114137, 0, 0, 1114138, 0, 0, 1114139, 0, 0, 1114140, 0, 0, 1114148, 0, 0, 1114149, 0, 0, 1114150, 0, 0, 1114151, 0, 0, 1114152, 0, 0, 1114153, 0, 0, 1114154, 0, 0, 1114147, 0, 0, 1114146, 0, 0, 1114145, 0, 0, 1114144, 0, 0, 1114143, 0, 0, 1114142, 0, 0, 1114141, 0, 0)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("8_d3h60")]
 position = Vector2(135, 282)
 
+[node name="OwlManBodyCollider" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -35.5)
+shape = SubResource("RectangleShape2D_s5p7w")
+debug_color = Color(0.392157, 0.568627, 0.611765, 0.419608)
+
 [node name="Beee" parent="." instance=ExtResource("9_y1mjf")]
-position = Vector2(630, 209)
+position = Vector2(376, -216)
+
+[node name="Beee2" parent="." instance=ExtResource("9_y1mjf")]
+position = Vector2(752, 256)
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
-position = Vector2(369, 100.539)
+position = Vector2(512, -232)
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_lgtyf")
+
+[node name="Flagpole" parent="." instance=ExtResource("12_xtltd")]
+position = Vector2(672, 248)

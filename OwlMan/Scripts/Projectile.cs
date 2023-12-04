@@ -19,9 +19,14 @@ namespace Atmo2 {
 		[Export]
 		public int speed;
 
+		[Export]
+		public AnimatedSprite2D projectileSprite;
+
 		[Signal]
 		public delegate void OnHitEventHandler(Node2D source, Node2D body);
 		AIVector movement;
+		NodePath animatedSpritePath;
+		AnimatedSprite2D projectileAnimatedSprite;
 
 		public override void _Ready()
 		{
@@ -29,7 +34,9 @@ namespace Atmo2 {
 
 			if(this.TargetHitgroups == null) {
 				this.TargetHitgroups = new List<string>();
-			}			
+			}
+			animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D"));
+			projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);			
 
 			movement = new AIVector(this, direction, speed);
 			this.AddChild(movement);
@@ -51,9 +58,31 @@ namespace Atmo2 {
 			// 		break;
 			// 	}
 			// }
+
+		
+			if (body.IsInGroup(HitGroups.Enemy)) {
+				if (isDeflected) {
+					GD.Print("Bullet Hit Enemy and Will Damage Enemy");
+					projectileAnimatedSprite.Frame = 2; // Color red
+				} else {
+					GD.Print("Bullet Hit Enemy and Will Not Damage Enemy");
+					projectileAnimatedSprite.Frame = 0; // Color normal
+				}
+			} else if (body.IsInGroup(HitGroups.Player)) {
+				if (isDeflected) {
+					GD.Print("Bullet Hit Player and Will Not Damage Player");
+					projectileAnimatedSprite.Frame = 1; // Color blue
+				} else {
+					GD.Print("Bullet Hit Player and Will Damage Player");
+					projectileAnimatedSprite.Frame = 2; // Color red
+				}
+			}
 			
-			// TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
-			if(!body.IsInGroup(HitGroups.Enemy) || isDeflected) {
+			// // TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
+			// if(body.IsInGroup(HitGroups.Enemy) && isDeflected) {
+			// 	GD.Print("Bullet Hit Enemy and Will Damage Enemy");
+			// 	projectileAnimatedSprite.Frame = 2; // Color red
+			// }
 				// var parent = this.GetParent();
 				// EmitSignal(nameof(OnHit), GetParent(), body);
 
@@ -65,8 +94,8 @@ namespace Atmo2 {
 				//QueueFree();
 				//SetPhysicsProcess(false);
 
-				GD.Print("OOF");
-			}
+				// GD.Print("OOF");
+
 		}
 
 		public void Deflect()
@@ -78,6 +107,10 @@ namespace Atmo2 {
 			movement.Direction = -direction;
 			movement.Speed *= 2;
 			Overlord.OwlOverlord.PlaySound("Hit4", GlobalPosition);
-		}
+			    
+			projectileAnimatedSprite.Frame = 1; // Color blue
+
+
   }
+}
 }

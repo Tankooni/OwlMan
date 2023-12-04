@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://blpxe6jur03w6"]
+
+[ext_resource type="Texture2D" uid="uid://d16mr4egfxdtj" path="res://icon.png" id="1_6uts6"]
+[ext_resource type="Script" path="res://scenes/loading_screen.gd" id="1_qcu77"]
+
+[sub_resource type="Gradient" id="Gradient_q4sne"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oaxxw"]
+gradient = SubResource("Gradient_q4sne")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[node name="LoadingScreen" type="CanvasLayer"]
+script = ExtResource("1_qcu77")
+next_scene_path = "res://scenes/GameScene.tscn"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlackBackground" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_oaxxw")
+
+[node name="OwlMan" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 240.0
+offset_right = 464.0
+offset_bottom = 304.0
+texture = ExtResource("1_6uts6")
+
+[node name="LoadingText" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
