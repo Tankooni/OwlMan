@@ -24,6 +24,8 @@ public partial class Carnosaur : Enemy
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animatedSprite.AnimationFinished += AnimatedSprite_AnimationFinished;
 
+		AddToGroup(HitGroups.Enemy);
+
 		shootAI = new ShootAt(Shoot, ChangeDirection, 120)
 		{
 			TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall }
