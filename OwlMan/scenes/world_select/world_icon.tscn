@@ -1,4 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgxond6irl28i"]
+[gd_scene load_steps=5 format=3 uid="uid://dgxond6irl28i"]
+
+[ext_resource type="FontFile" uid="uid://b0f8mvxep3e6w" path="res://Assets/Fonts/pixpopenei.ttf" id="1_07nk8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ckis"]
+font = ExtResource("1_07nk8")
 
 [sub_resource type="Gradient" id="Gradient_ddfpy"]
 offsets = PackedFloat32Array(0)
@@ -19,6 +24,7 @@ layout_mode = 0
 offset_top = -26.0
 offset_right = 64.0
 text = "World 1"
+label_settings = SubResource("LabelSettings_4ckis")
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
