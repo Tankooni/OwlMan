@@ -17,34 +17,19 @@ public partial class Flagpole : Area2D
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 
 		// this.AreaEntered += OnArea2DAreaEntered;
-		this.BodyEntered += OnDingus;
+		this.BodyEntered += OnBodyEntered;
 	}
 
-    private void OnDingus(Node2D body)
+    private void OnBodyEntered(Node2D body)
     {
 		if(body.IsInGroup(HitGroups.Player))
 		{
-			GD.Print("Dingus");
 			AnimatedSprite2D animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		
 			// Change the animation to a new animation named "new_animation"
 			animatedSprite.Play("owl");
 		}
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-	{
-	}
-
-	private void OnArea2DAreaEntered(Area2D otherArea)
-	{
-		// Assuming you have a reference to the AnimatedSprite2D node
-		AnimatedSprite2D animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		
-		// Change the animation to a new animation named "new_animation"
-		animatedSprite.Play("owl");
-	}
 
 }
 
