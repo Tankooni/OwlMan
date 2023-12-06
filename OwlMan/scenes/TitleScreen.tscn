@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfqqeemrvreld"]
+[gd_scene load_steps=7 format=3 uid="uid://cfqqeemrvreld"]
 
 [ext_resource type="Script" path="res://Scripts/TitleScreen.gd" id="1_doc2u"]
 [ext_resource type="Texture2D" uid="uid://soy00v8sa215" path="res://Assets/PNG/TitleScreen.png" id="2_v45yf"]
 [ext_resource type="FontFile" uid="uid://bqdm3r1judw7h" path="res://Assets/Fonts/pixpopenei.otf" id="3_stdxb"]
 [ext_resource type="Texture2D" uid="uid://2ci0yhtllqbm" path="res://Assets/PNG/SideIcon.png" id="4_82ocd"]
 [ext_resource type="FontFile" uid="uid://daj1k3t2eyene" path="res://Assets/Fonts/PixeloidSansBold-PKnYd.ttf" id="5_8uhsd"]
+[ext_resource type="Texture2D" uid="uid://jdeod0nih2gr" path="res://Assets/PNG/SideIcon_2.png" id="5_rvs2m"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -25,24 +26,51 @@ texture = ExtResource("2_v45yf")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 856.0
-offset_top = 328.0
-offset_right = 1040.0
-offset_bottom = 400.0
+offset_left = 800.0
+offset_top = 320.0
+offset_right = 1096.0
+offset_bottom = 408.0
 theme_override_fonts/font = ExtResource("3_stdxb")
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 41
 text = "Start"
 icon = ExtResource("4_82ocd")
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 552.0
+offset_right = 1048.0
+offset_bottom = 624.0
+theme_override_fonts/font = ExtResource("3_stdxb")
+theme_override_font_sizes/font_size = 21
+text = "Quit"
+icon = ExtResource("5_rvs2m")
+icon_alignment = 2
+expand_icon = true
+
+[node name="OptionsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 456.0
+offset_right = 1048.0
+offset_bottom = 528.0
+theme_override_fonts/font = ExtResource("3_stdxb")
+theme_override_font_sizes/font_size = 21
+text = "Options"
+icon = ExtResource("5_rvs2m")
+icon_alignment = 2
 expand_icon = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 664.0
-offset_top = 152.0
+offset_top = 136.0
 offset_right = 1328.0
-offset_bottom = 309.0
+offset_bottom = 293.0
 theme_override_fonts/font = ExtResource("5_8uhsd")
 theme_override_font_sizes/font_size = 111
 text = "OWLMAN"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
