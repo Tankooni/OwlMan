@@ -1,0 +1,33 @@
+[
+  {
+    "id": "Start",
+    "character": "OwlPerson",
+    "text": "Would you like an apple or orange?"
+  },
+  {
+    "go to": [
+      "Apple",
+      "Orange"
+    ],
+    "options": [
+      "Apple",
+      "Orange"
+    ]
+  },
+  {
+    "id": "Apple",
+    "character": "OwlMan",
+    "text": "The apple is very tasty."
+  },
+  {
+    "function": "end_dialog"
+  },
+  {
+    "id": "Orange",
+    "character": "OwlMan",
+    "text": "The orange is my goal."
+  },
+  {
+    "function": "end_dialog"
+  }
+]
