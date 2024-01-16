@@ -10,7 +10,8 @@ namespace Atmo2.Movements
         private Player entity;
 		public bool OnGround { get; set; }
 		public bool HeadBonk { get; set; }
-		public int AgainstWall { get; set; }
+		public bool AgainstLeftWall { get; set; }
+		public bool AgainstRightWall { get; set; }
 		public float MoveRefill { get; set; }
 
 		public bool LeftBox { get; set; }
@@ -32,10 +33,6 @@ namespace Atmo2.Movements
 		public MovementInfo(Player entity)
 		{
 			this.entity = entity;
-			MoveRefill = 0;
-			VelX = 0;
-			VelY = 0;
-
 			Reset();
 		}
 
@@ -43,7 +40,9 @@ namespace Atmo2.Movements
 		{
 			OnGround = false;
 			HeadBonk = false;
-			AgainstWall = 0;
+			AgainstLeftWall = false;
+			AgainstRightWall = false;
+			MoveRefill = 0;
 			VelX = 0;
 			VelY = 0;
 		}
@@ -55,8 +54,8 @@ namespace Atmo2.Movements
 
 			OnGround = entity.TestMove(entity.Transform, new Vector2(0, 1));
 			HeadBonk = entity.TestMove(entity.Transform, new Vector2(0, -1));
-			AgainstWall = entity.TestMove(entity.Transform, new Vector2(1, 0)) ? 1 : 0;
-			AgainstWall = entity.TestMove(entity.Transform, new Vector2(-1, 0)) ? -1 : 0;
+			AgainstLeftWall = entity.TestMove(entity.Transform, new Vector2(-1, 0));
+			AgainstRightWall = entity.TestMove(entity.Transform, new Vector2(1, 0));
 
 
    //         this.OnGround = entity.Collide(KQ.CollisionTypeSolid, entity.X, entity.Y + 1) != null;

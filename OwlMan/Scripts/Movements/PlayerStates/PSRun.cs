@@ -10,6 +10,7 @@ namespace Atmo2.Movements.PlayerStates
 	class PSRun : PlayerState
 	{
 		private float speedModifier;
+		
 
 		public PSRun(Player player, float initialSpeedModifier = 0)
 			:base(player)

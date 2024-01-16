@@ -37,7 +37,7 @@ namespace Atmo2
 		public void GiveAllAbilities()
 		{
 			GoodJump = true;
-			DoubleJump = true;
+			DoubleJump = false;
 			WallSlide = true;
 			WallJump = true;
 			GroundDash = true;

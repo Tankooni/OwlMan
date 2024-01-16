@@ -12,13 +12,15 @@ namespace Atmo2.Movements.PlayerStates
 		private float speed;
 		private int coyoteTimeTicks;
 		private float speedModifier;
+		private float jumpSpeedModifier;
 
-		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1)
+		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1, float jumpSpeedModifier = 0)
 			: base(player)
 		{
 			this.player = player;
 			this.speed = speed < 0 ? player.RunSpeed : speed;
 			this.coyoteTimeTicks = coyoteTime ? 10 : 0;
+			this.jumpSpeedModifier = jumpSpeedModifier;
 			speedModifier = initialSpeedModifier;
 		}
 		public override void OnEnter()
@@ -61,7 +63,11 @@ namespace Atmo2.Movements.PlayerStates
 			//Modify any timer variables & animations that will be based on movement
 			if (speedModifier != 0)
 			{
-				speedModifier = Mathf.Clamp(speedModifier - player.HorizontalDrag * signedHorizontal, signedHorizontal < 0 ? speedModifier : 0, signedHorizontal < 0 ? 0 : speedModifier);
+				// speedModifier = speedModifier - player.HorizontalDrag * signedHorizontal;
+				speedModifier = Mathf.Clamp(
+					speedModifier - player.HorizontalDrag * signedHorizontal, 
+					signedHorizontal < 0 ? speedModifier : 0, 
+					signedHorizontal < 0 ? 0 : speedModifier);
 			}
 
 			AnimationCheckSet();
@@ -81,7 +87,7 @@ namespace Atmo2.Movements.PlayerStates
 				--coyoteTimeTicks;
 				if (player.InputController.JumpPressed())
 				{
-					return new PSJump(player, speedModifier);
+					return new PSJump(player, speedModifier + jumpSpeedModifier);
 				}
 				if (player.Abilities.GroundDash &&
 					player.InputController.DashPressed())
@@ -119,14 +125,17 @@ namespace Atmo2.Movements.PlayerStates
 				else // Hit the ground runnin'
 					return new PSRun(player);
 
-			// Determine if we're on a wall and only left or right is pressed.
-			if (player.MovementInfo.AgainstWall != 0 && (player.InputController.LeftHeld() ^ player.InputController.RightHeld()))
+			// Determine if we're on a wall and only left or right is pressed for wall slide if enabled
+			if (player.Abilities.WallSlide
+				&& (player.MovementInfo.AgainstLeftWall || player.MovementInfo.AgainstRightWall)
+				&& (player.InputController.LeftHeld() ^ player.InputController.RightHeld()))
 			{
-				if(player.MovementInfo.AgainstWall < 0 && player.InputController.LeftHeld())
+				if(player.MovementInfo.AgainstLeftWall && player.InputController.LeftHeld())
 				{
 					return new PSWallSlide(player, true);
 				}
-				else if(player.MovementInfo.AgainstWall > 0 && player.InputController.RightHeld())
+				
+				if(player.MovementInfo.AgainstRightWall && player.InputController.RightHeld())
 				{
 					return new PSWallSlide(player, false);
 				}
