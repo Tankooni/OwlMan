@@ -34,7 +34,7 @@ namespace Atmo2.Movements.PlayerStates
 
         public override void OnExit(PlayerState newState)
 		{
-			//player.MovementInfo.ResetBoxes();
+			// player.MovementInfo.ResetBoxes();
 		}
 
         public override PlayerState Update()
@@ -93,6 +93,24 @@ namespace Atmo2.Movements.PlayerStates
 			if (player.MovementInfo.OnGround && player.InputController.JumpPressed())
 			{
 				return new PSJump(player, SpeedModifier);
+			}
+
+			if (player.MovementInfo.AgainstWall != 0)
+			{
+				if(player.MovementInfo.AgainstWall < 0 && player.InputController.LeftPressed())
+				{
+					
+				}
+				else if(player.MovementInfo.AgainstWall > 0 && player.InputController.RightPressed())
+				{
+					
+				}
+
+
+				// TODO: add directional check in case we're flush on a wall but moving away
+				// dashTicks = 0; // Our dash should be considered done since we've hit a wall.
+				player.ShakeCamera();
+				return new PSWallSlide(player, player.MovementInfo.AgainstWall < 0);
 			}
 
 			--dashTicks;

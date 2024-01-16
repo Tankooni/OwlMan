@@ -200,6 +200,12 @@ public partial class Player : CharacterBody2D
 	// {
 	// }
 
+	public void ShakeCamera()
+	{
+		_camera.Call("Shake", .1f, 100, 10);
+		Overlord.OwlOverlord.PlaySound("Hit4", Position);
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
@@ -224,8 +230,7 @@ public partial class Player : CharacterBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
-				_camera.Call("Shake", .1f, 100, 10);
-				Overlord.OwlOverlord.PlaySound("Hit4", Position);
+				ShakeCamera();
 
 				// if (body.HasMethod("OnDamage"))
 				// 	body.Call("OnDamage");
@@ -245,8 +250,7 @@ public partial class Player : CharacterBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
-				_camera.Call("Shake", .1f, 100, 10);
-				Overlord.OwlOverlord.PlaySound("Hit4", Position);
+				ShakeCamera();
 			}
 			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
 			{
@@ -260,8 +264,7 @@ public partial class Player : CharacterBody2D
 			{
 				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
 				body.QueueFree();
-				_camera.Call("Shake", .1f, 100, 10);
-				Overlord.OwlOverlord.PlaySound("Hit4", Position);
+				ShakeCamera();
 			}
 			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
 			{

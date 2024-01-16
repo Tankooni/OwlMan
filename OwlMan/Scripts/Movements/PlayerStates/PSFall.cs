@@ -119,6 +119,19 @@ namespace Atmo2.Movements.PlayerStates
 				else // Hit the ground runnin'
 					return new PSRun(player);
 
+			// Determine if we're on a wall and only left or right is pressed.
+			if (player.MovementInfo.AgainstWall != 0 && (player.InputController.LeftHeld() ^ player.InputController.RightHeld()))
+			{
+				if(player.MovementInfo.AgainstWall < 0 && player.InputController.LeftHeld())
+				{
+					return new PSWallSlide(player, true);
+				}
+				else if(player.MovementInfo.AgainstWall > 0 && player.InputController.RightHeld())
+				{
+					return new PSWallSlide(player, false);
+				}
+			}
+
 			return null;
 		}
 		private void AnimationCheckSet()
