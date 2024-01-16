@@ -1,0 +1,38 @@
+[
+  {
+	"ID": "Start",
+	"Character": "OwllMan",
+	"Pose": "Confident",
+	"Text": "Would you like an apple or orange?"
+  },
+  {
+	"GoTo": [
+	  "Apple",
+	  "Orange"
+	],
+	"Options": [
+	  "Apple",
+	  "Orange"
+	],
+	"If": "apple_exists"
+  },
+  {
+	"ID": "Apple",
+	"Character": "OwlMan",
+	"Pose": "Confident",
+	"Text": "The apple is very tasty.",
+	"Add": "apple_eaten"
+  },
+  {
+	"Function": "end_dialog"
+  },
+  {
+	"ID": "Orange",
+	"Character": "OwlMan",
+	"Pose": "Confident",
+	"Text": "The orange is my goal."
+  },
+  {
+	"Function": "end_dialog"
+  }
+]

@@ -8,9 +8,9 @@ using Godot;
 
 namespace Atmo2.Movements.PlayerStates
 {
-	class PSIdle : PlayerState
+	class PSInteract : PlayerState
 	{
-		public PSIdle(Player player)
+		public PSInteract(Player player)
 			: base(player)
 		{
 			this.player = player;
@@ -64,16 +64,28 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				return new PSJump(player);
 			}
-			if (!player.InputController.InteractPressed())
-			{
-				return new PSInteract(player);
-			}
-			if (!player.InputController.InteractPressed() && player.HasInteract())
-			{
-				return new PSInteract(player);
-			}
 
 			return null;
 		}
+
+		// public static bool CheckInteract(Player player)
+		// {
+		// 	bool result = player.OverlapsArea(player.GlobalPosition, HitGroups.GetGroups(HitGroups.Interact));
+		// 	GD.print("CheckInteract Result: ", result);
+		// 	return result;
+		// 	// foreach (string hitgroup in HitGroups.GetGroups())
+		// 	// {
+		// 	// 	if (player.OverlapsArea(player.GlobalPosition, HitGroups.GetGroups(hitgroup)))
+		// 	// }	
+		// 	// return false;
+
+
+		// 	// // Check if player overlaps with an interactable object
+		// 	// if ()
+		// 	// {
+		// 	// 	return false;
+		// 	// }
+			
+		// }
 	}
 }

@@ -11,7 +11,7 @@
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Character" type="TextureRect" parent="Control"]
+[node name="Portrait" type="TextureRect" parent="Control"]
 layout_mode = 0
 offset_left = -512.0
 offset_top = -344.0

@@ -101,7 +101,5 @@ public partial class Overlord : Node
 	public static readonly string Wall = "wall";
 
 	public static readonly string Bullet = "bullet";
-
-	// have a way to enumerate over types
-	//public static IEnumerable<string> 
+	public static readonly string Interact = "interactable";
   }

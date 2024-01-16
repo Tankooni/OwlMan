@@ -79,6 +79,10 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				return new PSFall(player, coyoteTime: true);
 			}
+			if (!player.InputController.InteractPressed() && player.HasInteract())
+			{
+				return new PSInteract(player);
+			}
 
 			return null;
 		}
