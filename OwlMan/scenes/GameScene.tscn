@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=17 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
 [ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_j7aro"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://dg34tsxyauv00" path="res://prefab/Enemies/Beee.tscn" id="9_y1mjf"]
 [ext_resource type="PackedScene" uid="uid://dt6g14xyc321m" path="res://prefab/Enemies/Carnosaur.tscn" id="10_uotos"]
 [ext_resource type="PackedScene" uid="uid://dwekd1pgdtx03" path="res://prefab/Objects/flagpole.tscn" id="12_xtltd"]
+[ext_resource type="Texture2D" uid="uid://1wlvxj4kmacl" path="res://Assets/PNG/Etc/Trashcan.png" id="13_d7n3i"]
+[ext_resource type="Texture2D" uid="uid://b8f8x440fsdcf" path="res://Assets/PNG/Etc/Sign.png" id="14_mte03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5p7w"]
 size = Vector2(36, 71)
@@ -91,10 +93,10 @@ shape = SubResource("RectangleShape2D_s5p7w")
 debug_color = Color(0.392157, 0.568627, 0.611765, 0.419608)
 
 [node name="Beee" parent="." instance=ExtResource("9_y1mjf")]
-position = Vector2(360, 208)
+position = Vector2(392, 40)
 
 [node name="Beee2" parent="." instance=ExtResource("9_y1mjf")]
-position = Vector2(672, 128)
+position = Vector2(768, 248)
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
 position = Vector2(504, 112)
@@ -104,3 +106,11 @@ script = SubResource("GDScript_lgtyf")
 
 [node name="Flagpole" parent="." instance=ExtResource("12_xtltd")]
 position = Vector2(672, 248)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(507, 288)
+texture = ExtResource("13_d7n3i")
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(373, 285)
+texture = ExtResource("14_mte03")

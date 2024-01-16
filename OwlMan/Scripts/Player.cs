@@ -77,6 +77,8 @@ public partial class Player : CharacterBody2D
 	// Make this private later and fix the things that reference it to flip the image
 	public AnimatedSprite2D Image;
 
+	public Godot.Collections.Array AllInteractions = new Godot.Collections.Array();
+
 	private Camera2D _camera;
 	private Control _hud;
 	private CollisionShape2D _collisionShape2D;
@@ -387,4 +389,18 @@ public partial class Player : CharacterBody2D
 	// 	else
 	// 		dashOrb.IsActivated = true;
 	// }
+
+	//// Interaction Methods ////
+	
+	public void OnAreaEntered(Area2D InteractionArea)
+	{
+		GD.Print("Area entered: ", InteractionArea.Name);
+		AllInteractions.Insert(0, InteractionArea);
+	}
+
+	public void OnAreaExited(Area2D InteractionArea)
+	{
+		GD.Print("Area exited: ", InteractionArea.Name);
+		AllInteractions.Remove(InteractionArea);
+	}
 }

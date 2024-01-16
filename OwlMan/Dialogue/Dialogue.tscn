@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://c88rdo3arxh88"]
+
+[ext_resource type="Texture2D" uid="uid://ltr2phr0mxcn" path="res://Dialogue/Portraits/OwlMan/Confident.png" id="1_fcss1"]
+[ext_resource type="FontFile" uid="uid://daj1k3t2eyene" path="res://Assets/Fonts/PixeloidSansBold-PKnYd.ttf" id="2_q8j37"]
+[ext_resource type="Texture2D" uid="uid://cf6e3ie56iugo" path="res://Assets/PNG/Indicator.png" id="3_78dif"]
+[ext_resource type="FontFile" uid="uid://bpual12k64068" path="res://Assets/Fonts/PixeloidMono-d94EV.ttf" id="4_s4sju"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Character" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -512.0
+offset_top = -344.0
+offset_right = -237.966
+texture = ExtResource("1_fcss1")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="PanelBG" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = -298.0
+offset_top = -246.0
+offset_right = 430.0
+offset_bottom = 18.0
+
+[node name="PanelBox" type="Panel" parent="Control/PanelBG"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 720.0
+offset_bottom = 248.0
+
+[node name="NameBox" type="Panel" parent="Control/PanelBG"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 312.0
+offset_bottom = 88.0
+
+[node name="Character" type="RichTextLabel" parent="Control/PanelBG/NameBox"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 8.0
+offset_right = 281.0
+offset_bottom = 72.0
+theme_override_fonts/normal_font = ExtResource("2_q8j37")
+theme_override_font_sizes/normal_font_size = 48
+text = "OWLMAN"
+
+[node name="NextIndicator" type="Sprite2D" parent="Control/PanelBG"]
+position = Vector2(689, 222)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_78dif")
+
+[node name="Text" type="RichTextLabel" parent="Control/PanelBG"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 104.0
+offset_right = 664.0
+offset_bottom = 232.0
+theme_override_fonts/normal_font = ExtResource("4_s4sju")
+theme_override_font_sizes/normal_font_size = 24
+text = "Testing this dialogue for testing all of the font choices. Giving more detail on this conversation."
+
+[node name="Options" type="GridContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 328.0
+offset_top = 312.0
+offset_right = 664.0
+offset_bottom = 400.0
+
+[node name="Option1" type="Button" parent="Control/Options"]
+layout_mode = 2
+
+[node name="Option2" type="Button" parent="Control/Options"]
+layout_mode = 2
+
+[node name="Option3" type="Button" parent="Control/Options"]
+layout_mode = 2
