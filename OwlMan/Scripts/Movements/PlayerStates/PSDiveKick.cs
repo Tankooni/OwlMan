@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace Atmo2.Movements.PlayerStates
 {
-    class PSDiveKick : PlayerState
-    {
-        //TODO: Fix this
-        public static float last_bounce;
+	class PSDiveKick : PlayerState
+	{
+		//TODO: Fix this
+		public static float last_bounce;
 
 		public PSDiveKick(Player player)
 			: base(player)
 		{
-            this.player = player;
+			this.player = player;
 		}
-        public override void OnEnter()
-        {
-            player.Animation = "diveKick";
-            player.MovementInfo.VelY = 1200f;
+		public override void OnEnter()
+		{
+			player.Animation = "diveKick";
+			player.MovementInfo.VelY = 1200f;
 			player.InputController.JumpSuccess();
 		}
 
-        public override void OnExit(PlayerState newState)
-        {
+		public override void OnExit(PlayerState newState)
+		{
 
 			player.MovementInfo.ResetBoxes();
 		}
 
-        public override PlayerState Update()
-        {
+		public override PlayerState Update()
+		{
 			player.MovementInfo.BottomBox = true;
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
@@ -41,7 +41,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(signedHorizontal);
 
 			if (player.MovementInfo.OnGround)
-            {
+			{
 				if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 					return new PSRun(player);
 				else
@@ -85,6 +85,6 @@ namespace Atmo2.Movements.PlayerStates
 			// }
 
 			return null;
-        }
-    }
+		}
+	}
 }

@@ -21,6 +21,8 @@ public partial class Player : CharacterBody2D
 	public Abilities Abilities;
 	public MovementInfo MovementInfo;
 
+	public InteractComponent Interactable;
+
 	// Player state
 	private int health;
 	public int Health
@@ -405,5 +407,17 @@ public partial class Player : CharacterBody2D
 	{
 		GD.Print("Area exited: ", InteractionArea.Name);
 		AllInteractions.Remove(InteractionArea);
+	}
+
+	public bool HasInteract()
+	{
+		if (Interactable is not null)
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
 	}
 }

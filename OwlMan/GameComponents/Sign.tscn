@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgma4lm2b17mt"]
+
+[ext_resource type="Texture2D" uid="uid://b8f8x440fsdcf" path="res://Assets/PNG/Etc/Sign.png" id="1_7tmq0"]
+[ext_resource type="Script" path="res://scenes/Sign.cs" id="2_m4pih"]
+[ext_resource type="Script" path="res://GameComponents/InteractComponent.cs" id="3_5si5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekq7i"]
+size = Vector2(28, 34)
+
+[node name="Sign" type="Sprite2D"]
+position = Vector2(1, -16)
+texture = ExtResource("1_7tmq0")
+script = ExtResource("2_m4pih")
+
+[node name="InteractComponent" type="Area2D" parent="."]
+script = ExtResource("3_5si5m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ekq7i")
+
+[connection signal="body_entered" from="InteractComponent" to="InteractComponent" method="OnBodyEntered"]
+[connection signal="body_exited" from="InteractComponent" to="InteractComponent" method="OnBodyExited"]
