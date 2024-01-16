@@ -23,7 +23,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.InputController.JumpSuccess();
 		}
 
-        public override void OnExit()
+        public override void OnExit(PlayerState newState)
         {
 
 			player.MovementInfo.ResetBoxes();

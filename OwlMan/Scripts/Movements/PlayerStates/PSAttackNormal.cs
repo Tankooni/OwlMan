@@ -24,7 +24,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.Animation = "attackNormal";
 		}
 
-		public override void OnExit()
+		public override void OnExit(PlayerState newState)
 		{
 			player.MovementInfo.VelX = 0;
 			player.MovementInfo.ResetBoxes();

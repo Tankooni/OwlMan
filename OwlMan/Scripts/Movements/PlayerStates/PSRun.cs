@@ -23,7 +23,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.Animation = "walk";
 		}
 
-		public override void OnExit()
+		public override void OnExit(PlayerState newState)
 		{
 			player.MovementInfo.VelX = 0;
 		}

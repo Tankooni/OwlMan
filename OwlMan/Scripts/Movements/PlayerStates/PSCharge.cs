@@ -38,7 +38,7 @@ namespace Atmo2.Movements.PlayerStates
 			// AudioManager.PlaySoundVariations("charge", .5f, .7f);
         }
 
-        public override void OnExit()
+        public override void OnExit(PlayerState newState)
         {
 			//poseParticles.Emitting = false;
             player.EnergyRechargeRate = previous_charge_rate;

@@ -32,7 +32,7 @@ namespace Atmo2.Movements.PlayerStates
 			//direction = new Vector2(player.InputController.LeftStickHorizontal(), 0/*Controller.LeftStickVertical()*/).Normalized();
 		}
 
-        public override void OnExit()
+        public override void OnExit(PlayerState newState)
 		{
 			//player.MovementInfo.ResetBoxes();
 		}

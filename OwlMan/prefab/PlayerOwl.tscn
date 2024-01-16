@@ -145,11 +145,18 @@ position = Vector2(-1.62259, -43.6846)
 scale = Vector2(1.5, 0.75)
 emitting = false
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -44)
+texture = ExtResource("14_v6p2n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("3")]
 texture_filter = 1
 position = Vector2(0, -44)
 sprite_frames = SubResource("1")
-animation = &"idle"
+animation = &"wallSlide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -33)

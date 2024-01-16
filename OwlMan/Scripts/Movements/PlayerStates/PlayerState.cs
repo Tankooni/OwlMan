@@ -17,7 +17,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public abstract void OnEnter();
 		public abstract PlayerState Update();
-		public abstract void OnExit();
+		public abstract void OnExit(PlayerState newState);
 		public virtual PlayerState OnAnimationComplete()
 		{
 			return null;// new PSIdle(player);

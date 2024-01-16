@@ -41,7 +41,7 @@ namespace Atmo2.Movements.PlayerStates
             //     });
         }
 
-        public override void OnExit()
+        public override void OnExit(PlayerState newState)
         {
             
         }

@@ -16,8 +16,8 @@ namespace Atmo2.Movements.PlayerStates
 		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1)
 			: base(player)
 		{
-			this.player     = player;
-			this.speed      = speed < 0 ? player.RunSpeed : speed;
+			this.player = player;
+			this.speed = speed < 0 ? player.RunSpeed : speed;
 			this.coyoteTimeTicks = coyoteTime ? 10 : 0;
 			speedModifier = initialSpeedModifier;
 		}
@@ -26,7 +26,7 @@ namespace Atmo2.Movements.PlayerStates
 			AnimationCheckSet();
 		}
 
-		public override void OnExit()
+		public override void OnExit(PlayerState newState)
 		{
 			player.MovementInfo.VelX = 0;
 		}

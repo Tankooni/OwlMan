@@ -26,7 +26,7 @@ namespace Atmo2.Movements.PlayerStates
             //     .OnComplete(() => this.animation_finished = true);
         }
 
-        public override void OnExit()
+        public override void OnExit(PlayerState newState)
         {
             // player.Collidable = true;
         }

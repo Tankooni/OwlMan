@@ -23,7 +23,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.Animation = "idle";
         }
 
-        public override void OnExit()
+        public override void OnExit(PlayerState newState)
         {
         }
 

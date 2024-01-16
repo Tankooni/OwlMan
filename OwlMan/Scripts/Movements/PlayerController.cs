@@ -31,7 +31,7 @@ namespace Atmo2.Movements
 
 			if(newState != null)
 			{
-				current_state.OnExit();
+				current_state.OnExit(newState);
 				newState.OnEnter();
 				current_state = newState;
 			}

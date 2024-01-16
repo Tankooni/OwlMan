@@ -27,7 +27,7 @@ namespace Atmo2.Movements.PlayerStates
 			//this.player.MovementInfo.VelY = strY;
 		}
 
-		public override void OnExit()
+		public override void OnExit(PlayerState newState)
 		{
 			//player.MovementInfo.VelX = 0;
 		}
