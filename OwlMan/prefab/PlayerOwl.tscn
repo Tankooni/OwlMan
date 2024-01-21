@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://boybl7xia5i5j"]
+[gd_scene load_steps=28 format=3 uid="uid://boybl7xia5i5j"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1"]
 [ext_resource type="PackedScene" path="res://Particles/TestParticles.tscn" id="2"]
@@ -20,8 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://3o1gkogqonmp" path="res://Images/OwlMan/001_Walk03.png" id="17_024lk"]
 [ext_resource type="Texture2D" uid="uid://cy2mcjpa8e7d5" path="res://Images/OwlMan/001_Walk00.png" id="18_d50ls"]
 [ext_resource type="Texture2D" uid="uid://cw2uvjgepepcd" path="res://Images/OwlMan/001_Walk01.png" id="19_c717g"]
-[ext_resource type="Texture2D" uid="uid://dvp3w2ndwd0ad" path="res://Images/Julep/006_Slide00.png" id="20_ir5bn"]
-[ext_resource type="Texture2D" uid="uid://c6118pbs3xkwr" path="res://Images/Julep/006_Slide01.png" id="21_lsjof"]
+[ext_resource type="Texture2D" uid="uid://qdog1isnk7x1" path="res://Images/OwlMan/002_Pose03.png" id="20_ldser"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -115,10 +114,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("20_ir5bn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_lsjof")
+"texture": ExtResource("20_ldser")
 }],
 "loop": true,
 "name": &"wallSlide",

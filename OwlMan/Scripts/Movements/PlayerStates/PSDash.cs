@@ -95,22 +95,24 @@ namespace Atmo2.Movements.PlayerStates
 				return new PSJump(player, SpeedModifier);
 			}
 
-			if (player.MovementInfo.AgainstWall != 0)
+			if (player.MovementInfo.AgainstLeftWall || player.MovementInfo.AgainstRightWall)
 			{
-				if(player.MovementInfo.AgainstWall < 0 && player.InputController.LeftPressed())
+				if(player.MovementInfo.AgainstLeftWall && player.InputController.LeftPressed())
 				{
 					
 				}
-				else if(player.MovementInfo.AgainstWall > 0 && player.InputController.RightPressed())
+				else if(player.MovementInfo.AgainstRightWall && player.InputController.RightPressed())
 				{
 					
 				}
 
 
 				// TODO: add directional check in case we're flush on a wall but moving away
-				// dashTicks = 0; // Our dash should be considered done since we've hit a wall.
-				player.ShakeCamera();
-				return new PSWallSlide(player, player.MovementInfo.AgainstWall < 0);
+				if(player.Abilities.WallSlide)
+					return new PSWallSlide(player, player.MovementInfo.AgainstLeftWall);
+				
+				// Our dash should be considered done since we've hit a wall
+				dashTicks = 0;
 			}
 
 			--dashTicks;

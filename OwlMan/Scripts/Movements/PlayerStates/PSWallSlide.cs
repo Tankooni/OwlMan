@@ -9,19 +9,22 @@ namespace Atmo2.Movements.PlayerStates
 {
 	class PSWallSlide : PlayerState
 	{
-		private bool isLeft = false;
-		public PSWallSlide(Player player, bool isLeft = false)
+		private bool wallOnLeft = false;
+		public PSWallSlide(Player player, bool wallOnLeft)
 			: base(player)
 		{
 			this.player = player;
-			this.isLeft = isLeft;
+			this.wallOnLeft = wallOnLeft;
 		}
 		public override void OnEnter()
 		{
 			player.MovementInfo.VelX = 0;
-			player.Image.FlipH = isLeft;
+			player.MovementInfo.VelY = 0;
+			player.Image.FlipH = !wallOnLeft;
 
-			AnimationCheckSet();
+			player.ShakeCamera();
+
+			player.Animation = "wallSlide";
 		}
 
 		public override void OnExit(PlayerState newState)
@@ -34,40 +37,39 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.VelY += player.Gravity / 2;
-
-			AnimationCheckSet();
+			player.MovementInfo.VelY += player.Gravity / 3;
 
 			if(player.MovementInfo.OnGround)
 			{
 				return new PSIdle(player);
 			}
 
-			if(isLeft && player.MovementInfo.AgainstWall > -1)
+
+
+
+			if(player.Abilities.WallJump && player.InputController.JumpPressed())
 			{
-				return new PSFall(player);
-			}
-			else if (player.MovementInfo.AgainstWall < 1)
-			{
-				return new PSFall(player);
+				//TODO: Add some kind of directionality to this call
+				return new PSJump(player, initialSpeedModifier: player.RunSpeed * 2);
 			}
 
-			if(player.InputController.LeftHeld() ^player.InputController.RightHeld())
+			// Check to see if we should enter into the falling state
+			if(wallOnLeft)
 			{
-				// if(isLeft && )
-				// {
-					
-				// }
+				if(!player.MovementInfo.AgainstLeftWall)
+					return new PSFall(player);
+				if(player.InputController.RightHeld())
+					return new PSFall(player, coyoteTime: player.Abilities.WallJump, jumpSpeedModifier: player.RunSpeed * 2);
+			}
+			else 
+			{
+				if(!player.MovementInfo.AgainstRightWall)
+					return new PSFall(player);
+				if(player.InputController.LeftHeld())
+					return new PSFall(player, coyoteTime: player.Abilities.WallJump, jumpSpeedModifier: player.RunSpeed * 2);
 			}
 
 			return null;
-		}
-		private void AnimationCheckSet()
-		{
-			if (player.MovementInfo.VelY > 0)
-				player.Animation = "wallSlide";
-			else
-				player.Animation = "wallSlide";
 		}
 	}
 }

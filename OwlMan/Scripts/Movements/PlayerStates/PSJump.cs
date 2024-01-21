@@ -56,7 +56,10 @@ namespace Atmo2.Movements.PlayerStates
 			//Modify any timer variables & animations that will be based on movement
 			if (speedModifier != 0)
 			{
-				speedModifier = Mathf.Clamp(speedModifier - player.HorizontalDrag * signedHorizontal, signedHorizontal < 0 ? speedModifier : 0, signedHorizontal < 0 ? 0 : speedModifier);
+				speedModifier = Mathf.Clamp(
+					speedModifier - player.HorizontalDrag * signedHorizontal,
+					signedHorizontal < 0 ? speedModifier : 0,
+					signedHorizontal < 0 ? 0 : speedModifier);
 			}
 
 			//Handle Player input for state changers

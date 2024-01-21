@@ -15,7 +15,7 @@ namespace Atmo2
 		
 		public bool JumpHeld() { return Input.IsActionPressed("jump"); }
 		public bool DashHeld() { return Input.IsActionPressed("dash"); }
-		public bool Attackv() { return Input.IsActionPressed("attack"); }
+		public bool AttackHeld() { return Input.IsActionPressed("attack"); }
 		public bool InteractHeld() { return Input.IsActionPressed("interact"); }
 
 		public bool UpHeld() { return Input.IsActionPressed("up"); }
