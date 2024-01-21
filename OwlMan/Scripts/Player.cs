@@ -413,6 +413,7 @@ public partial class Player : CharacterBody2D
 	{
 		if (Interactable is not null)
 		{
+			GD.Print(Interactable);
 			return true;
 		}
 		else 

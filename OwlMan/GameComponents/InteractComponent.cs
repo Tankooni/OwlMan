@@ -18,6 +18,24 @@ public partial class InteractComponent : Area2D
 		if(body.IsInGroup(HitGroups.Player))
 			{
 				GD.Print("Interact Component entered");
+				
+				//Player player = GetNode<Player>("Player");
+				Player player = body as Player;
+
+				GD.Print(player);
+				player.Interactable = this;
+				GD.Print(this);
+
+
+				// if (player != null)
+				// {
+				// 	GD.Print("Player found");
+				// 	player.Interactable = this;
+				// 	GD.Print(this);
+
+
+				// }
+
 			}
 	}
 

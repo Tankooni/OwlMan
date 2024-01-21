@@ -64,11 +64,8 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				return new PSJump(player);
 			}
-			if (!player.InputController.InteractPressed())
-			{
-				return new PSInteract(player);
-			}
-			if (!player.InputController.InteractPressed() && player.HasInteract())
+
+			if (player.InputController.InteractPressed() && player.HasInteract())
 			{
 				return new PSInteract(player);
 			}
