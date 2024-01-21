@@ -36,4 +36,10 @@ public partial class Dialogue : CanvasLayer
 			Overlord.Dialogue.Visible = false;
 		}
 	}
+
+	public void ParseJSON(string IDLabel)
+	{
+		GD.Print("Going to parse JSON label for :" + IDLabel);
+	}
+
 }

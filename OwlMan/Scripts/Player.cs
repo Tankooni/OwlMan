@@ -22,6 +22,7 @@ public partial class Player : CharacterBody2D
 	public MovementInfo MovementInfo;
 
 	public InteractComponent Interactable;
+	public String IDLabel;
 
 	// Player state
 	private int health;
@@ -413,6 +414,7 @@ public partial class Player : CharacterBody2D
 	{
 		if (Interactable is not null)
 		{
+			GD.Print("Player has an interact.");
 			GD.Print(Interactable);
 			return true;
 		}

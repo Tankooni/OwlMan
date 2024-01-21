@@ -3,6 +3,8 @@ using System;
 
 public partial class InteractComponent : Area2D
 {
+	[Export]
+	public string IDLabel;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -24,6 +26,7 @@ public partial class InteractComponent : Area2D
 
 				GD.Print(player);
 				player.Interactable = this;
+				player.IDLabel = IDLabel;
 				GD.Print(this);
 
 

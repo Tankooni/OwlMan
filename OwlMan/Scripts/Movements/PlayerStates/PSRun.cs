@@ -81,6 +81,7 @@ namespace Atmo2.Movements.PlayerStates
 			}
 			if (player.InputController.InteractPressed() && player.HasInteract())
 			{
+				GD.Print("IDLE TO INTERACT STATE CHANGED");
 				return new PSInteract(player);
 			}
 

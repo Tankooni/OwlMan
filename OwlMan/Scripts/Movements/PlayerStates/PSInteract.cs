@@ -20,7 +20,10 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnEnter()
 		{
+			GD.Print("State Interact Entered");
 			Overlord.DialogueScripts.SetVisible(true);
+			Overlord.DialogueScripts.ParseJSON(player.IDLabel);
+			
 			// // player.MovementInfo.VelY = 0;
 			// // // player.MovementInfo.VelX = 0;
 			// // player.Animation = "idle";

@@ -113,6 +113,7 @@ position = Vector2(507, 288)
 texture = ExtResource("13_d7n3i")
 
 [node name="InteractComponent" parent="." instance=ExtResource("14_foldv")]
+IDLabel = "Start_000"
 
 [node name="Sign" parent="InteractComponent" instance=ExtResource("14_g3a01")]
 position = Vector2(0, 0)
