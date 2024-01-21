@@ -19,6 +19,8 @@ public partial class Overlord : Node
 	public Dictionary<string, PackedScene> Sounds = new Dictionary<string, PackedScene>();
 
 	public Node2D Level;
+	public static CanvasLayer Dialogue;
+	public static Dialogue DialogueScripts;
 
 	// Declare member variables here. Examples:
 	// private int a = 2;
@@ -42,6 +44,10 @@ public partial class Overlord : Node
 		Sounds.Add("Hit1", (PackedScene)ResourceLoader.Load("res://prefab/sounds/Hit1.tscn"));
 		Sounds.Add("Hit3", (PackedScene)ResourceLoader.Load("res://prefab/sounds/Hit3.tscn"));
 		Sounds.Add("Hit4", (PackedScene)ResourceLoader.Load("res://prefab/sounds/Hit4.tscn"));
+
+		Overlord.Dialogue = GetNode<CanvasLayer>("Dialogue");
+
+	
 	}
 
 	//public void LoadLevel()

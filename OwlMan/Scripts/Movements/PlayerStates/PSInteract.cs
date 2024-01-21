@@ -20,20 +20,26 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnEnter()
 		{
-			//// player.MovementInfo.VelY = 0;
-			//// // player.MovementInfo.VelX = 0;
-			//// player.Animation = "idle";
-			//CurrentScene = GetTree().CurrentScene as Node;
-			//if (DialogueInstance == null && CurrentScene != null)
-			//{
-				//DialogueInstance = (Control)GD.Load<PackedScene>("res://path/to/DialogueScene.tscn").Instance();
-//
-				//// Add the dialogue instance to the current scene
-				//CurrentScene.AddChild(DialogueInstance);
-//
-				//DialogueInstance.Position = new Vector2(100, 100);
-				//DialogueInstance.Size = new Vector2(400, 200);
-			//}
+			Overlord.DialogueScripts.SetVisible(true);
+			// // player.MovementInfo.VelY = 0;
+			// // // player.MovementInfo.VelX = 0;
+			// // player.Animation = "idle";
+
+			// // Load the dialogue scene
+			// PackedScene DialogueScene = (PackedScene)GD.Load("res://Dialogue/Dialogue.tscn");
+
+			// // Instance the dialogue scene
+			// Node dialogueNode = DialogueScene.Instance() as Node;
+
+			// if (dialogueNode != null)
+			// {
+			// 	// Add the dialogue instance to the current scene
+			// 	GetTree().CurrentScene.AddChild(dialogueNode);
+
+			// 	// Set position and size (optional)
+			// 	dialogueNode.Position = new Vector2(100, 100);
+			// 	dialogueNode.RectSize = new Vector2(400, 200);
+			// 	}
 		}
 
 		public override void OnExit(PlayerState newState)

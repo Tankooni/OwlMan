@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=18 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
 [ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_j7aro"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dt6g14xyc321m" path="res://prefab/Enemies/Carnosaur.tscn" id="10_uotos"]
 [ext_resource type="PackedScene" uid="uid://dwekd1pgdtx03" path="res://prefab/Objects/flagpole.tscn" id="12_xtltd"]
 [ext_resource type="Texture2D" uid="uid://1wlvxj4kmacl" path="res://Assets/PNG/Etc/Trashcan.png" id="13_d7n3i"]
+[ext_resource type="PackedScene" uid="uid://con84vjvwqlvr" path="res://GameComponents/interact_component.tscn" id="14_foldv"]
 [ext_resource type="PackedScene" uid="uid://cgma4lm2b17mt" path="res://GameComponents/Sign.tscn" id="14_g3a01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5p7w"]
@@ -96,7 +97,7 @@ debug_color = Color(0.392157, 0.568627, 0.611765, 0.419608)
 position = Vector2(380, -141)
 
 [node name="Beee2" parent="." instance=ExtResource("9_y1mjf")]
-position = Vector2(176, -106)
+position = Vector2(258, -31)
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
 position = Vector2(-161, -155)
@@ -111,5 +112,7 @@ position = Vector2(672, 248)
 position = Vector2(507, 288)
 texture = ExtResource("13_d7n3i")
 
-[node name="Sign" parent="." instance=ExtResource("14_g3a01")]
-position = Vector2(397, 285)
+[node name="InteractComponent" parent="." instance=ExtResource("14_foldv")]
+
+[node name="Sign" parent="InteractComponent" instance=ExtResource("14_g3a01")]
+position = Vector2(0, 0)

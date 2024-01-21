@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://con84vjvwqlvr"]
+
+[ext_resource type="Script" path="res://GameComponents/InteractComponent.cs" id="1_dw8v5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcyeh"]
+size = Vector2(28, 34)
+
+[node name="InteractComponent" type="Area2D"]
+position = Vector2(397, 285)
+script = ExtResource("1_dw8v5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_gcyeh")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]
