@@ -1,15 +1,15 @@
-[
+{"Dialogues": [
 	{
 		"ID": "Start_000",
-		"Character": null,
-		"Pose": null,
+		"Character": "",
+		"Pose": "",
 		"Text": "Hello world, I am a sign.",
-		"Options": null,
-		"EmitSignal": null,
-		"WaitSeconds": null,
+		"Options": "",
+		"EmitSignal": "",
+		"WaitSeconds": "",
 		"Function": "end_dialog",
-		"If": null,
-		"Add": null
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "Start_001",
@@ -17,11 +17,11 @@
 		"Pose": "Confident",
 		"Text": "Would you like an apple or orange?",
 		"Options": "An Apple;One Orange;Two Bananas",
-		"EmitSignal": null,
-		"WaitSeconds": null,
-		"Function": null,
-		"If": null,
-		"Add": null
+		"EmitSignal": "",
+		"WaitSeconds": "",
+		"Function": "",
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "An Apple",
@@ -29,10 +29,10 @@
 		"Pose": "Confident",
 		"Text": "The apple is very tasty.",
 		"Options": "I agree it is tasty;Apples are yucky;Keep Doc Away",
-		"EmitSignal": null,
-		"WaitSeconds": null,
-		"Function": null,
-		"If": null,
+		"EmitSignal": "",
+		"WaitSeconds": "",
+		"Function": "",
+		"If": "",
 		"Add": "apple_eaten"
 	},
 	{
@@ -40,12 +40,12 @@
 		"Character": "OwlMan",
 		"Pose": "Confident",
 		"Text": "The orange is my goal.",
-		"Options": null,
-		"EmitSignal": null,
-		"WaitSeconds": null,
+		"Options": "",
+		"EmitSignal": "",
+		"WaitSeconds": "",
 		"Function": "end_dialog",
-		"If": null,
-		"Add": null
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "Two Bananas",
@@ -53,58 +53,59 @@
 		"Pose": "Confident",
 		"Text": "Bananas are inappropriate",
 		"Options": "You're Inappropriate",
-		"EmitSignal": null,
-		"WaitSeconds": null,
-		"Function": null,
-		"If": null,
-		"Add": null
+		"EmitSignal": "",
+		"WaitSeconds": "",
+		"Function": "",
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "I agree it is tasty",
 		"Character": "OwlMan",
 		"Pose": "Confident",
 		"Text": "Yes very tasty",
-		"Options": null,
-		"EmitSignal": null,
-		"WaitSeconds": null,
+		"Options": "",
+		"EmitSignal": "",
+		"WaitSeconds": "",
 		"Function": "end_dialog",
-		"If": null,
-		"Add": null
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "Apples are yucky",
 		"Character": "OwlMan",
 		"Pose": "Confident",
 		"Text": "You are wrong",
-		"Options": null,
-		"EmitSignal": null,
-		"WaitSeconds": null,
+		"Options": "",
+		"EmitSignal": "",
+		"WaitSeconds": "",
 		"Function": "end_dialog",
-		"If": null,
-		"Add": null
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "Keep Doc Away",
 		"Character": "OwlMan",
 		"Pose": "Confident",
 		"Text": "Well I'm not a doctor...",
-		"Options": null,
-		"EmitSignal": null,
-		"WaitSeconds": null,
+		"Options": "",
+		"EmitSignal": "",
+		"WaitSeconds": "",
 		"Function": "end_dialog",
-		"If": null,
-		"Add": null
+		"If": "",
+		"Add": ""
 	},
 	{
 		"ID": "You're Inappropriate",
 		"Character": "OwlMan",
 		"Pose": "Confident",
 		"Text": "Good sir....",
-		"Options": null,
-		"EmitSignal": null,
-		"WaitSeconds": null,
+		"Options": "",
+		"EmitSignal": "",
+		"WaitSeconds": "",
 		"Function": "end_dialog",
-		"If": null,
-		"Add": null
+		"If": "",
+		"Add": ""
 	}
 ]
+}
