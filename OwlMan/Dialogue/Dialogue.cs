@@ -94,10 +94,25 @@ public partial class Dialogue : CanvasLayer
 		if (entry != null)
 		{
 			GD.Print(entry.Text);
+			ChangeRichTextLabel(entry.Text);
 		}
 
 	}
 	
+	public void ChangeRichTextLabel(string newText)
+	{
+		// Assuming you have a RichTextLabel node in your scene with the name "RichTextLabel"
+		RichTextLabel richTextLabel = this.GetNode<RichTextLabel>("Control/PanelBG/Text");
+
+		if (richTextLabel != null)
+		{
+			richTextLabel.Text = newText;
+		}
+		else
+		{
+			GD.Print("RichTextLabel not found. Make sure the node path is correct.");
+		}
+	}
 
 	private string ObtainFileString(string path)
 	{
