@@ -62,6 +62,19 @@ public partial class Dialogue : CanvasLayer
 		}
 	}
 
+	public void SetVisibleIndicator(bool status)
+	{
+		AnimatedSprite2D Indicator = this.GetNode<AnimatedSprite2D>("Control/PanelBG/NextIndicator");
+		if(status == true)
+		{
+			Indicator.Visible = true;
+		}
+		else
+		{
+			Indicator.Visible = false;
+		}
+	}
+
 	public void ParseJSON(string IDLabel)
 	{
 		GD.Print("Going to parse JSON label for : " + IDLabel);
@@ -83,34 +96,65 @@ public partial class Dialogue : CanvasLayer
 		//GD.Print(Data);
 		dialogueData = JsonSerializer.Deserialize<DialogueData>(Data);	
 
-		GD.Print("DIALOGUEDATA");
-		GD.Print(dialogueData.Dialogues);
-
+		// GD.Print("DIALOGUEDATA");
+		// GD.Print(dialogueData.Dialogues);
 
 		DialogueEntry entry = GetDialogueEntryByID(IDLabel);
 
-
-// Use entry.infos to customize the dialog scene
 		if (entry != null)
 		{
-			GD.Print(entry.Text);
-			ChangeRichTextLabel(entry.Text);
+			UpdateDialogueBox(entry);
 		}
 
 	}
+	public void UpdateDialogueBox(DialogueEntry entry)
+	{
+		GD.Print(entry.Text);
+		ChangeMainLabel(entry.Text);
+		ChangeCharacterLabel(entry.Character);
+		ChangePortrait(entry.Character, entry.Pose);
+		
+	}
 	
-	public void ChangeRichTextLabel(string newText)
+	public void ChangeMainLabel(string newText)
 	{
 		// Assuming you have a RichTextLabel node in your scene with the name "RichTextLabel"
-		RichTextLabel richTextLabel = this.GetNode<RichTextLabel>("Control/PanelBG/Text");
+		RichTextLabel MainLabel = this.GetNode<RichTextLabel>("Control/PanelBG/Text");
 
-		if (richTextLabel != null)
+		if (MainLabel != null)
 		{
-			richTextLabel.Text = newText;
+			MainLabel.Text = newText;
 		}
 		else
 		{
-			GD.Print("RichTextLabel not found. Make sure the node path is correct.");
+			GD.Print("Main Label not found. Make sure the node path is correct.");
+		}
+	}
+
+	public void ChangeCharacterLabel(string NewName)
+	{
+		RichTextLabel CharacterLabel = this.GetNode<RichTextLabel>("Control/PanelBG/NameBox/Character");
+
+		if(NewName != null)
+		{
+			CharacterLabel.Text = NewName;
+		}
+		else
+		{
+			GD.Print("Character Name not found");
+		}
+	}
+
+	public void ChangePortrait(string Character, string Pose)
+	{
+		TextureRect PortraitRect = this.GetNode<TextureRect>("Control/Portrait");
+		string ImagePath = "res://Dialogue/Portraits/OwlMan/" + Pose + ".png";
+		GD.Print(ImagePath);
+		
+		if(Pose != null)
+		{
+			Texture2D PortraitTexture = GD.Load<Texture2D>(ImagePath);
+			PortraitRect.Texture = PortraitTexture;
 		}
 	}
 

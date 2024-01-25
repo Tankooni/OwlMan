@@ -1,8 +1,8 @@
 {"Dialogues": [
 	{
 		"ID": "Start_000",
-		"Character": "",
-		"Pose": "",
+		"Character": "OwlMan",
+		"Pose": "Confident",
 		"Text": "Hello world, I am a sign.",
 		"Options": "",
 		"EmitSignal": "",
@@ -13,7 +13,7 @@
 	},
 	{
 		"ID": "Start_001",
-		"Character": "OwllMan",
+		"Character": "OwlMan",
 		"Pose": "Confident",
 		"Text": "Would you like an apple or orange?",
 		"Options": "An Apple;One Orange;Two Bananas",
