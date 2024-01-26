@@ -75,6 +75,18 @@ public partial class Dialogue : CanvasLayer
 		}
 	}
 
+	public void FindEndDialog(DialogueEntry entry, string IDLabel)
+	{
+		if(entry.Function == "end_dialog")
+		{
+			SetVisibleIndicator(false);
+		}
+		else
+		{
+			SetVisibleIndicator(true);
+		}
+	}
+
 	public void ParseJSON(string IDLabel)
 	{
 		GD.Print("Going to parse JSON label for : " + IDLabel);
@@ -113,6 +125,7 @@ public partial class Dialogue : CanvasLayer
 		ChangeMainLabel(entry.Text);
 		ChangeCharacterLabel(entry.Character);
 		ChangePortrait(entry.Character, entry.Pose);
+		FindEndDialog(entry, entry.ID);
 		
 	}
 	
