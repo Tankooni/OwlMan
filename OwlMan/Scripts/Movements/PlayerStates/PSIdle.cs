@@ -18,7 +18,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnEnter()
 		{
-			player.MovementInfo.VelY = 0;
+			player.MovementInfo.Vel_New.Y = 0;
 			// player.MovementInfo.VelX = 0;
 			player.Animation = "idle";
 		}

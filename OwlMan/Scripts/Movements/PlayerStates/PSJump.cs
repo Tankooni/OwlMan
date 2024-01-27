@@ -22,7 +22,7 @@ namespace Atmo2.Movements.PlayerStates
         public override void OnEnter()
         {
             player.Animation = "jump";
-			player.MovementInfo.VelY = -player.JumpStrenth * multiplier;
+			player.MovementInfo.Vel_New.Y = -player.JumpStrenth * multiplier;
 			player.InputController.JumpSuccess();
 		}
 
@@ -34,33 +34,25 @@ namespace Atmo2.Movements.PlayerStates
         {
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
+
+			// MOVEMENT --------------------------------------------------------------------------
+			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
-			//Perform caluclations and modify player variables with results
-			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
-				speedModifier = 0;
+			if (speedModifier != 0)
+			{
+				var modSign = Math.Sign(speedModifier);
+
+				speedModifier = speedModifier - player.HorizontalAirDrag * modSign;
+
+				if(modSign != Math.Sign(speedModifier))
+					speedModifier = 0;
+			}
+			// ---------------------------------------------------------------------------------
 
 			if (signedHorizontal != 0)
 				player.Image.FlipH = signedHorizontal < 0;
-
-			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
-
-			//Handle any collision resitution & modify variables further if needed
-			//TODO: enemy collision
-			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
-			// if (enemy != null && !this.player.IsInvincable)
-			// {
-			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
-			// }
-			
-
-			//Modify any timer variables & animations that will be based on movement
-			if (speedModifier != 0)
-			{
-				speedModifier = Mathf.Clamp(
-					speedModifier - player.HorizontalDrag * signedHorizontal,
-					signedHorizontal < 0 ? speedModifier : 0,
-					signedHorizontal < 0 ? 0 : speedModifier);
-			}
+			else if ( speedModifier != 0)
+				player.Image.FlipH = speedModifier < 0;
 
 			//Handle Player input for state changers
 			if (player.InputController.JumpPressed() && player.InputController.DownHeld())

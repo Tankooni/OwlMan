@@ -22,11 +22,11 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.Animation = "attackNormal";
+
 		}
 
 		public override void OnExit(PlayerState newState)
 		{
-			player.MovementInfo.VelX = 0;
 			player.MovementInfo.ResetBoxes();
 		}
 
@@ -34,10 +34,6 @@ namespace Atmo2.Movements.PlayerStates
 		{
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
-
-			//Perform caluclations and modify player variables with results
-			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
-				speedModifier = 0;
 
 			if (signedHorizontal != 0)
 				player.Image.FlipH = signedHorizontal < 0;
@@ -51,37 +47,36 @@ namespace Atmo2.Movements.PlayerStates
 				player.MovementInfo.RightBox = true;
 			}
 
-			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
 			if (!player.IsOnFloor())
-				player.MovementInfo.VelY += player.Gravity;
-
-			//Handle any collision resitution & modify variables further if needed
-			//player.image.SetSpeedScale(Math.Max(Math.Abs(h), .3f));
-			//TODO: enemy collision
-			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
-			// if (enemy != null && !this.player.IsInvincable)
-			// {
-			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
-			// }
-
-			//Modify any timer variables & animations that will be based on movement
+				player.MovementInfo.Vel_New.Y += player.Gravity;
+			
+			// MOVEMENT --------------------------------------------------------------------------
+			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
+			
 			if (speedModifier != 0)
 			{
-				speedModifier = Mathf.Clamp(speedModifier - player.HorizontalDrag * signedHorizontal, signedHorizontal < 0 ? speedModifier : 0, signedHorizontal < 0 ? 0 : speedModifier);
+				var modSign = Math.Sign(speedModifier);
+
+				speedModifier = speedModifier - player.HorizontalGroundDrag * modSign;
+
+				if(modSign != Math.Sign(speedModifier))
+					speedModifier = 0;
 			}
+			// ---------------------------------------------------------------------------------
 
 			return null;
 		}
 
-		public override PlayerState OnAnimationComplete()
+
+        public override PlayerState OnAnimationComplete()
 		{
 			if (player.MovementInfo.OnGround)
 				if (player.InputController.LeftHeld() || player.InputController.RightHeld())
-					return new PSRun(player);
+					return new PSRun(player, initialSpeedModifier: speedModifier);
 				else
 					return new PSIdle(player);
 			else
-				return new PSFall(player);
+				return new PSFall(player, initialSpeedModifier: speedModifier);
 		}
 	}
 }

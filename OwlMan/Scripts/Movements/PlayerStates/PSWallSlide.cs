@@ -18,8 +18,8 @@ namespace Atmo2.Movements.PlayerStates
 		}
 		public override void OnEnter()
 		{
-			player.MovementInfo.VelX = 0;
-			player.MovementInfo.VelY = 0;
+			player.MovementInfo.Vel_New.X = 0;
+			player.MovementInfo.Vel_New.Y = 0;
 			player.Image.FlipH = !wallOnLeft;
 
 			player.ShakeCamera();
@@ -29,7 +29,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnExit(PlayerState newState)
 		{
-			player.MovementInfo.VelX = 0;
+			// player.MovementInfo.NewVel.X = 0;
 		}
 
 		public override PlayerState Update()
@@ -37,20 +37,19 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.VelY += player.Gravity / 3;
+			player.MovementInfo.Vel_New.Y += player.Gravity / 3;
 
-			if(player.MovementInfo.OnGround)
-			{
-				return new PSIdle(player);
-			}
-
-
-
+			
 
 			if(player.Abilities.WallJump && player.InputController.JumpPressed())
 			{
 				//TODO: Add some kind of directionality to this call
-				return new PSJump(player, initialSpeedModifier: player.RunSpeed * 2);
+				return new PSJump(player, initialSpeedModifier: player.RunSpeed * 3 * (wallOnLeft ? 1 : -1) );
+			}
+			
+			if ( player.MovementInfo.OnGround && ( player.InputController.LeftHeld() || player.InputController.RightHeld() ) )
+			{
+				return new PSRun(player);
 			}
 
 			// Check to see if we should enter into the falling state
@@ -59,14 +58,19 @@ namespace Atmo2.Movements.PlayerStates
 				if(!player.MovementInfo.AgainstLeftWall)
 					return new PSFall(player);
 				if(player.InputController.RightHeld())
-					return new PSFall(player, coyoteTime: player.Abilities.WallJump, jumpSpeedModifier: player.RunSpeed * 2);
+					return new PSFall(player, coyoteTime: player.Abilities.WallJump, coyoteJumpSpeedModifier: player.RunSpeed * 3);
 			}
 			else 
 			{
 				if(!player.MovementInfo.AgainstRightWall)
 					return new PSFall(player);
 				if(player.InputController.LeftHeld())
-					return new PSFall(player, coyoteTime: player.Abilities.WallJump, jumpSpeedModifier: player.RunSpeed * 2);
+					return new PSFall(player, coyoteTime: player.Abilities.WallJump, coyoteJumpSpeedModifier: -player.RunSpeed * 3);
+			}
+			
+			if(player.MovementInfo.OnGround)
+			{
+				return new PSIdle(player);
 			}
 
 			return null;

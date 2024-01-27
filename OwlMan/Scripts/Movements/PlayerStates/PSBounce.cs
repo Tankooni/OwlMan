@@ -40,7 +40,7 @@ namespace Atmo2.Movements.PlayerStates
 			//Perform caluclations and modify player variables with results
 			if (signedHorizontal != 0)
 				player.Image.FlipH = signedHorizontal < 0;
-			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal;
+			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal;
 
 			//Handle any collision resitution & modify variables further if needed
 
@@ -97,7 +97,7 @@ namespace Atmo2.Movements.PlayerStates
 				else
 					return new PSFall(player);
 			}
-			player.MovementInfo.VelY += player.Gravity;
+			player.MovementInfo.Vel_New.Y += player.Gravity;
 			return null;
 		}
 	}

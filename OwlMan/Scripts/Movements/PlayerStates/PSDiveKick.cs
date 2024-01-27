@@ -19,7 +19,7 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.Animation = "diveKick";
-			player.MovementInfo.VelY = 1200f;
+			player.MovementInfo.Vel_New.Y = 1200f;
 			player.InputController.JumpSuccess();
 		}
 
@@ -35,10 +35,10 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.VelY += player.Gravity;
+			player.MovementInfo.Vel_New.Y += player.Gravity;
 			if (signedHorizontal != 0)
 				player.Image.FlipH = signedHorizontal < 0;
-			player.MovementInfo.VelX = player.RunSpeed * Math.Sign(signedHorizontal);
+			player.MovementInfo.Vel_New.X = player.RunSpeed * Math.Sign(signedHorizontal);
 
 			if (player.MovementInfo.OnGround)
 			{

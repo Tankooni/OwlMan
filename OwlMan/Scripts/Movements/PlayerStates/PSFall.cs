@@ -12,15 +12,15 @@ namespace Atmo2.Movements.PlayerStates
 		private float speed;
 		private int coyoteTimeTicks;
 		private float speedModifier;
-		private float jumpSpeedModifier;
+		private float coyoteJumpSpeedModifier;
 
-		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1, float jumpSpeedModifier = 0)
+		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1, float coyoteJumpSpeedModifier = 0)
 			: base(player)
 		{
 			this.player = player;
 			this.speed = speed < 0 ? player.RunSpeed : speed;
 			this.coyoteTimeTicks = coyoteTime ? 10 : 0;
-			this.jumpSpeedModifier = jumpSpeedModifier;
+			this.coyoteJumpSpeedModifier = coyoteJumpSpeedModifier;
 			speedModifier = initialSpeedModifier;
 		}
 		public override void OnEnter()
@@ -30,7 +30,6 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnExit(PlayerState newState)
 		{
-			player.MovementInfo.VelX = 0;
 		}
 
 		public override PlayerState Update()
@@ -38,40 +37,36 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			//Perform caluclations and modify player variables with results
-			if (speedModifier != 0 && signedHorizontal != Math.Sign(speedModifier))
-			{
-				speedModifier = 0;
-			}
-
-			player.MovementInfo.VelY += player.Gravity;
+			player.MovementInfo.Vel_New.Y += player.Gravity;
 			if (player.MovementInfo.HeadBonk)
-				player.MovementInfo.VelY = player.Gravity;
+				player.MovementInfo.Vel_New.Y = player.Gravity;
 			
-			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
-			player.MovementInfo.VelX = player.RunSpeed * signedHorizontal + speedModifier;
-
-			//Handle any collision resitution & modify variables further if needed
-			//TODO: Enemy Collision
-			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
-			// if (enemy != null && !this.player.IsInvincable)
-			// {
-			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
-			// }
+			// MOVEMENT --------------------------------------------------------------------------
+			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
-			//Modify any timer variables & animations that will be based on movement
 			if (speedModifier != 0)
 			{
-				// speedModifier = speedModifier - player.HorizontalDrag * signedHorizontal;
-				speedModifier = Mathf.Clamp(
-					speedModifier - player.HorizontalDrag * signedHorizontal, 
-					signedHorizontal < 0 ? speedModifier : 0, 
-					signedHorizontal < 0 ? 0 : speedModifier);
+				var modSign = Math.Sign(speedModifier);
+
+				speedModifier = speedModifier - player.HorizontalAirDrag * modSign;
+
+				if(modSign != Math.Sign(speedModifier))
+					speedModifier = 0;
 			}
+			// ---------------------------------------------------------------------------------
+
+			if (signedHorizontal != 0)
+				player.Image.FlipH = signedHorizontal < 0;
+			else if ( speedModifier != 0)
+				player.Image.FlipH = speedModifier < 0;
 
 			AnimationCheckSet();
 
+			return CheckForNewState(signedHorizontal);
+		}
+
+        public PlayerState CheckForNewState(int signedHorizontal)
+        {
 			if (player.InputController.AttackPressed())
 			{
 				return new PSAttackNormal(player, speedModifier);
@@ -87,7 +82,7 @@ namespace Atmo2.Movements.PlayerStates
 				--coyoteTimeTicks;
 				if (player.InputController.JumpPressed())
 				{
-					return new PSJump(player, speedModifier + jumpSpeedModifier);
+					return new PSJump(player, speedModifier + coyoteJumpSpeedModifier);
 				}
 				if (player.Abilities.GroundDash &&
 					player.InputController.DashPressed())
@@ -120,10 +115,10 @@ namespace Atmo2.Movements.PlayerStates
 			}
 
 			if (player.MovementInfo.OnGround)
-				if (player.MovementInfo.VelX == 0)
+				if (player.MovementInfo.Vel_New.X == 0)
 					return new PSIdle(player);
 				else // Hit the ground runnin'
-					return new PSRun(player);
+					return new PSRun(player, initialSpeedModifier: speedModifier);
 
 			// Determine if we're on a wall and only left or right is pressed for wall slide if enabled
 			if (player.Abilities.WallSlide
@@ -142,10 +137,10 @@ namespace Atmo2.Movements.PlayerStates
 			}
 
 			return null;
-		}
-		private void AnimationCheckSet()
+        }
+        private void AnimationCheckSet()
 		{
-			if (player.MovementInfo.VelY > 0)
+			if (player.MovementInfo.Vel_New.Y > 0)
 				player.Animation = "fall";
 			else
 				player.Animation = "jump";

@@ -23,8 +23,8 @@ namespace Atmo2.Movements.PlayerStates
 			this.direction = direction;
             this.dashTicks = dashTicks;
 
-			player.MovementInfo.VelX = this.speed * direction;
-			player.MovementInfo.VelY = 0;
+			player.MovementInfo.Vel_New.X = this.speed * direction;
+			player.MovementInfo.Vel_New.Y = 0;
 		}
         public override void OnEnter()
         {
@@ -51,8 +51,8 @@ namespace Atmo2.Movements.PlayerStates
 			// }
 
 			//TODO: change this to be directional based
-			player.MovementInfo.VelX = this.speed * direction;
-			//player.MovementInfo.VelY = this.speed * direction.y;
+			player.MovementInfo.Vel_New.X = this.speed * direction;
+			//player.MovementInfo.NewVel.Y = this.speed * direction.y;
 
 			//if (player._image.FlipH)
 			//{
@@ -120,10 +120,10 @@ namespace Atmo2.Movements.PlayerStates
             {
 				// We're done here
 				if (player.MovementInfo.OnGround)
-					if (player.InputController.LeftHeld() || player.InputController.RightHeld())
-						return new PSRun(player, SpeedModifier);
-					else
-						return new PSIdle(player);
+					// if (player.InputController.LeftHeld() || player.InputController.RightHeld())
+					return new PSRun(player, SpeedModifier);
+					// else
+					// 	return new PSIdle(player);
 				else
 				{
 					return new PSFall(player, SpeedModifier);

@@ -69,7 +69,8 @@ public partial class Player : CharacterBody2D
 	public float JumpStrenth { get; set; }
 	public float RunSpeed { get; set; }
 	public float DashMultiplier { get; set; }
-	public float HorizontalDrag { get; set; }
+	public float HorizontalAirDrag { get; set; }
+	public float HorizontalGroundDrag { get; set; }
 	public float Gravity { get; set; }
 	public bool IsInvincable { get; set; }
 
@@ -153,7 +154,8 @@ public partial class Player : CharacterBody2D
 		//JumpStrenth = 660;
 		RunSpeed = 200;
 		DashMultiplier = 3.5f;
-		HorizontalDrag = 50;
+		HorizontalAirDrag = 30;
+		HorizontalGroundDrag = 50;
 		Gravity = Overlord.STANDARD_GRAVITY;
 
 		// image.RenderStep = 1;
