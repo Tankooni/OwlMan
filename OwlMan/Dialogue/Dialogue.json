@@ -1,8 +1,8 @@
 {"Dialogues": [
 	{
 		"ID": "Start_000",
-		"Character": "OwlMan",
-		"Pose": "Confident",
+		"Character": "",
+		"Pose": "",
 		"Text": "Hello world, I am a sign.",
 		"Options": "",
 		"EmitSignal": "",
