@@ -162,16 +162,22 @@ text = "Testing this dialogue for testing all of the font choices. Giving more d
 [node name="Options" type="GridContainer" parent="Control"]
 visible = false
 layout_mode = 0
-offset_left = 328.0
-offset_top = 312.0
-offset_right = 664.0
-offset_bottom = 400.0
+offset_left = -269.0
+offset_top = -160.0
+offset_right = 363.0
+offset_bottom = -37.0
+theme_override_constants/v_separation = 15
 
 [node name="Option1" type="Button" parent="Control/Options"]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "Testing Option 1"
+icon_alignment = 1
 
 [node name="Option2" type="Button" parent="Control/Options"]
 layout_mode = 2
+text = "Testing Option 2"
 
 [node name="Option3" type="Button" parent="Control/Options"]
 layout_mode = 2
+text = "Testing Option 3"
