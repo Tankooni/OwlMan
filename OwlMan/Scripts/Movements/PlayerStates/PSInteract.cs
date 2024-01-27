@@ -12,6 +12,7 @@ namespace Atmo2.Movements.PlayerStates
 	{
 		private Control DialogueInstance = null;
 		private Node CurrentScene = null;
+		public bool isReadyToClose = false;
 		public PSInteract(Player player)
 			: base(player)
 		{
@@ -57,13 +58,20 @@ namespace Atmo2.Movements.PlayerStates
 			//Perform caluclations and modify player variables with results
 			player.RefillEnergy();
 
-
-			
-
+			if (player.InputController.InteractPressed() && Overlord.DialogueScripts.IsReadyToClose)
+			{
+				Overlord.DialogueScripts.SetVisible(false);
+				return new PSIdle(player);
+			}
 
 			return null;
+
 		}
 
+		private void _OnDialogueReadyToClose()
+        {
+            GD.Print("Dialogue is ready to close!");
+        }
 
 		// public static bool CheckInteract(Player player)
 		// {

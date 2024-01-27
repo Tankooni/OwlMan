@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Atmo2.Movements.PlayerStates;
 
 public class DialogueEntry
 {
@@ -26,7 +27,7 @@ public class DialogueData
 
 public partial class Dialogue : CanvasLayer
 {
-
+	public bool IsReadyToClose { get; set; } = false;
 	private DialogueData dialogueData;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -75,11 +76,39 @@ public partial class Dialogue : CanvasLayer
 		}
 	}
 
+	public void SetVisiblePortrait(bool status)
+	{
+		TextureRect PortraitRect = this.GetNode<TextureRect>("Control/Portrait");
+		if(status == true)
+		{
+			PortraitRect.Visible = true;
+		}
+		else
+		{
+			PortraitRect.Visible = false;
+		}
+	}
+
+	public void SetVisibleNameBox(bool status)
+	{
+		Panel NameBox = this.GetNode<Panel>("Control/PanelBG/NameBox");
+		if(status == true)
+		{
+			NameBox.Visible = true;
+		}
+		else
+		{
+			NameBox.Visible = false;
+		}
+	}
+
 	public void FindEndDialog(DialogueEntry entry, string IDLabel)
 	{
 		if(entry.Function == "end_dialog")
 		{
 			SetVisibleIndicator(false);
+            IsReadyToClose = true;
+			
 		}
 		else
 		{
@@ -126,9 +155,18 @@ public partial class Dialogue : CanvasLayer
 		ChangeCharacterLabel(entry.Character);
 		ChangePortrait(entry.Character, entry.Pose);
 		FindEndDialog(entry, entry.ID);
-		
+		CleanUpScreen(entry);
 	}
-	
+	public void CleanUpScreen(DialogueEntry entry)
+	{
+		if (entry.Character == string.Empty)
+		{
+			SetVisiblePortrait(false);
+			SetVisibleNameBox(false);
+		}
+
+	}
+
 	public void ChangeMainLabel(string newText)
 	{
 		// Assuming you have a RichTextLabel node in your scene with the name "RichTextLabel"

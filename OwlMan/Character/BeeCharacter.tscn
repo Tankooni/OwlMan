@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://dbsms766wi1ci"]
+
+[ext_resource type="Script" path="res://Character/BeeCharacter.cs" id="1_mdmb5"]
+[ext_resource type="Texture2D" uid="uid://bri7bfcc8f0t1" path="res://Images/Beee/001_Attack00.png" id="2_p0y33"]
+[ext_resource type="Texture2D" uid="uid://bus0vl7wk6kel" path="res://Images/Beee/001_Attack01.png" id="3_1nonw"]
+[ext_resource type="Texture2D" uid="uid://clb7yjvj7871" path="res://Images/Beee/001_Attack02.png" id="4_cfxrk"]
+[ext_resource type="Texture2D" uid="uid://c3uoiwyguulge" path="res://Images/Beee/001_Attack03.png" id="5_xtfcd"]
+[ext_resource type="Texture2D" uid="uid://b3q5c38tnpvgy" path="res://Images/Beee/000_Idle00.png" id="6_uj2v8"]
+[ext_resource type="Texture2D" uid="uid://dllsuhsv1s7r8" path="res://Images/Beee/000_Idle01.png" id="7_kdd3s"]
+[ext_resource type="Texture2D" uid="uid://ctnpb0btiu787" path="res://Images/Beee/000_Idle02.png" id="8_gsoym"]
+[ext_resource type="Texture2D" uid="uid://bxop1efknde1c" path="res://Images/Beee/000_Idle03.png" id="9_o8njt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o73dn"]
+radius = 15.0894
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0pa5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p0y33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1nonw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cfxrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xtfcd")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_uj2v8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kdd3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gsoym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_o8njt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[node name="BeeCharacter" type="CharacterBody2D"]
+script = ExtResource("1_mdmb5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o73dn")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_e0pa5")
+animation = &"idle"
+frame_progress = 0.66029
