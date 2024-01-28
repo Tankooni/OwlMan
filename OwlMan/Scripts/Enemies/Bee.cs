@@ -9,11 +9,7 @@ namespace Atmo2.Enemy
 	public partial class Bee : Enemy
 	{
 		[Export]
-		public NodePath Target
-		{
-			get { return this.shootAI.Target; }
-			set { this.shootAI.Target = value; }
-		}
+		public NodePath Target { get; set; }
 
 		[Export]
 		public string AttackSoundName { get; set; }
@@ -37,13 +33,13 @@ namespace Atmo2.Enemy
 
 			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60)
 			{
-				TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall }
+				TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
+				TargetPath = Target
 			});
 		}
 
 		private void AnimatedSprite_AnimationFinished()
 		{
-			GD.Print("Bee anim finished");
 			if(isShooting)
 			{
 				animatedSprite.Play("idle");

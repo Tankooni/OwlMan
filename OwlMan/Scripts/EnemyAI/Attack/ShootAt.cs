@@ -8,16 +8,8 @@ namespace Atmo2.Enemy.AI
 {
 	public partial class ShootAt : Node2D
 	{
-		[Export]
-		public NodePath Target
-		{
-			get { return this.target?.GetPath(); }
-			set
-			{
-				var n = GetNode<Node2D>(value);
-				if (n != null) this.target = n;
-			}
-		}
+		public NodePath TargetPath { get; set; }
+		
 		Node2D target;
 
 		//[Export]
@@ -45,11 +37,7 @@ namespace Atmo2.Enemy.AI
 				this.TargetHitgroups = new List<string>();
 			}
 
-			// Shoot at the player if we have nothing to shoot at
-			if (true)
-			{ //this.Target == null) {
-				Target = Enemy.PlayerPath;
-			}
+			target = GetNode<Node2D>("../" + TargetPath.ToString());
 		}
 
 		public override void _PhysicsProcess(double delta)

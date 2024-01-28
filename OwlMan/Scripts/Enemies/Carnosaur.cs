@@ -11,8 +11,12 @@ public partial class Carnosaur : Enemy
 	[Export]
 	public string AttackSoundName { get; set; }
 
+	[Export]
+	public NodePath Target { get; set; }
+
 	AnimatedSprite2D animatedSprite;
 	ShootAt shootAI;
+	HoverChase hoverChase;
 	private bool isShooting = false;
 
 
@@ -28,11 +32,17 @@ public partial class Carnosaur : Enemy
 
 		shootAI = new ShootAt(Shoot, ChangeDirection, 120)
 		{
-			TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall }
+			TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
+			TargetPath = Target
+		};
+		
+		hoverChase = new HoverChase(this, 150, 300, 250)
+		{
+			TargetPath = Target	
 		};
 
 		AddChild(shootAI);
-		AddChild(new HoverChase(this, 150, 300, 250));
+		AddChild(hoverChase);
 	}
 
 	private void AnimatedSprite_AnimationFinished()

@@ -5,13 +5,7 @@ using Godot;
 namespace Atmo2.Enemy.AI {
     public partial class HoverChase : Node2D
     {
-        public NodePath Target { 
-            get { return this.target?.GetPath(); }
-            set { 
-                var n = GetNode<Node2D>(value);
-                if( n != null) this.target = n; 
-            }
-        }
+		public NodePath TargetPath { get; set; }
         Node2D target;
 
         private CharacterBody2D parent;
@@ -29,11 +23,16 @@ namespace Atmo2.Enemy.AI {
 
         public override void _Ready()
         {
-            Target = Enemy.PlayerPath;
+			target = GetNode<Node2D>("../" + TargetPath.ToString());
         }
 
         public override void _PhysicsProcess(double delta)
         {
+			if(target == null)
+			{
+				return;
+			}
+
             var distance = GlobalPosition.DistanceTo(target.GlobalPosition);
             if(distance > activeDistance + 100)
                 return;
