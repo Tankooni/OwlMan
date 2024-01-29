@@ -48,7 +48,10 @@ public partial class InteractComponent : Area2D
 	{
 		if(body.IsInGroup(HitGroups.Player))
 			{
+				Player player = body as Player;
 				GD.Print("Interact Component exited");
+				player.Interactable = null;
+				
 			}
 	}
 }

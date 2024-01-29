@@ -96,7 +96,6 @@ Target = NodePath("../CharacterBody2D")
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
 position = Vector2(-161, -155)
-Target = NodePath("../CharacterBody2D")
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_lgtyf")
