@@ -5,6 +5,8 @@ using System.Text.Json;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Atmo2.Movements.PlayerStates;
+using System.Net.NetworkInformation;
+using System.Diagnostics;
 
 public class DialogueEntry
 {
@@ -28,7 +30,10 @@ public class DialogueData
 public partial class Dialogue : CanvasLayer
 {
 	public bool IsReadyToClose { get; set; } = false;
+	
+	public DialogueEntry CurrentInfo;
 	private DialogueData dialogueData;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -49,7 +54,60 @@ public partial class Dialogue : CanvasLayer
 		AnimatedSprite.Play("idle");
 	}
 
-	
+	public Button[] GetButtons()
+	{
+		Button Button1 = this.GetNode<Button>("Control/Options/Option1");
+		Button Button2 = this.GetNode<Button>("Control/Options/Option2");
+		Button Button3 = this.GetNode<Button>("Control/Options/Option3");
+
+		Button[] buttons = new Button[] {Button1, Button2, Button3};
+
+		return buttons;
+	}
+
+	public void OnOption1Pressed()
+	{
+		GD.Print("PUSHED BUTTON 1");
+		ParseJSON(GetButtons()[0].Text);
+		SwitchToText();
+	}
+
+	public void OnOption2Pressed()
+	{
+		GD.Print("PUSHED BUTTON 2");
+		ParseJSON(GetButtons()[1].Text);
+		SwitchToText();
+	}
+
+	public void OnOption3Pressed()
+	{
+		GD.Print("PUSHED BUTTON 3");
+		ParseJSON(GetButtons()[2].Text);
+		SwitchToText();
+	}		
+
+	public void ClearOptions()
+	{
+		GetButtons()[0].Text = "";
+		GetButtons()[1].Text = "";
+		GetButtons()[2].Text = "";
+	}
+
+	public void CleanOptions()
+	{
+		if (GetButtons()[0].Text == "")
+		{
+			GetButtons()[0].Visible = false;
+		}
+		if (GetButtons()[1].Text == "")
+		{
+			GetButtons()[1].Visible = false;
+		}
+		if (GetButtons()[2].Text == "")
+		{
+			GetButtons()[2].Visible = false;
+		}
+	}
 
 	public void SetVisible(bool status)
 	{
@@ -102,6 +160,35 @@ public partial class Dialogue : CanvasLayer
 		}
 	}
 
+	public void SetVisibleOptions(bool status)
+	{
+		GridContainer Options = this.GetNode<GridContainer>("Control/Options");
+		if (status == true)
+		{
+			Options.Visible = true;
+			GetButtons()[0].Visible = true;
+			GetButtons()[1].Visible = true;
+			GetButtons()[2].Visible = true;
+		}
+		else
+		{
+			Options.Visible = false;
+		}
+	}
+
+	public void SetVisibleText(bool status)
+	{
+		RichTextLabel Text = this.GetNode<RichTextLabel>("Control/PanelBG/Text");
+		if (status == true)
+		{
+			Text.Visible = true;
+		}
+		else
+		{
+			Text.Visible = false;
+		}		
+	}
+
 	public void FindEndDialog(DialogueEntry entry, string IDLabel)
 	{
 		if(entry.Function == "end_dialog")
@@ -113,6 +200,7 @@ public partial class Dialogue : CanvasLayer
 		else
 		{
 			SetVisibleIndicator(true);
+			IsReadyToClose = false;
 		}
 	}
 
@@ -141,6 +229,7 @@ public partial class Dialogue : CanvasLayer
 		// GD.Print(dialogueData.Dialogues);
 
 		DialogueEntry entry = GetDialogueEntryByID(IDLabel);
+		CurrentInfo = entry;
 
 		if (entry != null)
 		{
@@ -157,6 +246,20 @@ public partial class Dialogue : CanvasLayer
 		FindEndDialog(entry, entry.ID);
 		CleanUpScreen(entry);
 	}
+
+	public void ContinueDialogueBox()
+	{
+		if (CurrentInfo.Options != "")
+		{
+			SetUpOptions(CurrentInfo);
+		}
+		else
+		{
+			GD.Print("Need to find next line of code");
+		}
+	}
+
+
 	public void CleanUpScreen(DialogueEntry entry)
 	{
 		if (entry.Character == string.Empty)
@@ -201,12 +304,65 @@ public partial class Dialogue : CanvasLayer
 		TextureRect PortraitRect = this.GetNode<TextureRect>("Control/Portrait");
 		string ImagePath = "res://Dialogue/Portraits/OwlMan/" + Pose + ".png";
 		GD.Print(ImagePath);
-		
-		if(Pose != null)
+
+		if (System.IO.File.Exists(ImagePath) && Pose != null)
 		{
 			Texture2D PortraitTexture = GD.Load<Texture2D>(ImagePath);
 			PortraitRect.Texture = PortraitTexture;
 		}
+		else
+		{
+			GD.Print("There is no image portrait path for : " + ImagePath);
+		}
+	}
+
+	static string[] ParseOptions(string input)
+	{
+		string[] items = input.Split(';');
+
+		// Trim whitespace from each item
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i] = items[i].Trim();
+        }
+
+        return items;
+	}
+	
+	public void SetUpOptions(DialogueEntry entry)
+	{
+		if (entry.Options != "")
+		{
+			SetVisibleOptions(true);
+			SetVisibleText(false);
+			ClearOptions();
+
+			Button[] buttons = GetButtons();
+			string[] items = ParseOptions(entry.Options);
+
+			for (int i = 0; i < items.Length; i++)
+			{
+				buttons[i].Text = items[i];
+
+				// Check if the item is empty
+				if (string.IsNullOrEmpty(items[i]))
+				{
+					buttons[i].Visible = false;
+				}
+				else
+				{
+					buttons[i].Visible = true;
+				}
+			}
+
+			CleanOptions();
+		}
+	}
+
+	public void SwitchToText()
+	{
+		SetVisibleOptions(false);
+		SetVisibleText(true);
 	}
 
 	private string ObtainFileString(string path)
