@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Godot;
@@ -62,6 +63,10 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				Overlord.DialogueScripts.SetVisible(false);
 				return new PSIdle(player);
+			}
+			if (player.InputController.InteractPressed() && !Overlord.DialogueScripts.IsReadyToClose)
+			{
+				Overlord.DialogueScripts.ContinueDialogueBox();
 			}
 
 			return null;

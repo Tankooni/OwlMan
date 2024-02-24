@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Dialogue/Dialogue.cs" id="1_rfemd"]
 [ext_resource type="FontFile" uid="uid://daj1k3t2eyene" path="res://Assets/Fonts/PixeloidSansBold-PKnYd.ttf" id="2_q8j37"]
 [ext_resource type="Texture2D" uid="uid://cf6e3ie56iugo" path="res://Assets/PNG/Indicator.png" id="3_78dif"]
-[ext_resource type="FontFile" uid="uid://bpual12k64068" path="res://Assets/Fonts/PixeloidMono-d94EV.ttf" id="4_s4sju"]
 [ext_resource type="Texture2D" uid="uid://byeh5trgjjaat" path="res://Assets/SpriteSheet/Indicator.png" id="4_xofn0"]
+[ext_resource type="FontFile" uid="uid://cimw5fjsqpvhs" path="res://Assets/Fonts/PixelFJVerdana12pt.ttf" id="6_4qbnm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ccy2a"]
 atlas = ExtResource("4_xofn0")
@@ -155,8 +155,8 @@ offset_left = 32.0
 offset_top = 104.0
 offset_right = 664.0
 offset_bottom = 232.0
-theme_override_fonts/normal_font = ExtResource("4_s4sju")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_fonts/normal_font = ExtResource("6_4qbnm")
+theme_override_font_sizes/normal_font_size = 14
 text = "Testing this dialogue for testing all of the font choices. Giving more detail on this conversation."
 
 [node name="Options" type="GridContainer" parent="Control"]
@@ -171,13 +171,23 @@ theme_override_constants/v_separation = 15
 [node name="Option1" type="Button" parent="Control/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("6_4qbnm")
+theme_override_font_sizes/font_size = 10
 text = "Testing Option 1"
 icon_alignment = 1
 
 [node name="Option2" type="Button" parent="Control/Options"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4qbnm")
+theme_override_font_sizes/font_size = 10
 text = "Testing Option 2"
 
 [node name="Option3" type="Button" parent="Control/Options"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4qbnm")
+theme_override_font_sizes/font_size = 10
 text = "Testing Option 3"
+
+[connection signal="pressed" from="Control/Options/Option1" to="." method="OnOption1Pressed"]
+[connection signal="pressed" from="Control/Options/Option2" to="." method="OnOption2Pressed"]
+[connection signal="pressed" from="Control/Options/Option3" to="." method="OnOption3Pressed"]
