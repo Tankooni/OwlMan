@@ -19,7 +19,7 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.Animation = "diveKick";
-			player.MovementInfo.Vel_New.Y = 1200f;
+			player.MovementInfo.Velocity.Y = 1200f;
 			player.InputController.JumpSuccess();
 		}
 
@@ -35,10 +35,10 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.Vel_New.Y += player.Gravity;
+			player.MovementInfo.Velocity.Y += player.Gravity;
 			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
-			player.MovementInfo.Vel_New.X = player.RunSpeed * Math.Sign(signedHorizontal);
+				player.FacingDirection = signedHorizontal;
+			player.MovementInfo.Velocity.X = player.RunSpeed * Math.Sign(signedHorizontal);
 
 			if (player.MovementInfo.OnGround)
 			{
@@ -66,11 +66,8 @@ namespace Atmo2.Movements.PlayerStates
 				player.InputController.DashPressed() &&
 				player.Energy >= 1)
 			{
-				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
-				{
-					player.Energy -= 1;
-					return new PSDash(player, signedHorizontal);
-				}
+				player.Energy -= 1;
+				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
 
 			//TODO: Check for enemy collision

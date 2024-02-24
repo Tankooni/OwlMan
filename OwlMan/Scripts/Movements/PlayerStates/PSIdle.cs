@@ -18,7 +18,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnEnter()
 		{
-			player.MovementInfo.Vel_New.Y = 0;
+			player.MovementInfo.Velocity.Y = 0;
 			// player.MovementInfo.VelX = 0;
 			player.Animation = "idle";
 		}
@@ -45,7 +45,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (!player.MovementInfo.OnGround)
 			{
-				return new PSFall(player);
+				return new PSFall(player, coyoteTime: true);
 			}
 
 			if (player.InputController.AttackPressed())
@@ -69,6 +69,12 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				GD.Print("IDLE TO INTERACT STATE CHANGED");
 				return new PSInteract(player);
+			}
+
+			if(player.Abilities.GroundDash && 
+				player.InputController.DashPressed())
+			{
+				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
 
 			return null;

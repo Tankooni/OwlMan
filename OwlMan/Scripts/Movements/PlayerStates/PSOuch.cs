@@ -24,11 +24,11 @@ namespace Atmo2.Movements.PlayerStates
             player.Spice -= damage_taken;
             if (player.Spice == 0) return;
 
-            player.MovementInfo.Vel_New.Y = -240;
-            if (player.Image.FlipH)
-                player.MovementInfo.Vel_New.X += 480;
+            player.MovementInfo.Velocity.Y = -240;
+            if ( player.FacingDirection < 0 )
+                player.MovementInfo.Velocity.X += 480;
             else
-                player.MovementInfo.Vel_New.X -= 480;
+                player.MovementInfo.Velocity.X -= 480;
 
             player.IsInvincable = true;
             // this.player.Tweener.Tween(this.player, new { Alpha = 1 }, .9f)
@@ -48,7 +48,7 @@ namespace Atmo2.Movements.PlayerStates
 
         public override PlayerState Update()
         {
-			player.MovementInfo.Vel_New.Y += player.Gravity;
+			player.MovementInfo.Velocity.Y += player.Gravity;
 
 			--duration;
 

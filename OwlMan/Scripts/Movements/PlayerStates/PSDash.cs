@@ -23,8 +23,8 @@ namespace Atmo2.Movements.PlayerStates
 			this.direction = direction;
             this.dashTicks = dashTicks;
 
-			player.MovementInfo.Vel_New.X = this.speed * direction;
-			player.MovementInfo.Vel_New.Y = 0;
+			player.MovementInfo.Velocity.X = this.speed * direction;
+			player.MovementInfo.Velocity.Y = 0;
 		}
         public override void OnEnter()
         {
@@ -51,7 +51,7 @@ namespace Atmo2.Movements.PlayerStates
 			// }
 
 			//TODO: change this to be directional based
-			player.MovementInfo.Vel_New.X = this.speed * direction;
+			player.MovementInfo.Velocity.X = this.speed * direction;
 			//player.MovementInfo.NewVel.Y = this.speed * direction.y;
 
 			//if (player._image.FlipH)

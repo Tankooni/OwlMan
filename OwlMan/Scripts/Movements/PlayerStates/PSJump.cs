@@ -22,7 +22,7 @@ namespace Atmo2.Movements.PlayerStates
         public override void OnEnter()
         {
             player.Animation = "jump";
-			player.MovementInfo.Vel_New.Y = -player.JumpStrenth * multiplier;
+			player.MovementInfo.Velocity.Y = -player.JumpStrenth * multiplier;
 			player.InputController.JumpSuccess();
 		}
 
@@ -36,7 +36,7 @@ namespace Atmo2.Movements.PlayerStates
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
 			// MOVEMENT --------------------------------------------------------------------------
-			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
+			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
 			if (speedModifier != 0)
 			{
@@ -50,9 +50,9 @@ namespace Atmo2.Movements.PlayerStates
 			// ---------------------------------------------------------------------------------
 
 			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
+				player.FacingDirection = signedHorizontal;
 			else if ( speedModifier != 0)
-				player.Image.FlipH = speedModifier < 0;
+				player.FacingDirection = Math.Sign(speedModifier);
 
 			//Handle Player input for state changers
 			if (player.InputController.JumpPressed() && player.InputController.DownHeld())
@@ -66,16 +66,12 @@ namespace Atmo2.Movements.PlayerStates
 				return new PSJump(player, speedModifier);
 			}
 
-			if (signedHorizontal != 0 &&
-				player.Abilities.AirDash &&
+			if (player.Abilities.AirDash &&
 				player.InputController.DashPressed() &&
 				player.Energy >= 1)
 			{
-				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
-				{
-					player.Energy -= 1;
-					return new PSDash(player, signedHorizontal);
-				}
+				player.Energy -= 1;
+				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
 
 			return new PSFall(player, speedModifier);

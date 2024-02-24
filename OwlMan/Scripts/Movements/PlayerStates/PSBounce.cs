@@ -39,8 +39,8 @@ namespace Atmo2.Movements.PlayerStates
 
 			//Perform caluclations and modify player variables with results
 			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
-			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal;
+				player.FacingDirection = signedHorizontal;
+			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal;
 
 			//Handle any collision resitution & modify variables further if needed
 
@@ -68,22 +68,20 @@ namespace Atmo2.Movements.PlayerStates
 					player.InputController.DashPressed() &&
 					player.Energy >= 1)
 				{
-					if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
-					{
-						player.Energy -= 1;
-						return new PSDash(player, signedHorizontal);
-					}
+					player.Energy -= 1;
+					return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 				}
 			}
 			else
 			{
 				if(player.InputController.JumpPressed())
+				{
 					return new PSJump(player);
-				if (signedHorizontal != 0 &&
-					player.Abilities.GroundDash &&
+				}
+				if (player.Abilities.GroundDash &&
 					player.InputController.DashPressed())
 				{
-					return new PSDash(player, signedHorizontal);
+					return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 				}
 			}
 
@@ -97,7 +95,7 @@ namespace Atmo2.Movements.PlayerStates
 				else
 					return new PSFall(player);
 			}
-			player.MovementInfo.Vel_New.Y += player.Gravity;
+			player.MovementInfo.Velocity.Y += player.Gravity;
 			return null;
 		}
 	}

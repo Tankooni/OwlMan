@@ -18,9 +18,9 @@ namespace Atmo2.Movements.PlayerStates
 		}
 		public override void OnEnter()
 		{
-			player.MovementInfo.Vel_New.X = 0;
-			player.MovementInfo.Vel_New.Y = 0;
-			player.Image.FlipH = !wallOnLeft;
+			player.MovementInfo.Velocity.X = 0;
+			player.MovementInfo.Velocity.Y = 0;
+			player.FacingDirection = wallOnLeft ? 1 : -1;
 
 			player.ShakeCamera();
 
@@ -37,7 +37,7 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.Vel_New.Y += player.Gravity / 3;
+			player.MovementInfo.Velocity.Y += player.Gravity / 3;
 
 			
 
@@ -71,6 +71,14 @@ namespace Atmo2.Movements.PlayerStates
 			if(player.MovementInfo.OnGround)
 			{
 				return new PSIdle(player);
+			}
+
+			if (player.Abilities.AirDash &&
+				player.InputController.DashPressed() &&
+				player.Energy >= 1)
+			{
+				player.Energy -= 1;
+				return new PSDash(player, player.FacingDirection);
 			}
 
 			return null;

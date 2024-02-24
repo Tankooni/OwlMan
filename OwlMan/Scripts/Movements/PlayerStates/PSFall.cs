@@ -37,12 +37,12 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.Vel_New.Y += player.Gravity;
+			player.MovementInfo.Velocity.Y += player.Gravity;
 			if (player.MovementInfo.HeadBonk)
-				player.MovementInfo.Vel_New.Y = player.Gravity;
+				player.MovementInfo.Velocity.Y = player.Gravity;
 			
 			// MOVEMENT --------------------------------------------------------------------------
-			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
+			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
 			if (speedModifier != 0)
 			{
@@ -56,9 +56,9 @@ namespace Atmo2.Movements.PlayerStates
 			// ---------------------------------------------------------------------------------
 
 			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
+				player.FacingDirection = signedHorizontal;
 			else if ( speedModifier != 0)
-				player.Image.FlipH = speedModifier < 0;
+				player.FacingDirection = Math.Sign(speedModifier);
 
 			AnimationCheckSet();
 
@@ -87,10 +87,7 @@ namespace Atmo2.Movements.PlayerStates
 				if (player.Abilities.GroundDash &&
 					player.InputController.DashPressed())
 				{
-					if (signedHorizontal != 0)
-					{
-						return new PSDash(player, signedHorizontal);
-					}
+					return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 				}
 			}
 
@@ -107,15 +104,12 @@ namespace Atmo2.Movements.PlayerStates
 				player.InputController.DashPressed() && 
 				player.Energy >= 1)
 			{
-				if (player.InputController.LeftStickHorizontal() != 0 || player.InputController.LeftStickVertical() != 0)
-				{
-					player.Energy -= 1;
-					return new PSDash(player, signedHorizontal);
-				}
+				player.Energy -= 1;
+				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
 
 			if (player.MovementInfo.OnGround)
-				if (player.MovementInfo.Vel_New.X == 0)
+				if (player.MovementInfo.Velocity.X == 0)
 					return new PSIdle(player);
 				else // Hit the ground runnin'
 					return new PSRun(player, initialSpeedModifier: speedModifier);
@@ -140,7 +134,7 @@ namespace Atmo2.Movements.PlayerStates
         }
         private void AnimationCheckSet()
 		{
-			if (player.MovementInfo.Vel_New.Y > 0)
+			if (player.MovementInfo.Velocity.Y > 0)
 				player.Animation = "fall";
 			else
 				player.Animation = "jump";

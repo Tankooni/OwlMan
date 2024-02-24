@@ -20,13 +20,13 @@ namespace Atmo2.Movements.PlayerStates
 		}
 		public override void OnEnter()
 		{
-			player.MovementInfo.Vel_New.Y = 0;
+			player.MovementInfo.Velocity.Y = 0;
 			player.Animation = "walk";
 		}
 
 		public override void OnExit(PlayerState newState)
 		{
-			player.MovementInfo.Vel_New.X = 0;
+			player.MovementInfo.Velocity.X = 0;
 		}
 
 		public override PlayerState Update()
@@ -37,7 +37,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.RefillEnergy();
 
 			// MOVEMENT --------------------------------------------------------------------------
-			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
+			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
 			if (speedModifier != 0)
 			{
@@ -51,10 +51,9 @@ namespace Atmo2.Movements.PlayerStates
 			// ---------------------------------------------------------------------------------
 
 			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
+				player.FacingDirection = signedHorizontal;
 			else if ( speedModifier != 0)
-				player.Image.FlipH = speedModifier < 0;
-
+				player.FacingDirection = Math.Sign(speedModifier);
 
 			if (signedHorizontal == 0 && speedModifier == 0)
 			{
@@ -72,8 +71,7 @@ namespace Atmo2.Movements.PlayerStates
 			if(player.Abilities.GroundDash && 
 				player.InputController.DashPressed())
 			{
-				if (signedHorizontal != 0)
-					return new PSDash(player, signedHorizontal);
+				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
 			if (!player.MovementInfo.OnGround)
 			{

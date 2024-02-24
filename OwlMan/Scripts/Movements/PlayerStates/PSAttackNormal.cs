@@ -36,22 +36,24 @@ namespace Atmo2.Movements.PlayerStates
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
 			if (signedHorizontal != 0)
-				player.Image.FlipH = signedHorizontal < 0;
+				player.FacingDirection = signedHorizontal;
 
-			if (player.Image.FlipH)
+			if (player.FacingDirection < 0)
 			{
 				player.MovementInfo.LeftBox = true;
+				player.MovementInfo.RightBox = false;
 			}
 			else
 			{
+				player.MovementInfo.LeftBox = false;
 				player.MovementInfo.RightBox = true;
 			}
 
 			if (!player.IsOnFloor())
-				player.MovementInfo.Vel_New.Y += player.Gravity;
+				player.MovementInfo.Velocity.Y += player.Gravity;
 			
 			// MOVEMENT --------------------------------------------------------------------------
-			player.MovementInfo.Vel_New.X = player.RunSpeed * signedHorizontal + speedModifier;
+			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
 			if (speedModifier != 0)
 			{

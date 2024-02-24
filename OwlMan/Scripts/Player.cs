@@ -66,6 +66,19 @@ public partial class Player : CharacterBody2D
 	public int MaxEnergy { get; set; }
 	public float EnergyRechargeRate { get; set; }
 
+	private float facingDirection = 1;
+	public float FacingDirection
+	{
+		get { return facingDirection; }
+		set
+		{
+			if( value != 0 )
+				Image.FlipH = (facingDirection = value) < 0;
+			else
+				Image.FlipH = (facingDirection = 1) < 0;
+		}
+	}
+
 	public float JumpStrenth { get; set; }
 	public float RunSpeed { get; set; }
 	public float DashMultiplier { get; set; }

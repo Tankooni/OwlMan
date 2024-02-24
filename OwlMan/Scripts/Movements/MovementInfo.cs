@@ -25,8 +25,8 @@ namespace Atmo2.Movements
 			BottomBox = false;
 		}
 
-		public Vector2 Vel_New;
-		public Vector2 Vel_Added;
+		public Vector2 Velocity;
+		public Vector2 VelocityMomentum;
 
 		public bool StartShake { get; set; }
 
@@ -43,13 +43,13 @@ namespace Atmo2.Movements
 			AgainstLeftWall = false;
 			AgainstRightWall = false;
 			MoveRefill = 0;
-			Vel_New.X = 0;
-			Vel_New.Y = 0;
+			Velocity.X = 0;
+			Velocity.Y = 0;
 		}
 
 		public void Update()
 		{
-			entity.Velocity = Vel_New;
+			entity.Velocity = Velocity;
 			entity.MoveAndSlide();
 
 			OnGround = entity.TestMove(entity.Transform, new Vector2(0, 1));
