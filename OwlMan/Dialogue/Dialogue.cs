@@ -201,11 +201,15 @@ public partial class Dialogue : CanvasLayer
 		TextureRect PortraitRect = this.GetNode<TextureRect>("Control/Portrait");
 		string ImagePath = "res://Dialogue/Portraits/OwlMan/" + Pose + ".png";
 		GD.Print(ImagePath);
-		
-		if(Pose != null)
+
+		if (System.IO.File.Exists(ImagePath) && Pose != null)
 		{
 			Texture2D PortraitTexture = GD.Load<Texture2D>(ImagePath);
 			PortraitRect.Texture = PortraitTexture;
+		}
+		else
+		{
+			GD.Print("There is no image portrait path for : " + ImagePath);
 		}
 	}
 
