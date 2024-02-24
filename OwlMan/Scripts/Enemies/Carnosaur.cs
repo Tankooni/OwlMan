@@ -16,6 +16,7 @@ public partial class Carnosaur : Enemy
 
 	AnimatedSprite2D animatedSprite;
 	ShootAt shootAI;
+	private Damageable damageable;
 	HoverChase hoverChase;
 	private bool isShooting = false;
 
@@ -43,8 +44,20 @@ public partial class Carnosaur : Enemy
 
 		AddChild(shootAI);
 		AddChild(hoverChase);
+
+		AddChild(damageable = new Damageable(this, 2));
+		damageable.OnDeathCallback += OnDeath;
+		damageable.OnDamageCallback += OnDamage; 
 	}
 
+	private void OnDamage(int damage)
+	{
+		
+	}
+	private void OnDeath()
+	{
+		QueueFree();
+	}
 	private void AnimatedSprite_AnimationFinished()
 	{
 		GD.Print("Carnosaur anim finished");

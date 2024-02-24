@@ -11,7 +11,7 @@ namespace Atmo2.Movements.PlayerStates
 	class PSAttackNormal : PlayerState
 	{
 		private float speedModifier;
-
+		private float prevDirection = 0;
 		public PSAttackNormal(Player player, float initialSpeedModifier)
 			: base(player)
 		{
@@ -22,7 +22,6 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.Animation = "attackNormal";
-
 		}
 
 		public override void OnExit(PlayerState newState)
@@ -37,16 +36,19 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (signedHorizontal != 0)
 				player.FacingDirection = signedHorizontal;
-
-			if (player.FacingDirection < 0)
+			
+			if(player.FacingDirection != prevDirection)
 			{
-				player.MovementInfo.LeftBox = true;
-				player.MovementInfo.RightBox = false;
-			}
-			else
-			{
-				player.MovementInfo.LeftBox = false;
-				player.MovementInfo.RightBox = true;
+				if (player.FacingDirection < 0)
+				{
+					player.MovementInfo.LeftTrace = true;
+					player.MovementInfo.RightTrace = false;
+				}
+				else
+				{
+					player.MovementInfo.LeftTrace = false;
+					player.MovementInfo.RightTrace = true;
+				}
 			}
 
 			if (!player.IsOnFloor())
@@ -66,6 +68,8 @@ namespace Atmo2.Movements.PlayerStates
 			}
 			// ---------------------------------------------------------------------------------
 
+			prevDirection = player.FacingDirection;
+			
 			return null;
 		}
 

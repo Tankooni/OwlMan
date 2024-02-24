@@ -68,6 +68,7 @@ namespace Atmo2.Enemy.AI
 
 			Projectile b = (Projectile)Overlord.Bullet.Instantiate();
 
+			b.Name = "Projectile";
 			b.direction = direction;
 			b.TargetHitgroups = TargetHitgroups;
 			b.speed = 5;

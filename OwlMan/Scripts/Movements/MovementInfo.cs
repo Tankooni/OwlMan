@@ -1,6 +1,7 @@
 // using Atmo2.Entities;
 // using Utility;
 
+using Atmo.OgmoLoader.Serialized;
 using Godot;
 
 namespace Atmo2.Movements
@@ -14,15 +15,27 @@ namespace Atmo2.Movements
 		public bool AgainstRightWall { get; set; }
 		public float MoveRefill { get; set; }
 
-		public bool LeftBox { get; set; }
-		public bool RightBox { get; set; }
-		public bool BottomBox { get; set; }
+		public bool LeftTrace
+		{
+			get { return entity.BoxL.Monitoring; }
+			set { entity.BoxL.SetTraceState(value); }
+		}
+		public bool RightTrace
+		{
+			get { return entity.BoxR.Monitoring; }
+			set { entity.BoxR.SetTraceState(value); }
+		}
+		public bool BottomTrace
+		{
+			get { return entity.BoxB.Monitoring; }
+			set { entity.BoxB.SetTraceState(value); }
+		}
 
 		public void ResetBoxes()
 		{
-			LeftBox = false;
-			RightBox = false;
-			BottomBox = false;
+			LeftTrace = false;
+			RightTrace = false;
+			BottomTrace = false;
 		}
 
 		public Vector2 Velocity;

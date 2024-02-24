@@ -15,6 +15,7 @@ namespace Atmo2.Enemy
 		public string AttackSoundName { get; set; }
 
 		private ShootAt shootAI;
+		private Damageable damageable;
 
 		AnimatedSprite2D animatedSprite;
 
@@ -36,6 +37,21 @@ namespace Atmo2.Enemy
 				TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
 				TargetPath = Target
 			});
+
+			
+			AddChild(damageable = new Damageable(this, 2));
+			damageable.OnDeathCallback += OnDeath;
+			damageable.OnDamageCallback += OnDamage; 
+		}
+		private void OnDamage(int damage)
+		{
+			Velocity = new Vector2(100, 100);
+			MoveAndSlide();
+			Velocity = Vector2.Zero;
+		}
+		private void OnDeath()
+		{
+			QueueFree();
 		}
 
 		private void AnimatedSprite_AnimationFinished()
@@ -49,7 +65,6 @@ namespace Atmo2.Enemy
 
 		public void Shoot()
 		{
-			GD.Print("Shoot");
 			isShooting = true;
 			if (AttackSoundName != string.Empty)
 				Overlord.OwlOverlord.PlaySound(AttackSoundName, this.GlobalPosition);
@@ -63,5 +78,10 @@ namespace Atmo2.Enemy
 			else if (direction.X > 0)
 				animatedSprite.FlipH = true;
 		}
-	}
+
+        public void HandleDamage(int damage)
+        {
+            GD.Print($"Ow {damage}");
+        }
+    }
 }

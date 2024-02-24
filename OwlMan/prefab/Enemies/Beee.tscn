@@ -51,6 +51,8 @@ animations = [{
 }]
 
 [node name="Beee" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 5
 script = ExtResource("1")
 AttackSoundName = "Squeak"
 

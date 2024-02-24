@@ -6,6 +6,7 @@ using Atmo2.Movements.PlayerStates;
 using Atmo2.Enemy;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 
 public partial class Player : CharacterBody2D
 {
@@ -25,16 +26,6 @@ public partial class Player : CharacterBody2D
 	public String IDLabel;
 
 	// Player state
-	private int health;
-	public int Health
-	{
-		get { return health; }
-		set
-		{
-			health = value;
-			EmitSignal(nameof(HealthChanged), health);
-		}
-	}
 	public int Power { get; set; }
 
 	private int maxHealth = 5;
@@ -87,9 +78,9 @@ public partial class Player : CharacterBody2D
 	public float Gravity { get; set; }
 	public bool IsInvincable { get; set; }
 
-	public Area2D BoxL;
-	public Area2D BoxR;
-	public Area2D BoxB;
+	public KillBox BoxL;
+	public KillBox BoxR;
+	public KillBox BoxB;
 
 	// Make this private later and fix the things that reference it to flip the image
 	public AnimatedSprite2D Image;
@@ -99,7 +90,8 @@ public partial class Player : CharacterBody2D
 	private Camera2D _camera;
 	private Control _hud;
 	private CollisionShape2D _collisionShape2D;
-	private Node _overlord;
+	private Overlord _overlord;
+	private Damageable damageable;
 
 	public String Animation
 	{
@@ -146,16 +138,25 @@ public partial class Player : CharacterBody2D
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
 		Image = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
-		_overlord = GetNode("/root/Overlord");
+		_overlord = GetNode<Overlord>("/root/Overlord");
 
-		BoxL = GetNode<Area2D>("SideBoxL");
-		BoxR = GetNode<Area2D>("SideBoxR");
-		BoxB = GetNode<Area2D>("BottomBox");
+		BoxL = GetNode<KillBox>("SideBoxL");
+		BoxR = GetNode<KillBox>("SideBoxR");
+		BoxB = GetNode<KillBox>("BottomBox");
+
+		BoxL.HitCallback += OnTraceHit;
+		BoxR.HitCallback += OnTraceHit;
+		BoxB.HitCallback += OnTraceHit;
 
 		this.Connect("HealthChanged", new Callable(_hud, "on_set_health"));
 		this.Connect("AnimationChanged", new Callable(_hud, "on_animation_changed"));
 
 		SetDeferred("Health", maxHealth);
+
+		AddChild(damageable = new Damageable(this, maxHealth));
+		damageable.OnDamageCallback += HandleDamage;
+		// damageable.OnDeathCallback += HandleDeath;
+
 		//Health = maxHealth;
 		Power = 0;
 
@@ -218,6 +219,11 @@ public partial class Player : CharacterBody2D
 	// {
 	// }
 
+	public void OnTraceHit(Node2D otherNode2D)
+	{
+		ShakeCamera();
+	}
+
 	public void ShakeCamera()
 	{
 		_camera.Call("Shake", .1f, 100, 10);
@@ -239,9 +245,10 @@ public partial class Player : CharacterBody2D
 
 		if (InputController.Select())
 		{
-			_overlord.Call("Reset");
+			_overlord.Reset();
 		}
 
+		/*
 		if (MovementInfo.LeftBox)
 		{
 			foreach (PhysicsBody2D body in BoxL.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
@@ -290,7 +297,7 @@ public partial class Player : CharacterBody2D
 				area.Call("Deflect");
 			}
 		}
-
+		*/
 		invulnerabilityFrames = Math.Max(--invulnerabilityFrames, 0);
 	}
 
@@ -343,26 +350,19 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	public void OnDamage(CollisionObject2D collider)
+	public void HandleDamage(int damage)
 	{
-		if (this.invulnerabilityFrames == 0)
+		GD.Print("OOF");
+		if (damageable.InvulnerabilityFrames == 0)
 		{
-			if ((collider as CollisionObject2D).IsInGroup(HitGroups.Bullet))
-			{
-				// Take a damage and do hurt stuff
-				Health -= 1;
-				invulnerabilityFrames = 120;
+			damageable.InvulnerabilityFrames = 120;
+		}
 
-				CheckDeath();
-			}
-		}
+		EmitSignal(nameof(HealthChanged), damageable.Health);
 	}
-	void CheckDeath()
+	public void HandleDeath()
 	{
-		if (this.Health <= 0)
-		{
-			_overlord.Call("Reset");
-		}
+		_overlord.Reset();
 	}
 
 	// public void OnJumpPickup(object[] param)
@@ -424,7 +424,7 @@ public partial class Player : CharacterBody2D
 		GD.Print("Area exited: ", InteractionArea.Name);
 		AllInteractions.Remove(InteractionArea);
 	}
-
+	
 	public bool HasInteract()
 	{
 		if (Interactable is not null)

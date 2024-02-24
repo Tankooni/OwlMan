@@ -5,6 +5,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using Atmo2.Enemy.AI;
+using System;
 
 
 namespace Atmo2 {
@@ -25,8 +26,13 @@ namespace Atmo2 {
 		[Signal]
 		public delegate void OnHitEventHandler(Node2D source, Node2D body);
 		AIVector movement;
+		Damageable damageable;
 		NodePath animatedSpritePath;
 		AnimatedSprite2D projectileAnimatedSprite;
+		bool isDeflected = false;
+
+		private int lifeTicks = 0;
+		private int lifeSpan = 120;
 
 		public override void _Ready()
 		{
@@ -38,18 +44,28 @@ namespace Atmo2 {
 			animatedSpritePath = GetPathTo(GetNode("AnimatedSprite2D"));
 			projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);			
 
-			movement = new AIVector(this, direction, speed);
-			this.AddChild(movement);
-			this.Connect("body_entered", new Callable(this, "OnCollide"));
+			AddChild(movement = new AIVector(this, direction, speed));
+			AddChild(damageable = new Damageable(this));
+			damageable.OnDamageCallback += Deflect;
+			
+			// Connect(Damageable.SignalName.OnHandleDamageable, Callable.From<int>((damage) => HandleDamageDeflect(damage)));
+			// damageable.OnHandleDamageable += HandleDamageDeflect;
+			BodyEntered += OnCollide;
+			AreaEntered += OnCollide;
 		}
-		
-		bool isDeflected = false;
 
-		public void OnCollide(Node body)
+		public void OnCollide(Node2D otherNode2D)
 		{
 			// Tell the thing we collided with and our parent that we've collided if we actually did collide
 			// bool isInGroup = false; // Use Intersect(body) when godot makes it's arrays IEnumerable
-			
+			GD.Print($"Projectile collision {otherNode2D.Name}");
+			var damageable = otherNode2D.GetNodeOrNull<Damageable>(Damageable.DAMAGEABLE_NAME);
+			if(damageable is not null)
+			{
+				damageable.HandleDamage(1);
+			}
+			QueueFree();
+
 			// foreach(string g in body.GetGroups() {
 			// 	if(HitGroups.Player == )
 			// 	if(this.TargetHitgroups.Contains(g)) {
@@ -59,7 +75,8 @@ namespace Atmo2 {
 			// 	}
 			// }
 
-		
+
+		/*
 			if (body.IsInGroup(HitGroups.Enemy)) {
 				if (isDeflected) {
 					GD.Print("Bullet Hit Enemy and Will Damage Enemy");
@@ -77,6 +94,7 @@ namespace Atmo2 {
 					projectileAnimatedSprite.Frame = 2; // Color red
 				}
 			}
+		*/
 			
 			// // TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
 			// if(body.IsInGroup(HitGroups.Enemy) && isDeflected) {
@@ -98,19 +116,32 @@ namespace Atmo2 {
 
 		}
 
-		public void Deflect()
+		public void Deflect(int damage)
 		{
 			if(isDeflected)
 				return;
-				
+			
+			lifeTicks = 0;
 			isDeflected = true;
 			movement.Direction = -direction;
+
+			SetCollisionMaskValue(1, false);
+			SetCollisionMaskValue(4, true);
+
 			movement.Speed *= 2;
 			Overlord.OwlOverlord.PlaySound("Hit4", GlobalPosition);
 			    
 			projectileAnimatedSprite.Frame = 1; // Color blue
+		}
 
-
-  }
-}
+        public override void _PhysicsProcess(double delta)
+        {
+            base._PhysicsProcess(delta);
+			lifeTicks++;
+			if(lifeTicks >= lifeSpan)
+			{
+				QueueFree();
+			}
+        }
+    }
 }
