@@ -37,7 +37,7 @@ public partial class Carnosaur : Enemy
 			TargetPath = Target
 		};
 		
-		hoverChase = new HoverChase(this, 150, 300, 250)
+		hoverChase = new HoverChase(this, 50, 300, 250)
 		{
 			TargetPath = Target	
 		};

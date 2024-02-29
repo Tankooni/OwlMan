@@ -19,10 +19,10 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.MovementInfo.Velocity.X = 0;
-			if(player.MovementInfo.Velocity.Y > 0)
-			{
-				player.MovementInfo.Velocity.Y = 0;
-			}
+			// if(player.MovementInfo.Velocity.Y > 0)
+			// {
+			// 	player.MovementInfo.Velocity.Y = 0;
+			// }
 			player.FacingDirection = wallOnLeft ? 1 : -1;
 
 			// player.ShakeCamera();
@@ -40,7 +40,16 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.Velocity.Y += player.Gravity / 3;
+			// Apply gravity but once we're at a certain rate, keep it constant. This allows for upward momentum 
+			player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity * 1.5f, player.Gravity * 5f);
+			// if ( player.MovementInfo.Velocity.Y >= player.Gravity * 10f )
+			// {
+			// 	player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity / 3, player.Gravity * 10f);
+			// }
+			// else 
+			// {
+			// 	player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity, player.Gravity * 10f);
+			// }
 
 			
 

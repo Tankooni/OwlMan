@@ -19,7 +19,7 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.Animation = "diveKick";
-			player.MovementInfo.Velocity.Y = 1200f;
+			player.MovementInfo.Velocity.Y = player.Gravity * 20f;
 			player.InputController.JumpSuccess();
 		}
 
@@ -35,7 +35,8 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			player.MovementInfo.Velocity.Y += player.Gravity;
+			player.MovementInfo.Velocity.Y += player.Gravity * 2;
+
 			if (signedHorizontal != 0)
 				player.FacingDirection = signedHorizontal;
 			player.MovementInfo.Velocity.X = player.RunSpeed * Math.Sign(signedHorizontal);
@@ -69,17 +70,6 @@ namespace Atmo2.Movements.PlayerStates
 				player.Energy -= 1;
 				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
-
-			//TODO: Check for enemy collision
-			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
-			// if (enemy != null)
-			// {
-			// 	player.MovementInfo.VelY = 0;
-			// 	enemy.World.Remove(enemy);
-			// 	player.Energy++;
-			//     last_bounce = delta;
-			//     return new PSJump(player, 1.1f);
-			// }
 
 			return null;
 		}
