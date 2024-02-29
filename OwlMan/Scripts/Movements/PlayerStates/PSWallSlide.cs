@@ -19,10 +19,13 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.MovementInfo.Velocity.X = 0;
-			player.MovementInfo.Velocity.Y = 0;
+			if(player.MovementInfo.Velocity.Y > 0)
+			{
+				player.MovementInfo.Velocity.Y = 0;
+			}
 			player.FacingDirection = wallOnLeft ? 1 : -1;
 
-			player.ShakeCamera();
+			// player.ShakeCamera();
 
 			player.Animation = "wallSlide";
 		}

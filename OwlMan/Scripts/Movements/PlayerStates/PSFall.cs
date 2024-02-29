@@ -74,7 +74,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			//Handle Player input for state changers
 			// && delta - PSDiveKick.last_bounce > 300)
-			if (player.InputController.JumpPressed() && player.InputController.DownHeld())
+			if (player.InputController.DashHeld() && player.InputController.DownHeld())
 				return new PSDiveKick(player);
 
 			if (coyoteTimeTicks > 0)

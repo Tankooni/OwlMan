@@ -16,6 +16,8 @@ public partial class KillBox : Area2D
       AreaEntered += OnAreaEntered;
       BodyEntered += OnBodyEntered;
       Monitoring = false;
+      
+      // Connect("", new Callable(GetParent(), ""));
 	  }
 
 

@@ -131,7 +131,7 @@ size = Vector2(35, 70)
 size = Vector2(35, 70)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(25, 10)
+size = Vector2(49, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrag5"]
 size = Vector2(85, 80)
@@ -156,7 +156,7 @@ texture = ExtResource("14_v6p2n")
 texture_filter = 1
 position = Vector2(0, -44)
 sprite_frames = SubResource("1")
-animation = &"attackNormal"
+animation = &"diveKick"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -33)
@@ -191,6 +191,7 @@ collision_mask = 8
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox"]
+position = Vector2(-1, -10)
 shape = SubResource("4")
 
 [node name="InteractionComponents" type="Node2D" parent="."]

@@ -52,7 +52,7 @@ namespace Atmo2.Movements.PlayerStates
 			if (!player.MovementInfo.OnGround)
 			{
 				// && delta - PSDiveKick.last_bounce > 300)
-				if (player.InputController.JumpPressed() && player.InputController.DownHeld())
+				if (player.InputController.DashHeld() && player.InputController.DownHeld())
 					return new PSDiveKick(player);
 
 				if (player.Abilities.DoubleJump &&

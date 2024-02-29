@@ -7,15 +7,15 @@ Controls
 Keyboard
 	Arrow Keys: Move
 	C: Attack
-	X + Direction: Dash
+	X + Left/Right: Dash
+	Down + X in air: Dive Kick
 	Space: Jump
-	Down + Jump in air: Dive Kick
 	Down on ground: Pose
 Controller
 	DPad: Move
 	Left Stick: Move
 	Left trigger: attack
 	Right trigger + direction: Dash
+	Down + right trigger in air: Dive Kick
 	Bottom Button: Jump
-	Down + Jump in air: Dive Kick
 	Down on ground: Pose

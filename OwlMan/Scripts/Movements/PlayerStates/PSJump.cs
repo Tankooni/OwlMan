@@ -55,7 +55,7 @@ namespace Atmo2.Movements.PlayerStates
 				player.FacingDirection = Math.Sign(speedModifier);
 
 			//Handle Player input for state changers
-			if (player.InputController.JumpPressed() && player.InputController.DownHeld())
+			if (player.InputController.DashHeld() && player.InputController.DownHeld())
 				return new PSDiveKick(player);
 
 			if (player.Abilities.DoubleJump &&
