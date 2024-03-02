@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dslvdlcfp6hd3"]
+
+[ext_resource type="Texture2D" uid="uid://crgh3boxoxqqb" path="res://Character/Slime/demo.png" id="1_rx357"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o73dn"]
+radius = 15.0894
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0pa5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rx357")
+}],
+"loop": true,
+"name": &"demo",
+"speed": 5.0
+}]
+
+[node name="SlimeCharacter" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o73dn")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_e0pa5")
+animation = &"demo"

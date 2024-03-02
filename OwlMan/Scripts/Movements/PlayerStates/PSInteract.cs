@@ -64,10 +64,11 @@ namespace Atmo2.Movements.PlayerStates
 				Overlord.DialogueScripts.SetVisible(false);
 				return new PSIdle(player);
 			}
-			if (player.InputController.InteractPressed() && !Overlord.DialogueScripts.IsReadyToClose)
+			if ((player.InputController.InteractPressed() || player.InputController.JumpPressed()) && !Overlord.DialogueScripts.IsReadyToClose)
 			{
 				Overlord.DialogueScripts.ContinueDialogueBox();
 			}
+			
 
 			return null;
 
