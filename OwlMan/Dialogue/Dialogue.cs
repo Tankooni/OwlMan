@@ -197,6 +197,11 @@ public partial class Dialogue : CanvasLayer
             IsReadyToClose = true;
 			
 		}
+		else if (entry.Function == "continue_dialog")
+		{
+			SetVisibleIndicator(true);
+			IsReadyToClose = false;
+		}
 		else
 		{
 			SetVisibleIndicator(true);
@@ -255,7 +260,7 @@ public partial class Dialogue : CanvasLayer
 		}
 		else
 		{
-			GD.Print("Need to find next line of code");
+			ParseJSON(CurrentInfo.Text);
 		}
 	}
 

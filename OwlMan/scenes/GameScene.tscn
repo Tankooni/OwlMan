@@ -118,7 +118,7 @@ position = Vector2(0, 0)
 [node name="InteractComponent2" parent="." instance=ExtResource("14_foldv")]
 position = Vector2(491.22, 263.64)
 scale = Vector2(1.235, 0.95)
-IDLabel = "Start_001"
+IDLabel = "Start_002"
 
 [node name="BeeCharacter" parent="InteractComponent2" instance=ExtResource("15_xpm8k")]
 position = Vector2(0.631561, -1.72632)
