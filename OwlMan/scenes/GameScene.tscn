@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=21 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
 [ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_j7aro"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://con84vjvwqlvr" path="res://GameComponents/interact_component.tscn" id="14_foldv"]
 [ext_resource type="PackedScene" uid="uid://cgma4lm2b17mt" path="res://GameComponents/Sign.tscn" id="14_g3a01"]
 [ext_resource type="PackedScene" uid="uid://dbsms766wi1ci" path="res://Character/BeeCharacter.tscn" id="15_xpm8k"]
+[ext_resource type="PackedScene" uid="uid://dslvdlcfp6hd3" path="res://Character/Slime/SlimeCharacter.tscn" id="16_pqqhy"]
 [ext_resource type="PackedScene" uid="uid://bchs0sl3rmwrj" path="res://prefab/Projectiles/Bullet.tscn" id="17_gqugq"]
 
 [sub_resource type="GDScript" id="GDScript_lgtyf"]
@@ -96,7 +97,7 @@ position = Vector2(309, 254)
 Target = NodePath("../PlayerOwl")
 
 [node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
-position = Vector2(-161, -155)
+position = Vector2(235, 151)
 Target = NodePath("../PlayerOwl")
 
 [node name="Node" type="Node" parent="."]
@@ -106,7 +107,7 @@ script = SubResource("GDScript_lgtyf")
 position = Vector2(672, 248)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(570, 287)
+position = Vector2(635, 266)
 texture = ExtResource("13_d7n3i")
 
 [node name="InteractComponent" parent="." instance=ExtResource("14_foldv")]
@@ -122,6 +123,15 @@ IDLabel = "Start_001"
 
 [node name="BeeCharacter" parent="InteractComponent2" instance=ExtResource("15_xpm8k")]
 position = Vector2(0.631561, -1.72632)
+scale = Vector2(0.809717, 1.05263)
+
+[node name="InteractComponent3" parent="." instance=ExtResource("14_foldv")]
+position = Vector2(565, 284)
+scale = Vector2(1.235, 0.95)
+IDLabel = "Start_002"
+
+[node name="SlimeCharacter" parent="InteractComponent3" instance=ExtResource("16_pqqhy")]
+position = Vector2(5.57899e-05, 2.10527)
 scale = Vector2(0.809717, 1.05263)
 
 [node name="PlayerOwl" parent="." instance=ExtResource("8_d3h60")]
