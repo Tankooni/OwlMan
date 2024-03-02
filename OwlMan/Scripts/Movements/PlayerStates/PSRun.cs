@@ -64,7 +64,7 @@ namespace Atmo2.Movements.PlayerStates
 			if (player.InputController.AttackPressed())
 				return new PSAttackNormal(player, speedModifier);
 
-			if (player.InputController.JumpPressed())
+			if (player.InputController.JumpPressedBuffered())
 			{
 				return new PSJump(player);
 			}

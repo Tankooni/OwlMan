@@ -56,7 +56,7 @@ namespace Atmo2.Movements.PlayerStates
 					return new PSDiveKick(player);
 
 				if (player.Abilities.DoubleJump &&
-					player.InputController.JumpPressed() &&
+					player.InputController.JumpPressedBuffered() &&
 					player.Energy >= 1)
 				{
 					player.Energy -= 1;
@@ -74,7 +74,7 @@ namespace Atmo2.Movements.PlayerStates
 			}
 			else
 			{
-				if(player.InputController.JumpPressed())
+				if(player.InputController.JumpPressedBuffered())
 				{
 					return new PSJump(player);
 				}

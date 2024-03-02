@@ -14,6 +14,8 @@ namespace Atmo2.Movements.PlayerStates
 		private float speedModifier;
 		private float coyoteJumpSpeedModifier;
 
+		private float prevDirection;
+
 		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1, float coyoteJumpSpeedModifier = 0)
 			: base(player)
 		{
@@ -40,7 +42,7 @@ namespace Atmo2.Movements.PlayerStates
 			player.MovementInfo.Velocity.Y += player.Gravity;
 			if (player.MovementInfo.HeadBonk)
 				player.MovementInfo.Velocity.Y = player.Gravity;
-			
+
 			// MOVEMENT --------------------------------------------------------------------------
 			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
@@ -62,6 +64,8 @@ namespace Atmo2.Movements.PlayerStates
 
 			AnimationCheckSet();
 
+			prevDirection = player.FacingDirection;
+
 			return CheckForNewState(signedHorizontal);
 		}
 
@@ -80,7 +84,7 @@ namespace Atmo2.Movements.PlayerStates
 			if (coyoteTimeTicks > 0)
 			{
 				--coyoteTimeTicks;
-				if (player.InputController.JumpPressed())
+				if (player.InputController.JumpPressedBuffered())
 				{
 					return new PSJump(player, speedModifier + coyoteJumpSpeedModifier);
 				}
@@ -92,15 +96,14 @@ namespace Atmo2.Movements.PlayerStates
 			}
 
 			if (player.Abilities.DoubleJump &&
-				player.InputController.JumpPressed() && 
+				player.InputController.JumpPressedBuffered() && 
 				player.Energy >= 1)
 			{
 				player.Energy -= 1;
 				return new PSJump(player, speedModifier);
 			}
 
-			if(signedHorizontal != 0 &&
-				player.Abilities.AirDash && 
+			if( player.Abilities.AirDash && 
 				player.InputController.DashPressed() && 
 				player.Energy >= 1)
 			{

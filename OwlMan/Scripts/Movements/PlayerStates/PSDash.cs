@@ -9,7 +9,8 @@ namespace Atmo2.Movements.PlayerStates
 {
     class PSDash : PlayerState
     {
-        private readonly float speed;
+        private float speed = 0;
+        private float maxSpeed;
         private int dashTicks;
 		private float direction;
 
@@ -19,11 +20,12 @@ namespace Atmo2.Movements.PlayerStates
 			: base(player)
 		{
             this.player = player;
-            this.speed = player.DashMultiplier * player.RunSpeed;
+            this.maxSpeed = player.DashMultiplier * player.RunSpeed;
 			this.direction = direction;
             this.dashTicks = dashTicks;
 
-			player.MovementInfo.Velocity.X = this.speed * direction;
+			// speed = MathF.Min(player.RunSpeed * 4, maxSpeed);
+			player.MovementInfo.Velocity.X = maxSpeed * direction;
 			player.MovementInfo.Velocity.Y = 0;
 		}
         public override void OnEnter()
@@ -39,36 +41,8 @@ namespace Atmo2.Movements.PlayerStates
 
         public override PlayerState Update()
         {
-			//TODO: Enemy colision
-			// Enemy enemy = player.Collide(KQ.CollisionTypeEnemy, player.X, player.Y) as Enemy;
-			// if (enemy != null /*&& !this.player.IsInvincable*/)
-			// {
-			// 	//player.MovementInfo.Move = Math.Sign(player.MovementInfo.Move) * 100;
-			// 	enemy.World.Remove(enemy);
-			// 	player.Energy++;
-			// 	//return new PSFall(player);
-			// 	return new PSBounce(player, KQ.STANDARD_GRAVITY/*, enemy.touchDamage*/);
-			// }
-
-			//TODO: change this to be directional based
-			player.MovementInfo.Velocity.X = this.speed * direction;
-			//player.MovementInfo.NewVel.Y = this.speed * direction.y;
-
-			//if (player._image.FlipH)
-			//{
-			//	player.MovementInfo.LeftBox = true;
-			//}
-			//else
-			//{
-			//	player.MovementInfo.RightBox = true;
-			//}
-
-			/*
-			(-0.921875, -1)(-0.6778028, -0.7352437)
-			(-1, 0)(-1, 0)
-			(1, 0)(1, 0)
-			(1, -1)(0.7071068, -0.7071068)
-			*/
+			// speed = MathF.Min(speed + speed * 1.2f, maxSpeed);
+			player.MovementInfo.Velocity.X = maxSpeed * direction;
 
 			if (player.InputController.AttackPressed())
 			{
@@ -82,7 +56,7 @@ namespace Atmo2.Movements.PlayerStates
 					return new PSDiveKick(player);
 
 				if (player.Abilities.DoubleJump &&
-					player.InputController.JumpPressed() &&
+					player.InputController.JumpPressedBuffered() &&
 					player.Energy >= 1)
 				{
 					player.Energy -= 1;
@@ -90,7 +64,7 @@ namespace Atmo2.Movements.PlayerStates
 				}
 			}
 
-			if (player.MovementInfo.OnGround && player.InputController.JumpPressed())
+			if (player.MovementInfo.OnGround && player.InputController.JumpPressedBuffered())
 			{
 				return new PSJump(player, SpeedModifier);
 			}

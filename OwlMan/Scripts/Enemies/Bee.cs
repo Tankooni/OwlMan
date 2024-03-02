@@ -34,7 +34,7 @@ namespace Atmo2.Enemy
 
 			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60)
 			{
-				TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
+				// TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
 				TargetPath = Target
 			});
 

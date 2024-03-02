@@ -55,7 +55,7 @@ namespace Atmo2.Movements.PlayerStates
 			}
 
 			if (player.Abilities.DoubleJump &&
-					player.InputController.JumpPressed() &&
+					player.InputController.JumpPressedBuffered() &&
 					player.Energy >= 1)
 			{
 				player.Energy -= 1;

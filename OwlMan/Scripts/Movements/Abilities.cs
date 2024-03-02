@@ -28,10 +28,10 @@ namespace Atmo2
             this.player = player;
 			GoodJump = true;
 			DoubleJump = false;
-			WallSlide = false;
-			WallJump = false;
-			GroundDash = false;
-			AirDash = false;
+			WallSlide = true;
+			WallJump = true;
+			GroundDash = true;
+			AirDash = true;
 		}
 
 		public void GiveAllAbilities()

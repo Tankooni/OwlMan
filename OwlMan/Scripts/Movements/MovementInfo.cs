@@ -60,9 +60,21 @@ namespace Atmo2.Movements
 			Velocity.Y = 0;
 		}
 
+		Vector2 newVelocity;
 		public void Update()
 		{
-			entity.Velocity = Velocity;
+			
+			newVelocity = new Vector2(Velocity.X, 0);
+			// Bad implementation of terminal velocity
+			if(Mathf.Sign(Velocity.Y) > 0)
+			{
+				newVelocity.Y = Mathf.Min(Velocity.Y, 2000);
+			}
+			else
+			{
+				newVelocity.Y = Velocity.Y;
+			}
+			entity.Velocity = newVelocity;
 			entity.MoveAndSlide();
 
 			OnGround = entity.TestMove(entity.Transform, new Vector2(0, 1));

@@ -134,7 +134,7 @@ public partial class Player : CharacterBody2D
 
 		//	//node.Set("node", node.GetPath());
 		//}
-
+		
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
 		Image = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
@@ -151,7 +151,7 @@ public partial class Player : CharacterBody2D
 		this.Connect("HealthChanged", new Callable(_hud, "on_set_health"));
 		this.Connect("AnimationChanged", new Callable(_hud, "on_animation_changed"));
 
-		SetDeferred("Health", maxHealth);
+		// SetDeferred("Health", maxHealth);
 
 		AddChild(damageable = new Damageable(this, maxHealth));
 		damageable.OnDamageCallback += HandleDamage;
@@ -162,7 +162,7 @@ public partial class Player : CharacterBody2D
 
 		// Spice = 100;
 		// Energy = 0f;
-		MaxEnergy = 3;
+		MaxEnergy = 1;
 		EnergyRechargeRate = 2f;
 
 		//JumpStrenth = 660;
@@ -178,7 +178,7 @@ public partial class Player : CharacterBody2D
 		// Type = KQ.CollisionTypePlayer;
 
 		Abilities = new Abilities(this);
-		Abilities.GiveAllAbilities();
+		// Abilities.GiveAllAbilities();
 		MovementInfo = new MovementInfo(this);
 
 		InputController = new Controller();
@@ -415,13 +415,11 @@ public partial class Player : CharacterBody2D
 	
 	public void OnAreaEntered(Area2D InteractionArea)
 	{
-		GD.Print("Area entered: ", InteractionArea.Name);
 		AllInteractions.Insert(0, InteractionArea);
 	}
 
 	public void OnAreaExited(Area2D InteractionArea)
 	{
-		GD.Print("Area exited: ", InteractionArea.Name);
 		AllInteractions.Remove(InteractionArea);
 	}
 	

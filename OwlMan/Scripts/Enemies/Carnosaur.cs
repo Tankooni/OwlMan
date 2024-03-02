@@ -33,7 +33,7 @@ public partial class Carnosaur : Enemy
 
 		shootAI = new ShootAt(Shoot, ChangeDirection, 120)
 		{
-			TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
+			// TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
 			TargetPath = Target
 		};
 		

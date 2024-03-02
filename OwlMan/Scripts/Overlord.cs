@@ -101,11 +101,12 @@ public partial class Overlord : Node
 }
 
   // Also this is a hack to get around limitations in C# enums
-  public static class HitGroups {
+public static class HitGroups
+{
 	public static readonly string Player = "player";
 	public static readonly string Enemy = "enemy";
 	public static readonly string Wall = "wall";
-
 	public static readonly string Bullet = "bullet";
 	public static readonly string Interact = "interactable";
-  }
+	public static readonly string Targetable = "targetable";
+}

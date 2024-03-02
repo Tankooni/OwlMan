@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://boybl7xia5i5j"]
+[gd_scene load_steps=29 format=3 uid="uid://boybl7xia5i5j"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1"]
 [ext_resource type="PackedScene" path="res://Particles/TestParticles.tscn" id="2"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cy2mcjpa8e7d5" path="res://Images/OwlMan/001_Walk00.png" id="18_d50ls"]
 [ext_resource type="Texture2D" uid="uid://cw2uvjgepepcd" path="res://Images/OwlMan/001_Walk01.png" id="19_c717g"]
 [ext_resource type="Texture2D" uid="uid://qdog1isnk7x1" path="res://Images/OwlMan/002_Pose03.png" id="20_ldser"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Targetable.cs" id="22_3i43j"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -156,7 +157,7 @@ texture = ExtResource("14_v6p2n")
 texture_filter = 1
 position = Vector2(0, -44)
 sprite_frames = SubResource("1")
-animation = &"diveKick"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -33)
@@ -221,6 +222,10 @@ grow_vertical = 2
 text = "Interact Here"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Targetable" type="Node2D" parent="."]
+position = Vector2(0, -43)
+script = ExtResource("22_3i43j")
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="InteractionComponents/InteractionArea" to="." method="OnAreaExited"]

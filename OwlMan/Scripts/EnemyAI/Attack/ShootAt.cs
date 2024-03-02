@@ -10,10 +10,15 @@ namespace Atmo2.Enemy.AI
 	{
 		public NodePath TargetPath { get; set; }
 		
-		Node2D target;
-
-		//[Export]
-		public List<string> TargetHitgroups { get; set; }
+		private Node2D target;
+		public Node2D Target
+		{
+			get
+			{	
+				target ??= GetNodeOrNull<Targetable>( $"../{TargetPath.ToString()}/{nameof(Targetable)}" );
+				return ( target ??= GetNodeOrNull<Node2D>( $"../{TargetPath.ToString()}" ));
+			}
+		}
 
 		private int attackFrameFrequency = 60;
 		private int framesUntilAttack = 0;
@@ -31,21 +36,15 @@ namespace Atmo2.Enemy.AI
 
 		public override void _Ready()
 		{
-			// Default to target's groups if none are given
-			if (this.TargetHitgroups == null)
-			{
-				this.TargetHitgroups = new List<string>();
-			}
-
-			target = GetNode<Node2D>("../" + TargetPath.ToString());
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
-			if(target == null)
+			if(Target == null)
 			{
 				return;
 			}
+
 
 			var distance = GlobalPosition.DistanceTo(target.GlobalPosition);
 			if (distance < 300)
@@ -70,7 +69,6 @@ namespace Atmo2.Enemy.AI
 
 			b.Name = "Projectile";
 			b.direction = direction;
-			b.TargetHitgroups = TargetHitgroups;
 			b.speed = 5;
 			b.Position = GlobalPosition;
 

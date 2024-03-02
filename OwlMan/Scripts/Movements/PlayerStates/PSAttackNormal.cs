@@ -52,7 +52,9 @@ namespace Atmo2.Movements.PlayerStates
 			}
 
 			if (!player.IsOnFloor())
+			{
 				player.MovementInfo.Velocity.Y += player.Gravity;
+			}
 			
 			// MOVEMENT --------------------------------------------------------------------------
 			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;

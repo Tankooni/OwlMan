@@ -60,7 +60,7 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				return new PSRun(player);
 			}
-			if(player.InputController.JumpPressed())
+			if(player.InputController.JumpPressedBuffered())
 			{
 				return new PSJump(player);
 			}

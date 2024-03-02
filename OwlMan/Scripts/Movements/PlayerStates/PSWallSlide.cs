@@ -53,7 +53,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			
 
-			if(player.Abilities.WallJump && player.InputController.JumpPressed())
+			if(player.Abilities.WallJump && player.InputController.JumpPressedBuffered())
 			{
 				//TODO: Add some kind of directionality to this call
 				return new PSJump(player, initialSpeedModifier: player.RunSpeed * 3 * (wallOnLeft ? 1 : -1) );
