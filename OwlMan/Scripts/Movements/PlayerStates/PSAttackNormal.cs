@@ -78,7 +78,7 @@ namespace Atmo2.Movements.PlayerStates
 
         public override PlayerState OnAnimationComplete()
 		{
-			if (player.MovementInfo.OnGround)
+			if (player.IsOnFloor())
 				if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 					return new PSRun(player, initialSpeedModifier: speedModifier);
 				else

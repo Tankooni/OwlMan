@@ -49,7 +49,7 @@ namespace Atmo2.Movements.PlayerStates
 				return new PSAttackNormal(player, SpeedModifier);
 			}
 
-			if (!player.MovementInfo.OnGround)
+			if (!player.IsOnFloor())
 			{
 				// && delta - PSDiveKick.last_bounce > 300)
 				if (player.InputController.DashHeld() && player.InputController.DownHeld())
@@ -64,26 +64,17 @@ namespace Atmo2.Movements.PlayerStates
 				}
 			}
 
-			if (player.MovementInfo.OnGround && player.InputController.JumpPressedBuffered())
+			if (player.IsOnFloor() && player.InputController.JumpPressedBuffered())
 			{
 				return new PSJump(player, SpeedModifier);
 			}
 
-			if (player.MovementInfo.AgainstLeftWall || player.MovementInfo.AgainstRightWall)
+			if (player.IsOnWallOnly())
 			{
-				if(player.MovementInfo.AgainstLeftWall && player.InputController.LeftPressed())
-				{
-					
-				}
-				else if(player.MovementInfo.AgainstRightWall && player.InputController.RightPressed())
-				{
-					
-				}
-
-
+				
 				// TODO: add directional check in case we're flush on a wall but moving away
 				if(player.Abilities.WallSlide)
-					return new PSWallSlide(player, player.MovementInfo.AgainstLeftWall);
+					return new PSWallSlide(player, player.GetWallNormal().X > 0);
 				
 				// Our dash should be considered done since we've hit a wall
 				dashTicks = 0;
@@ -93,7 +84,7 @@ namespace Atmo2.Movements.PlayerStates
             if(dashTicks < 0)
             {
 				// We're done here
-				if (player.MovementInfo.OnGround)
+				if (player.IsOnFloor())
 					// if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 					return new PSRun(player, SpeedModifier);
 					// else

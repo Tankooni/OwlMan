@@ -43,7 +43,7 @@ namespace Atmo2.Movements.PlayerStates
 			//     return new PSOuch(player, enemy.touchDamage, KQ.STANDARD_GRAVITY);
 			// }
 
-			if (!player.MovementInfo.OnGround)
+			if (!player.IsOnFloor())
 			{
 				return new PSFall(player, coyoteTime: true);
 			}

@@ -54,7 +54,7 @@ namespace Atmo2.Movements.PlayerStates
 
             if(this.duration < 0)
             {
-				if (player.MovementInfo.OnGround)
+				if (player.IsOnFloor())
 					if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 						return new PSRun(player);
 					else

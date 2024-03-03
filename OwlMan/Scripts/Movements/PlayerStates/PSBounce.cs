@@ -49,7 +49,7 @@ namespace Atmo2.Movements.PlayerStates
 			--duration;
 
 			//Handle Player input for state changers
-			if (!player.MovementInfo.OnGround)
+			if (!player.IsOnFloor())
 			{
 				// && delta - PSDiveKick.last_bounce > 300)
 				if (player.InputController.DashHeld() && player.InputController.DownHeld())
@@ -87,7 +87,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (duration < 0)
 			{
-				if (player.MovementInfo.OnGround)
+				if (player.IsOnFloor())
 					if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 						return new PSRun(player);
 					else

@@ -33,8 +33,8 @@ func load_screen_to_scene(target: String, parameters: Dictionary = {}) -> void:
 	
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5p7w"]
-size = Vector2(36, 71)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m3ryi"]
+b = Vector2(200, 0)
 
 [node name="GameScene" type="Node"]
 script = ExtResource("1_j7aro")
@@ -137,10 +137,75 @@ scale = Vector2(0.809717, 1.05263)
 [node name="PlayerOwl" parent="." instance=ExtResource("8_d3h60")]
 position = Vector2(135, 282)
 
-[node name="OwlManBodyCollider" type="CollisionShape2D" parent="PlayerOwl"]
-position = Vector2(0, -35.5)
-shape = SubResource("RectangleShape2D_s5p7w")
-debug_color = Color(0.392157, 0.568627, 0.611765, 0.419608)
-
 [node name="Bullet" parent="." instance=ExtResource("17_gqugq")]
 position = Vector2(244, 264)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(804, 79)
+rotation = 3.14743
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(0, 1)
+polygon = PackedVector2Array(93, -46, -66, 61, 233, 62)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
+show_behind_parent = true
+polygon = PackedVector2Array(93, -46, -66, 61, 233, 62)
+
+[node name="Line_45_L" type="StaticBody2D" parent="."]
+position = Vector2(1123, 280)
+rotation = -0.785398
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line_45_L"]
+shape = SubResource("SegmentShape2D_m3ryi")
+
+[node name="Line2D" type="Line2D" parent="Line_45_L"]
+show_behind_parent = true
+points = PackedVector2Array(0, 0, 200, 0)
+width = 5.0
+
+[node name="Line_45_R" type="StaticBody2D" parent="."]
+position = Vector2(1412, 280)
+rotation = -2.35619
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line_45_R"]
+shape = SubResource("SegmentShape2D_m3ryi")
+
+[node name="Line2D" type="Line2D" parent="Line_45_R"]
+show_behind_parent = true
+points = PackedVector2Array(0, 0, 200, 0)
+width = 5.0
+
+[node name="Line_30_L2" type="StaticBody2D" parent="."]
+position = Vector2(740, 280)
+rotation = -0.523599
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line_30_L2"]
+shape = SubResource("SegmentShape2D_m3ryi")
+
+[node name="Line2D" type="Line2D" parent="Line_30_L2"]
+show_behind_parent = true
+points = PackedVector2Array(0, 0, 200, 0)
+width = 5.0
+
+[node name="Line_30_R2" type="StaticBody2D" parent="."]
+position = Vector2(1093, 280)
+rotation = -2.61799
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line_30_R2"]
+shape = SubResource("SegmentShape2D_m3ryi")
+
+[node name="Line2D" type="Line2D" parent="Line_30_R2"]
+show_behind_parent = true
+points = PackedVector2Array(0, 0, 200, 0)
+width = 5.0

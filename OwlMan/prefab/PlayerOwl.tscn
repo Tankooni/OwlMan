@@ -122,8 +122,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_10wg0"]
-size = Vector2(10, 34)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng4ip"]
+size = Vector2(15, 70)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(35, 70)
@@ -139,6 +139,9 @@ size = Vector2(85, 80)
 
 [node name="PlayerOwl" type="CharacterBody2D"]
 collision_mask = 4
+slide_on_ceiling = false
+floor_constant_speed = true
+floor_snap_length = 20.0
 script = ExtResource("1")
 
 [node name="PoseParticles" parent="." instance=ExtResource("2")]
@@ -160,10 +163,11 @@ sprite_frames = SubResource("1")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -33)
-shape = SubResource("RectangleShape2D_10wg0")
+position = Vector2(0.5, -35)
+shape = SubResource("RectangleShape2D_ng4ip")
 
 [node name="SideBoxL" type="Area2D" parent="."]
+visible = false
 position = Vector2(-23, -30)
 collision_layer = 0
 collision_mask = 24
@@ -171,10 +175,12 @@ monitorable = false
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxL"]
+visible = false
 position = Vector2(-1, -15)
 shape = SubResource("2")
 
 [node name="SideBoxR" type="Area2D" parent="."]
+visible = false
 position = Vector2(24, -30)
 collision_layer = 0
 collision_mask = 24
@@ -182,20 +188,24 @@ monitorable = false
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxR"]
+visible = false
 position = Vector2(1, -15)
 shape = SubResource("3")
 
 [node name="BottomBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(1, 10)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox"]
+visible = false
 position = Vector2(-1, -10)
 shape = SubResource("4")
 
 [node name="InteractionComponents" type="Node2D" parent="."]
+visible = false
 z_index = 1
 
 [node name="InteractionArea" type="Area2D" parent="InteractionComponents"]

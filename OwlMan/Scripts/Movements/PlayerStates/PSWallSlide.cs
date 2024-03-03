@@ -59,30 +59,34 @@ namespace Atmo2.Movements.PlayerStates
 				return new PSJump(player, initialSpeedModifier: player.RunSpeed * 3 * (wallOnLeft ? 1 : -1) );
 			}
 			
-			if ( player.MovementInfo.OnGround && ( player.InputController.LeftHeld() || player.InputController.RightHeld() ) )
+			if ( player.IsOnFloor() && ( player.InputController.LeftHeld() || player.InputController.RightHeld() ) )
 			{
 				return new PSRun(player);
 			}
+			
+			if(player.IsOnFloor())
+			{
+				return new PSIdle(player);
+			}
 
 			// Check to see if we should enter into the falling state
+			if(!player.IsOnWallOnly())
+			{
+				return new PSFall(player);
+			}
 			if(wallOnLeft)
 			{
-				if(!player.MovementInfo.AgainstLeftWall)
-					return new PSFall(player);
 				if(player.InputController.RightHeld())
+				{
 					return new PSFall(player, coyoteTime: player.Abilities.WallJump, coyoteJumpSpeedModifier: player.RunSpeed * 3);
+				}
 			}
 			else 
 			{
-				if(!player.MovementInfo.AgainstRightWall)
-					return new PSFall(player);
 				if(player.InputController.LeftHeld())
+				{
 					return new PSFall(player, coyoteTime: player.Abilities.WallJump, coyoteJumpSpeedModifier: -player.RunSpeed * 3);
-			}
-			
-			if(player.MovementInfo.OnGround)
-			{
-				return new PSIdle(player);
+				}
 			}
 
 			if (player.Abilities.AirDash &&

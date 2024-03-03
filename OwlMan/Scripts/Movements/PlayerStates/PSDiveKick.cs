@@ -41,7 +41,7 @@ namespace Atmo2.Movements.PlayerStates
 				player.FacingDirection = signedHorizontal;
 			player.MovementInfo.Velocity.X = player.RunSpeed * Math.Sign(signedHorizontal);
 
-			if (player.MovementInfo.OnGround)
+			if (player.IsOnFloor())
 			{
 				if (player.InputController.LeftHeld() || player.InputController.RightHeld())
 					return new PSRun(player);

@@ -10,14 +10,26 @@ namespace Atmo2.Enemy {
 	[Export]
 	public int Health = 1;
 
-	public override void _Ready()
-	{
-	}
+	public override void _EnterTree()
+    {
+        base._EnterTree();
+		GD.Print($"{Name} enter tree");
+    }
 
-	public override void _PhysicsProcess(double delta)
-	{
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		GD.Print($"{Name} exit tree");
+    }
+
+	// public override void _Ready()
+	// {
+	// }
+
+	// public override void _PhysicsProcess(double delta)
+	// {
 	  
-	}
+	// }
 
 	public void OnDamage(CollisionObject2D collider)
 	{

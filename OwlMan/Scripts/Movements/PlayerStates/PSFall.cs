@@ -39,9 +39,13 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
+			
+			if (player.IsOnCeiling() && player.MovementInfo.Velocity.Y < 0)
+			{
+				player.MovementInfo.Velocity.Y = 0;
+			}
+
 			player.MovementInfo.Velocity.Y += player.Gravity;
-			if (player.MovementInfo.HeadBonk)
-				player.MovementInfo.Velocity.Y = player.Gravity;
 
 			// MOVEMENT --------------------------------------------------------------------------
 			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
@@ -111,7 +115,7 @@ namespace Atmo2.Movements.PlayerStates
 				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
 
-			if (player.MovementInfo.OnGround)
+			if (player.IsOnFloor())
 				if (player.MovementInfo.Velocity.X == 0)
 					return new PSIdle(player);
 				else // Hit the ground runnin'
@@ -119,15 +123,15 @@ namespace Atmo2.Movements.PlayerStates
 
 			// Determine if we're on a wall and only left or right is pressed for wall slide if enabled
 			if (player.Abilities.WallSlide
-				&& (player.MovementInfo.AgainstLeftWall || player.MovementInfo.AgainstRightWall)
+				&& (player.IsOnWallOnly())
 				&& (player.InputController.LeftHeld() ^ player.InputController.RightHeld()))
 			{
-				if(player.MovementInfo.AgainstLeftWall && player.InputController.LeftHeld())
+				if(player.GetWallNormal().X > 0 && player.InputController.LeftHeld())
 				{
 					return new PSWallSlide(player, true);
 				}
 				
-				if(player.MovementInfo.AgainstRightWall && player.InputController.RightHeld())
+				if(player.GetWallNormal().X < 0 && player.InputController.RightHeld())
 				{
 					return new PSWallSlide(player, false);
 				}

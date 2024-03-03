@@ -66,14 +66,14 @@ namespace Atmo2.Movements.PlayerStates
 
 			if (player.InputController.JumpPressedBuffered())
 			{
-				return new PSJump(player);
+				return new PSJump(player, speedModifier);
 			}
 			if(player.Abilities.GroundDash && 
 				player.InputController.DashPressed())
 			{
 				return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
 			}
-			if (!player.MovementInfo.OnGround)
+			if (!player.IsOnFloor())
 			{
 				return new PSFall(player, coyoteTime: true);
 			}

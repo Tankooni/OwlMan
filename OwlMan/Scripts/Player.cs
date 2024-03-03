@@ -116,11 +116,22 @@ public partial class Player : CharacterBody2D
 	// Make this a property at some point
 	public Vector2 ResetPoint;
 
-	
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+		GD.Print("Player enter tree");
+    }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		GD.Print("Player exit tree");
+    }
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
+		base._Ready();
 		AddToGroup(HitGroups.Player);
 		_camera = GetNode<Camera2D>("../MainCamera");
 		_camera.Call("SetFollow", this.GetPath());

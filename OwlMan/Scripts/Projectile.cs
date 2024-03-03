@@ -56,26 +56,14 @@ namespace Atmo2 {
 
 		public void OnCollide(Node2D otherNode2D)
 		{
-			// Tell the thing we collided with and our parent that we've collided if we actually did collide
-			// bool isInGroup = false; // Use Intersect(body) when godot makes it's arrays IEnumerable
-			GD.Print($"Projectile collision {otherNode2D.Name}");
+			// Tell the thing we collided with and our parent that we've collided if we actually did collide.
+			// TODO: probably want to hook this up properly
 			var damageable = otherNode2D.GetNodeOrNull<Damageable>(Damageable.DAMAGEABLE_NAME);
 			if(damageable is not null)
 			{
 				damageable.HandleDamage(1);
 			}
 			QueueFree();
-
-			// foreach(string g in body.GetGroups() {
-			// 	if(HitGroups.Player == )
-			// 	if(this.TargetHitgroups.Contains(g)) {
-			// 		isInGroup = true;
-			// 		GD.Print(g);
-			// 		break;
-			// 	}
-			// }
-
-
 		/*
 			if (body.IsInGroup(HitGroups.Enemy)) {
 				if (isDeflected) {
@@ -95,25 +83,6 @@ namespace Atmo2 {
 				}
 			}
 		*/
-			
-			// // TODO: Pass an Attack object with a damage amount, pushback, damage type, etc instead of this object
-			// if(body.IsInGroup(HitGroups.Enemy) && isDeflected) {
-			// 	GD.Print("Bullet Hit Enemy and Will Damage Enemy");
-			// 	projectileAnimatedSprite.Frame = 2; // Color red
-			// }
-				// var parent = this.GetParent();
-				// EmitSignal(nameof(OnHit), GetParent(), body);
-
-
-				//TODO: need to fix collision layers
-				//if(body.HasMethod("OnDamage"))
-				//	body.Call("OnDamage", this);
-
-				//QueueFree();
-				//SetPhysicsProcess(false);
-
-				// GD.Print("OOF");
-
 		}
 
 		public void Deflect(int damage)
