@@ -61,4 +61,3 @@ disabled = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_e0pa5")
 animation = &"idle"
-frame_progress = 0.66029
