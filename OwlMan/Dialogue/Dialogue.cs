@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using Atmo2.Movements.PlayerStates;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
+using Microsoft.VisualBasic;
 
 public class DialogueEntry
 {
@@ -306,11 +307,13 @@ public partial class Dialogue : CanvasLayer
 
 	public void ChangePortrait(string Character, string Pose)
 	{
+		// var fileSystem = Engine.GetSingleton("FileSystem") as FileSystem;
 		TextureRect PortraitRect = this.GetNode<TextureRect>("Control/Portrait");
-		string ImagePath = "res://Dialogue/Portraits/OwlMan/" + Pose + ".png";
+		string ImagePath = "res://Dialogue/Portraits/" + Character + "/" + Pose + ".png";
+		
 		GD.Print(ImagePath);
 
-		if (System.IO.File.Exists(ImagePath) && Pose != null)
+		if (ResourceLoader.Exists(ImagePath) && Pose != null)
 		{
 			Texture2D PortraitTexture = GD.Load<Texture2D>(ImagePath);
 			PortraitRect.Texture = PortraitTexture;
