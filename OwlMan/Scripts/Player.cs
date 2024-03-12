@@ -78,18 +78,23 @@ public partial class Player : CharacterBody2D
 	public float Gravity { get; set; }
 	public bool IsInvincable { get; set; }
 
+	[Export]
 	public KillBox BoxL;
+	[Export]
 	public KillBox BoxR;
+	[Export]
 	public KillBox BoxB;
 
-	// Make this private later and fix the things that reference it to flip the image
+	[Export]
 	public AnimatedSprite2D Image;
+	[Export]
+	private CollisionShape2D collisionShape2D;
+	
 
 	public Godot.Collections.Array AllInteractions = new Godot.Collections.Array();
 
-	private Camera2D _camera;
+	private Camera2D camera;
 	private Control _hud;
-	private CollisionShape2D _collisionShape2D;
 	private Overlord _overlord;
 	private Damageable damageable;
 
@@ -119,24 +124,20 @@ public partial class Player : CharacterBody2D
     public override void _EnterTree()
     {
         base._EnterTree();
-		GD.Print("Player enter tree");
-    }
-
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-		GD.Print("Player exit tree");
+		Enemy.PlayerPath = this.GetPath();
     }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
 		base._Ready();
-		AddToGroup(HitGroups.Player);
-		_camera = GetNode<Camera2D>("../MainCamera");
-		_camera.Call("SetFollow", this.GetPath());
+		
+		_overlord = GetNode<Overlord>("/root/Overlord");
 
-		Enemy.PlayerPath = this.GetPath();
+		AddToGroup(HitGroups.Player);
+
+		camera = Overlord.MainCamera;
+		camera?.Call("SetFollow", this.GetPath());
 
 		//foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
 		//{
@@ -147,20 +148,16 @@ public partial class Player : CharacterBody2D
 		//}
 		
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
-		Image = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
-		_overlord = GetNode<Overlord>("/root/Overlord");
-
-		BoxL = GetNode<KillBox>("SideBoxL");
-		BoxR = GetNode<KillBox>("SideBoxR");
-		BoxB = GetNode<KillBox>("BottomBox");
 
 		BoxL.HitCallback += OnTraceHit;
 		BoxR.HitCallback += OnTraceHit;
 		BoxB.HitCallback += OnTraceHit;
 
-		this.Connect("HealthChanged", new Callable(_hud, "on_set_health"));
-		this.Connect("AnimationChanged", new Callable(_hud, "on_animation_changed"));
+		if( _hud != null )
+		{
+			this.Connect("HealthChanged", new Callable(_hud, "on_set_health"));
+			this.Connect("AnimationChanged", new Callable(_hud, "on_animation_changed"));
+		}
 
 		// SetDeferred("Health", maxHealth);
 
@@ -201,13 +198,11 @@ public partial class Player : CharacterBody2D
 		// AddResponse(PickupType.AirJump, OnAirJumpPickup);
 		// AddResponse(PickupType.Jump, OnJumpPickup);
 		// AddResponse(PickupType.Dash, OnDashPickup);
+    }
 
-		
-		// Node playerCharacter = GetNode<Node>("CharacterBody2D"); // Replace "PlayerCharacterPath" with the actual path to your player character node
-
-        // // Add the player character to the "Player" hit group
-        // playerCharacter?.AddToGroup("HitGroup.Player");
-
+    public override void _ExitTree()
+    {
+        base._ExitTree();
     }
 
 	public void AnimationComplete()
@@ -221,15 +216,6 @@ public partial class Player : CharacterBody2D
 			time.Elapsed*EnergyRechargeRate + Energy, 0, MaxEnergy);*/
 	}
 
-	// public override bool IsRiding(Solid solid)
-	// {
-	// 	return Bottom == solid.Top;
-	// }
-
-	// public void NodeHandler(System.Xml.XmlNode entity)
-	// {
-	// }
-
 	public void OnTraceHit(Node2D otherNode2D)
 	{
 		ShakeCamera();
@@ -237,7 +223,7 @@ public partial class Player : CharacterBody2D
 
 	public void ShakeCamera()
 	{
-		_camera.Call("Shake", .1f, 100, 10);
+		camera.Call("Shake", .1f, 100, 10);
 		Overlord.OwlOverlord.PlaySound("Hit4", Position);
 	}
 
@@ -245,11 +231,9 @@ public partial class Player : CharacterBody2D
 	{
 		base._PhysicsProcess(delta);
 
+		
+
 		InputController.Update();
-		// if(Keyboard.Space.Pressed)
-		// {
-		// 	Console.WriteLine(player_controller.current_state.ToString());
-		// }
 
 		PlayerStateController.Update();
 		MovementInfo.Update();
@@ -259,56 +243,6 @@ public partial class Player : CharacterBody2D
 			_overlord.Reset();
 		}
 
-		/*
-		if (MovementInfo.LeftBox)
-		{
-			foreach (PhysicsBody2D body in BoxL.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
-			{
-				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
-				body.QueueFree();
-				ShakeCamera();
-
-				// if (body.HasMethod("OnDamage"))
-				// 	body.Call("OnDamage");
-				// else if (body.HasMethod("on_damage"))
-				// 	body.Call("on_damage");
-
-			}
-			foreach (var area in BoxL.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
-			{
-				_camera.Call("Shake", .1f, 100, 10);
-				area.Call("Deflect");
-			}
-		}
-		if (MovementInfo.RightBox)
-		{
-			foreach (PhysicsBody2D body in BoxR.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
-			{
-				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
-				body.QueueFree();
-				ShakeCamera();
-			}
-			foreach (var area in BoxR.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
-			{
-				_camera.Call("Shake", .1f, 100, 10);
-				area.Call("Deflect");
-			}
-		}
-		if (MovementInfo.BottomBox)
-		{
-			foreach (PhysicsBody2D body in BoxB.GetOverlappingBodies().OfType<PhysicsBody2D>().Where(x => x.IsInGroup(HitGroups.Enemy)))
-			{
-				body.ShapeOwnerSetDisabled(body.ShapeFindOwner(0), true);
-				body.QueueFree();
-				ShakeCamera();
-			}
-			foreach (var area in BoxB.GetOverlappingAreas().OfType<Area2D>().Where(x => x.IsInGroup(HitGroups.Bullet)))
-			{
-				_camera.Call("Shake", .1f, 100, 10);
-				area.Call("Deflect");
-			}
-		}
-		*/
 		invulnerabilityFrames = Math.Max(--invulnerabilityFrames, 0);
 	}
 
@@ -363,7 +297,6 @@ public partial class Player : CharacterBody2D
 
 	public void HandleDamage(int damage)
 	{
-		GD.Print("OOF");
 		if (damageable.InvulnerabilityFrames == 0)
 		{
 			damageable.InvulnerabilityFrames = 120;

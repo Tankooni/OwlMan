@@ -13,13 +13,11 @@ namespace Atmo2.Enemy {
 	public override void _EnterTree()
     {
         base._EnterTree();
-		GD.Print($"{Name} enter tree");
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
-		GD.Print($"{Name} exit tree");
     }
 
 	// public override void _Ready()

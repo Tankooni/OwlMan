@@ -18,9 +18,11 @@ public partial class Overlord : Node
 
 	public Dictionary<string, PackedScene> Sounds = new Dictionary<string, PackedScene>();
 
-	public Node2D Level;
+	public static Level CurrentLevel;
 	public static CanvasLayer Dialogue;
 	public static Dialogue DialogueScripts;
+
+	public static ShakeCamera MainCamera;
 
 	// Declare member variables here. Examples:
 	// private int a = 2;

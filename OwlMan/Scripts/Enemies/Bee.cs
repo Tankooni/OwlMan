@@ -32,11 +32,7 @@ namespace Atmo2.Enemy
 
 			AddToGroup(HitGroups.Enemy);
 
-			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60)
-			{
-				// TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
-				TargetPath = Target
-			});
+			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60));
 
 			
 			AddChild(damageable = new Damageable(this, 2));

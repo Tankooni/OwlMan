@@ -31,16 +31,8 @@ public partial class Carnosaur : Enemy
 
 		AddToGroup(HitGroups.Enemy);
 
-		shootAI = new ShootAt(Shoot, ChangeDirection, 120)
-		{
-			// TargetHitgroups = new List<string> { HitGroups.Player, HitGroups.Wall },
-			TargetPath = Target
-		};
-		
-		hoverChase = new HoverChase(this, 50, 300, 250)
-		{
-			TargetPath = Target	
-		};
+		shootAI = new ShootAt(Shoot, ChangeDirection, 120);
+		hoverChase = new HoverChase(this, 50, 300, 250);
 
 		AddChild(shootAI);
 		AddChild(hoverChase);

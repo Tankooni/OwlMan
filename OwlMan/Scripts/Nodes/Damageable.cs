@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Reflection.Metadata;
 
+[GlobalClass]
 public partial class Damageable : Node
 {
 	public const string DAMAGEABLE_NAME = "Damageable";
@@ -34,8 +35,6 @@ public partial class Damageable : Node
 		{
 			Health = MaxHealth;
 		}
-
-		GD.Print($"Damageable ready {Health}/{MaxHealth}");
 	}
 
 	public void HandleDamage(int damage)

@@ -18,6 +18,12 @@ public partial class ShakeCamera : Camera2D
 
 	private RandomNumberGenerator rand = new RandomNumberGenerator();
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+		Overlord.MainCamera = this;
+    }
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

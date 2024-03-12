@@ -5,8 +5,20 @@ using Godot;
 namespace Atmo2.Enemy.AI {
     public partial class HoverChase : Node2D
     {
-		public NodePath TargetPath { get; set; }
-        Node2D target;
+		private Node2D target;
+		public Node2D Target
+		{
+			get
+			{	
+				if(target == null)
+				{
+					if( Enemy.PlayerPath == null)
+						return null;
+					target = GetTree().CurrentScene.GetNodeOrNull<Targetable>( $"{Enemy.PlayerPath.ToString()}/{nameof(Targetable)}" );
+				}
+				return target ??= GetTree().CurrentScene.GetNodeOrNull<Node2D>( Enemy.PlayerPath );
+			}
+		}
 
         private CharacterBody2D parent;
         private int speed;
@@ -23,21 +35,21 @@ namespace Atmo2.Enemy.AI {
 
         public override void _Ready()
         {
-			target = GetNode<Node2D>("../" + TargetPath.ToString());
+            
         }
 
         public override void _PhysicsProcess(double delta)
         {
-			if(target == null)
-			{
+			if(Target == null)
+			{ 
 				return;
 			}
 
-            var distance = GlobalPosition.DistanceTo(target.GlobalPosition);
+            var distance = GlobalPosition.DistanceTo(Target.GlobalPosition);
             if(distance > activeDistance + 100)
                 return;
             
-            var direction = GlobalPosition.DirectionTo(target.GlobalPosition);
+            var direction = GlobalPosition.DirectionTo(Target.GlobalPosition);
 
             if (distance > 300)
                 parent.Velocity = direction * speed;

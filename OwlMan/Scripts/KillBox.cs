@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class KillBox : Area2D
 {
     // Declare member variables here. Examples:
@@ -51,7 +52,6 @@ public partial class KillBox : Area2D
     {
         foreach(var body in GetOverlappingBodies())
         {
-          GD.Print($"Body in area {body.Name}");
           OnBodyEntered(body);
         }
     }

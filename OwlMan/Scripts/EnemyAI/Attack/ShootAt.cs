@@ -8,15 +8,20 @@ namespace Atmo2.Enemy.AI
 {
 	public partial class ShootAt : Node2D
 	{
-		public NodePath TargetPath { get; set; }
+		// public NodePath TargetPath { get; set; }
 		
 		private Node2D target;
 		public Node2D Target
 		{
 			get
 			{	
-				target ??= GetNodeOrNull<Targetable>( $"../{TargetPath.ToString()}/{nameof(Targetable)}" );
-				return ( target ??= GetNodeOrNull<Node2D>( $"../{TargetPath.ToString()}" ));
+				if(target == null)
+				{
+					if( Enemy.PlayerPath == null)
+						return null;
+					target = GetTree().CurrentScene.GetNodeOrNull<Targetable>( $"{Enemy.PlayerPath.ToString()}/{nameof(Targetable)}" );
+				}
+				return target ??= GetTree().CurrentScene.GetNodeOrNull<Node2D>( Enemy.PlayerPath );
 			}
 		}
 
@@ -36,6 +41,7 @@ namespace Atmo2.Enemy.AI
 
 		public override void _Ready()
 		{
+
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -72,7 +78,7 @@ namespace Atmo2.Enemy.AI
 			b.speed = 5;
 			b.Position = GlobalPosition;
 
-			GetNode("/root/GameScene").AddChild(b);
+			GetTree().CurrentScene.CallDeferred(Node.MethodName.AddChild, b);
 
 			if (shootCallback != null)
 				shootCallback();

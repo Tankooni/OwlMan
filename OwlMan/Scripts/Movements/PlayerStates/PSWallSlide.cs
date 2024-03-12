@@ -18,7 +18,8 @@ namespace Atmo2.Movements.PlayerStates
 		}
 		public override void OnEnter()
 		{
-			player.MovementInfo.Velocity.X = 0;
+			// Hack to make sure we continue to push against the wall
+			player.MovementInfo.Velocity.X = wallOnLeft ? -1 : 1;
 			// if(player.MovementInfo.Velocity.Y > 0)
 			// {
 			// 	player.MovementInfo.Velocity.Y = 0;
@@ -41,39 +42,42 @@ namespace Atmo2.Movements.PlayerStates
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
 			// Apply gravity but once we're at a certain rate, keep it constant. This allows for upward momentum 
-			player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity * 1.5f, player.Gravity * 5f);
-			// if ( player.MovementInfo.Velocity.Y >= player.Gravity * 10f )
-			// {
-			// 	player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity / 3, player.Gravity * 10f);
-			// }
-			// else 
-			// {
-			// 	player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity, player.Gravity * 10f);
-			// }
-
-			
+			player.MovementInfo.Velocity.Y = Mathf.Min(player.MovementInfo.Velocity.Y + player.Gravity * 1.5f, player.Gravity * 5f);		
+				
 
 			if(player.Abilities.WallJump && player.InputController.JumpPressedBuffered())
 			{
 				//TODO: Add some kind of directionality to this call
 				return new PSJump(player, initialSpeedModifier: player.RunSpeed * 3 * (wallOnLeft ? 1 : -1) );
 			}
-			
-			if ( player.IsOnFloor() && ( player.InputController.LeftHeld() || player.InputController.RightHeld() ) )
+
+			if ( player.IsOnFloor() )
 			{
-				return new PSRun(player);
-			}
-			
-			if(player.IsOnFloor())
-			{
+				if (player.Abilities.GroundDash &&
+					player.InputController.DashPressed())
+				{
+					return new PSDash(player, player.FacingDirection);
+				}
+				if ( player.InputController.LeftHeld() || player.InputController.RightHeld() )
+				{
+					return new PSRun(player);
+				}
 				return new PSIdle(player);
 			}
 
-			// Check to see if we should enter into the falling state
 			if(!player.IsOnWallOnly())
 			{
 				return new PSFall(player);
 			}
+
+			if (player.Abilities.AirDash &&
+				player.InputController.DashPressed() &&
+				player.Energy >= 1)
+			{
+				player.Energy -= 1;
+				return new PSDash(player, player.FacingDirection);
+			}
+
 			if(wallOnLeft)
 			{
 				if(player.InputController.RightHeld())
@@ -87,14 +91,6 @@ namespace Atmo2.Movements.PlayerStates
 				{
 					return new PSFall(player, coyoteTime: player.Abilities.WallJump, coyoteJumpSpeedModifier: -player.RunSpeed * 3);
 				}
-			}
-
-			if (player.Abilities.AirDash &&
-				player.InputController.DashPressed() &&
-				player.Energy >= 1)
-			{
-				player.Energy -= 1;
-				return new PSDash(player, player.FacingDirection);
 			}
 
 			return null;
