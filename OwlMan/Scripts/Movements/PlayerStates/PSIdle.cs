@@ -54,7 +54,7 @@ namespace Atmo2.Movements.PlayerStates
 			}
 			if (player.InputController.DownPressed())
 			{
-				return new PSCharge(player);
+				player.Animation = "charge";
 			}
 			if (signedHorizontal != 0)
 			{

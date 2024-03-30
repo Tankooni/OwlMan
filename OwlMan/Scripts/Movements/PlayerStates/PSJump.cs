@@ -56,7 +56,9 @@ namespace Atmo2.Movements.PlayerStates
 
 			//Handle Player input for state changers
 			if (player.InputController.DashHeld() && player.InputController.DownHeld())
+			{
 				return new PSDiveKick(player);
+			}
 
 			if (player.Abilities.DoubleJump &&
 				player.InputController.JumpPressedBuffered() &&

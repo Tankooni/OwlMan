@@ -12,6 +12,7 @@ namespace Atmo2.Movements.PlayerStates
 	{
 		private float speedModifier;
 		private float prevDirection = 0;
+		private AttackDirection atkDir;
 		public PSAttackNormal(Player player, float initialSpeedModifier)
 			: base(player)
 		{
@@ -22,34 +23,20 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			player.Animation = "attackNormal";
+			
+			ResolveAttackDirection();
 		}
 
 		public override void OnExit(PlayerState newState)
 		{
 			player.MovementInfo.ResetBoxes();
+			player.Image.RotationDegrees = 0;
 		}
 
 		public override PlayerState Update()
 		{
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
-
-			if (signedHorizontal != 0)
-				player.FacingDirection = signedHorizontal;
-			
-			if(player.FacingDirection != prevDirection)
-			{
-				if (player.FacingDirection < 0)
-				{
-					player.MovementInfo.LeftTrace = true;
-					player.MovementInfo.RightTrace = false;
-				}
-				else
-				{
-					player.MovementInfo.LeftTrace = false;
-					player.MovementInfo.RightTrace = true;
-				}
-			}
 
 			if (!player.IsOnFloor())
 			{
@@ -69,12 +56,62 @@ namespace Atmo2.Movements.PlayerStates
 					speedModifier = 0;
 			}
 			// ---------------------------------------------------------------------------------
-
-			prevDirection = player.FacingDirection;
 			
 			return null;
 		}
 
+		private void ResolveAttackDirection()
+		{
+			//Collect variables to run calculations on
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
+			var signedVertical = Math.Sign(player.InputController.LeftStickVertical());
+			
+			player.MovementInfo.ResetBoxes();
+
+			if ( signedVertical > 0 )
+			{
+				atkDir = AttackDirection.Down;
+				player.FacingDirection = 1;
+				player.Image.RotationDegrees = 90;
+
+				player.MovementInfo.DownTrace = true;
+			}
+			else if ( signedVertical < 0 )
+			{
+				atkDir = AttackDirection.Up;
+				player.FacingDirection = 1;
+				player.Image.RotationDegrees = -90;
+
+				player.MovementInfo.UpTrace = true;
+			}
+			else if (signedHorizontal < 0)
+			{
+				player.FacingDirection = signedHorizontal;
+				if (signedHorizontal < 0)
+				{
+					atkDir = AttackDirection.Left;
+					player.MovementInfo.LeftTrace = true;
+				}
+				else
+				{
+					atkDir = AttackDirection.Right;
+					player.MovementInfo.RightTrace = true;
+				}
+			}
+			else
+			{	
+				if (player.FacingDirection < 0)
+				{
+					atkDir = AttackDirection.Left;
+					player.MovementInfo.LeftTrace = true;
+				}
+				else
+				{
+					atkDir = AttackDirection.Right;
+					player.MovementInfo.RightTrace = true;
+				}
+			}
+		}
 
         public override PlayerState OnAnimationComplete()
 		{
@@ -86,5 +123,13 @@ namespace Atmo2.Movements.PlayerStates
 			else
 				return new PSFall(player, initialSpeedModifier: speedModifier);
 		}
+	}
+
+	enum AttackDirection
+	{
+		Left,
+		Right,
+		Up,
+		Down
 	}
 }

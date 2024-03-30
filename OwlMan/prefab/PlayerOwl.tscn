@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://boybl7xia5i5j"]
+[gd_scene load_steps=30 format=3 uid="uid://boybl7xia5i5j"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1"]
 [ext_resource type="PackedScene" path="res://Particles/TestParticles.tscn" id="2"]
@@ -132,20 +132,24 @@ size = Vector2(35, 70)
 size = Vector2(35, 70)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(49, 19)
+size = Vector2(76, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxgja"]
+size = Vector2(76, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrag5"]
 size = Vector2(85, 80)
 
-[node name="PlayerOwl" type="CharacterBody2D" node_paths=PackedStringArray("BoxL", "BoxR", "BoxB", "Image", "collisionShape2D")]
+[node name="PlayerOwl" type="CharacterBody2D" node_paths=PackedStringArray("BoxL", "BoxR", "BoxU", "BoxB", "Image", "collisionShape2D")]
 collision_mask = 4
 slide_on_ceiling = false
 floor_constant_speed = true
 floor_snap_length = 20.0
 script = ExtResource("1")
-BoxL = NodePath("SideBoxL")
-BoxR = NodePath("SideBoxR")
-BoxB = NodePath("BottomBox")
+BoxL = NodePath("Left Hitbox")
+BoxR = NodePath("Right Hitbox")
+BoxU = NodePath("Up Hitbox")
+BoxB = NodePath("Down Hitbox")
 Image = NodePath("AnimatedSprite2D")
 collisionShape2D = NodePath("CollisionBox")
 
@@ -164,7 +168,7 @@ animation = &"idle"
 position = Vector2(0.5, -35)
 shape = SubResource("RectangleShape2D_ng4ip")
 
-[node name="SideBoxL" type="Area2D" parent="."]
+[node name="Left Hitbox" type="Area2D" parent="."]
 visible = false
 position = Vector2(-23, -30)
 collision_layer = 0
@@ -172,12 +176,11 @@ collision_mask = 24
 monitorable = false
 script = ExtResource("4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxL"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Hitbox"]
 position = Vector2(-1, -15)
 shape = SubResource("2")
 
-[node name="SideBoxR" type="Area2D" parent="."]
+[node name="Right Hitbox" type="Area2D" parent="."]
 visible = false
 position = Vector2(24, -30)
 collision_layer = 0
@@ -185,22 +188,31 @@ collision_mask = 24
 monitorable = false
 script = ExtResource("4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SideBoxR"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Hitbox"]
 position = Vector2(1, -15)
 shape = SubResource("3")
 
-[node name="BottomBox" type="Area2D" parent="."]
+[node name="Up Hitbox" type="Area2D" parent="."]
 visible = false
-position = Vector2(1, 10)
+position = Vector2(0, -66)
 collision_layer = 0
-collision_mask = 8
+collision_mask = 24
+monitorable = false
 script = ExtResource("4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBox"]
-visible = false
-position = Vector2(-1, -10)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up Hitbox"]
 shape = SubResource("4")
+
+[node name="Down Hitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -22)
+collision_layer = 0
+collision_mask = 24
+monitorable = false
+script = ExtResource("4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Down Hitbox"]
+shape = SubResource("RectangleShape2D_yxgja")
 
 [node name="InteractionComponents" type="Node2D" parent="."]
 visible = false

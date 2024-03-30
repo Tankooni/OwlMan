@@ -21,7 +21,12 @@ namespace Atmo2.Movements
 			get { return PlayerRef.BoxR.Monitoring; }
 			set { PlayerRef.BoxR.SetTraceState(value); }
 		}
-		public bool BottomTrace
+		public bool UpTrace
+		{
+			get { return PlayerRef.BoxU.Monitoring; }
+			set { PlayerRef.BoxU.SetTraceState(value); }
+		}
+		public bool DownTrace
 		{
 			get { return PlayerRef.BoxB.Monitoring; }
 			set { PlayerRef.BoxB.SetTraceState(value); }
@@ -31,7 +36,8 @@ namespace Atmo2.Movements
 		{
 			LeftTrace = false;
 			RightTrace = false;
-			BottomTrace = false;
+			UpTrace = false;
+			DownTrace = false;
 		}
 
 		public Vector2 Velocity;
@@ -75,7 +81,6 @@ namespace Atmo2.Movements
 			{
 				PlayerRef.FloorSnapLength = 20;
 			}
-			GD.Print(PlayerRef.FloorSnapLength);
 
 			PlayerRef.MoveAndSlide();
         }

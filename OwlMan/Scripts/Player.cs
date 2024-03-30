@@ -83,6 +83,8 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public KillBox BoxR;
 	[Export]
+	public KillBox BoxU;
+	[Export]
 	public KillBox BoxB;
 
 	[Export]
@@ -151,6 +153,7 @@ public partial class Player : CharacterBody2D
 
 		BoxL.HitCallback += OnTraceHit;
 		BoxR.HitCallback += OnTraceHit;
+		BoxU.HitCallback += OnTraceHit;
 		BoxB.HitCallback += OnTraceHit;
 
 		if( _hud != null )

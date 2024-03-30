@@ -77,8 +77,6 @@ namespace Atmo2.Movements.PlayerStates
 				inAirTicks = 0;
 			}
 
-			GD.Print($"On Floor {player.IsOnFloor()}/{coyotedOnFloor}, air ticks {inAirTicks}/{coyoteTicks}");
-
 			if (player.InputController.AttackPressed())
 			{
 				return new PSAttackNormal(player, SpeedModifier);
@@ -95,7 +93,17 @@ namespace Atmo2.Movements.PlayerStates
 			{
 				if( player.InputController.JumpPressedBuffered() )
 				{
-					return new PSJump(player, SpeedModifier);
+					var extraJumpMult = 1f;
+					var speedModMult = 1f;
+
+					if ( player.IsOnFloor() )
+					{
+						float percentMaxAngle = player.GetFloorAngle() / (Mathf.Pi / 4);
+						extraJumpMult += .3f * percentMaxAngle;
+						speedModMult -= .4f * percentMaxAngle;
+					}
+					
+					return new PSJump(player, SpeedModifier * speedModMult, extraJumpMult);
 				}
 			}
 			else

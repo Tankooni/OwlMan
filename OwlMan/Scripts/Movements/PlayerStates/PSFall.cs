@@ -13,8 +13,9 @@ namespace Atmo2.Movements.PlayerStates
 		private int coyoteTimeTicks;
 		private float speedModifier;
 		private float coyoteJumpSpeedModifier;
+		private float gravityScale = 1;
 
-		private float prevDirection;
+		private int downHeldTicks;
 
 		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1, float coyoteJumpSpeedModifier = 0)
 			: base(player)
@@ -24,6 +25,7 @@ namespace Atmo2.Movements.PlayerStates
 			this.coyoteTimeTicks = coyoteTime ? 10 : 0;
 			this.coyoteJumpSpeedModifier = coyoteJumpSpeedModifier;
 			speedModifier = initialSpeedModifier;
+			downHeldTicks = 0;
 		}
 		public override void OnEnter()
 		{
@@ -32,6 +34,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnExit(PlayerState newState)
 		{
+			
 		}
 
 		public override PlayerState Update()
@@ -39,15 +42,29 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
-			
+			// Start the player back downward if we bonk our head
 			if (player.IsOnCeiling() && player.MovementInfo.Velocity.Y < 0)
 			{
 				player.MovementInfo.Velocity.Y = 0;
 			}
 
-			player.MovementInfo.Velocity.Y += player.Gravity;
+			// Slightly float the player mid-fall
+			gravityScale = Mathf.Abs(player.MovementInfo.Velocity.Y) > 110 && !player.InputController.JumpHeld() ? 1 : .65f;
 
-			// MOVEMENT --------------------------------------------------------------------------
+			if( player.InputController.DownHeld() )
+			{
+				if( ++downHeldTicks > 5 )
+				{
+					gravityScale += .5f;
+				}
+			}
+			else if ( downHeldTicks > 0 )
+			{
+				downHeldTicks = 0;
+			}
+
+			player.MovementInfo.Velocity.Y += player.Gravity * gravityScale;
+
 			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
 			
 			if (speedModifier != 0)
@@ -67,8 +84,6 @@ namespace Atmo2.Movements.PlayerStates
 				player.FacingDirection = Math.Sign(speedModifier);
 
 			AnimationCheckSet();
-
-			prevDirection = player.FacingDirection;
 
 			return CheckForNewState(signedHorizontal);
 		}
