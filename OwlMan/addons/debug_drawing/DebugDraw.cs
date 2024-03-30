@@ -49,11 +49,9 @@ public partial class DebugDraw : Node
 			DebugDrawingPlugin.StartingPoolSizeOption, _startingPoolSize);
 	}
 
-
-	public override void _Ready()
-	{
-		
-		base._Ready();
+    public override void _EnterTree()
+    {
+        base._EnterTree();
 
 		_drawCanvas = new CanvasLayer();
 		AddChild(_drawCanvas);
@@ -70,6 +68,12 @@ public partial class DebugDraw : Node
 			_drawCanvas.AddChild(_dock);
 			_dock.Owner = _drawCanvas;
 		}
+    }
+
+    public override void _Ready()
+	{
+		
+		base._Ready();
 	}
 
 
@@ -635,6 +639,20 @@ public partial class DebugDraw : Node
 		_meshDrawer?.DrawCircle(xform, duration, color, layers);
 		#endif //TOOLS
 	}
+
+	// 	public static void Circle2D(Vector2 position, float radius = 1.0f,
+	// 		Color? color = null, float duration = 0.0f, uint layers = 1 << 1)
+	// {
+	// 	#if TOOLS
+	// 	Transform3D xform =
+	// 		new Transform3D(new Basis(rotation), position).ScaledLocal(Vector3.One * radius);
+	// 	_meshDrawer?.DrawCircle(xform, duration, color, layers);
+
+	// 			#if TOOLS
+	// 	_canvasDrawer?.DrawText(text.ToString(), duration, color, layers);
+	// 	#endif //TOOLS
+	// 	#endif //TOOLS
+	// }
 
 
 	
@@ -1463,7 +1481,8 @@ namespace Burden.DebugDrawing
 	internal partial class DebugCanvasDrawer : GodotObject
 	{
 		private Font _textFont;
-		private int _fontSize = 12;
+		private int _fontSize = 16
+		;
 		private int _screenEdgePadding = 16;
 		private int _textEntryExtraPadding = 4;
 

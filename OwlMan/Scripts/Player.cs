@@ -231,8 +231,6 @@ public partial class Player : CharacterBody2D
 	{
 		base._PhysicsProcess(delta);
 
-		
-
 		InputController.Update();
 
 		PlayerStateController.Update();

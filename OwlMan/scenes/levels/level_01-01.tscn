@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://krdns23w64wp"]
+[gd_scene load_steps=14 format=3 uid="uid://krdns23w64wp"]
 
 [ext_resource type="Script" path="res://Scripts/Nodes/LevelStuff/Level.cs" id="1_i21te"]
 [ext_resource type="Script" path="res://Scripts/Nodes/LevelStuff/PlayerStart.cs" id="2_jpmgm"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://4cpod2yihqqk" path="res://Images/Backgrounds/BG_Sky_Parallax3.png" id="7_ryxxr"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="8_qwgka"]
 [ext_resource type="PackedScene" uid="uid://boybl7xia5i5j" path="res://prefab/PlayerOwl.tscn" id="10_eg1pk"]
+[ext_resource type="Script" path="res://Scripts/Nodes/LevelStuff/EnemySpawn.cs" id="11_v8a0s"]
+[ext_resource type="PackedScene" uid="uid://dg34tsxyauv00" path="res://prefab/Enemies/Beee.tscn" id="12_4jpao"]
+[ext_resource type="PackedScene" uid="uid://dt6g14xyc321m" path="res://prefab/Enemies/Carnosaur.tscn" id="12_xfryg"]
 
 [node name="Level01-01" type="Node2D"]
 script = ExtResource("1_i21te")
@@ -65,3 +68,13 @@ region_rect = Rect2(0, 0, 12800, 720)
 position = Vector2(240, 510)
 script = ExtResource("2_jpmgm")
 SpawnThis = ExtResource("10_eg1pk")
+
+[node name="EnemySpawn" type="Node2D" parent="."]
+position = Vector2(741, 519)
+script = ExtResource("11_v8a0s")
+EnemyToSpawn = ExtResource("12_xfryg")
+
+[node name="EnemySpawn2" type="Node2D" parent="."]
+position = Vector2(965, 323)
+script = ExtResource("11_v8a0s")
+EnemyToSpawn = ExtResource("12_4jpao")

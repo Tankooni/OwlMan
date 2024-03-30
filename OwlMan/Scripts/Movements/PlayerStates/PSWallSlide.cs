@@ -56,7 +56,7 @@ namespace Atmo2.Movements.PlayerStates
 				if (player.Abilities.GroundDash &&
 					player.InputController.DashPressed())
 				{
-					return new PSDash(player, player.FacingDirection);
+					return new PSDash(player, player.FacingDirection, coyoteTime: true);
 				}
 				if ( player.InputController.LeftHeld() || player.InputController.RightHeld() )
 				{

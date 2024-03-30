@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using Atmo.OgmoLoader;
 using System.Collections.Generic;
 
 public partial class Overlord : Node
@@ -15,6 +14,8 @@ public partial class Overlord : Node
 
 	public static Node2D Player;
 	public static Overlord OwlOverlord;
+
+	public static readonly double FRAME_TIME = 1d/60d;
 
 	public Dictionary<string, PackedScene> Sounds = new Dictionary<string, PackedScene>();
 

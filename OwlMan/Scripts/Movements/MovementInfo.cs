@@ -2,7 +2,6 @@
 // using Utility;
 
 using System;
-using Atmo.OgmoLoader.Serialized;
 using Godot;
 
 namespace Atmo2.Movements

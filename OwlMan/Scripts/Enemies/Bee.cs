@@ -9,9 +9,6 @@ namespace Atmo2.Enemy
 	public partial class Bee : Enemy
 	{
 		[Export]
-		public NodePath Target { get; set; }
-
-		[Export]
 		public string AttackSoundName { get; set; }
 
 		private ShootAt shootAI;
@@ -75,9 +72,9 @@ namespace Atmo2.Enemy
 				animatedSprite.FlipH = true;
 		}
 
-        public void HandleDamage(int damage)
-        {
-            GD.Print($"Ow {damage}");
-        }
-    }
+		public void HandleDamage(int damage)
+		{
+			GD.Print($"Ow {damage}");
+		}
+	}
 }

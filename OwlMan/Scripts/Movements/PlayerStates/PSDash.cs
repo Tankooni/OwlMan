@@ -1,3 +1,4 @@
+using Burden.DebugDrawing;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -12,21 +13,38 @@ namespace Atmo2.Movements.PlayerStates
         private float speed = 0;
         private float maxSpeed;
         private int dashTicks;
+        private bool coyoteTime;
+        private int coyoteTicks;
+		private int inAirTicks;
 		private float direction;
+
+		private bool coyotedOnFloor;
 
 		private float SpeedModifier { get { return player.DashMultiplier * player.RunSpeed * direction; } }
 
-        public PSDash(Player player, float direction, int dashTicks = 10) //dash should probably be 9-10
+/// <summary>
+/// 
+/// </summary>
+/// <param name="player"></param>
+/// <param name="direction"></param>
+/// <param name="dashTicks">Should probably be around 10 ticks or 1/6 of a second</param>
+/// <param name="coyoteTime">Should we have coyote time for jumps while "in the air"</param>
+        public PSDash(Player player, float direction, bool coyoteTime = false, int dashTicks = 15)
 			: base(player)
 		{
             this.player = player;
             this.maxSpeed = player.DashMultiplier * player.RunSpeed;
 			this.direction = direction;
             this.dashTicks = dashTicks;
+			this.coyoteTime = coyoteTime;
+			this.coyoteTicks = coyoteTime ? 7 : 0;
+			this.inAirTicks = 0;
 
 			// speed = MathF.Min(player.RunSpeed * 4, maxSpeed);
 			player.MovementInfo.Velocity.X = maxSpeed * direction;
 			player.MovementInfo.Velocity.Y = 0;
+
+			player.FacingDirection = direction;
 		}
         public override void OnEnter()
         {
@@ -41,54 +59,98 @@ namespace Atmo2.Movements.PlayerStates
 
         public override PlayerState Update()
         {
-			// speed = MathF.Min(speed + speed * 1.2f, maxSpeed);
+			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
+
 			player.MovementInfo.Velocity.X = maxSpeed * direction;
+			coyotedOnFloor = player.IsOnFloor();
+			if( !coyotedOnFloor )
+			{
+				++inAirTicks;
+
+				if( inAirTicks <= coyoteTicks )
+				{
+					coyotedOnFloor = true;
+				}
+			}
+			else if ( inAirTicks != 0 ) // If we're on the floor, reset air tick counter if needed
+			{
+				inAirTicks = 0;
+			}
+
+			GD.Print($"On Floor {player.IsOnFloor()}/{coyotedOnFloor}, air ticks {inAirTicks}/{coyoteTicks}");
 
 			if (player.InputController.AttackPressed())
 			{
 				return new PSAttackNormal(player, SpeedModifier);
 			}
 
-			if (!player.IsOnFloor())
+			if (player.InputController.DashHeld()
+			&&	player.InputController.DownHeld()
+			&&	!player.IsOnFloor())
 			{
-				// && delta - PSDiveKick.last_bounce > 300)
-				if (player.InputController.DashHeld() && player.InputController.DownHeld())
-					return new PSDiveKick(player);
+				return new PSDiveKick(player);
+			}
 
-				if (player.Abilities.DoubleJump &&
-					player.InputController.JumpPressedBuffered() &&
-					player.Energy >= 1)
+			if (coyotedOnFloor)
+			{
+				if( player.InputController.JumpPressedBuffered() )
 				{
-					player.Energy -= 1;
 					return new PSJump(player, SpeedModifier);
 				}
 			}
-
-			if (player.IsOnFloor() && player.InputController.JumpPressedBuffered())
+			else
 			{
-				return new PSJump(player, SpeedModifier);
+				if( player.InputController.JumpPressedBuffered() )
+				{
+					if (	player.Abilities.DoubleJump
+						&&	player.Energy >= 1)
+					{
+						player.Energy -= 1;
+						return new PSJump(player, SpeedModifier);
+					}
+				}
 			}
 
 			if (player.IsOnWallOnly())
 			{
-				
 				// TODO: add directional check in case we're flush on a wall but moving away
 				if(player.Abilities.WallSlide)
 					return new PSWallSlide(player, player.GetWallNormal().X > 0);
-				
-				// Our dash should be considered done since we've hit a wall
+			}
+
+			// if( player.Abilities.AirDash && 
+			// 	player.InputController.DashPressed() && 
+			// 	player.Energy >= 1)
+			// {
+			// 	player.Energy -= 1;
+			// 	return new PSDash(player, signedHorizontal != 0 ? signedHorizontal : player.FacingDirection);
+			// }
+
+
+			if(		player.IsOnWall()
+				||	player.InputController.JumpPressed() 
+				||	player.InputController.DashPressed()
+				||	signedHorizontal != 0 
+					&&	signedHorizontal != direction )
+			{
 				dashTicks = 0;
 			}
 
 			--dashTicks;
-            if(dashTicks < 0)
+            if( dashTicks < 0 )
             {
 				// We're done here
 				if (player.IsOnFloor())
-					// if (player.InputController.LeftHeld() || player.InputController.RightHeld())
-					return new PSRun(player, SpeedModifier);
-					// else
-					// 	return new PSIdle(player);
+				{
+					if( !player.IsOnWall() || signedHorizontal != 0)
+					{
+						return new PSRun(player, SpeedModifier);
+					}
+					else
+					{
+						return new PSIdle(player);
+					}
+				}
 				else
 				{
 					return new PSFall(player, SpeedModifier);

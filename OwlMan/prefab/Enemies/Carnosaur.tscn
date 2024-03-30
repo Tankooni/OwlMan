@@ -47,12 +47,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="3"]
 radius = 28.8894
 
-[node name="Carnosaur" type="CharacterBody2D"]
+[node name="Carnosaur" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D")]
 position = Vector2(0, -0.461274)
 collision_layer = 8
 collision_mask = 5
+motion_mode = 1
+platform_on_leave = 2
 script = ExtResource("1")
 AttackSoundName = "Hit1"
+Sprite2D = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
