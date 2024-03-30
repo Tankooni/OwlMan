@@ -100,6 +100,8 @@ public partial class Player : CharacterBody2D
 	private Overlord _overlord;
 	private Damageable damageable;
 
+	public Vector2 HitBounceDirection = new();
+
 	public String Animation
 	{
 		get { return this.Image.Animation; }
@@ -154,7 +156,7 @@ public partial class Player : CharacterBody2D
 		BoxL.HitCallback += OnTraceHit;
 		BoxR.HitCallback += OnTraceHit;
 		BoxU.HitCallback += OnTraceHit;
-		BoxB.HitCallback += OnTraceHit;
+		BoxB.HitCallback += OnTraceHitDown;
 
 		if( _hud != null )
 		{
@@ -217,6 +219,12 @@ public partial class Player : CharacterBody2D
 	{
 		Energy = MaxEnergy;/*MathHelper.Clamp(
 			time.Elapsed*EnergyRechargeRate + Energy, 0, MaxEnergy);*/
+	}
+
+	public void OnTraceHitDown(Node2D otherNode2D)
+	{
+		HitBounceDirection = new Vector2(0, -1);
+		OnTraceHit(otherNode2D);
 	}
 
 	public void OnTraceHit(Node2D otherNode2D)

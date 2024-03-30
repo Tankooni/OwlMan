@@ -14,7 +14,6 @@ namespace Atmo2.Movements.PlayerStates
 		private float speedModifier;
 		private float coyoteJumpSpeedModifier;
 		private float gravityScale = 1;
-
 		private int downHeldTicks;
 
 		public PSFall(Player player, float initialSpeedModifier = 0, bool coyoteTime = false, float speed = -1, float coyoteJumpSpeedModifier = 0)

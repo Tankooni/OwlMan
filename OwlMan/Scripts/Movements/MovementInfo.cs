@@ -38,6 +38,8 @@ namespace Atmo2.Movements
 			RightTrace = false;
 			UpTrace = false;
 			DownTrace = false;
+
+			PlayerRef.HitBounceDirection = Vector2.Zero;
 		}
 
 		public Vector2 Velocity;

@@ -13,6 +13,11 @@ namespace Atmo2.Movements.PlayerStates
 		private float speedModifier;
 		private float prevDirection = 0;
 		private AttackDirection atkDir;
+		private float gravityScale = 1;
+		private int downHeldTicks;
+
+		private bool hasBounced = false;
+
 		public PSAttackNormal(Player player, float initialSpeedModifier)
 			: base(player)
 		{
@@ -38,9 +43,39 @@ namespace Atmo2.Movements.PlayerStates
 			//Collect variables to run calculations on
 			var signedHorizontal = Math.Sign(player.InputController.LeftStickHorizontal());
 
+			// Start the player back downward if we bonk our head
+			if (player.IsOnCeiling() && player.MovementInfo.Velocity.Y < 0)
+			{
+				player.MovementInfo.Velocity.Y = 0;
+			}
+
 			if (!player.IsOnFloor())
 			{
 				player.MovementInfo.Velocity.Y += player.Gravity;
+			}
+
+			// Slightly float the player mid-fall
+			gravityScale = Mathf.Abs(player.MovementInfo.Velocity.Y) > 110 && !player.InputController.JumpHeld() ? 1 : .65f;
+
+			// if( player.InputController.DownHeld() )
+			// {
+			// 	if( ++downHeldTicks > 5 )
+			// 	{
+			// 		gravityScale += .5f;
+			// 	}
+			// }
+			// else if ( downHeldTicks > 0 )
+			// {
+			// 	downHeldTicks = 0;
+			// }
+
+			player.MovementInfo.Velocity.Y += player.Gravity * gravityScale;
+
+			if( !hasBounced && player.HitBounceDirection.Length() > 0 ) 
+			{
+				hasBounced = true;
+				++player.Energy;
+				player.MovementInfo.Velocity.Y = -player.JumpStrenth * 1.3f;
 			}
 			
 			// MOVEMENT --------------------------------------------------------------------------
