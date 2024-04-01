@@ -6,19 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0v4jl"]
 size = Vector2(1.51007, 2.32824)
 
-[node name="CoinArea" type="Area2D"]
-position = Vector2(1298, 209)
+[node name="Coin" type="Area2D"]
 scale = Vector2(0.706101, 0.699205)
+collision_layer = 0
 script = ExtResource("2_7d7ip")
 
 [node name="Coin" type="Sprite2D" parent="."]
-position = Vector2(-1838.44, -298.911)
+position = Vector2(0.0052725, -0.162343)
 texture = ExtResource("1_qor60")
 
 [node name="CoinCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-1838.44, -298.911)
+position = Vector2(0.00502836, -0.162373)
 rotation = -3.14159
 scale = Vector2(15.0073, -12.2856)
 shape = SubResource("RectangleShape2D_0v4jl")
-
-[connection signal="PlayerTouched" from="." to="." method="OnBodyEntered"]

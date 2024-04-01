@@ -146,7 +146,15 @@ script = ExtResource("17_7ode7")
 SpawnThis = ExtResource("8_d3h60")
 
 [node name="Coin" parent="." instance=ExtResource("18_3jdi1")]
-position = Vector2(2525, 434)
+position = Vector2(1358, 190)
 scale = Vector2(0.706035, 0.695923)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 1
+
+[node name="Coin2" parent="." instance=ExtResource("18_3jdi1")]
+position = Vector2(933, 219)
+
+[node name="Coin3" parent="." instance=ExtResource("18_3jdi1")]
+position = Vector2(433, 284)
+
+[node name="Coin4" parent="." instance=ExtResource("18_3jdi1")]
+position = Vector2(60, 286)

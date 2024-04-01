@@ -9,10 +9,7 @@ public partial class Coin : Area2D
 	private CollisionShape2D CoinCollision;
 	public override void _Ready()
 	{
-		GD.Print("IM READY IM READY");
 		CoinCollision = GetNode<CollisionShape2D>("CoinCollision");
-		GD.Print(CoinCollision);
-
 		this.BodyEntered += OnBodyEntered;
 	}
 
@@ -23,9 +20,9 @@ public partial class Coin : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		GD.Print("BODY ENTERED");
 		if(body.IsInGroup(HitGroups.Player))
 		{
+			Overlord.HudLayer.AddCoinCount();
 			QueueFree();
 		}
 	}
