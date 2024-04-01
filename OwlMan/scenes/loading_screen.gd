@@ -12,7 +12,7 @@ func _process(delta):
 		await get_tree().create_timer(1).timeout
 		var new_scene: PackedScene = ResourceLoader.load_threaded_get(next_scene_path)
 		var new_node = new_scene.instantiate()
-		new_node.parameters = parameters
+		#new_node.parameters = parameters
 		var current_scene = get_tree().current_scene
 		get_tree().get_root().add_child(new_node)
 		get_tree().current_scene = new_node

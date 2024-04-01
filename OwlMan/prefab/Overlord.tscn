@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3ypjwqncnhbj"]
+[gd_scene load_steps=9 format=3 uid="uid://3ypjwqncnhbj"]
 
 [ext_resource type="Script" path="res://Scripts/Overlord.cs" id="1"]
 [ext_resource type="AudioStream" uid="uid://x5qivptf5tbg" path="res://sounds/music/owl.ogg" id="2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bsk6absj3q2ph" path="res://Images/HealthBar/HealthPip.png" id="3_wm46u"]
 [ext_resource type="FontFile" uid="uid://daj1k3t2eyene" path="res://Assets/Fonts/PixeloidSansBold-PKnYd.ttf" id="5_kdo2m"]
 [ext_resource type="Texture2D" uid="uid://ceainb051iy47" path="res://Assets/PNG/Coin.png" id="6_dnplb"]
+[ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="8_t0k1d"]
 
 [node name="Overlord" type="Node"]
 script = ExtResource("1")
@@ -14,6 +15,11 @@ script = ExtResource("1")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2")
 volume_db = -6.0
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_speed = 7.0
+script = ExtResource("8_t0k1d")
 
 [node name="HUD Layer" type="CanvasLayer" parent="." node_paths=PackedStringArray("HealthPips", "HealthBacking")]
 script = ExtResource("3_f4rv4")

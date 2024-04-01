@@ -95,7 +95,7 @@ public partial class Player : CharacterBody2D
 
 	public Godot.Collections.Array AllInteractions = new Godot.Collections.Array();
 
-	private Camera2D camera;
+	private ShakeCamera camera;
 	private Overlord _overlord;
 	private Damageable damageable;
 
@@ -140,7 +140,8 @@ public partial class Player : CharacterBody2D
 		AddToGroup(HitGroups.Player);
 
 		camera = Overlord.MainCamera;
-		camera?.Call("SetFollow", this.GetPath());
+		camera.SetFollow(this);
+		// camera?.Call("SetFollow", this.GetPath());
 
 		//foreach (var node in Atmo.OgmoLoader.OgmoLoader.nodes)
 		//{

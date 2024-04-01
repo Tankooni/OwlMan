@@ -62,6 +62,7 @@ public partial class ShakeCamera : Camera2D
 			_previous_y = new_y;
 			// Track how much we've moved the offset, as opposed to other effects.
 			var new_offset = new Vector2((float)x_component, (float)y_component);
+			// var new_offset = new Vector2((float)Math.Round(x_component), (float)Math.Round(y_component));
 			this.Offset -= (_last_offset + new_offset);
 			//OS.WindowPosition += (_last_offset + new_offset);
 		}
@@ -105,6 +106,8 @@ public partial class ShakeCamera : Camera2D
 	{
 		var centerX = FollowNode.Position.X;
 		var centerY = FollowNode.Position.Y;
+		// var centerX = (float)Math.Round(FollowNode.Position.X);
+		// var centerY = (float)Math.Round(FollowNode.Position.Y);
 
 
 		// todo: create proper camera bounding box for levels
@@ -114,15 +117,14 @@ public partial class ShakeCamera : Camera2D
 		this.Position = new Vector2(centerX, centerY);
 	}
 
-	public void SetFollow(NodePath nodePath)
+	public void SetFollow(Node2D followNode)
 	{
-		var node = (Node2D)GetNode(nodePath);
-		if (node == null)
+		if (followNode == null)
 		{
 			ClearFollow();
 			return;
 		}
-		FollowNode = node;
+		FollowNode = followNode;
 		UpdatePosition();
 	}
 

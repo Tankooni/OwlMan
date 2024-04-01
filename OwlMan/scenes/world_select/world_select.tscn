@@ -29,6 +29,7 @@ offset_right = 384.0
 offset_bottom = 184.0
 script = ExtResource("2_awe17")
 world_index = 2
+next_scene_path = "res://scenes/GameScene.tscn"
 
 [node name="WorldIcon3" parent="." instance=ExtResource("1_jovkn")]
 offset_left = 448.0
@@ -37,6 +38,7 @@ offset_right = 512.0
 offset_bottom = 328.0
 script = ExtResource("2_awe17")
 world_index = 3
+next_scene_path = "res://scenes/GameScene.tscn"
 
 [node name="WorldIcon4" parent="." instance=ExtResource("1_jovkn")]
 offset_left = 640.0
@@ -45,6 +47,7 @@ offset_right = 704.0
 offset_bottom = 192.0
 script = ExtResource("2_awe17")
 world_index = 4
+next_scene_path = "res://scenes/GameScene.tscn"
 
 [node name="WorldIcon5" parent="." instance=ExtResource("1_jovkn")]
 offset_left = 832.0
@@ -53,6 +56,7 @@ offset_right = 896.0
 offset_bottom = 448.0
 script = ExtResource("2_awe17")
 world_index = 5
+next_scene_path = "res://scenes/GameScene.tscn"
 
 [node name="PlayerIcon" parent="." instance=ExtResource("3_tk4ue")]
 layout_mode = 0

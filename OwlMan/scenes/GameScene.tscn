@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=18 format=3 uid="uid://b8ynag3aoj0jj"]
 
-[ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b4m6dfs7iltcm" path="res://Images/Backgrounds/BG_Sky.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxf1hvr7vqdq6" path="res://Images/Backgrounds/BG_Sky_Parallax2.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://bb61heaygk20d" path="res://Images/Backgrounds/BG_Sky_Parallax1.png" id="5"]
@@ -15,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cgma4lm2b17mt" path="res://GameComponents/Sign.tscn" id="14_g3a01"]
 [ext_resource type="PackedScene" uid="uid://dbsms766wi1ci" path="res://Character/BeeCharacter.tscn" id="15_xpm8k"]
 [ext_resource type="PackedScene" uid="uid://dslvdlcfp6hd3" path="res://Character/Slime/SlimeCharacter.tscn" id="16_pqqhy"]
-[ext_resource type="Script" path="res://Scripts/Nodes/LevelStuff/PlayerStart.cs" id="17_7ode7"]
 [ext_resource type="PackedScene" uid="uid://bchs0sl3rmwrj" path="res://prefab/Projectiles/Bullet.tscn" id="17_gqugq"]
 [ext_resource type="PackedScene" uid="uid://dr2ujp7joc72y" path="res://GameComponents/Coin.tscn" id="18_3jdi1"]
 
@@ -35,41 +33,36 @@ func load_screen_to_scene(target: String, parameters: Dictionary = {}) -> void:
 
 [node name="GameScene" type="Node"]
 
-[node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2(640, 360)
-position_smoothing_speed = 7.0
-script = ExtResource("1")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="MainCamera"]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("3")
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 720)
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.3, 0.01)
 
-[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer3"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 texture = ExtResource("5")
 region_enabled = true
 region_rect = Rect2(0, 0, 12800, 720)
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.03)
 
-[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer2"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource("4")
 region_enabled = true
 region_rect = Rect2(0, 0, 12800, 720)
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="MainCamera/ParallaxBackground"]
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 0.05)
 
-[node name="Sprite2D" type="Sprite2D" parent="MainCamera/ParallaxBackground/ParallaxLayer4"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(39, 4)
 texture = ExtResource("6")
 region_enabled = true
@@ -140,11 +133,6 @@ scale = Vector2(0.809717, 1.05263)
 [node name="Bullet" parent="." instance=ExtResource("17_gqugq")]
 position = Vector2(244, 264)
 
-[node name="PlayerStart" type="Node2D" parent="."]
-position = Vector2(1720, 280)
-script = ExtResource("17_7ode7")
-SpawnThis = ExtResource("8_d3h60")
-
 [node name="Coin" parent="." instance=ExtResource("18_3jdi1")]
 position = Vector2(1358, 190)
 scale = Vector2(0.599258, 0.790565)
@@ -212,3 +200,6 @@ position = Vector2(-528, -233)
 
 [node name="Coin22" parent="." instance=ExtResource("18_3jdi1")]
 position = Vector2(-822, -231)
+
+[node name="PlayerOwl" parent="." instance=ExtResource("8_d3h60")]
+position = Vector2(1696, 296)
