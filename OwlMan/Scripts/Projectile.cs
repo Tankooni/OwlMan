@@ -85,7 +85,7 @@ namespace Atmo2 {
 		*/
 		}
 
-		public void Deflect(int damage)
+		public void Deflect(int damage, Damageable damageable)
 		{
 			if(isDeflected)
 				return;

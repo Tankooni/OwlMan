@@ -28,7 +28,7 @@ public partial class Player : CharacterBody2D
 	// Player state
 	public int Power { get; set; }
 
-	private int maxHealth = 5;
+	private int maxHealth = 30;
 	private int maxPower;
 
 	private int invulnerabilityFrames = 0;
@@ -96,7 +96,6 @@ public partial class Player : CharacterBody2D
 	public Godot.Collections.Array AllInteractions = new Godot.Collections.Array();
 
 	private Camera2D camera;
-	private Control _hud;
 	private Overlord _overlord;
 	private Damageable damageable;
 
@@ -150,27 +149,19 @@ public partial class Player : CharacterBody2D
 
 		//	//node.Set("node", node.GetPath());
 		//}
-		
-		_hud = GetNode<Control>("../CanvasLayer/HUD");
 
 		BoxL.HitCallback += OnTraceHit;
 		BoxR.HitCallback += OnTraceHit;
 		BoxU.HitCallback += OnTraceHit;
 		BoxB.HitCallback += OnTraceHitDown;
 
-		if( _hud != null )
-		{
-			this.Connect("HealthChanged", new Callable(_hud, "on_set_health"));
-			this.Connect("AnimationChanged", new Callable(_hud, "on_animation_changed"));
-		}
-
-		// SetDeferred("Health", maxHealth);
-
 		AddChild(damageable = new Damageable(this, maxHealth));
 		damageable.OnDamageCallback += HandleDamage;
 		// damageable.OnDeathCallback += HandleDeath;
-
+		Overlord.HudLayer.CallDeferred(HudLayer.MethodName.Setup, damageable);
+		
 		//Health = maxHealth;
+
 		Power = 0;
 
 		// Spice = 100;
@@ -198,6 +189,7 @@ public partial class Player : CharacterBody2D
 		PlayerStateController = new PlayerStateController(new PSIdle(this));
 
 		Image.Connect("animation_finished", new Callable(this, "AnimationComplete"));
+
 
 		// AddResponse(PickupType.AirDash, OnAirDashPickup);
 		// AddResponse(PickupType.AirJump, OnAirJumpPickup);
@@ -304,7 +296,7 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	public void HandleDamage(int damage)
+	public void HandleDamage(int damage, Damageable Damageable)
 	{
 		if (damageable.InvulnerabilityFrames == 0)
 		{

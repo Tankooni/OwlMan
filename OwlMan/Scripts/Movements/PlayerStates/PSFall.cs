@@ -96,8 +96,8 @@ namespace Atmo2.Movements.PlayerStates
 
 			//Handle Player input for state changers
 			// && delta - PSDiveKick.last_bounce > 300)
-			if (player.InputController.DashHeld() && player.InputController.DownHeld())
-				return new PSDiveKick(player);
+			// if (player.InputController.DashHeld() && player.InputController.DownHeld())
+			// 	return new PSDiveKick(player);
 
 			if (coyoteTimeTicks > 0)
 			{
@@ -159,6 +159,8 @@ namespace Atmo2.Movements.PlayerStates
 				player.Animation = "fall";
 			else
 				player.Animation = "jump";
+
+			// todo: could add the divekick anim here? Could also just transition to it if you are moving fast enough
 		}
 	}
 }

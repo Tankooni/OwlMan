@@ -106,8 +106,8 @@ public partial class ShakeCamera : Camera2D
 		var centerX = FollowNode.Position.X;
 		var centerY = FollowNode.Position.Y;
 
-		centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.X / 2f, Overlord.LevelBoundsX.Y - Overlord.ViewportSize.X / 2f);
-		centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.Y / 2f, Overlord.LevelBoundsY.Y - Overlord.ViewportSize.Y / 2f);
+		// centerX = Mathf.Clamp(centerX, Overlord.ViewportSize.X / 2f, Overlord.LevelBoundsX.Y - Overlord.ViewportSize.X / 2f);
+		// centerY = Mathf.Clamp(centerY, Overlord.ViewportSize.Y / 2f, Overlord.LevelBoundsY.Y - Overlord.ViewportSize.Y / 2f);
 
 		this.Position = new Vector2(centerX, centerY);
 	}

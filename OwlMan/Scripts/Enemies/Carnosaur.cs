@@ -42,7 +42,7 @@ public partial class Carnosaur : Enemy
 		damageable.OnDamageCallback += OnDamage; 
 	}
 
-	private void OnDamage(int damage)
+	private void OnDamage(int damage, Damageable damageable)
 	{
 		
 	}
@@ -52,7 +52,6 @@ public partial class Carnosaur : Enemy
 	}
 	private void AnimatedSprite_AnimationFinished()
 	{
-		GD.Print("Carnosaur anim finished");
 		if (isShooting)
 		{
 			animatedSprite.Play("idle");

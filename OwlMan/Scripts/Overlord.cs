@@ -23,6 +23,8 @@ public partial class Overlord : Node
 	public static CanvasLayer Dialogue;
 	public static Dialogue DialogueScripts;
 
+	public static HudLayer HudLayer;
+
 	public static ShakeCamera MainCamera;
 
 	// Declare member variables here. Examples:

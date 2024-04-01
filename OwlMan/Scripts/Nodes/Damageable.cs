@@ -6,7 +6,7 @@ using System.Reflection.Metadata;
 public partial class Damageable : Node
 {
 	public const string DAMAGEABLE_NAME = "Damageable";
-	public Action<int> OnDamageCallback;
+	public Action<int, Damageable> OnDamageCallback;
 	public Action OnDeathCallback;
 	
 	public int Health { get; set; }
@@ -39,11 +39,11 @@ public partial class Damageable : Node
 
 	public void HandleDamage(int damage)
 	{
-		if( InvulnerabilityFrames > 0 )
-			return;
+		// if( InvulnerabilityFrames > 0 )
+		// 	return;
 
 		if(OnDamageCallback is not null)
-			OnDamageCallback(damage);
+			OnDamageCallback(damage, this);
 
 		if(InfiniteHealth)
 			return;

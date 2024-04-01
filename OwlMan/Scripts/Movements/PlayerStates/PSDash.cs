@@ -82,12 +82,12 @@ namespace Atmo2.Movements.PlayerStates
 				return new PSAttackNormal(player, SpeedModifier);
 			}
 
-			if (player.InputController.DashHeld()
-			&&	player.InputController.DownHeld()
-			&&	!player.IsOnFloor())
-			{
-				return new PSDiveKick(player);
-			}
+			// if (player.InputController.DashHeld()
+			// &&	player.InputController.DownHeld()
+			// &&	!player.IsOnFloor())
+			// {
+			// 	return new PSDiveKick(player);
+			// }
 
 			if (coyotedOnFloor)
 			{

@@ -15,12 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://cfast7ublh28d" path="res://Images/OwlMan/003_AirPose02.png" id="12_8fniy"]
 [ext_resource type="Texture2D" uid="uid://slxftb084g8k" path="res://Images/OwlMan/003_AirPose01.png" id="13_qs858"]
 [ext_resource type="Texture2D" uid="uid://btheufi0ly0qh" path="res://Images/OwlMan/000_Idle00.png" id="14_v6p2n"]
-[ext_resource type="Texture2D" uid="uid://cr623qx8qa6ab" path="res://Images/OwlMan/003_AirPose00.png" id="15_8yfcj"]
+[ext_resource type="Texture2D" uid="uid://e3slnvfnw876" path="res://Images/OwlMan/003_AirPose03.png" id="15_jl4du"]
 [ext_resource type="Texture2D" uid="uid://c5umskrab246t" path="res://Images/OwlMan/001_Walk02.png" id="16_7pmij"]
 [ext_resource type="Texture2D" uid="uid://3o1gkogqonmp" path="res://Images/OwlMan/001_Walk03.png" id="17_024lk"]
 [ext_resource type="Texture2D" uid="uid://cy2mcjpa8e7d5" path="res://Images/OwlMan/001_Walk00.png" id="18_d50ls"]
 [ext_resource type="Texture2D" uid="uid://cw2uvjgepepcd" path="res://Images/OwlMan/001_Walk01.png" id="19_c717g"]
-[ext_resource type="Texture2D" uid="uid://qdog1isnk7x1" path="res://Images/OwlMan/002_Pose03.png" id="20_ldser"]
+[ext_resource type="Texture2D" uid="uid://qwr2q43tvmy7" path="res://Images/OwlMan/Wallslide00.png" id="20_kwbno"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Targetable.cs" id="22_3i43j"]
 
 [sub_resource type="SpriteFrames" id="1"]
@@ -90,7 +90,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("15_8yfcj")
+"texture": ExtResource("15_jl4du")
 }],
 "loop": true,
 "name": &"jump",
@@ -115,7 +115,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("20_ldser")
+"texture": ExtResource("20_kwbno")
 }],
 "loop": true,
 "name": &"wallSlide",
@@ -162,7 +162,7 @@ emitting = false
 texture_filter = 1
 position = Vector2(0, -44)
 sprite_frames = SubResource("1")
-animation = &"idle"
+animation = &"wallSlide"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -35)

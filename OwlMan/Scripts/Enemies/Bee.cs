@@ -36,7 +36,7 @@ namespace Atmo2.Enemy
 			damageable.OnDeathCallback += OnDeath;
 			damageable.OnDamageCallback += OnDamage; 
 		}
-		private void OnDamage(int damage)
+		private void OnDamage(int damage, Damageable damageable)
 		{
 			Velocity = new Vector2(100, 100);
 			MoveAndSlide();
