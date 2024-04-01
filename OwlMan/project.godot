@@ -37,7 +37,7 @@ project/assembly_name="OwlMan"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

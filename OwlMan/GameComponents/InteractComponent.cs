@@ -1,11 +1,30 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class InteractComponent : Area2D
 {
+	[ExportSubgroup("Interact Properties")]
 	[Export]
 	public string IDLabel;
+
+	public enum EnumItems
+{
+
+    Umbrella = 1,
+    Ball = 2,
+    Hat = -1,
+}
+
+	[Export]
+	public EnumItems SpecialItems { get; set; }
+
 	// Called when the node enters the scene tree for the first time.
+
+	[Export]
+	public string[] Options { get; set; } = { "Option 1", "Option 2", "Option 3" };
+
+
 	public override void _Ready()
 	{
 	}

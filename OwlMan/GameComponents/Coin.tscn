@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr2ujp7joc72y"]
+
+[ext_resource type="Texture2D" uid="uid://ceainb051iy47" path="res://Assets/PNG/Coin.png" id="1_qor60"]
+[ext_resource type="Script" path="res://GameComponents/Coin.cs" id="2_7d7ip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0v4jl"]
+size = Vector2(1.51007, 2.32824)
+
+[node name="CoinArea" type="Area2D"]
+position = Vector2(1298, 209)
+scale = Vector2(0.706101, 0.699205)
+script = ExtResource("2_7d7ip")
+
+[node name="Coin" type="Sprite2D" parent="."]
+position = Vector2(-1838.44, -298.911)
+texture = ExtResource("1_qor60")
+
+[node name="CoinCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1838.44, -298.911)
+rotation = -3.14159
+scale = Vector2(15.0073, -12.2856)
+shape = SubResource("RectangleShape2D_0v4jl")
+
+[connection signal="PlayerTouched" from="." to="." method="OnBodyEntered"]

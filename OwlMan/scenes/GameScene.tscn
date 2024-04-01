@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=20 format=3 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Script" path="res://Scripts/ShakeCamera.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b4m6dfs7iltcm" path="res://Images/Backgrounds/BG_Sky.png" id="3"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dslvdlcfp6hd3" path="res://Character/Slime/SlimeCharacter.tscn" id="16_pqqhy"]
 [ext_resource type="Script" path="res://Scripts/Nodes/LevelStuff/PlayerStart.cs" id="17_7ode7"]
 [ext_resource type="PackedScene" uid="uid://bchs0sl3rmwrj" path="res://prefab/Projectiles/Bullet.tscn" id="17_gqugq"]
+[ext_resource type="PackedScene" uid="uid://dr2ujp7joc72y" path="res://GameComponents/Coin.tscn" id="18_3jdi1"]
 
 [sub_resource type="GDScript" id="GDScript_lgtyf"]
 script/source = "extends Node
@@ -143,3 +144,9 @@ position = Vector2(244, 264)
 position = Vector2(1720, 280)
 script = ExtResource("17_7ode7")
 SpawnThis = ExtResource("8_d3h60")
+
+[node name="Coin" parent="." instance=ExtResource("18_3jdi1")]
+position = Vector2(2525, 434)
+scale = Vector2(0.706035, 0.695923)
+collision_layer = 2
+collision_mask = 2
