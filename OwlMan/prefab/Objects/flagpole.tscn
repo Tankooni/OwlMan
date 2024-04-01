@@ -28,6 +28,7 @@ size = Vector2(52.25, 75)
 
 [node name="Flagpole" type="Area2D"]
 position = Vector2(0, -32)
+scale = Vector2(1, 1.00558)
 script = ExtResource("1_04jsy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

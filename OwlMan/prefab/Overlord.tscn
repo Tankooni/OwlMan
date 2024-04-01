@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://3ypjwqncnhbj"]
+[gd_scene load_steps=8 format=3 uid="uid://3ypjwqncnhbj"]
 
 [ext_resource type="Script" path="res://Scripts/Overlord.cs" id="1"]
 [ext_resource type="AudioStream" uid="uid://x5qivptf5tbg" path="res://sounds/music/owl.ogg" id="2"]
 [ext_resource type="Script" path="res://prefab/HudLayer.cs" id="3_f4rv4"]
 [ext_resource type="PackedScene" uid="uid://c88rdo3arxh88" path="res://Dialogue/Dialogue.tscn" id="3_k1hs1"]
 [ext_resource type="Texture2D" uid="uid://bsk6absj3q2ph" path="res://Images/HealthBar/HealthPip.png" id="3_wm46u"]
+[ext_resource type="FontFile" uid="uid://daj1k3t2eyene" path="res://Assets/Fonts/PixeloidSansBold-PKnYd.ttf" id="5_kdo2m"]
+[ext_resource type="Texture2D" uid="uid://ceainb051iy47" path="res://Assets/PNG/Coin.png" id="6_dnplb"]
 
 [node name="Overlord" type="Node"]
 script = ExtResource("1")
@@ -27,11 +29,13 @@ offset_right = 18.0
 offset_bottom = 29.0
 
 [node name="ColorRect" type="ColorRect" parent="HUD Layer/Control"]
+layout_mode = 0
 offset_right = 20.0
 offset_bottom = 8.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="HUD Layer/Control"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 19.0
@@ -39,12 +43,28 @@ offset_bottom = 7.0
 texture = ExtResource("3_wm46u")
 stretch_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD Layer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CoinControl" type="Control" parent="HUD Layer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 18.0
+offset_top = 29.0
+offset_right = 58.0
+offset_bottom = 69.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD Layer/MarginContainer"]
-layout_mode = 2
+[node name="CoinCount" type="RichTextLabel" parent="HUD Layer/CoinControl"]
+layout_mode = 0
+offset_left = 1186.0
+offset_top = -3.0
+offset_right = 1276.0
+offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("5_kdo2m")
+theme_override_font_sizes/normal_font_size = 24
+text = "000"
+
+[node name="CoinSprite" type="Sprite2D" parent="HUD Layer/CoinControl"]
+position = Vector2(1170, 12)
+scale = Vector2(0.764706, 0.764706)
+texture = ExtResource("6_dnplb")
 
 [node name="Dialogue" parent="." instance=ExtResource("3_k1hs1")]
 visible = false
