@@ -85,6 +85,8 @@ _data = {
 }
 
 [node name="CarnosaurusRex" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1")
 AttackSoundName = "Hit4"
 Health = 5
@@ -93,14 +95,13 @@ Health = 5
 position = Vector2(23.956, 23.5862)
 sprite_frames = SubResource("1")
 animation = &"idle"
-frame = 2
+frame_progress = 0.00691544
 
 [node name="BossPollen" parent="." instance=ExtResource("6")]
 position = Vector2(-0.598724, -1.68088)
 amount = 300
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.598724, 39.0478)
 sprite_frames = SubResource("2")
 animation = &"idle"
 
