@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg34tsxyauv00"]
+[gd_scene load_steps=13 format=3 uid="uid://dg34tsxyauv00"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Bee.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b3q5c38tnpvgy" path="res://Images/Beee/000_Idle00.png" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bus0vl7wk6kel" path="res://Images/Beee/001_Attack01.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://clb7yjvj7871" path="res://Images/Beee/001_Attack02.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://c3uoiwyguulge" path="res://Images/Beee/001_Attack03.png" id="9"]
+[ext_resource type="PackedScene" uid="uid://7gqbkojngkb3" path="res://GameComponents/LootDropComponent.tscn" id="10_oimy0"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 15.0894
@@ -66,3 +67,6 @@ shape = SubResource("1")
 texture_filter = 1
 sprite_frames = SubResource("2")
 animation = &"attack"
+
+[node name="LootDropComponent" parent="." instance=ExtResource("10_oimy0")]
+position = Vector2(0, 0)
