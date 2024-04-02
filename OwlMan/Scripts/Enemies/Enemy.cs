@@ -33,18 +33,6 @@ namespace Atmo2.Enemy
 		// {
 			
 		// }
-		public void OnDamage(CollisionObject2D collider)
-		{
-			GD.Print("ENEMY DAMAGED");
-			this.Health -= 1;
-			if( this.Health <= 0 )
-			{
-				Godot.Vector2 position = GlobalPosition;
-				GD.Print("Enemy destroyed at position: ", position);
-				this.QueueFree();
-				SetPhysicsProcess(false);
-			}
-		}
 
 		public void LootDropCalculation()
 		{

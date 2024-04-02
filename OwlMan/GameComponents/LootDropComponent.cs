@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public partial class LootDropComponent : Area2D
+[GlobalClass]
+public partial class LootDropComponent : Node
 {
 	[ExportSubgroup("LootDrop Properties")]
 	[Export]
