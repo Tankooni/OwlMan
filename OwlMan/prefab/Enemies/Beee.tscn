@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg34tsxyauv00"]
+[gd_scene load_steps=13 format=3 uid="uid://dg34tsxyauv00"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Bee.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b3q5c38tnpvgy" path="res://Images/Beee/000_Idle00.png" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bus0vl7wk6kel" path="res://Images/Beee/001_Attack01.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://clb7yjvj7871" path="res://Images/Beee/001_Attack02.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://c3uoiwyguulge" path="res://Images/Beee/001_Attack03.png" id="9"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Damageable.cs" id="10_khp07"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 15.0894
@@ -50,7 +51,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Beee" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D")]
+[node name="Beee" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D", "Damageable")]
 collision_layer = 8
 collision_mask = 5
 motion_mode = 1
@@ -58,6 +59,7 @@ platform_on_leave = 2
 script = ExtResource("1")
 AttackSoundName = "Squeak"
 Sprite2D = NodePath("AnimatedSprite2D")
+Damageable = NodePath("Damageable")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
@@ -66,3 +68,7 @@ shape = SubResource("1")
 texture_filter = 1
 sprite_frames = SubResource("2")
 animation = &"attack"
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("10_khp07")
+MaxHealth = 2

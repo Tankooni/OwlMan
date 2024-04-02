@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://boybl7xia5i5j"]
+[gd_scene load_steps=31 format=3 uid="uid://boybl7xia5i5j"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1"]
 [ext_resource type="PackedScene" path="res://Particles/TestParticles.tscn" id="2"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cw2uvjgepepcd" path="res://Images/OwlMan/001_Walk01.png" id="19_c717g"]
 [ext_resource type="Texture2D" uid="uid://qwr2q43tvmy7" path="res://Images/OwlMan/Wallslide00.png" id="20_kwbno"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Targetable.cs" id="22_3i43j"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Damageable.cs" id="23_m0kt5"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -140,7 +141,7 @@ size = Vector2(76, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrag5"]
 size = Vector2(85, 80)
 
-[node name="PlayerOwl" type="CharacterBody2D" node_paths=PackedStringArray("BoxL", "BoxR", "BoxU", "BoxB", "Image", "collisionShape2D")]
+[node name="PlayerOwl" type="CharacterBody2D" node_paths=PackedStringArray("BoxL", "BoxR", "BoxU", "BoxB", "Image", "collisionShape2D", "Damageable")]
 collision_mask = 4
 slide_on_ceiling = false
 floor_constant_speed = true
@@ -152,6 +153,7 @@ BoxU = NodePath("Up Hitbox")
 BoxB = NodePath("Down Hitbox")
 Image = NodePath("AnimatedSprite2D")
 collisionShape2D = NodePath("CollisionBox")
+Damageable = NodePath("Damageable")
 
 [node name="PoseParticles" parent="." instance=ExtResource("2")]
 position = Vector2(-1.62259, -43.6846)
@@ -246,6 +248,9 @@ vertical_alignment = 1
 [node name="Targetable" type="Node2D" parent="."]
 position = Vector2(0, -43)
 script = ExtResource("22_3i43j")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("23_m0kt5")
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="InteractionComponents/InteractionArea" to="." method="OnAreaExited"]

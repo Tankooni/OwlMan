@@ -137,8 +137,9 @@ namespace Atmo2.Movements.PlayerStates
 			if(		player.IsOnWall()
 				||	player.InputController.JumpPressed() 
 				||	player.InputController.DashPressed()
-				||	signedHorizontal != 0 
-					&&	signedHorizontal != direction )
+				// ||	signedHorizontal != 0 
+				// 	&&	signedHorizontal != direction
+				)
 			{
 				dashTicks = 0;
 			}

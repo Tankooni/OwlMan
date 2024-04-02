@@ -12,17 +12,9 @@ public partial class Damageable : Node
 	public int Health { get; set; }
 	[Export]
 	public int MaxHealth = 1;
+	[Export]
 	public bool InfiniteHealth = false;
 	public float InvulnerabilityFrames = 0;
-	
-	private Node parent;
-
-	public Damageable (Node parent = null, int maxHealth = -1)
-	{
-		this.parent = parent;
-		MaxHealth = maxHealth;
-		Name = DAMAGEABLE_NAME;
-	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

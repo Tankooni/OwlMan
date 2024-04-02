@@ -91,13 +91,14 @@ public partial class Player : CharacterBody2D
 	public AnimatedSprite2D Image;
 	[Export]
 	private CollisionShape2D collisionShape2D;
+	[Export]
+	public Damageable Damageable;
 	
 
 	public Godot.Collections.Array AllInteractions = new Godot.Collections.Array();
 
 	private ShakeCamera camera;
 	private Overlord _overlord;
-	private Damageable damageable;
 
 	public Vector2 HitBounceDirection = new();
 
@@ -156,10 +157,12 @@ public partial class Player : CharacterBody2D
 		BoxU.HitCallback += OnTraceHit;
 		BoxB.HitCallback += OnTraceHitDown;
 
-		AddChild(damageable = new Damageable(this, maxHealth));
-		damageable.OnDamageCallback += HandleDamage;
+		Damageable.MaxHealth = maxHealth;
+		Damageable.Health = maxHealth;
+
+		Damageable.OnDamageCallback += HandleDamage;
 		// damageable.OnDeathCallback += HandleDeath;
-		Overlord.HudLayer.CallDeferred(HudLayer.MethodName.Setup, damageable);
+		Overlord.HudLayer.CallDeferred(HudLayer.MethodName.Setup, Damageable);
 		
 		//Health = maxHealth;
 
@@ -297,14 +300,14 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	public void HandleDamage(int damage, Damageable Damageable)
+	public void HandleDamage(int damage, Damageable myDamageable)
 	{
-		if (damageable.InvulnerabilityFrames == 0)
+		if (myDamageable.InvulnerabilityFrames == 0)
 		{
-			damageable.InvulnerabilityFrames = 120;
+			myDamageable.InvulnerabilityFrames = 120;
 		}
 
-		EmitSignal(nameof(HealthChanged), damageable.Health);
+		EmitSignal(nameof(HealthChanged), myDamageable.Health);
 	}
 	public void HandleDeath()
 	{

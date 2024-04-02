@@ -19,7 +19,7 @@ namespace Atmo2.Movements.PlayerStates
 		public override void OnEnter()
 		{
 			// Hack to make sure we continue to push against the wall
-			player.MovementInfo.Velocity.X = wallOnLeft ? -1 : 1;
+			// player.MovementInfo.Velocity.X = wallOnLeft ? -1 : 1;
 			// if(player.MovementInfo.Velocity.Y > 0)
 			// {
 			// 	player.MovementInfo.Velocity.Y = 0;
