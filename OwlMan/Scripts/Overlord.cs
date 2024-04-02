@@ -11,6 +11,7 @@ public partial class Overlord : Node
 	public static Vector2 ViewportSize;
 
 	public static PackedScene Bullet;
+	public static PackedScene Coin;
 
 	public static Node2D Player;
 	public static Overlord OwlOverlord;
@@ -35,7 +36,8 @@ public partial class Overlord : Node
 	public override void _Ready()
 	{
 		Bullet = ResourceLoader.Load<PackedScene>("res://prefab/Projectiles/Bullet.tscn");
-		
+		Coin = ResourceLoader.Load<PackedScene>("res://GameComponents/Coin.tscn");
+
 		Overlord.OwlOverlord = this;
 		Overlord.ViewportSize = new Vector2
 		(

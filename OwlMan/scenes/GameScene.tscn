@@ -203,3 +203,12 @@ position = Vector2(-822, -231)
 
 [node name="PlayerOwl" parent="." instance=ExtResource("8_d3h60")]
 position = Vector2(1696, 296)
+
+[node name="Carnosaur" parent="." instance=ExtResource("10_uotos")]
+position = Vector2(1888, 237.539)
+
+[node name="Carnosaur2" parent="." instance=ExtResource("10_uotos")]
+position = Vector2(1996, 253.539)
+
+[node name="Carnosaur3" parent="." instance=ExtResource("10_uotos")]
+position = Vector2(1828, 168.539)

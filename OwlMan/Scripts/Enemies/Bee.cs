@@ -41,7 +41,7 @@ namespace Atmo2.Enemy
 		}
 		private void OnDeath()
 		{
-			LootDropCalculation();
+			QueueFree();
 		}
 
 		private void AnimatedSprite_AnimationFinished()

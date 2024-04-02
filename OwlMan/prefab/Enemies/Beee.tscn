@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dg34tsxyauv00"]
+[gd_scene load_steps=14 format=3 uid="uid://dg34tsxyauv00"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Bee.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b3q5c38tnpvgy" path="res://Images/Beee/000_Idle00.png" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://clb7yjvj7871" path="res://Images/Beee/001_Attack02.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://c3uoiwyguulge" path="res://Images/Beee/001_Attack03.png" id="9"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Damageable.cs" id="10_khp07"]
+[ext_resource type="Script" path="res://GameComponents/LootDropComponent.cs" id="11_6j1ox"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 15.0894
@@ -72,3 +73,8 @@ animation = &"attack"
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("10_khp07")
 MaxHealth = 2
+
+[node name="LootDropComponent" type="Node2D" parent="." node_paths=PackedStringArray("Damageable")]
+script = ExtResource("11_6j1ox")
+Damageable = NodePath("../Damageable")
+NumGold = 1
