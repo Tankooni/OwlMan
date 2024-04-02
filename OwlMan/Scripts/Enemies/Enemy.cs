@@ -11,10 +11,9 @@ namespace Atmo2.Enemy
 		public static NodePath PlayerPath;
 
 		[Export]
-		public int Health = 1;
-
-		[Export]
 		public AnimatedSprite2D Sprite2D;
+		[Export]
+		public Damageable Damageable;
 
 		public override void _EnterTree()
 		{
@@ -34,7 +33,6 @@ namespace Atmo2.Enemy
 		// {
 			
 		// }
-
 		public void OnDamage(CollisionObject2D collider)
 		{
 			GD.Print("ENEMY DAMAGED");

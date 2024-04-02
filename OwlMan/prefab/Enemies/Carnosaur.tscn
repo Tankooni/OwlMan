@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt6g14xyc321m"]
+[gd_scene load_steps=10 format=3 uid="uid://dt6g14xyc321m"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Carnosaur.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://b5xjrkqxb7o80" path="res://Images/Carnosaur/000_Idle00.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://4ql4cgfs1pv8" path="res://Images/Carnosaur/000_Idle01.png" id="3"]
 [ext_resource type="Script" path="res://Scripts/AnimationPlayerAlwaysPlay.gd" id="4"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Damageable.cs" id="5_ar1hm"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -47,7 +48,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="3"]
 radius = 28.8894
 
-[node name="Carnosaur" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D")]
+[node name="Carnosaur" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D", "Damageable")]
 position = Vector2(0, -0.461274)
 collision_layer = 8
 collision_mask = 5
@@ -56,6 +57,7 @@ platform_on_leave = 2
 script = ExtResource("1")
 AttackSoundName = "Hit1"
 Sprite2D = NodePath("AnimatedSprite2D")
+Damageable = NodePath("Damageable")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -72,3 +74,7 @@ script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("3")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("5_ar1hm")
+MaxHealth = 2

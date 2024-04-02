@@ -26,7 +26,8 @@ namespace Atmo2 {
 		[Signal]
 		public delegate void OnHitEventHandler(Node2D source, Node2D body);
 		AIVector movement;
-		Damageable damageable;
+		[Export]
+		public Damageable Damageable;
 		NodePath animatedSpritePath;
 		AnimatedSprite2D projectileAnimatedSprite;
 		bool isDeflected = false;
@@ -45,8 +46,8 @@ namespace Atmo2 {
 			projectileAnimatedSprite = GetNode<AnimatedSprite2D>(animatedSpritePath);			
 
 			AddChild(movement = new AIVector(this, direction, speed));
-			AddChild(damageable = new Damageable(this));
-			damageable.OnDamageCallback += Deflect;
+			
+			Damageable.OnDamageCallback += Deflect;
 			
 			// Connect(Damageable.SignalName.OnHandleDamageable, Callable.From<int>((damage) => HandleDamageDeflect(damage)));
 			// damageable.OnHandleDamageable += HandleDamageDeflect;

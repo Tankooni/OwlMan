@@ -12,7 +12,6 @@ namespace Atmo2.Enemy
 		public string AttackSoundName { get; set; }
 
 		private ShootAt shootAI;
-		private Damageable damageable;
 
 		AnimatedSprite2D animatedSprite;
 
@@ -31,10 +30,8 @@ namespace Atmo2.Enemy
 
 			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60));
 
-			
-			AddChild(damageable = new Damageable(this, 2));
-			damageable.OnDeathCallback += OnDeath;
-			damageable.OnDamageCallback += OnDamage; 
+			Damageable.OnDeathCallback += OnDeath;
+			Damageable.OnDamageCallback += OnDamage; 
 		}
 		private void OnDamage(int damage, Damageable damageable)
 		{

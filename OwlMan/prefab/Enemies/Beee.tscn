@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://clb7yjvj7871" path="res://Images/Beee/001_Attack02.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://c3uoiwyguulge" path="res://Images/Beee/001_Attack03.png" id="9"]
 [ext_resource type="PackedScene" uid="uid://7gqbkojngkb3" path="res://GameComponents/LootDropComponent.tscn" id="10_oimy0"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Damageable.cs" id="10_khp07"]
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 15.0894
-
+radius = 15.0894ss
 [sub_resource type="SpriteFrames" id="2"]
 animations = [{
 "frames": [{
@@ -51,7 +51,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Beee" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D")]
+[node name="Beee" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D", "Damageable")]
 collision_layer = 8
 collision_mask = 5
 motion_mode = 1
@@ -59,6 +59,7 @@ platform_on_leave = 2
 script = ExtResource("1")
 AttackSoundName = "Squeak"
 Sprite2D = NodePath("AnimatedSprite2D")
+Damageable = NodePath("Damageable")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
@@ -70,3 +71,8 @@ animation = &"attack"
 
 [node name="LootDropComponent" parent="." instance=ExtResource("10_oimy0")]
 position = Vector2(0, 0)
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("10_khp07")
+MaxHealth = 2
+
