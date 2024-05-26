@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace Atmo2.Movements.PlayerStates
 	class PSWallSlide : PlayerState
 	{
 		private bool wallOnLeft = false;
+		private float onExitVelocityX = 0;
 		public PSWallSlide(Player player, bool wallOnLeft)
 			: base(player)
 		{
@@ -26,6 +28,8 @@ namespace Atmo2.Movements.PlayerStates
 			// }
 			player.FacingDirection = wallOnLeft ? 1 : -1;
 
+			player.MovementInfo.Velocity.X = -player.FacingDirection * 20;
+
 			// player.ShakeCamera();
 
 			player.Animation = "wallSlide";
@@ -33,7 +37,7 @@ namespace Atmo2.Movements.PlayerStates
 
 		public override void OnExit(PlayerState newState)
 		{
-			// player.MovementInfo.NewVel.X = 0;
+			player.MovementInfo.Velocity.X = onExitVelocityX;
 		}
 
 		public override PlayerState Update()
@@ -67,6 +71,7 @@ namespace Atmo2.Movements.PlayerStates
 
 			if(!player.IsOnWallOnly())
 			{
+				onExitVelocityX = player.FacingDirection * 20;
 				return new PSFall(player);
 			}
 

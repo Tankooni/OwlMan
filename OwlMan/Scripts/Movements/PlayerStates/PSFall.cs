@@ -63,9 +63,8 @@ namespace Atmo2.Movements.PlayerStates
 			}
 
 			player.MovementInfo.Velocity.Y += player.Gravity * gravityScale;
-
 			player.MovementInfo.Velocity.X = player.RunSpeed * signedHorizontal + speedModifier;
-			
+
 			if (speedModifier != 0)
 			{
 				var modSign = Math.Sign(speedModifier);
