@@ -13,8 +13,6 @@ public partial class Carnosaur : Enemy
 
 	[Export]
 	public NodePath Target { get; set; }
-
-	AnimatedSprite2D animatedSprite;
 	ShootAt shootAI;
 	HoverChase hoverChase;
 	private bool isShooting = false;
@@ -25,8 +23,7 @@ public partial class Carnosaur : Enemy
 	{
 		base._Ready();
 
-		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		animatedSprite.AnimationFinished += AnimatedSprite_AnimationFinished;
+		Sprite2D.AnimationFinished += AnimatedSprite_AnimationFinished;
 
 		AddToGroup(HitGroups.Enemy);
 
@@ -35,24 +32,13 @@ public partial class Carnosaur : Enemy
 
 		AddChild(shootAI);
 		AddChild(hoverChase);
-
-		Damageable.OnDeathCallback += OnDeath;
-		Damageable.OnDamageCallback += OnDamage; 
 	}
 
-	private void OnDamage(int damage, Damageable damageable)
-	{
-		
-	}
-	private void OnDeath()
-	{
-		QueueFree();
-	}
 	private void AnimatedSprite_AnimationFinished()
 	{
 		if (isShooting)
 		{
-			animatedSprite.Play("idle");
+			Sprite2D.Play("idle");
 			isShooting = false;
 		}
 	}
@@ -62,14 +48,14 @@ public partial class Carnosaur : Enemy
 		isShooting = true;
 		if (AttackSoundName != String.Empty)
 			Overlord.OwlOverlord.PlaySound(AttackSoundName, this.GlobalPosition);
-		animatedSprite.Play("attack");
+		Sprite2D.Play("attack");
 	}
 
 	public void ChangeDirection(Vector2 direction)
 	{
 		if (direction.X < 0)
-			animatedSprite.FlipH = false;
+			Sprite2D.FlipH = false;
 		else if (direction.X > 0)
-			animatedSprite.FlipH = true;
+			Sprite2D.FlipH = true;
 	}
 }

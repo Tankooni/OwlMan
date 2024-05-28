@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class WalkTurn : Node2D
+public partial class WalkTurn : Node
 {
 	public enum WalkingDirection : int
 	{
@@ -11,56 +11,80 @@ public partial class WalkTurn : Node2D
 
 	[Export]
 	public WalkingDirection direction = WalkingDirection.Left;
+	[Export]
+	public int Speed = 200;
+	[Export]
+	private RayCast2D leftCast;
+	[Export]
+	private RayCast2D rightCast;
 	private Vector2 velocity = new Vector2(0, 0);
-	private int speed;
+	private Vector2 currentFloorNormal = new Vector2(0, 0);
+
 	private CharacterBody2D parent;
 
-	private Action<int> changeDirection;
+	public Action<int> changeDirection;
 
-	public WalkTurn(Action<int> changeDirection, CharacterBody2D parent, int speed)
-	{
-		this.changeDirection = changeDirection;
-		this.parent = parent;
-		this.speed = speed;
-	}
 	public override void _Ready()
 	{
+		parent = Owner as CharacterBody2D;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity.X = 0;
 		velocity.Y += Overlord.STANDARD_GRAVITY;
-		if (parent.TestMove(parent.Transform, velocity)
-			&& !parent.TestMove(parent.Transform, new Vector2(speed * 5 * (int)direction, velocity.Y))
-		)
-		{
-			direction = direction == WalkingDirection.Left ? WalkingDirection.Right : WalkingDirection.Left;
-			changeDirection((int)direction);
-		}
-		velocity.X = speed * (int)direction;
+
+		velocity.X = Speed * (int)direction;
 		parent.Velocity = velocity;
 		var hasCollided = parent.MoveAndSlide();
-		if(hasCollided)
+
+		// if( !hasCollided )
+		// {
+		// 	return;
+		// }
+
+		if( parent.IsOnWall() )
 		{
-			//for (int i = 0; i < parent.GetSlideCollisionCount(); i++)
-			//{
-			//	var collision = parent.GetSlideCollision(i);
-
-			//	GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
-			//}
-			direction = direction == WalkingDirection.Left ? WalkingDirection.Right : WalkingDirection.Left;
-			changeDirection((int)direction);
+			// var wallNormal = parent.GetWallNormal();
+			// if(Mathf.Sign( parent.GetWallNormal().X ) < 0)
+			// {
+				
+			// }
+			FlipFlop();
+			return;
 		}
+		
+		if(parent.IsOnFloor())
+		{
+			switch (direction)
+			{
+				default:
+				case WalkingDirection.Left:
+					if( !leftCast.IsColliding() )
+					{
+						FlipFlop( WalkingDirection.Right );
+						return;
+					}
+					break;
+				case WalkingDirection.Right:
+					if( !rightCast.IsColliding() )
+					{
+						FlipFlop( WalkingDirection.Left );
+						return;
+					}
+					break;
+			}
+		}
+	}
 
-		//var collision = parent.MoveAndCollide(parent.Velocity);
 
-		//if (Math.Abs(collision.X) < speed)
-		//{
-		//	direction = direction == WalkingDirection.Left ? WalkingDirection.Right : WalkingDirection.Left;
-		//	changeDirection((int)direction);
-		//}
-		//if (collision.Y == 0)
-		//	velocity.Y = 0;
+	private void FlipFlop()
+	{
+		FlipFlop( Mathf.Sign( parent.GetWallNormal().X ) < 0 ? WalkingDirection.Left : WalkingDirection.Right);
+	}
+	private void FlipFlop(WalkingDirection newDirection)
+	{
+		direction = newDirection;
+		changeDirection((int)direction);
 	}
 }

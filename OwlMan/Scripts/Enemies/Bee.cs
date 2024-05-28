@@ -13,42 +13,31 @@ namespace Atmo2.Enemy
 
 		private ShootAt shootAI;
 
-		AnimatedSprite2D animatedSprite;
-
 		private bool isShooting = false;
 
 		public override void _Ready()
 		{
 			base._Ready();
 
-			animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-			animatedSprite.AnimationFinished += AnimatedSprite_AnimationFinished;
-
-			animatedSprite.Play("idle");
+			Sprite2D.AnimationFinished += AnimatedSprite_AnimationFinished;
+			Sprite2D.Play("idle");
 
 			AddToGroup(HitGroups.Enemy);
 
 			AddChild(shootAI = new ShootAt(Shoot, ChangeDirection, 60));
-
-			Damageable.OnDeathCallback += OnDeath;
-			Damageable.OnDamageCallback += OnDamage; 
 		}
-		private void OnDamage(int damage, Damageable damageable)
+		protected override void OnDamage(int damage, Damageable damageable)
 		{
 			Velocity = new Vector2(100, 100);
 			MoveAndSlide();
 			Velocity = Vector2.Zero;
-		}
-		private void OnDeath()
-		{
-			QueueFree();
 		}
 
 		private void AnimatedSprite_AnimationFinished()
 		{
 			if(isShooting)
 			{
-				animatedSprite.Play("idle");
+				Sprite2D.Play("idle");
 				isShooting = false;
 			}
 		}
@@ -58,20 +47,15 @@ namespace Atmo2.Enemy
 			isShooting = true;
 			if (AttackSoundName != string.Empty)
 				Overlord.OwlOverlord.PlaySound(AttackSoundName, this.GlobalPosition);
-			animatedSprite.Play("attack");
+			Sprite2D.Play("attack");
 		}
 
 		public void ChangeDirection(Vector2 direction)
 		{
 			if (direction.X < 0)
-				animatedSprite.FlipH = false;
+				Sprite2D.FlipH = false;
 			else if (direction.X > 0)
-				animatedSprite.FlipH = true;
-		}
-
-		public void HandleDamage(int damage)
-		{
-			GD.Print($"Ow {damage}");
+				Sprite2D.FlipH = true;
 		}
 	}
 }

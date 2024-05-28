@@ -25,14 +25,24 @@ namespace Atmo2.Enemy
 			base._ExitTree();
 		}
 
-		// public override void _Ready()
-		// {
-		// }
+		public override void _Ready()
+		{
+			Damageable.OnDeathCallback += OnDeath;
+			Damageable.OnDamageCallback += OnDamage; 
+		}
 
 		// public override void _PhysicsProcess(double delta)
 		// {
 			
 		// }
+		protected virtual void OnDamage(int damage, Damageable damageable)
+		{
+
+		}
+		protected virtual void OnDeath()
+		{
+			QueueFree();
+		}
 
 	}
 }

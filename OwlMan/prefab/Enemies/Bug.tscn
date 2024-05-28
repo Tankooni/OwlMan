@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ymenqxwbyu77"]
+[gd_scene load_steps=57 format=3 uid="uid://ymenqxwbyu77"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Bug.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://ch7x6yebku7de" path="res://Images/Bug/000_BugIdle00.png" id="2"]
@@ -51,7 +51,9 @@
 [ext_resource type="Texture2D" uid="uid://5ij2u6u0vidu" path="res://Images/Bug/003_BugSlash03.png" id="49"]
 [ext_resource type="Texture2D" uid="uid://bweehswu4myw2" path="res://Images/Bug/003_BugSlash04.png" id="50"]
 [ext_resource type="Texture2D" uid="uid://b2vpf48h00f6y" path="res://Images/Bug/003_BugSlash05.png" id="51"]
-[ext_resource type="Script" path="res://Scripts/EnemyAI/animation_generic.gd" id="52"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Damageable.cs" id="52_pyt2w"]
+[ext_resource type="Script" path="res://GameComponents/LootDropComponent.cs" id="53_346ng"]
+[ext_resource type="Script" path="res://Scripts/EnemyAI/Movement/WalkTurn.cs" id="54_b1jix"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -220,7 +222,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -243,20 +245,53 @@ animations = [{
 }],
 "loop": true,
 "name": &"slash",
-"speed": 5.0
+"speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(9.19104, 6.86301)
+[sub_resource type="CircleShape2D" id="CircleShape2D_mgnh8"]
+radius = 8.0
 
-[node name="Bug" type="CharacterBody2D"]
+[node name="Bug" type="CharacterBody2D" node_paths=PackedStringArray("WalkTurn", "Sprite2D", "Damageable")]
+collision_layer = 8
+collision_mask = 5
+floor_constant_speed = true
+floor_snap_length = 20.0
 script = ExtResource("1")
+WalkTurn = NodePath("WalkTurn")
+Sprite2D = NodePath("AnimatedSprite2D")
+Damageable = NodePath("Damageable")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("1")
-animation = &"idle"
-script = ExtResource("52")
+animation = &"run"
+frame_progress = 0.908642
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.23523, 7.76483)
-shape = SubResource("2")
+position = Vector2(2, 7)
+shape = SubResource("CircleShape2D_mgnh8")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("52_pyt2w")
+
+[node name="LootDropComponent" type="Node2D" parent="." node_paths=PackedStringArray("Damageable")]
+script = ExtResource("53_346ng")
+Damageable = NodePath("../Damageable")
+NumGold = 1
+
+[node name="WalkTurn" type="Node" parent="." node_paths=PackedStringArray("leftCast", "rightCast")]
+script = ExtResource("54_b1jix")
+Speed = 100
+leftCast = NodePath("../RayCast2D_Left")
+rightCast = NodePath("../RayCast2D_Right")
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 18)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+position = Vector2(10, 0)
+target_position = Vector2(0, 18)
+collision_mask = 4
+hit_from_inside = true

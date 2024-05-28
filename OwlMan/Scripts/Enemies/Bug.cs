@@ -4,25 +4,28 @@ using System;
 
 public partial class Bug : Enemy
 {
-    private AnimatedSprite2D animatedSprite;
+	[Export]
+	public WalkTurn WalkTurn;
+	public override void _Ready()
+	{
+		base._Ready();
+		
+		// AddChild(new WalkTurn(ChangeDirection, this, 200));
+		
+		WalkTurn.changeDirection += ChangeDirection;
 
+		Sprite2D.Play("run");
+	}
 
-    public override void _Ready()
-    {
-        base._Ready();
-
-        animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
-        AddToGroup(HitGroups.Enemy);
-        
-        AddChild(new WalkTurn(ChangeDirection, this, 200));
-    }
-
-    public void ChangeDirection(int direction)
-    {
-      if(direction < 0)
-	    animatedSprite.FlipH = false;
-      else if(direction > 0)
-		animatedSprite.FlipH = true;
-    }
+	public void ChangeDirection(int direction)
+	{
+		if(direction < 0)
+		{
+			Sprite2D.FlipH = false;
+		}
+		else if(direction > 0)
+		{
+			Sprite2D.FlipH = true;
+		}
+	}
 }
