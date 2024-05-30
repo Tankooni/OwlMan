@@ -96,17 +96,14 @@ position = Vector2(371, -20)
 [node name="Beee2" parent="Enemies" instance=ExtResource("9_y1mjf")]
 position = Vector2(309, 254)
 
-[node name="Beee3" parent="Enemies" node_paths=PackedStringArray("Sprite2D") instance=ExtResource("9_y1mjf")]
+[node name="Beee3" parent="Enemies" instance=ExtResource("9_y1mjf")]
 position = Vector2(476, -19)
-Sprite2D = NodePath("../Beee/AnimatedSprite2D")
 
-[node name="Beee4" parent="Enemies" node_paths=PackedStringArray("Sprite2D") instance=ExtResource("9_y1mjf")]
+[node name="Beee4" parent="Enemies" instance=ExtResource("9_y1mjf")]
 position = Vector2(254, -19)
-Sprite2D = NodePath("../Beee/AnimatedSprite2D")
 
-[node name="Beee5" parent="Enemies" node_paths=PackedStringArray("Sprite2D") instance=ExtResource("9_y1mjf")]
+[node name="Beee5" parent="Enemies" instance=ExtResource("9_y1mjf")]
 position = Vector2(127, -23)
-Sprite2D = NodePath("../Beee/AnimatedSprite2D")
 
 [node name="Bug2" parent="Enemies" instance=ExtResource("17_xwkbg")]
 position = Vector2(1872, 304)

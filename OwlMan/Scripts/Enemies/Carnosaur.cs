@@ -23,7 +23,7 @@ public partial class Carnosaur : Enemy
 	{
 		base._Ready();
 
-		Sprite2D.AnimationFinished += AnimatedSprite_AnimationFinished;
+		Sprite2D_Old.AnimationFinished += AnimatedSprite_AnimationFinished;
 
 		AddToGroup(HitGroups.Enemy);
 
@@ -38,7 +38,7 @@ public partial class Carnosaur : Enemy
 	{
 		if (isShooting)
 		{
-			Sprite2D.Play("idle");
+			Sprite2D_Old.Play("idle");
 			isShooting = false;
 		}
 	}
@@ -48,14 +48,14 @@ public partial class Carnosaur : Enemy
 		isShooting = true;
 		if (AttackSoundName != String.Empty)
 			Overlord.OwlOverlord.PlaySound(AttackSoundName, this.GlobalPosition);
-		Sprite2D.Play("attack");
+		Sprite2D_Old.Play("attack");
 	}
 
 	public void ChangeDirection(Vector2 direction)
 	{
 		if (direction.X < 0)
-			Sprite2D.FlipH = false;
+			Sprite2D_Old.FlipH = false;
 		else if (direction.X > 0)
-			Sprite2D.FlipH = true;
+			Sprite2D_Old.FlipH = true;
 	}
 }

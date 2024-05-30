@@ -52,18 +52,25 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Beee" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D", "Damageable")]
+[node name="Beee" type="CharacterBody2D" node_paths=PackedStringArray("Sprite2D_Old", "Sprite", "AnimPlayer", "Damageable")]
 collision_layer = 8
 collision_mask = 5
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1")
 AttackSoundName = "Squeak"
-Sprite2D = NodePath("AnimatedSprite2D")
+Sprite2D_Old = NodePath("AnimatedSprite2D")
+Sprite = NodePath("Sprite2D")
+AnimPlayer = NodePath("AnimationPlayer")
 Damageable = NodePath("Damageable")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

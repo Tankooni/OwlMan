@@ -1,0 +1,172 @@
+{ "frames": {
+   "OwlMan #Idle.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Walk 0.aseprite": {
+    "frame": { "x": 0, "y": 87, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 200
+   },
+   "OwlMan #Walk 1.aseprite": {
+    "frame": { "x": 87, "y": 87, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 200
+   },
+   "OwlMan #Walk 2.aseprite": {
+    "frame": { "x": 174, "y": 87, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 200
+   },
+   "OwlMan #Walk 3.aseprite": {
+    "frame": { "x": 261, "y": 87, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 200
+   },
+   "OwlMan #PoseG 0.aseprite": {
+    "frame": { "x": 0, "y": 174, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #PoseG 1.aseprite": {
+    "frame": { "x": 87, "y": 174, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #PoseG 2.aseprite": {
+    "frame": { "x": 174, "y": 174, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #PoseG 3.aseprite": {
+    "frame": { "x": 261, "y": 174, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Jump.aseprite": {
+    "frame": { "x": 0, "y": 261, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Fall.aseprite": {
+    "frame": { "x": 0, "y": 348, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Dive.aseprite": {
+    "frame": { "x": 0, "y": 435, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Dash.aseprite": {
+    "frame": { "x": 0, "y": 522, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Attack 0.aseprite": {
+    "frame": { "x": 0, "y": 609, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Attack 1.aseprite": {
+    "frame": { "x": 87, "y": 609, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Attack 2.aseprite": {
+    "frame": { "x": 174, "y": 609, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Attack 3.aseprite": {
+    "frame": { "x": 261, "y": 609, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   },
+   "OwlMan #Wallslide.aseprite": {
+    "frame": { "x": 0, "y": 696, "w": 87, "h": 87 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 87, "h": 87 },
+    "sourceSize": { "w": 87, "h": 87 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.7-x64",
+  "image": "OwlMan_Sheet.png",
+  "format": "RGBA8888",
+  "size": { "w": 348, "h": 783 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+   { "name": "Walk", "from": 1, "to": 4, "direction": "forward", "color": "#000000ff" },
+   { "name": "PoseG", "from": 5, "to": 8, "direction": "forward", "color": "#000000ff" },
+   { "name": "Jump", "from": 9, "to": 9, "direction": "forward", "color": "#000000ff" },
+   { "name": "Fall", "from": 10, "to": 10, "direction": "forward", "color": "#000000ff" },
+   { "name": "Dive", "from": 11, "to": 11, "direction": "forward", "color": "#000000ff" },
+   { "name": "Dash", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" },
+   { "name": "Attack", "from": 14, "to": 17, "direction": "forward", "color": "#000000ff" },
+   { "name": "Wallslide", "from": 18, "to": 18, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

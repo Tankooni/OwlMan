@@ -11,7 +11,11 @@ namespace Atmo2.Enemy
 		public static NodePath PlayerPath;
 
 		[Export]
-		public AnimatedSprite2D Sprite2D;
+		public AnimatedSprite2D Sprite2D_Old;
+		[Export]
+		public Sprite2D Sprite;
+		[Export]
+		public AnimationPlayer AnimPlayer;
 		[Export]
 		public Damageable Damageable;
 

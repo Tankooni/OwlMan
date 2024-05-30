@@ -32,16 +32,20 @@ public partial class WalkTurn : Node
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity.X = 0;
+		// If we're on the floor, we want to reset out Y velocity
+		if( parent.IsOnFloor() ) 
+		{
+			velocity.Y = 0;
+		}
 		velocity.Y += Overlord.STANDARD_GRAVITY;
 
 		velocity.X = Speed * (int)direction;
 		parent.Velocity = velocity;
-		var hasCollided = parent.MoveAndSlide();
-
-		// if( !hasCollided )
-		// {
-		// 	return;
-		// }
+		
+		if( parent.MoveAndSlide() )
+		{
+			velocity.Y = 0;
+		}
 
 		if( parent.IsOnWall() )
 		{

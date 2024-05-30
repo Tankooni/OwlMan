@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bwrmgemrofohq"
+path="res://.godot/imported/OwlMan.aseprite-94d608902e381ff2bb17dd48c5bbf42c.res"
+
+[deps]
+
+source_file="res://Images/OwlMan/OwlMan.aseprite"
+dest_files=["res://.godot/imported/OwlMan.aseprite-94d608902e381ff2bb17dd48c5bbf42c.res"]
+
+[params]
+

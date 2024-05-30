@@ -14,18 +14,18 @@ public partial class Bug : Enemy
 		
 		WalkTurn.changeDirection += ChangeDirection;
 
-		Sprite2D.Play("run");
+		AnimPlayer.Play("Run");
 	}
 
 	public void ChangeDirection(int direction)
 	{
 		if(direction < 0)
 		{
-			Sprite2D.FlipH = false;
+			Sprite.FlipH = false;
 		}
 		else if(direction > 0)
 		{
-			Sprite2D.FlipH = true;
+			Sprite.FlipH = true;
 		}
 	}
 }
