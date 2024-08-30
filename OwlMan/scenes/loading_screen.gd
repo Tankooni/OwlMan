@@ -6,7 +6,7 @@ extends CanvasLayer
 func _ready():
 	ResourceLoader.load_threaded_request(next_scene_path)
 
-func _process(delta):
+func _process(_delta):
 	if ResourceLoader.load_threaded_get_status(next_scene_path) == ResourceLoader.THREAD_LOAD_LOADED:
 		set_process(false)
 		await get_tree().create_timer(1).timeout
