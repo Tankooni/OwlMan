@@ -16,6 +16,7 @@ namespace Atmo2.Movements.PlayerStates
         private int coyoteTicks;
 		private int inAirTicks;
 		private float direction;
+		private bool preventFirstFrameWallSlide;
 
 		private bool coyotedOnFloor;
 
@@ -28,7 +29,7 @@ namespace Atmo2.Movements.PlayerStates
 /// <param name="direction"></param>
 /// <param name="dashTicks">Should probably be around 10 ticks or 1/6 of a second</param>
 /// <param name="coyoteTime">Should we have coyote time for jumps while "in the air"</param>
-        public PSDash(Player player, float direction, bool coyoteTime = false, int dashTicks = 15)
+        public PSDash(Player player, float direction, bool coyoteTime = false, int dashTicks = 15, bool preventFirstFrameWallSlide = false)
 			: base(player)
 		{
             this.player = player;
@@ -38,6 +39,7 @@ namespace Atmo2.Movements.PlayerStates
 			this.coyoteTime = coyoteTime;
 			this.coyoteTicks = coyoteTime ? 7 : 0;
 			this.inAirTicks = 0;
+			this.preventFirstFrameWallSlide = preventFirstFrameWallSlide;
 
 			// speed = MathF.Min(player.RunSpeed * 4, maxSpeed);
 			player.MovementInfo.Velocity.X = maxSpeed * direction;
@@ -101,7 +103,7 @@ namespace Atmo2.Movements.PlayerStates
 						extraJumpMult += .3f * percentMaxAngle;
 						speedModMult -= .4f * percentMaxAngle;
 					}
-					
+					GD.Print("Dash: New Jump ");
 					return new PSJump(player, SpeedModifier * speedModMult, extraJumpMult);
 				}
 			}
@@ -113,16 +115,21 @@ namespace Atmo2.Movements.PlayerStates
 						&&	player.Energy >= 1)
 					{
 						player.Energy -= 1;
+						GD.Print("Dash: New Double Jump ");
 						return new PSJump(player, SpeedModifier);
 					}
 				}
 			}
 
-			if (player.IsOnWallOnly())
+			if ( player.IsOnWallOnly() && !preventFirstFrameWallSlide )
 			{
 				// TODO: add directional check in case we're flush on a wall but moving away
-				if(player.Abilities.WallSlide)
+				if( player.Abilities.WallSlide )
+				{
+					
+					GD.Print("Dash: New Wall slide ");
 					return new PSWallSlide(player, player.GetWallNormal().X > 0);
+				}
 			}
 
 			// if( player.Abilities.AirDash && 
@@ -134,13 +141,15 @@ namespace Atmo2.Movements.PlayerStates
 			// }
 
 
-			if(		player.IsOnWall()
+			if(		player.IsOnWall() && !preventFirstFrameWallSlide
 				||	player.InputController.JumpPressed() 
 				||	player.InputController.DashPressed()
 				// ||	signedHorizontal != 0 
 				// 	&&	signedHorizontal != direction
 				)
 			{
+				
+				GD.Print("Dash: Reset dash ticks");
 				dashTicks = 0;
 			}
 
@@ -156,14 +165,21 @@ namespace Atmo2.Movements.PlayerStates
 					}
 					else
 					{
+						
+						GD.Print("Dash: New Idle");
 						return new PSIdle(player);
 					}
 				}
 				else
 				{
+					GD.Print("Dash: New Fall ");
 					return new PSFall(player, SpeedModifier);
 				}
             }
+			if( preventFirstFrameWallSlide )
+			{
+				preventFirstFrameWallSlide = false;
+			}
             return null;
         }
     }

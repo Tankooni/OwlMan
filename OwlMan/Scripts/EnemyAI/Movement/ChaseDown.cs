@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Godot;
 
 namespace Atmo2.Enemy.AI {
-    public partial class HoverChase : Node2D
+    public partial class ChaseDown : Node2D
     {
 		private Node2D target;
-        public bool IsMoving { get; set; }
-		public Node2D Target
+        public bool IsChasing { get; set; }
+		private Node2D Target
 		{
 			get
 			{	
@@ -24,39 +24,39 @@ namespace Atmo2.Enemy.AI {
         private CharacterBody2D parent;
         private int speed;
         private int activeDistance;
-        private int tooCloseDistance;
 
-        public HoverChase(CharacterBody2D parent, int speed, int activeDistance = 300, int tooCloseDistance = 250)
+        public ChaseDown(CharacterBody2D parent, int speed, int activeDistance = 300)
         {
             this.parent = parent;
             this.speed = speed;
             this.activeDistance = activeDistance;
-            this.tooCloseDistance = tooCloseDistance;
         }
 
         public override void _Ready()
         {
-            
+            base._Ready();
         }
 
         public override void _PhysicsProcess(double delta)
         {
+            base._PhysicsProcess(delta);
+
 			if(Target == null)
 			{ 
 				return;
 			}
 
-            var distance = GlobalPosition.DistanceTo(Target.GlobalPosition);
-            if(distance > activeDistance + 100)
+            if( IsChasing )
+            {
+                parent.Velocity = GlobalPosition.DirectionTo(Target.GlobalPosition) * speed ;
+                parent.MoveAndSlide();
                 return;
-            
-            var direction = GlobalPosition.DirectionTo(Target.GlobalPosition);
+            }
 
-            if (distance > 300)
-                parent.Velocity = direction * speed;
-            else if(distance < 250)
-				parent.Velocity = -direction * speed;
-			parent.MoveAndSlide();
+            if ( !IsChasing && GlobalPosition.DistanceTo(Target.GlobalPosition) < activeDistance )
+            {
+                IsChasing = true;
+            }
 		}
     }
 }

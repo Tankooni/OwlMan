@@ -80,7 +80,7 @@ namespace Atmo2.Movements.PlayerStates
 				player.Energy >= 1)
 			{
 				player.Energy -= 1;
-				return new PSDash(player, player.FacingDirection);
+				return new PSDash(player, player.FacingDirection, preventFirstFrameWallSlide: true);
 			}
 
 			if(wallOnLeft)

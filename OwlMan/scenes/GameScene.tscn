@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://b8ynag3aoj0jj"]
+[gd_scene load_steps=24 format=4 uid="uid://b8ynag3aoj0jj"]
 
 [ext_resource type="Texture2D" uid="uid://b4m6dfs7iltcm" path="res://Images/Backgrounds/BG_Sky.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxf1hvr7vqdq6" path="res://Images/Backgrounds/BG_Sky_Parallax2.png" id="4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b0sggibu7x3v5" path="res://Images/Tiles/Tiles_Slopes.png" id="7_0b7up"]
 [ext_resource type="PackedScene" uid="uid://boybl7xia5i5j" path="res://prefab/PlayerOwl.tscn" id="8_d3h60"]
 [ext_resource type="PackedScene" uid="uid://dg34tsxyauv00" path="res://prefab/Enemies/Beee.tscn" id="9_y1mjf"]
+[ext_resource type="PackedScene" uid="uid://c7yiu4pk2ufks" path="res://prefab/Enemies/FlyChaser.tscn" id="10_pxe25"]
 [ext_resource type="PackedScene" uid="uid://dt6g14xyc321m" path="res://prefab/Enemies/Carnosaur.tscn" id="10_uotos"]
 [ext_resource type="PackedScene" uid="uid://dwekd1pgdtx03" path="res://prefab/Objects/flagpole.tscn" id="12_xtltd"]
 [ext_resource type="Texture2D" uid="uid://1wlvxj4kmacl" path="res://Assets/PNG/Etc/Trashcan.png" id="13_d7n3i"]
@@ -261,9 +262,6 @@ position = Vector2(1400, -184)
 [node name="Carnosaur3" parent="Enemies" instance=ExtResource("10_uotos")]
 position = Vector2(1040, 0)
 
-[node name="Carnosaur4" parent="Enemies" instance=ExtResource("10_uotos")]
-position = Vector2(1828, 168.539)
-
 [node name="Bug" parent="Enemies" instance=ExtResource("17_xwkbg")]
 position = Vector2(2288, 80)
 
@@ -288,6 +286,12 @@ position = Vector2(127, -23)
 
 [node name="Bug2" parent="Enemies" instance=ExtResource("17_xwkbg")]
 position = Vector2(1872, 304)
+
+[node name="FlyChaser" parent="Enemies" instance=ExtResource("10_pxe25")]
+position = Vector2(1912, 0)
+
+[node name="FlyChaser2" parent="Enemies" instance=ExtResource("10_pxe25")]
+position = Vector2(2864, -40)
 
 [node name="Bug3" parent="Enemies" instance=ExtResource("17_xwkbg")]
 position = Vector2(1616, 304)

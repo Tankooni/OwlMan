@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bce2ftemifv86"
+path="res://.godot/imported/FlyChaser.aseprite-956b415359caf82425e92fdaa63eba5d.res"
+
+[deps]
+
+source_file="res://Images/FlyChaser/FlyChaser.aseprite"
+dest_files=["res://.godot/imported/FlyChaser.aseprite-956b415359caf82425e92fdaa63eba5d.res"]
+
+[params]
+
